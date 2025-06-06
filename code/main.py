@@ -7,17 +7,26 @@ class Game:
         # Initializing
         pygame.init()
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        
+        # Caption
+        pygame.display.set_caption("Warnterra 1.0")
+        
+        # Time
         self.clock = pygame.time.Clock()
+        
+        # State
         self.running = True
         
         # Groups
         self.all_sprites = pygame.sprite.Group()
         self.enemy_sprites = pygame.sprite.Group()
+        self.player_projectiles = pygame.sprite.Group()
+        self.enemy_projectiles = pygame.sprite.Group()
         
         # Testing
         self.player = "iusdguyfsgduyfgsuydfgsudfgyusgfuysdgufgsufyd"
         self.enemy_level = 0
-        self.pr = Poro((WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), enemy_stat["Poro"], (self.all_sprites, self.enemy_sprites), self)
+        self.pr = Poro((WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), entity_stat["Poro"], (self.all_sprites, self.enemy_sprites), self)
         
         
         

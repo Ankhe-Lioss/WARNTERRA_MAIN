@@ -1,7 +1,7 @@
 import pygame
 import os
-import random
-import math
+from random import *
+from math import *
 from data import *
 
 WINDOW_WIDTH = 1280

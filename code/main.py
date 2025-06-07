@@ -1,11 +1,14 @@
 from setting import *
 from enemies import *
+from player import Player
 
 # THIS FKING MAIN GAME SIHFHFHFHFHFHFHFHF
 class Game:
     def __init__(self):
         # Initializing
         pygame.init()
+        
+        # Display
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         
         # Caption
@@ -23,10 +26,10 @@ class Game:
         self.player_projectiles = pygame.sprite.Group()
         self.enemy_projectiles = pygame.sprite.Group()
         
+        # Player
+        self.player = Player(pos=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), group=(self.all_sprites), game=self)
+        
         # Testing
-        self.player = "iusdguyfsgduyfgsuydfgsudfgyusgfuysdgufgsufyd"
-        self.enemy_level = 0
-        self.pr = Poro((WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), entity_stat["Poro"], (self.all_sprites, self.enemy_sprites), self)
         
         
         
@@ -39,9 +42,17 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+            
+            # FILL
             self.display_surface.fill('darkgray')
-            self.display_surface.blit(self.pr.image,(0, 0)) 
-    
+            
+            # TESTING AREA
+            self.player.get_state()
+            self.player.draw()
+
+
+
+            # UPDATE (LAST)
             pygame.display.update()
         # Cút
         pygame.quit()

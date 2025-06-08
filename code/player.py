@@ -8,7 +8,8 @@ class Player(pygame.sprite.Sprite):
         self.game = game
         
         # Loading stats
-        self.stats = entity_stat["Player"]
+        self.level = 1
+        self.get_stats()
         self.pos = pos
         
         # States
@@ -19,7 +20,33 @@ class Player(pygame.sprite.Sprite):
         # Loading appearance
         self.frames = dict()
         self.load_images()
-        self.image = self.frames[self.facing_state][self.frame_index]
+        self.image: pygame.Surface = self.frames[self.facing_state][self.frame_index]
+        
+        # Hitbox
+        self.rect = self.image.get_frect(center=self.pos)
+        
+    def get_stats(self):
+        stats = entity_stat["player"]
+        
+        self.raw_hp = stats[0]
+        self.raw_atk = stats[1]
+        self.raw_def = stats[2]
+        self.basespd = stats[3]
+        self.hp_multiplier = stats[4]
+        self.atk_multiplier = stats[5]
+        self.def_multiplier = stats[6]
+        
+        self.updstat()
+        
+        self.hp = self.maxhp
+        self.atk = self.baseatk
+        self.def_ = self.basedef
+        self.spd = self.basespd
+    
+    def updstat(self):
+        self.maxhp = self.raw_hp + self.level * self.hp_multiplier
+        self.baseatk = self.raw_atk + self.level * self.atk_multiplier
+        self.basedef = self.raw_def + self.level * self.def_multiplier
     
     def update_image(self):
         self.image = self.frames[self.facing_state][self.frame_index]
@@ -42,6 +69,6 @@ class Player(pygame.sprite.Sprite):
                 self.frames[key].append(surf)
     
     def draw(self):
-        self.game.display_surface.blit(self.image, self.pos)
+        self.game.display_surface.blit(self.image, self.rect)
         
         

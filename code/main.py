@@ -62,7 +62,7 @@ class Game:
 
             # UPDATE (LAST)
             pygame.display.update()
-        # Cút
+        # Cútd
         pygame.quit()
 
 if __name__ == "__main__":

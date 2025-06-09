@@ -12,7 +12,7 @@ weapon_skills = {
 skill_stats = {
 #   "Skill" : (cooldown, warmup, cast_time)
     "Gauntlet_primary" : (1000, 0, 0),
-    "Gauntlet_secondary" : (2000, 0, 0),
+    "Gauntlet_secondary" : (2000, 0, 100),
     "Gauntlet_q_skill" : (5000, 0, 200),
     "Gauntlet_e_skill" : (15000, 10000, 750)
 }

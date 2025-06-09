@@ -26,8 +26,6 @@ def setlevel(game):
     for obj in map.get_layer_by_name('Entities'):
         if obj.name == 'Player':
             game.player = Player((obj.x, obj.y), game.all_sprites, game)
-            print(game.player.rect)
-            print(game.player.hitbox_rect)
             game.player.weap = Gauntlet(game.all_sprites, game)
         else:
             #Spawn_animation((obj.x, obj.y), game.all_sprites,game,obj.name)

@@ -1,6 +1,10 @@
 from setting import *
-from enemies import *
+from entities import *
 from player import Player
+from groups import *
+from setlevel import *
+from cursor import *
+from weapon import *
 
 # THIS FKING MAIN GAME SIHFHFHFHFHFHFHFHF
 class Game:
@@ -10,6 +14,7 @@ class Game:
         
         # Display
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        pygame.mouse.set_visible(False)
         
         # Caption
         pygame.display.set_caption("Warnterra 1.0")
@@ -21,13 +26,16 @@ class Game:
         self.running = True
         
         # Groups
-        self.all_sprites = pygame.sprite.Group()
+        self.all_sprites = AllSprites()
         self.enemy_sprites = pygame.sprite.Group()
         self.player_projectiles = pygame.sprite.Group()
         self.enemy_projectiles = pygame.sprite.Group()
+        self.collision_sprites = pygame.sprite.Group()
         
         # Player
-        self.player = Player(pos=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), group=(self.all_sprites), game=self)
+        setlevel(self)
+        self.player = Player(pos=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), groups=(self.all_sprites), game=self)
+        self.player.equip()
         
         # Testing
         
@@ -47,10 +55,12 @@ class Game:
             self.display_surface.fill('darkgray')
             
             # TESTING AREA
-            self.player.get_state()
-            self.player.draw()
+            self.all_sprites.draw(self.player.image_rect)
+            self.player.update(dt)
 
 
+            # CURSOR
+            cursor(game)
 
             # UPDATE (LAST)
             pygame.display.update()

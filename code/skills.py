@@ -29,8 +29,8 @@ class Skill:
         self.casting = False
         self.remaining = self.cooldown
         
-    def update(self):
-        #self.remaining -= 
+    def update(self, dt):
+        self.remaining -= dt
         if self.remaining <= 0:
             if self.casting:
                 self.deactivate()
@@ -43,10 +43,10 @@ class Skill:
         pass
         
 
-class Shoot(Skill):
-    def __init__(self, game):
-        super().__init__(1000, "Pistol")
-        self.game = game
+class Gauntlet_Primary(Skill):
+    def __init__(self):
+        super().__init__(1000, "sdgfushgfu")
     
-    def cast():
-        super().cast()
+    def update(self):
+        super().update()
+        print(self.remaining)

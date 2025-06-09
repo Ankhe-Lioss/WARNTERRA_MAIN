@@ -1,15 +1,15 @@
 from setting import *
+from entities import entity
 
-class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, game):
+class Player(entity):
+    def __init__(self, pos, groups, game):
+        self.name = "Player"
         
         # Initializing
-        super().__init__(group)
+        super().__init__(pos, groups, game)
         self.game = game
         
         # Loading stats
-        self.level = 1
-        self.get_stats()
         self.pos = pos
         
         # States
@@ -19,39 +19,22 @@ class Player(pygame.sprite.Sprite):
         
         # Loading appearance
         self.frames = dict()
-        self.load_images()
+        self._load_images()
         self.image: pygame.Surface = self.frames[self.facing_state][self.frame_index]
+        self.image_rect = self.image.get_frect(center=self.pos)
         
         # Hitbox
-        self.rect = self.image.get_frect(center=self.pos)
-        
-    def get_stats(self):
-        stats = entity_stat["player"]
-        
-        self.raw_hp = stats[0]
-        self.raw_atk = stats[1]
-        self.raw_def = stats[2]
-        self.basespd = stats[3]
-        self.hp_multiplier = stats[4]
-        self.atk_multiplier = stats[5]
-        self.def_multiplier = stats[6]
-        
-        self.updstat()
-        
-        self.hp = self.maxhp
-        self.atk = self.baseatk
-        self.def_ = self.basedef
-        self.spd = self.basespd
+        self.direction = pygame.Vector2()
+        self.hitbox_rect = self.image_rect.inflate(0, 0)
     
-    def updstat(self):
-        self.maxhp = self.raw_hp + self.level * self.hp_multiplier
-        self.baseatk = self.raw_atk + self.level * self.atk_multiplier
-        self.basedef = self.raw_def + self.level * self.def_multiplier
+    def equip(self, weap):
+        self.weap = weap
     
-    def update_image(self):
-        self.image = self.frames[self.facing_state][self.frame_index]
+    def update_animation(self, dt):
+        self.frame_index = self.frame_index + (6 * dt if self.direction else 0)
+        self.image = self.frames[self.facing_state][int(self.frame_index) % len(self.frames[self.facing_state])]
     
-    def get_state(self):
+    def update_facing(self):
         # Calculate mouse position references
         mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
         player_pos = pygame.Vector2(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
@@ -59,16 +42,32 @@ class Player(pygame.sprite.Sprite):
         angle = - degrees(atan2(facing_dir.x, facing_dir.y)) + 180
         
         self.facing_state = self.facing[int((angle + 22.5 if angle <= 337.5 else angle + 22.5 - 360) / 45)]
-        self.update_image()
 
-    def load_images(self):
+    def _load_images(self):
         for key in self.facing:
             self.frames[key] = []
             for i in range(4):
-                surf = pygame.image.load(os.path.join("images", "player", key, f"{i}.png"))
+                surf = pygame.image.load(os.path.join("images", "player", key, f"{i}.png")).convert_alpha()
                 self.frames[key].append(surf)
-    
-    def draw(self):
-        self.game.display_surface.blit(self.image, self.rect)
         
+    def input(self):
+        """ Movement input """
+        keys = pygame.key.get_pressed()
+        self.direction.x = int(keys[pygame.K_RIGHT] or keys[pygame.K_d]) - int(keys[pygame.K_LEFT] or keys[pygame.K_a])
+        self.direction.y = int(keys[pygame.K_DOWN] or keys[pygame.K_s]) - int(keys[pygame.K_UP] or keys[pygame.K_w])
+        self.direction = self.direction.normalize() if self.direction else self.direction
+    
+    def move(self, dt):
+        self.hitbox_rect.x += self.direction.x * self.spd * dt
+        self.collision('horizontal')
+        self.hitbox_rect.y += self.direction.y * self.spd * dt
+        self.collision('vertical')
+        self.image_rect.center = self.hitbox_rect.center
+    
+    def update(self, dt):
+        self.input()
+        self.update_facing()
+        self.move(dt)
+        self.hitbox_rect = self.image_rect.inflate(0, 0)
+        self.update_animation(dt)
         

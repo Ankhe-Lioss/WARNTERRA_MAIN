@@ -1,18 +1,14 @@
 from setting import *
 
-class Bullet(pygame.sprite.Sprite):
+class Projectiles(pygame.sprite.Sprite):
     def __init__(self, pos, direction, groups, game):
-        
         # Initializing
         super().__init__(groups)
-        
-        # Setting group
-        self.enemy_sprites = game.enemy_sprites
-        self.collision_sprites = game.collision_sprites
+        self.game = game
         
         # Movement
         self.direction = direction
-        self.speed = 1200 #undef
+        self.angle = degrees(atan2(self.direction.x, self.direction.y)) - 90
         
         # Hitbox
         self.rect = self.image.get_frect(center=pos)
@@ -20,37 +16,52 @@ class Bullet(pygame.sprite.Sprite):
         self.lifetime = 5000
         
         # Loading appearance
-        self.load_images()
-        self.rotate()
-        self.image = self.bullet_surf
-
+        self.animation_spd = 4
+        self._load_images()
+        self.frame_id = 0
+        self.image = self.frames[self.frame_id]
+    
+    def _load_images(self):
+        folder, folder1 = self.source.split(" ")
+        self.frames = []
+        for i in range(4):
+            surf = pygame.image.load(os.path.join('images', 'projectiles', f'{folder}',f'{folder1}',f'{i}.png')).convert_alpha()
+            surf = pygame.transform.rotozoom(surf, self.angle, 1)
+            self.frames.append(surf)
         
-        
-    def load_images(self):
-        folder,file_name=(self.name).split('_')
-        self.bullet_surf = pygame.image.load(os.path.join('images', 'projectiles', f'{folder}',f'{file_name}.png')).convert_alpha()
-        
-    def rotate(self):
-        angle = degrees(atan2(self.direction.x, self.direction.y)) + 180
-        self.bullet_surf= pygame.transform.rotozoom(self.bullet_surf, angle, 1)
-        
-    def bullet_collision(self):
-        collision_sprites=pygame.sprite.spritecollide(self,self.enemy_sprites,False,pygame.sprite.collide_mask)
-        if collision_sprites:
-            for sprite in collision_sprites:
-                sprite.destroy()
-                self.kill()
+    def _animate(self, dt):
+        self.frame_id += self.animation_spd * dt
+        self.image = self.frames[int(self.frame_id) % len(self.frames)]
+    
     def collision(self):
-        if pygame.sprite.spritecollide(self,self.collision_sprites,False,pygame.sprite.collide_mask):
+        if hasattr(self,'piercing') and self.piercing:
+            return
+        if pygame.sprite.spritecollide(self, self.collision_sprites, False,pygame.sprite.collide_mask):
             self.kill()
+    
     def update(self, dt):
         self.rect.center += self.direction * self.speed * dt
         self.collision()
         self.bullet_collision()
         if pygame.time.get_ticks() - self.spawn_time >= self.lifetime:
             self.kill()
+
+class Player_projectiles(Projectiles):
+    def __init__(self, pos, direction, groups, game):
+        # Init
+        super().__init__(pos, direction, groups, game)
         
-class Gauntlet_Primary(Bullet):
-    def __init__(self, pos, direction, groups,game):
-        self.name='Gauntlet_Primary'
-        super().__init__(pos,direction,groups,game)
+        # Calcu
+        self.scale, self.spd = player_projectiles[self.name]
+        
+    def bullet_collision(self):
+        collision_sprites = pygame.sprite.spritecollide(self, self.game.enemy_sprites, False, pygame.sprite.collide_mask)
+        if collision_sprites:
+            for sprite in collision_sprites:
+                sprite.destroy()
+                self.kill()
+        
+class Gauntlet_Primary(Player_projectiles):
+    def __init__(self, pos, direction, groups, game):
+        self.source = "Gauntlet Primary"
+        super().__init__(pos, direction, groups, game)

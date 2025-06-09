@@ -11,22 +11,24 @@ class Projectiles(pygame.sprite.Sprite):
         self.angle = degrees(atan2(self.direction.x, self.direction.y)) - 90
         
         # Hitbox
-        self.rect = self.image.get_frect(center=pos)
         self.spawn_time = pygame.time.get_ticks()
         self.lifetime = 5000
         
         # Loading appearance
         self.animation_spd = 4
+        self.frames = []
         self._load_images()
         self.frame_id = 0
         self.image = self.frames[self.frame_id]
+        
+        self.rect = self.image.get_frect(center=pos)
     
     def _load_images(self):
         folder, folder1 = self.source.split(" ")
-        self.frames = []
+
         for i in range(4):
             surf = pygame.image.load(os.path.join('images', 'projectiles', f'{folder}',f'{folder1}',f'{i}.png')).convert_alpha()
-            surf = pygame.transform.rotozoom(surf, self.angle, 1)
+            surf = pygame.transform.rotozoom(surf, self.angle,1)
             self.frames.append(surf)
         
     def _animate(self, dt):
@@ -36,15 +38,17 @@ class Projectiles(pygame.sprite.Sprite):
     def collision(self):
         if hasattr(self,'piercing') and self.piercing:
             return
-        if pygame.sprite.spritecollide(self, self.collision_sprites, False,pygame.sprite.collide_mask):
+        if pygame.sprite.spritecollide(self, self.game.collision_sprites, False):
             self.kill()
     
     def update(self, dt):
-        self.rect.center += self.direction * self.speed * dt
+        self._animate(dt)
+        self.rect.center += self.direction * self.spd * dt
         self.collision()
         self.bullet_collision()
-        if pygame.time.get_ticks() - self.spawn_time >= self.lifetime:
-            self.kill()
+
+            
+        
 
 class Player_projectiles(Projectiles):
     def __init__(self, pos, direction, groups, game):
@@ -61,7 +65,8 @@ class Player_projectiles(Projectiles):
                 sprite.destroy()
                 self.kill()
         
-class Gauntlet_Primary(Player_projectiles):
+class Gauntlet_primary(Player_projectiles):
     def __init__(self, pos, direction, groups, game):
         self.source = "Gauntlet Primary"
+        self.name = self.__class__.__name__
         super().__init__(pos, direction, groups, game)

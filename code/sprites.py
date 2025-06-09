@@ -7,7 +7,7 @@ class Ground(pygame.sprite.Sprite):
     def __init__(self, pos, surf, groups):
         super().__init__(groups)
         self.image = surf
-        self.image_rect = self.image.get_frect(topleft=pos)
+        self.rect = self.image.get_frect(topleft=pos)
         self.ground = True
         
 class CollisionSprite(pygame.sprite.Sprite):
@@ -17,4 +17,4 @@ class CollisionSprite(pygame.sprite.Sprite):
     def __init__(self, pos, surf, groups):
         super().__init__(groups)
         self.image = surf
-        self.image_rect = self.image.get_frect(topleft=pos)
+        self.rect = self.image.get_frect(topleft=pos)

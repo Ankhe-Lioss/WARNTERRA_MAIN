@@ -36,13 +36,13 @@ class entity(pygame.sprite.Sprite):
 
     def collision(self, dir):
         for sprite in self.game.collision_sprites:
-            if sprite.image_rect.colliderect(self.hitbox_rect):
+            if sprite.rect.colliderect(self.hitbox_rect):
                 if dir == 'horizontal':
-                    if self.direction.x > 0: self.hitbox_rect.right = sprite.image_rect.left
-                    if self.direction.x < 0: self.hitbox_rect.left = sprite.image_rect.right
+                    if self.direction.x > 0: self.hitbox_rect.right = sprite.rect.left
+                    if self.direction.x < 0: self.hitbox_rect.left = sprite.rect.right
                 else:
-                    if self.direction.y < 0: self.hitbox_rect.top = sprite.image_rect.bottom
-                    if self.direction.y > 0: self.hitbox_rect.bottom = sprite.image_rect.top
+                    if self.direction.y < 0: self.hitbox_rect.top = sprite.rect.bottom
+                    if self.direction.y > 0: self.hitbox_rect.bottom = sprite.rect.top
     
     def take_damage(self, dmg):
         self.hp -= dmg / (1 + 0.01 * self.def_)

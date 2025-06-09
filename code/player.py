@@ -21,14 +21,11 @@ class Player(entity):
         self.frames = dict()
         self._load_images()
         self.image: pygame.Surface = self.frames[self.facing_state][self.frame_index]
-        self.image_rect = self.image.get_frect(center=self.pos)
+        self.rect = self.image.get_frect(center=self.pos)
         
         # Hitbox
         self.direction = pygame.Vector2()
-        self.hitbox_rect = self.image_rect.inflate(0, 0)
-    
-    def equip(self, weap):
-        self.weap = weap
+        self.hitbox_rect = self.rect.inflate(-20, -20)
     
     def update_animation(self, dt):
         self.frame_index = self.frame_index + (6 * dt if self.direction else 0)
@@ -38,8 +35,9 @@ class Player(entity):
         # Calculate mouse position references
         mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
         player_pos = pygame.Vector2(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
-        facing_dir = mouse_pos - player_pos
-        angle = - degrees(atan2(facing_dir.x, facing_dir.y)) + 180
+        self.facing_dir = (mouse_pos - player_pos)
+        self.facing_dir = self.facing_dir.normalize() if self.facing_dir else self.facing_dir
+        angle = - degrees(atan2(self.facing_dir.x, self.facing_dir.y)) + 180
         
         self.facing_state = self.facing[int((angle + 22.5 if angle <= 337.5 else angle + 22.5 - 360) / 45)]
 
@@ -62,12 +60,11 @@ class Player(entity):
         self.collision('horizontal')
         self.hitbox_rect.y += self.direction.y * self.spd * dt
         self.collision('vertical')
-        self.image_rect.center = self.hitbox_rect.center
+        self.rect.center = self.hitbox_rect.center
     
     def update(self, dt):
         self.input()
         self.update_facing()
         self.move(dt)
-        self.hitbox_rect = self.image_rect.inflate(0, 0)
         self.update_animation(dt)
         

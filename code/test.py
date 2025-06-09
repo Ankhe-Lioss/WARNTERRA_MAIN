@@ -1,12 +1,6 @@
 class cla:
     def cc(self):
-        print(":CC---------")
+        print(self.__class__.__name__)
 
-class clb(cla):
-    def cc(self):
-        super().cc()
-        print("fiudfghdghwriufg suyhgsugsg hisdfi erhitigh tgiti gh")
-
-
-a = clb()
+a = cla()
 a.cc()

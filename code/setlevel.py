@@ -23,9 +23,12 @@ def setlevel(game):
         CollisionSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), game.collision_sprites)
 
 
-    """for obj in map.get_layer_by_name('Entities'):
+    for obj in map.get_layer_by_name('Entities'):
         if obj.name == 'Player':
             game.player = Player((obj.x, obj.y), game.all_sprites, game)
-            game.gun = Weapon(game.all_sprites, game)
+            print(game.player.rect)
+            print(game.player.hitbox_rect)
+            game.player.weap = Gauntlet(game.all_sprites, game)
         else:
-            Spawn_animation((obj.x, obj.y), game.all_sprites,game,obj.name)"""
+            #Spawn_animation((obj.x, obj.y), game.all_sprites,game,obj.name)
+            pass

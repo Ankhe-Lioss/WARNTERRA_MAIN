@@ -34,8 +34,6 @@ class Game:
         
         # Player
         setlevel(self)
-        self.player = Player(pos=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), groups=(self.all_sprites), game=self)
-        self.player.equip()
         
         # Testing
         
@@ -55,8 +53,8 @@ class Game:
             self.display_surface.fill('darkgray')
             
             # TESTING AREA
-            self.all_sprites.draw(self.player.image_rect)
-            self.player.update(dt)
+            self.all_sprites.draw(self.player.rect)
+            self.all_sprites.update(dt)
 
 
             # CURSOR

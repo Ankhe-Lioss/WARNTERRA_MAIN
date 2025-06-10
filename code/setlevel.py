@@ -3,6 +3,7 @@ from main import *
 from weapon import *
 from sprites import *
 from player import Player
+from spawn import *
 
 def setlevel(game):
     game.level = 0
@@ -25,8 +26,8 @@ def setlevel(game):
 
     for obj in map.get_layer_by_name('Entities'):
         if obj.name == 'Player':
-            game.player = Player((obj.x, obj.y), game.all_sprites, game)
+            game.player = Player((obj.x, obj.y), (game.all_sprites, game.player_sprites), game)
             game.player.weap = Gauntlet(game.all_sprites, game)
         else:
-            #Spawn_animation((obj.x, obj.y), game.all_sprites,game,obj.name)
+            spawn_animation((obj.x, obj.y), game.all_sprites,game,obj.name)
             pass

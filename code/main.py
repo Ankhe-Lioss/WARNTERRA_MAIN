@@ -24,9 +24,11 @@ class Game:
         
         # State
         self.running = True
+        self.pausing = False
         
         # Groups
         self.all_sprites = AllSprites()
+        self.player_sprites = pygame.sprite.GroupSingle()
         self.enemy_sprites = pygame.sprite.Group()
         self.player_projectiles = pygame.sprite.Group()
         self.enemy_projectiles = pygame.sprite.Group()
@@ -41,6 +43,7 @@ class Game:
         
     def run(self):
         while self.running:
+            
             # Data time
             dt = self.clock.tick(FPS) / 1000
             
@@ -55,7 +58,6 @@ class Game:
             # TESTING AREA
             self.all_sprites.draw(self.player.rect)
             self.all_sprites.update(dt)
-
 
             # CURSOR
             cursor(game)

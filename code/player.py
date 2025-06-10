@@ -1,7 +1,8 @@
 from setting import *
-from entities import entity
+from entities import Entity
+from stat_ui import *
 
-class Player(entity):
+class Player(Entity):
     def __init__(self, pos, groups, game):
         self.name = "Player"
         
@@ -17,11 +18,6 @@ class Player(entity):
         self.facing_state = "right"
         self.frame_index = 0
         
-        # Other state
-        self.channeling = False
-        self.forced_moving = False
-        self.mode = None
-        
         # Loading appearance
         self.frames = dict()
         self._load_images()
@@ -30,7 +26,8 @@ class Player(entity):
         
         # Hitbox
         self.direction = pygame.Vector2()
-        self.hitbox_rect = self.rect.inflate(-20, -20)
+        self.rect = self.rect.inflate(0, 0)
+        
     
     def update_animation(self, dt):
         self.frame_index = self.frame_index + (6 * dt if self.direction else 0)
@@ -60,31 +57,15 @@ class Player(entity):
         self.direction.y = int(keys[pygame.K_DOWN] or keys[pygame.K_s]) - int(keys[pygame.K_UP] or keys[pygame.K_w])
         self.direction = self.direction.normalize() if self.direction else self.direction
     
-    def move(self, dt):
-        if self.channeling:
-            return
-        
-        self.hitbox_rect.x += self.direction.x * self.spd * dt
-        self.collision('horizontal')
-        self.hitbox_rect.y += self.direction.y * self.spd * dt
-        self.collision('vertical')
-        self.rect.center = self.hitbox_rect.center
-    
-    def forced_move(self, dt):
-        forced_spd = self.mode
-        self.hitbox_rect.x += self.facing_dir.x * forced_spd * dt
-        self.collision('horizontal')
-        self.hitbox_rect.y += self.facing_dir.y * forced_spd * dt
-        self.collision('vertical')
-        self.rect.center = self.hitbox_rect.center
-    
     def update(self, dt):
         self.input()
         self.update_facing()
         
-        if self.forced_moving:
-            self.forced_move(dt)
-        else:
-            self.move(dt) 
+        super().update(dt) # move
+        
         self.update_animation(dt)
         
+    
+    def death(self):
+        #self.game.running = False
+        print('u loose bitchess')

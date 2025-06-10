@@ -1,5 +1,5 @@
 from setting import *
-from skills import *
+from player_skills import *
 
 class Weap(pygame.sprite.Sprite):
     def __init__(self, groups, game):
@@ -44,8 +44,8 @@ class Gauntlet(Weap):
         super().__init__(groups, game)
         
         # Import skills
-        self.primary = Gauntlet_primary(self)
-        self.q_skill = Gauntlet_q_skill(self)
-        self.e_skill = Gauntlet_e_skill(self)
-        self.secondary = Gauntlet_secondary(self)
+        self.primary = Gauntlet_primary(self.player, self.game)
+        self.q_skill = Gauntlet_q_skill(self.player, self.game)
+        self.e_skill = Gauntlet_e_skill(self.player, self.game)
+        self.secondary = Gauntlet_secondary(self.player, self.game)
         

@@ -54,29 +54,44 @@ class Player_projectiles(Projectiles):
         
         # Calcu
         self.scale, self.spd = player_projectiles[self.name]
+        self.dmg = self.scale * self.game.player.atk
         
     def bullet_collision(self):
         collision_sprites = pygame.sprite.spritecollide(self, self.game.enemy_sprites, False, pygame.sprite.collide_mask)
         if collision_sprites:
             for sprite in collision_sprites:
-                sprite.destroy()
-                self.kill()
+                
+                if not hasattr(self, "piercing") or not self.piercing:
+                    sprite.take_damage(self.dmg)
+                    self.kill()
+                else:
+                    if not hasattr(sprite, "get_shot"):
+                        sprite.take_damage(self.dmg)
+                        sprite.get_shot = [self]
+                    else:
+                        this_sprite_got_shot_by_this_proj = False
+                        for proj in sprite.get_shot:
+                            if proj is self:
+                                this_sprite_got_shot_by_this_proj = True
+                                
+                        if not this_sprite_got_shot_by_this_proj:
+                            sprite.take_damage(self.dmg)
+                            sprite.get_shot.append(self)
+                                
+                        
+             
+class Enemy_projectiles(Projectiles):
+    def __init__(self, pos, direction, groups, game):
+        # Init
+        super().__init__(pos, direction, groups, game)
         
-class Gauntlet_primary(Player_projectiles):
-    def __init__(self, pos, direction, groups, game):
-        self.source = "Gauntlet Primary"
-        self.name = self.__class__.__name__
-        super().__init__(pos, direction, groups, game)
-
-class Gauntlet_q_skill(Player_projectiles):
-    def __init__(self, pos, direction, groups, game):
-        self.source = "Gauntlet Secondary"
-        self.name = self.__class__.__name__
-        super().__init__(pos, direction, groups, game)
-
-class Gauntlet_e_skill(Player_projectiles):
-    def __init__(self, pos, direction, groups, game):
-        self.source = "Gauntlet SkillR"
-        self.name = self.__class__.__name__
-        super().__init__(pos, direction, groups, game)
-        self.spd = 0
+        # Calcu
+        self.scale, self.spd = enemy_projectiles[self.name]
+        self.dmg = self.scale * self.game.player.atk
+        
+    def bullet_collision(self):
+        collision_sprites = pygame.sprite.spritecollide(self, self.game.player_sprites, False, pygame.sprite.collide_mask)
+        if collision_sprites:
+            for sprite in collision_sprites:
+                sprite.take_damage(self.dmg)
+                self.kill()

@@ -1,11 +1,11 @@
 from setting import *
-from stat_ui import stat_ui
+from health_bar import Healthbar
 
 class Entity(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, game):
+    def __init__(self, groups, game):
         
         #initialize sprite
-        super().__init__(groups)
+        super().__init__((groups, game.all_sprites))
         self.game = game
         self.level = game.level
         
@@ -28,18 +28,19 @@ class Entity(pygame.sprite.Sprite):
         self.def_ = self.basedef
         self.spd = self.basespd
         
-        #position
-        self.pos = pos
-        
         #states
         self.channeling = False
         self.forced_moving = False
         self.stunned = False
         self.mode = None
-        self.status = {}
+        self.silent = False
         
-        # STATUI
-        self.stat_ui = stat_ui(self, self.game)
+        # Status
+        self.status = set()
+        
+        self.rect = pygame.rect.FRect()
+        
+        self.healthbar = Healthbar(self)
         
     def updstat(self):
         self.maxhp = self.raw_hp + self.level * self.hp_multiplier
@@ -56,7 +57,7 @@ class Entity(pygame.sprite.Sprite):
                     if dir.y < 0: self.rect.top = sprite.rect.bottom
                     if dir.y > 0: self.rect.bottom = sprite.rect.top
     
-    def take_damage(self, dmg, pen = 0):
+    def take_damage(self, dmg, pen = 0, type="normal"):
         self.hp -= dmg / (1 + 0.01 * self.def_ * (1 - pen))
         if self.hp <= 0:
             self.death()
@@ -65,7 +66,6 @@ class Entity(pygame.sprite.Sprite):
         self.hp = min(self.hp + healing, self.maxhp)
     
     def death(self):
-        self.stat_ui.kill()
         self.kill()
     
     def move(self, dt):
@@ -94,9 +94,9 @@ class Entity(pygame.sprite.Sprite):
         pass
 
 class Enemy(Entity):
-    def __init__(self, pos, groups, game):
+    def __init__(self, pos, game):
         # Initializing
-        super().__init__(pos, groups, game)
+        super().__init__(game.enemy_sprites, game)
         self.player = self.game.player
         
         # Animation FPS

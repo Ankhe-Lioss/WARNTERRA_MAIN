@@ -15,7 +15,7 @@ class Skill:
         self.remaining = self.warmup
     
     def cast(self):
-        if self.ready:
+        if self.ready and not self.user.stunned and not self.user.silent:
             self.activate()
         else:
             self.warning()

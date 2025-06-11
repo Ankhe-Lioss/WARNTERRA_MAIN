@@ -1,13 +1,12 @@
 from setting import *
 from entities import Entity
-from stat_ui import *
 
 class Player(Entity):
     def __init__(self, pos, groups, game):
         self.name = "Player"
         
         # Initializing
-        super().__init__(pos, groups, game)
+        super().__init__(groups, game)
         self.game = game
         
         # Loading stats
@@ -26,7 +25,7 @@ class Player(Entity):
         
         # Hitbox
         self.direction = pygame.Vector2()
-        self.rect = self.rect.inflate(0, 0)
+        self.rect = self.rect.inflate((0, 0))
         
     
     def update_animation(self, dt):
@@ -67,5 +66,5 @@ class Player(Entity):
         
     
     def death(self):
-        #self.game.running = False
+        self.game.running = False
         print('u loose bitchess')

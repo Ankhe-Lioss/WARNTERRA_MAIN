@@ -15,14 +15,14 @@ class Game:
         # Display
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.mouse.set_visible(False)
-        
+    
         # Caption
         pygame.display.set_caption("Warnterra 1.0")
         
-        # Time
+        # Times
         self.clock = pygame.time.Clock()
         
-        # State
+        # Statew
         self.running = True
         self.pausing = False
         
@@ -40,7 +40,7 @@ class Game:
         # Testing
         
         
-        
+    
     def run(self):
         while self.running:
             

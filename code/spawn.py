@@ -2,13 +2,13 @@ from setting import *
 from enemies import *
 
 def spawn_poro(pos,game):
-    Poro(pos, (game.all_sprites, game.enemy_sprites), game)
+    Poro(pos, game)
 def spawn_meele(pos,game):
-    Meele(pos, (game.all_sprites, game.enemy_sprites), game)
+    Meele(pos, game)
 def spawn_karthus(pos,game):
-    Karthus(pos, (game.all_sprites, game.enemy_sprites), game)
+    Karthus(pos, game)
 def Spawm_chogath(pos,game):
-    Chogath(pos, (game.all_sprites, game.enemy_sprites), game)
+    Chogath(pos, game)
 def spawn_animation(pos,game,enemy_name):
     spawn_animation(pos,(game.all_sprites),game,enemy_name)
 

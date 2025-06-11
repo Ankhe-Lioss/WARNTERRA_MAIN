@@ -1,10 +1,10 @@
 entity_stats = {
 #   "enemy_name" : (hp, atk, def, spd, hp_multiplier, atk_multiplier, def_multiplier, atk_range)
-    "Player" : (500, 100, 10, 400, 50 , 20  , 5  , 0  ),
-    "Poro"   : (300, 50 , 10, 350, 75 , 10  , 2  , 100),
-    "Meele"  : (500, 45 , 10, 300, 65 , 12.5, 2.5, 50 ),
-    "Karthus": (400, 75 , 10, 300, 25 , 25  , 2  , 500),
-    "Chogath": (950, 20 , 20, 200, 150, 10  , 5  , 200)
+    "Player" : (500, 100, 11, 400, 50 , 25  , 2  , 0  ),
+    "Poro"   : (250, 50 , 10, 450, 75 , 25  , 3  , 50 ),
+    "Meele"  : (500, 45 , 10, 300, 65 , 30  , 1.5, 50 ),
+    "Karthus": (250, 75 , 10, 250, 25 , 75  , 1  , 500),
+    "Chogath": (700, 20 , 15, 200, 150, 20  , 2  , 200)
 }
 
 skill_stats = {
@@ -15,19 +15,19 @@ skill_stats = {
     "Gauntlet_q_skill" : (5000, 0, 200),
     "Gauntlet_e_skill" : (15000, 10000, 750),
 #enemy
-    "Poro_stomp" : (1000, 0, 750),
+    "Poro_stomp" : (1500, 0, 1000),
     "Chogath_stomp" : (2500, 1000, 750),
-    "Karthus_primary" : (500, 1000, 200)
+    "Karthus_primary" : (500, 1000, 1000)
 }
 
 player_projectiles = {
 #   "proj" : (atk_scale_multification, speed)
     "Gauntlet_primary" : (1, 1000),
     "Gauntlet_q_skill" : (3, 1000),
-    "Gauntlet_e_skill" : (3, 700)
+    "Gauntlet_e_skill" : (2, 700)
 }
 
 enemy_projectiles = {
 #   "proj" : (atk_scale_multification, speed)
-    "Karthus_Primary" : (0.2, 750),
+    "Karthus_Primary" : (0.5, 750),
 }

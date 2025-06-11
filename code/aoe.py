@@ -1,4 +1,5 @@
 from setting import *
+from status import *
 
 Aoe_stat={
 #   aoe skill=[scale_atk,frame_number,life_time]
@@ -10,6 +11,7 @@ class Area_of_effect(pygame.sprite.Sprite):
     def __init__(self,pos,groups,game,user_atk):
         super().__init__(groups)
         self.user_atk=user_atk
+        self.game = game
 
         #load stat
         self.scale=Aoe_stat[self.name][0]
@@ -48,14 +50,16 @@ class Area_of_effect(pygame.sprite.Sprite):
                 if sprite not in self.hit_enemies:
                     sprite.take_damage(dmg)
                     self.hit_enemies.add(sprite)
-                    if hasattr(self,'special_effect'):
-                        self.special_effect(sprite)
+                    self.apply(sprite)
 
     def update(self, dt):
         self.animate(dt)
         self.aoe_collision()
         if pygame.time.get_ticks()-self.spawn_time>=self.lifetime:
             self.kill()
+            
+    def apply(self, target):
+        pass
             
 class Poro_Stomp(Area_of_effect):
     def __init__(self, pos, groups, game,user_atk):
@@ -68,3 +72,6 @@ class Chogath_Rupture(Area_of_effect):
         self.enemy_sprites=game.player_sprites
         self.name='Chogath_Rupture'
         super().__init__(pos,groups,game,user_atk)
+
+    def apply(self, target):
+        target.status.add(Stunned(1000, self.game, target))

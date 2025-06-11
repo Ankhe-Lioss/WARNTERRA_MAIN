@@ -90,7 +90,7 @@ class Entity(pygame.sprite.Sprite):
         else:
             self.move(dt) 
     
-    def update_stat(self, dt):
+    def update_stat(self):
         pass
 
 class Enemy(Entity):
@@ -149,6 +149,10 @@ class Enemy(Entity):
         
     def move_enemy(self,dt):
         # update the rect position + collision
+        
+        if self.channeling:
+            return
+        
         self.rect.x += self.direction.x * self.spd * dt
         self.collision('horizontal', self.direction)
         self.enemy_collision('horizontal',dt)

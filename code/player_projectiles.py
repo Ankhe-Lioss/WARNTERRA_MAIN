@@ -1,4 +1,5 @@
 from projectiles import *
+from status import *
 
 class Gauntlet_primary(Player_projectiles):
     def __init__(self, pos, direction, groups, game):
@@ -17,6 +18,9 @@ class Gauntlet_e_skill(Player_projectiles):
         self.source = "Gauntlet SkillR"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, groups, game)
-        self.piercing = True
+        self.wall_piercing = True
+        self.e_piercing = True
         self.spd = 0
-   
+    
+    def apply(self, target):
+        target.status.add(Slowed(2000, 0.75, self.game, target))

@@ -13,8 +13,8 @@ def spawn_animation(pos,game,enemy_name):
     spawn_animation(pos,(game.all_sprites),game,enemy_name)
 
 class spawn_animation(pygame.sprite.Sprite):
-    def __init__(self, pos,groups,game,enemy_name):
-        super().__init__(groups)
+    def __init__(self, pos, game, enemy_name):
+        super().__init__(game.all_sprites)
         self.game=game
         self.frame_index = 0
         self.frames=[]

@@ -14,11 +14,9 @@ class Karthus_primary(Skill):
         super().activate()
         eproj.Karthus_Primary(self.user.rect.center, self.user.direction, (self.user.game.all_sprites, self.user.game.enemy_projectiles), self.user.game)
         self.user.state='Attacking'
-        self.user.spd =0
         
     def deactivate(self):
         super().deactivate()
-        self.user.spd = self.user.basespd
         self.user.state='Walking'
         
 class Poro_stomp(Skill):
@@ -29,13 +27,11 @@ class Poro_stomp(Skill):
 
     def activate(self):
         super().activate()
-        self.user.spd = 0
         aoe.Poro_Stomp(self.user.rect.center,self.user.game.all_sprites,self.user.game,self.user.atk)
         self.user.state = 'Attacking'
 
     def deactivate(self):
         super().deactivate()
-        self.user.spd = self.user.basespd
         self.user.state = 'Walking'
         
 class Chogath_stomp(Skill):
@@ -48,9 +44,9 @@ class Chogath_stomp(Skill):
         super().activate()
         aoew.Spawn_rupture(self.user.player.rect.center, self.user.game.all_sprites, self.user.game, self.user.atk)
         self.user.state = 'Attacking'
-        self.user.spd = 0
+        self.user.channeling = True
 
     def deactivate(self):
         super().deactivate()
-        self.user.spd = self.user.basespd
         self.user.state = 'Walking'
+        self.user.channeling = False

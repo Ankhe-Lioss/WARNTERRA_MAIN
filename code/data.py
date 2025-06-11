@@ -3,7 +3,7 @@ entity_stats = {
     "Player" : (500, 100, 11, 400, 50 , 25  , 2  , 0  ),
     "Poro"   : (250, 50 , 10, 450, 75 , 25  , 3  , 50 ),
     "Meele"  : (500, 45 , 10, 300, 65 , 30  , 1.5, 50 ),
-    "Karthus": (250, 75 , 10, 250, 25 , 75  , 1  , 500),
+    "Karthus": (250, 75 , 10, 200, 25 , 75  , 1  , 500),
     "Chogath": (700, 20 , 15, 200, 150, 20  , 2  , 200)
 }
 
@@ -14,17 +14,28 @@ skill_stats = {
     "Gauntlet_secondary" : (2000, 0, 100),
     "Gauntlet_q_skill" : (5000, 0, 200),
     "Gauntlet_e_skill" : (15000, 10000, 750),
+    
+    "Bow_primary" : (1000, 0, 0),
+    "Bow_primary_enhanced": (600, 0, 150),
+    "Bow_secondary": (6500, 5000, 3500),
+    "Bow_q_skill": (3800, 1000, 200),
+    "Bow_e_skill": (16000, 5000, 300),
 #enemy
     "Poro_stomp" : (1500, 0, 1000),
     "Chogath_stomp" : (2500, 1000, 750),
-    "Karthus_primary" : (500, 1000, 1000)
+    "Karthus_primary" : (1000, 1000, 500)
 }
 
 player_projectiles = {
 #   "proj" : (atk_scale_multification, speed)
     "Gauntlet_primary" : (1, 1000),
     "Gauntlet_q_skill" : (3, 1000),
-    "Gauntlet_e_skill" : (2, 700)
+    "Gauntlet_e_skill" : (2, 700),
+    
+    "Bow_primary" : (1, 1000),
+    "Bow_primary_enhanced": (0.4, 800),
+    "Bow_q_skill": (0.2, 1000, 650),
+    "Bow_e_skill": (16000, 5000, 600),
 }
 
 enemy_projectiles = {

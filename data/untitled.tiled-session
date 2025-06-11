@@ -5,15 +5,15 @@
     },
     "activeFile": "maps/Test_level.tmx",
     "expandedProjectPaths": [
+        ".",
         "maps",
-        "tilesets",
-        "."
+        "tilesets"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "maps/Test_level.tmx": {
             "scale": 0.33,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 710.6060606060606,
                 "y": 728.7878787878789

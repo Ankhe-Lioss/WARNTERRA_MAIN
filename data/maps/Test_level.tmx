@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="209">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="218">
  <tileset firstgid="1" source="../tilesets/terrain.tsx"/>
  <tileset firstgid="484" source="../tilesets/Objects.tsx"/>
  <tileset firstgid="538" source="../tilesets/terrain_atlas.tsx"/>
@@ -145,31 +145,22 @@
   <object id="41" name="Player" x="788.667" y="733.667">
    <point/>
   </object>
-  <object id="96" name="Poro" type="Enemy" x="351.667" y="814.167">
+  <object id="88" name="Chogath" type="0" x="444.667" y="650.364">
    <point/>
   </object>
-  <object id="97" name="Poro" type="Enemy" x="1282" y="791.333">
+  <object id="209" name="Poro" type="1" x="1021.21" y="309.091">
    <point/>
   </object>
-  <object id="196" name="Poro" type="Enemy" x="1418" y="449.333">
+  <object id="210" name="Karthus" type="2" x="1221.21" y="1048.48">
    <point/>
   </object>
-  <object id="88" name="Chogath" x="578" y="314">
+  <object id="211" name="Poro" type="3" x="572.727" y="1024.24">
    <point/>
   </object>
-  <object id="89" name="Chogath" x="1080" y="598">
+  <object id="212" name="Chogath" type="3" x="896.97" y="1033.33">
    <point/>
   </object>
-  <object id="99" name="Meele" x="1166" y="1108">
-   <point/>
-  </object>
-  <object id="205" name="Karthus" x="621.212" y="1039.39">
-   <point/>
-  </object>
-  <object id="207" name="Karthus" x="315.152" y="1157.58">
-   <point/>
-  </object>
-  <object id="208" name="Karthus" x="803.03" y="1212.12">
+  <object id="213" name="Karthus" type="3" x="360.606" y="936.364">
    <point/>
   </object>
  </objectgroup>

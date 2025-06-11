@@ -1,10 +1,11 @@
 from setting import *
 
 class Projectiles(pygame.sprite.Sprite):
-    def __init__(self, pos, direction, groups, game):
+    def __init__(self, target, pos, direction, groups, game):
         # Initializing
         super().__init__(groups)
         self.game = game
+        self.target = target
         
         # Movement
         self.direction = direction
@@ -36,7 +37,7 @@ class Projectiles(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frame_id) % len(self.frames)]
     
     def collision(self):
-        if hasattr(self,'piercing') and self.piercing:
+        if hasattr(self,'wall_piercing') and self.wall_piercing:
             return
         if pygame.sprite.spritecollide(self, self.game.collision_sprites, False):
             self.kill()
@@ -46,27 +47,23 @@ class Projectiles(pygame.sprite.Sprite):
         self.rect.center += self.direction * self.spd * dt
         self.collision()
         self.bullet_collision()
-
-class Player_projectiles(Projectiles):
-    def __init__(self, pos, direction, groups, game):
-        # Init
-        super().__init__(pos, direction, groups, game)
-        
-        # Calcu
-        self.scale, self.spd = player_projectiles[self.name]
-        self.dmg = self.scale * self.game.player.atk
+    
+    def apply(self, target):
+        pass
         
     def bullet_collision(self):
-        collision_sprites = pygame.sprite.spritecollide(self, self.game.enemy_sprites, False, pygame.sprite.collide_mask)
+        collision_sprites = pygame.sprite.spritecollide(self, self.target, False, pygame.sprite.collide_mask)
         if collision_sprites:
             for sprite in collision_sprites:
                 
-                if not hasattr(self, "piercing") or not self.piercing:
+                if not hasattr(self, "e_piercing") or not self.e_piercing:
                     sprite.take_damage(self.dmg)
+                    self.apply(sprite)
                     self.kill()
                 else:
                     if not hasattr(sprite, "get_shot"):
                         sprite.take_damage(self.dmg)
+                        self.apply(sprite)
                         sprite.get_shot = [self]
                     else:
                         this_sprite_got_shot_by_this_proj = False
@@ -76,22 +73,23 @@ class Player_projectiles(Projectiles):
                                 
                         if not this_sprite_got_shot_by_this_proj:
                             sprite.take_damage(self.dmg)
+                            self.apply(sprite)
                             sprite.get_shot.append(self)
-                                
-                        
+
+class Player_projectiles(Projectiles):
+    def __init__(self, pos, direction, groups, game):
+        # Init
+        super().__init__(game.enemy_sprites, pos, direction, groups, game)
+        
+        # Calcu
+        self.scale, self.spd = player_projectiles[self.name]
+        self.dmg = self.scale * self.game.player.atk                    
              
 class Enemy_projectiles(Projectiles):
     def __init__(self, pos, direction, groups, game):
         # Init
-        super().__init__(pos, direction, groups, game)
+        super().__init__(game.player_sprites, pos, direction, groups, game)
         
         # Calcu
         self.scale, self.spd = enemy_projectiles[self.name]
         self.dmg = self.scale * self.game.player.atk
-        
-    def bullet_collision(self):
-        collision_sprites = pygame.sprite.spritecollide(self, self.game.player_sprites, False, pygame.sprite.collide_mask)
-        if collision_sprites:
-            for sprite in collision_sprites:
-                sprite.take_damage(self.dmg)
-                self.kill()

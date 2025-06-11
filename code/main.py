@@ -38,6 +38,7 @@ class Game:
         setlevel(self)
         
         # Testing
+        spawn_enmey_wave(0, self)
         
         
     

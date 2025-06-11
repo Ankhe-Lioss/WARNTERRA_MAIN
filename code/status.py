@@ -16,9 +16,7 @@ class Status(pygame.sprite.Sprite):
         self.remaining -= dt * 1000
         if self.remaining <= 0:
             self.unapply()
-            self.kill()
-            
-            
+            self.kill()       
 
 class Stunned(Status):
     def __init__(self, duration, game, owner):
@@ -40,3 +38,15 @@ class Poisonned(Status):
     def update(self, dt):
         super().update(dt)
         self.owner.take_damage(self.dps / dt, type="dot")
+
+class Slowed(Status):
+    def __init__(self, duration, ratio, game, owner):
+        self.name = self.__class__.__name__
+        super().__init__(duration, game)
+        self.owner = owner
+        self.ratio = ratio
+        self.owner.spd *= (1 - self.ratio)
+
+    def unapply(self):
+        self.owner.spd /= (1 - self.ratio)
+

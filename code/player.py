@@ -2,11 +2,11 @@ from setting import *
 from entities import Entity
 
 class Player(Entity):
-    def __init__(self, pos, groups, game):
+    def __init__(self, pos, game):
         self.name = "Player"
         
         # Initializing
-        super().__init__(groups, game)
+        super().__init__(game.player_sprites, game)
         self.game = game
         
         # Loading stats
@@ -29,7 +29,7 @@ class Player(Entity):
         
     
     def update_animation(self, dt):
-        self.frame_index = self.frame_index + (6 * dt if self.direction else 0)
+        self.frame_index = self.frame_index + (6 * dt if self.direction and not self.stunned else 0)
         self.image = self.frames[self.facing_state][int(self.frame_index) % len(self.frames[self.facing_state])]
     
     def update_facing(self):
@@ -58,7 +58,8 @@ class Player(Entity):
     
     def update(self, dt):
         self.input()
-        self.update_facing()
+        if not self.stunned:
+            self.update_facing()
         
         super().update(dt) # move
         

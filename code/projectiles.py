@@ -3,7 +3,7 @@ from setting import *
 class Projectiles(pygame.sprite.Sprite):
     def __init__(self, target, pos, direction, groups, game):
         # Initializing
-        super().__init__(groups)
+        super().__init__(groups, game.all_sprites)
         self.game = game
         self.target = target
         
@@ -47,6 +47,10 @@ class Projectiles(pygame.sprite.Sprite):
         self.rect.center += self.direction * self.spd * dt
         self.collision()
         self.bullet_collision()
+        
+        self.lifetime -= dt * 1000
+        if self.lifetime <= 0:
+            self.kill()
     
     def apply(self, target):
         pass
@@ -77,9 +81,9 @@ class Projectiles(pygame.sprite.Sprite):
                             sprite.get_shot.append(self)
 
 class Player_projectiles(Projectiles):
-    def __init__(self, pos, direction, groups, game):
+    def __init__(self, pos, direction, game):
         # Init
-        super().__init__(game.enemy_sprites, pos, direction, groups, game)
+        super().__init__(game.enemy_sprites, pos, direction, game.player_projectiles, game)
         
         # Calcu
         self.scale, self.spd = player_projectiles[self.name]
@@ -88,7 +92,7 @@ class Player_projectiles(Projectiles):
 class Enemy_projectiles(Projectiles):
     def __init__(self, pos, direction, groups, game):
         # Init
-        super().__init__(game.player_sprites, pos, direction, groups, game)
+        super().__init__(game.player_sprites, pos, direction, game.enemy_projectiles, game)
         
         # Calcu
         self.scale, self.spd = enemy_projectiles[self.name]

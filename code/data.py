@@ -15,8 +15,8 @@ skill_stats = {
     "Gauntlet_q_skill" : (5000, 0, 200),
     "Gauntlet_e_skill" : (15000, 10000, 750),
     
-    "Bow_primary" : (1000, 0, 0),
-    "Bow_primary_enhanced": (600, 0, 150),
+    "Bow_primary" : (1000, 1000, 0),
+    "Bow_primary_enhanced": (450, 500, 150),
     "Bow_secondary": (6500, 5000, 3500),
     "Bow_q_skill": (3800, 1000, 200),
     "Bow_e_skill": (16000, 5000, 300),
@@ -33,9 +33,9 @@ player_projectiles = {
     "Gauntlet_e_skill" : (2, 700),
     
     "Bow_primary" : (1, 1000),
-    "Bow_primary_enhanced": (0.4, 800),
-    "Bow_q_skill": (0.2, 1000, 650),
-    "Bow_e_skill": (16000, 5000, 600),
+    "Bow_primary_enhanced": (0.3, 800),
+    "Bow_q_skill": (0.2, 700),
+    "Bow_e_skill": (0, 600)
 }
 
 enemy_projectiles = {

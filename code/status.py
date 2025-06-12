@@ -34,10 +34,15 @@ class Poisonned(Status):
         super().__init__(duration, game)
         self.owner = owner
         self.dps = dps
+        self.ticks = self.remaining / 250
+        self.inflicted = 0
     
     def update(self, dt):
         super().update(dt)
-        self.owner.take_damage(self.dps / dt, type="dot")
+        if self.remaining > 0 and int(self.remaining) % 250 != self.ticks:
+            self.ticks = int(self.remaining) % 250
+            self.owner.take_damage(self.dps / 4)
+
 
 class Slowed(Status):
     def __init__(self, duration, ratio, game, owner):

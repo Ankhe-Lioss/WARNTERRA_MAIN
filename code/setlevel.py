@@ -23,11 +23,12 @@ def setlevel(game):
     for obj in map.get_layer_by_name('Entities'):
         if obj.name == 'Player':
             game.player = Player((obj.x, obj.y), game)
-            game.gun = Gauntlet(game)
+            game.player.weap = Gauntlet(game)
         else:
             if not obj.type in game.spawnlist:
                 game.spawnlist[obj.type] = []
             game.spawnlist[obj.type].append((obj.name, obj.x, obj.y))
+            
 def spawn_enmey_wave(wave,game):
     for obj in game.spawnlist[f'{wave}']:
         spawn_animation((obj[1], obj[2]), game, obj[0])

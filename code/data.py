@@ -12,8 +12,8 @@ skill_stats = {
 #player
     "Gauntlet_primary" : (1000, 0, 0),
     "Gauntlet_secondary" : (2000, 0, 100),
-    "Gauntlet_q_skill" : (5000, 0, 200),
-    "Gauntlet_e_skill" : (15000, 10000, 750),
+    "Gauntlet_q_skill" : (4800, 0, 200),
+    "Gauntlet_e_skill" : (19250, 10000, 750),
     
     "Bow_primary" : (1000, 1000, 0),
     "Bow_primary_enhanced": (450, 500, 150),

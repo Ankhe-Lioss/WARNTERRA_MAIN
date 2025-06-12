@@ -33,7 +33,7 @@ class Entity(pygame.sprite.Sprite):
         self.forced_moving = False
         self.stunned = False
         self.mode = None
-        self.silent = False
+        self.silenced = False
         
         # Status
         self.status = set()

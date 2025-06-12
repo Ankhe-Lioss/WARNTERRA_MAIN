@@ -4,7 +4,11 @@ from player import *
 from weapon import *
 from spawn import *
 
+
+
 def setlevel(game):
+    #
+    #
     game.level=0
     map = load_pygame(os.path.join( 'data', 'maps', 'Test_level.tmx'))
     game.spawnlist={

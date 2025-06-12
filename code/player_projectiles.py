@@ -12,6 +12,17 @@ class Gauntlet_q_skill(Player_projectiles):
         self.source = "Gauntlet Secondary"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
+    
+    def bullet_collision(self):
+        collision_sprites = pygame.sprite.spritecollide(self, self.target, False, pygame.sprite.collide_mask)
+        if collision_sprites:
+            
+            self.game.player.weap.q_skill.remaining -= 2000
+            self.game.player.weap.e_skill.remaining -= 2000
+            
+            for sprite in collision_sprites:
+                    sprite.take_damage(self.dmg)
+                    self.kill()
 
 class Gauntlet_e_skill(Player_projectiles):
     def __init__(self, pos, direction, game):

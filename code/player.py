@@ -78,13 +78,16 @@ class Player(Entity):
     
     def collide_with_enemies(self, dt):
         for enemy in self.game.enemy_sprites:
-            if self.rect.inflate(-40, -40).colliderect(enemy.rect):
+            if not enemy.ghost and self.rect.inflate(-40, -40).colliderect(enemy.rect):
                 self.forced_moving = True
                 dir = (pygame.Vector2(self.rect.center) - pygame.Vector2(enemy.rect.center))
-                self.mode = {"spd" : 1000, "dir" : dir.normalize() if dir else dir}
+                self.mode = {"spd" : 1000, "dir" : dir.normalize() if dir else dir, "type" : "knockback"}
                 self.knockback_remaining = 0.02
         
         if self.forced_moving:
+            if self.mode["type"] != "knockback":
+                return
+            
             self.knockback_remaining -= dt
             if self.knockback_remaining <= 0:
                 self.forced_moving = False

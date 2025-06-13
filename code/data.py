@@ -1,10 +1,10 @@
 entity_stats = {
-#   "enemy_name" : (hp, atk, def, spd, hp_multiplier, atk_multiplier, def_multiplier, atk_range)
-    "Player" : (500, 100, 11, 400, 50 , 25  , 2  , 0  ),
-    "Poro"   : (250, 50 , 10, 450, 75 , 25  , 3  , 50 ),
-    "Meele"  : (500, 45 , 10, 300, 65 , 30  , 1.5, 50 ),
-    "Karthus": (250, 75 , 10, 200, 25 , 75  , 1  , 500),
-    "Chogath": (700, 20 , 15, 200, 150, 20  , 2  , 200)
+#   "enemy_name" : (hp, atk, def, spd, hp_multiplier, atk_multiplier, def_multiplier, atk_range, keep_range)
+    "Player" : (500, 100, 11, 400, 50 , 25  , 2  , 0  , 0  ),
+    "Poro"   : (250, 50 , 10, 450, 75 , 25  , 3  , 20 , 10 ),
+    "Meele"  : (500, 45 , 10, 300, 65 , 30  , 1.5, 50 , 10 ),
+    "Karthus": (250, 75 , 10, 200, 25 , 75  , 1  , 500, 200),
+    "Chogath": (700, 40 , 15, 200, 150, 20  , 2  , 200, 100)
 }
 
 skill_stats = {
@@ -41,4 +41,10 @@ player_projectiles = {
 enemy_projectiles = {
 #   "proj" : (atk_scale_multification, speed)
     "Karthus_Primary" : (0.5, 750),
+}
+
+Aoe_stat={
+#   aoe skill=[scale_atk,frame_number,life_time]
+    'Poro_Stomp':(1, 3, 1000),
+    'Chogath_Rupture':(2, 5, 1000)
 }

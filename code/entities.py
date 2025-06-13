@@ -20,6 +20,7 @@ class Entity(pygame.sprite.Sprite):
         self.atk_multiplier = self.stats[5]
         self.def_multiplier = self.stats[6]
         self.atk_range = self.stats[7]
+        self.keep_range = self.stats[8]
         
         self.updstat()
         
@@ -34,6 +35,7 @@ class Entity(pygame.sprite.Sprite):
         self.stunned = False
         self.mode = None
         self.silenced = False
+        self.ghost = False
         
         # Status
         self.status = set()
@@ -168,13 +170,17 @@ class Enemy(Entity):
         # get direction
         player_pos = pygame.Vector2(self.player.rect.center)
         enemy_pos = pygame.Vector2(self.rect.center)
-        self.distance=player_pos-enemy_pos
-        self.direction = self.distance.normalize() if self.distance else self.distance
+        self.distance_vector = player_pos - enemy_pos
+        self.direction = self.distance_vector.normalize() if self.distance_vector else self.distance_vector
         
     def move_enemy(self,dt):
         # update the rect position + collision
         
-        if self.channeling:
+        if self.channeling or self.stunned or self.forced_moving:
+            return
+        
+        distance = self.distance_vector.length()
+        if distance <= self.keep_range:
             return
         
         self.rect.x += self.direction.x * self.spd * dt
@@ -203,7 +209,7 @@ class Enemy(Entity):
             self.kill()
             
     def attacking(self):
-        if self.distance.length() <= self.atk_range:
+        if self.distance_vector.length() <= self.atk_range:
             for skill in self.skills:
                 if skill.ready:
                     skill.cast()

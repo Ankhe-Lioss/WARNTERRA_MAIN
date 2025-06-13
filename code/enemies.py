@@ -8,6 +8,7 @@ class Poro(Enemy):
         self.rect = self.rect.inflate(0, 0)
         self.primary=Poro_stomp(self, game)
         self.skills.append(self.primary)
+        self.ghost = True
 
 class Meele(Enemy):
     def __init__(self, pos, game):

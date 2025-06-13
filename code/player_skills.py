@@ -43,7 +43,7 @@ class Gauntlet_secondary(Skill):
         
     def activate(self):
         super().activate()
-        self.user.mode = {"dir" : self.user.facing_dir.copy(), "spd" : 2000}
+        self.user.mode = {"dir" : self.user.facing_dir.copy(), "spd" : 2000, "type" : "dash"}
         self.user.forced_moving = True
         
     def deactivate(self):

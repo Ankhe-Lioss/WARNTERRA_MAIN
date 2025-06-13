@@ -1,12 +1,6 @@
 from setting import *
 from status import *
 
-Aoe_stat={
-#   aoe skill=[scale_atk,frame_number,life_time]
-    'Poro_Stomp':[1,3,1000],
-    'Chogath_Rupture':[1,5,1000]
-}
-
 class Area_of_effect(pygame.sprite.Sprite):
     def __init__(self,pos,groups,game,user_atk):
         super().__init__(groups)

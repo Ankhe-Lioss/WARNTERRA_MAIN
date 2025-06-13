@@ -25,12 +25,12 @@ class Player(Entity):
         
         # Hitbox
         self.direction = pygame.Vector2()
-        self.rect = self.rect.inflate((0, 0))
         
     
     def update_animation(self, dt):
         self.frame_index = self.frame_index + (6 * dt if self.direction and not self.stunned else 0)
         self.image = self.frames[self.facing_state][int(self.frame_index) % len(self.frames[self.facing_state])]
+            
     
     def update_facing(self):
         # Calculate mouse position references
@@ -64,8 +64,31 @@ class Player(Entity):
         super().update(dt) # move
         
         self.update_animation(dt)
-        
+        self.collide_with_enemies(dt)
+    
+    def take_damage(self, dmg, pen=0, type="normal"):
+        super().take_damage(dmg, pen, type)
+        # animate hit:
+        self.take_dmg_animation_remaining = 100
+        self.taking_dmg = True
     
     def death(self):
         self.game.running = False
         print('u loose bitchess')
+    
+    def collide_with_enemies(self, dt):
+        for enemy in self.game.enemy_sprites:
+            if self.rect.inflate(-40, -40).colliderect(enemy.rect):
+                self.forced_moving = True
+                dir = (pygame.Vector2(self.rect.center) - pygame.Vector2(enemy.rect.center))
+                self.mode = {"spd" : 1000, "dir" : dir.normalize() if dir else dir}
+                self.knockback_remaining = 0.02
+        
+        if self.forced_moving:
+            self.knockback_remaining -= dt
+            if self.knockback_remaining <= 0:
+                self.forced_moving = False
+                self.mode = None
+                self.knockback_remaining = 0
+        
+        

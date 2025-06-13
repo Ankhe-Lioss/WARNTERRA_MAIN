@@ -58,7 +58,12 @@ class Entity(pygame.sprite.Sprite):
                     if dir.y > 0: self.rect.bottom = sprite.rect.top
     
     def take_damage(self, dmg, pen = 0, type="normal"):
-        self.hp -= dmg / (1 + 0.01 * self.def_ * (1 - pen))
+        delta = dmg / (1 + 0.01 * self.def_ * (1 - pen))
+        self.hp -= delta
+        
+        if type == "normal":
+            Flyout_number(self.rect.center, int(delta), (200, 0, 0), self.game)
+        
         if self.hp <= 0:
             self.death()
         
@@ -92,6 +97,25 @@ class Entity(pygame.sprite.Sprite):
     
     def update_stat(self):
         pass
+
+class Flyout_number(pygame.sprite.Sprite):
+    
+    def __init__(self, pos, number, color, game, font_size=24):
+        super().__init__(game.all_sprites)
+        self.image = pygame.font.Font(None, font_size).render(str(number), True, color)
+        self.rect = self.image.get_frect(center=pos)
+        self.lifetime = 0.5
+        self.spawn_time = pygame.time.get_ticks()
+        self.top_sprite = True  # Ensure this sprite is drawn on top of others
+    
+    def update(self, dt):
+        elapsed_time = pygame.time.get_ticks() - self.spawn_time
+        if elapsed_time < self.lifetime * 1000:
+            self.rect.y -= 50 * dt
+            alpha = max(0, 255 - int((elapsed_time / (self.lifetime * 1000)) * 255))
+            self.image.set_alpha(alpha)
+        else:
+            self.kill()
 
 class Enemy(Entity):
     def __init__(self, pos, game):

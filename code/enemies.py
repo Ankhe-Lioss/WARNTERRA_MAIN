@@ -5,7 +5,7 @@ class Poro(Enemy):
     def __init__(self, pos, game):
         self.name='Poro'
         super().__init__(pos, game)
-        self.rect = self.rect.inflate(0, 0)
+        self.rect = self.rect.inflate(-40, -40)
         self.primary=Poro_stomp(self, game)
         self.skills.append(self.primary)
         self.ghost = True

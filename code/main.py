@@ -59,6 +59,15 @@ class Game:
             # TESTING AREA
             self.all_sprites.draw(self.player.rect)
             self.all_sprites.update(dt)
+            
+            """target_pos = self.player.rect.center
+            offset = pygame.Vector2()
+            offset.x = -(target_pos[0] - WINDOW_WIDTH / 2)
+            offset.y = -(target_pos[1] - WINDOW_HEIGHT / 2)
+            player_rect = self.player.rect.copy()
+            player_rect.center += offset
+            pygame.draw.rect(self.display_surface, 'red', player_rect, 2)
+            pygame.draw.circle(self.display_surface, 'blue', CENTER, radius=100, width=2)"""
 
             # CURSOR
             cursor(game)

@@ -27,7 +27,7 @@ class Weap(pygame.sprite.Sprite):
     def rotate_gun(self):
         angle = degrees(atan2(self.player.facing_dir.x, self.player.facing_dir.y)) + 180
         self.image = pygame.transform.rotozoom(self.surf, angle, 1)
-        self.rect.center = self.player.rect.center
+        self.rect.center = self.player.rect.center + self.player.facing_dir * 20
     
     def update(self, dt):
         self.input()

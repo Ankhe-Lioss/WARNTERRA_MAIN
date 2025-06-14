@@ -22,6 +22,7 @@ class Projectiles(pygame.sprite.Sprite):
         self.frame_id = 0
         self.image = self.frames[self.frame_id]
         
+        self.image_rect = self.image.get_frect(center=pos)
         self.rect = self.image.get_frect(center=pos)
     
     def _load_images(self):
@@ -45,6 +46,7 @@ class Projectiles(pygame.sprite.Sprite):
     def update(self, dt):
         self._animate(dt)
         self.rect.center += self.direction * self.spd * dt
+        self.image_rect.center = self.rect.center
         self.collision()
         self.bullet_collision()
         

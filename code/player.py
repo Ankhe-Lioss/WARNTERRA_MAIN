@@ -21,7 +21,8 @@ class Player(Entity):
         self.frames = dict()
         self._load_images()
         self.image: pygame.Surface = self.frames[self.facing_state][self.frame_index]
-        self.rect = self.image.get_frect(center=self.pos).inflate(-10, -10)
+        self.image_rect = self.image.get_frect(center=self.pos)
+        self.rect = self.image_rect.inflate(-30, -30)
         
         # Hitbox
         self.direction = pygame.Vector2()
@@ -35,7 +36,7 @@ class Player(Entity):
     def update_facing(self):
         # Calculate mouse position references
         mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
-        player_pos = pygame.Vector2(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
+        player_pos = pygame.Vector2(CENTER)
         self.facing_dir = (mouse_pos - player_pos)
         self.facing_dir = self.facing_dir.normalize() if self.facing_dir else self.facing_dir
         angle = - degrees(atan2(self.facing_dir.x, self.facing_dir.y)) + 180

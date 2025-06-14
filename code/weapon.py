@@ -10,7 +10,7 @@ class Weap(pygame.sprite.Sprite):
         # Init
         self.surf = pygame.image.load(os.path.join('images', 'weapon', f'{self.name}.png')).convert_alpha()
         self.image = self.surf
-        self.rect = self.image.get_frect(center=self.player.rect.center)
+        self.image_rect = self.image.get_frect(center=self.player.image_rect.center)
         
         # Import skills
         
@@ -24,19 +24,13 @@ class Weap(pygame.sprite.Sprite):
         if pygame.key.get_pressed()[pygame.K_e]:
             self.e_skill.cast()
     
-    def rotate_gun(self):
-        angle = degrees(atan2(self.player.facing_dir.x, self.player.facing_dir.y)) + 180
-        self.image = pygame.transform.rotozoom(self.surf, angle, 1)
-        self.rect.center = self.player.rect.center + self.player.facing_dir * 20
-    
     def update(self, dt):
         self.input()
         self.primary.update(dt)
         self.secondary.update(dt)
         self.q_skill.update(dt)
         self.e_skill.update(dt)
-        
-        self.rotate_gun()
+    
 
 class Gauntlet(Weap):
     def __init__(self, game):

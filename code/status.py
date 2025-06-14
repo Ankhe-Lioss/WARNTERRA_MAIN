@@ -7,7 +7,7 @@ class Status(pygame.sprite.Sprite):
         super().__init__(game.all_sprites)
         
         self.image = pygame.surface.Surface(size=(0, 0))
-        self.rect = pygame.rect.FRect()
+        self.image_rect = pygame.rect.FRect()
 
     def unapply(self):
         pass

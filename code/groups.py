@@ -17,9 +17,11 @@ class AllSprites(pygame.sprite.Group):
         top_sprites = [sprite for sprite in self if hasattr(sprite, 'top_sprite')]
 
         for layer in [ground_sprites, object_sprites, top_sprites]:
-            for sprite in sorted(layer, key=lambda sprite: sprite.rect.centery):
-                self.display_surface.blit(sprite.image, sprite.image.get_frect(center=sprite.rect.center).topleft + self.offset)
-                if SHOW_HITBOX and not hasattr(sprite, 'top_sprite') and not hasattr(sprite, 'ground'):
+            for sprite in sorted(layer, key=lambda sprite: (sprite.image_rect if hasattr(sprite, 'image_rect') else sprite.rect).centery):
+                self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)
+                if SHOW_HITBOX and not hasattr(sprite, 'top_sprite') and not hasattr(sprite, 'ground') and hasattr(sprite, 'rect') and sprite.rect is not None:
+                    """if sprite.rect == None:
+                        print(sprite.__class__.__name__, "has no rect attribute")"""
                     rect = sprite.rect.copy()
                     rect.topleft += self.offset
                     pygame.draw.rect(self.display_surface, 'red', rect, 1)

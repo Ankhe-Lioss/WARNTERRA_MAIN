@@ -25,6 +25,7 @@ class spawn_animation(pygame.sprite.Sprite):
         self.spawn_time=pygame.time.get_ticks()
         self.image = self.frames[0]
         self.rect = self.image.get_frect(topleft=pos)
+        self.image_rect = self.image.get_rect(topleft=pos)
 
     def load_frame(self):
         for i in range(15):

@@ -19,6 +19,7 @@ class Area_of_effect(pygame.sprite.Sprite):
         self.animation_speed = self.frame_number/self.lifetime*1000
         self.spawn_time = pygame.time.get_ticks()
         self.image = self.frames[0]
+        self.image_rect = self.image.get_frect(center=pos)
         self.rect = self.image.get_frect(center=pos)
         
     def load_frame(self):

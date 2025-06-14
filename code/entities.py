@@ -83,6 +83,7 @@ class Entity(pygame.sprite.Sprite):
         self.collision('horizontal', self.direction)
         self.rect.y += self.direction.y * self.spd * dt
         self.collision('vertical', self.direction)
+        self.image_rect.center = self.rect.center
     
     def forced_move(self, dir, dt):
         forced_spd = self.mode["spd"]
@@ -90,6 +91,7 @@ class Entity(pygame.sprite.Sprite):
         self.collision('horizontal', dir)
         self.rect.y += dir.y * forced_spd * dt
         self.collision('vertical', dir)
+        self.image_rect.center = self.rect.center
     
     def update(self, dt):
         if self.forced_moving:
@@ -105,7 +107,7 @@ class Flyout_number(pygame.sprite.Sprite):
     def __init__(self, pos, number, color, game, font_size=24):
         super().__init__(game.all_sprites)
         self.image = pygame.font.Font(None, font_size).render(str(number), True, color)
-        self.rect = self.image.get_frect(center=pos)
+        self.image_rect = self.image.get_frect(center=pos)
         self.lifetime = 0.5
         self.spawn_time = pygame.time.get_ticks()
         self.top_sprite = True  # Ensure this sprite is drawn on top of others
@@ -113,7 +115,7 @@ class Flyout_number(pygame.sprite.Sprite):
     def update(self, dt):
         elapsed_time = pygame.time.get_ticks() - self.spawn_time
         if elapsed_time < self.lifetime * 1000:
-            self.rect.y -= 50 * dt
+            self.image_rect.y -= 50 * dt
             alpha = max(0, 255 - int((elapsed_time / (self.lifetime * 1000)) * 255))
             self.image.set_alpha(alpha)
         else:
@@ -148,6 +150,7 @@ class Enemy(Entity):
         
         # rect
         self.rect = self.image.get_frect(center=pos)
+        self.image_rect = self.rect.copy()
     
     def load_frames(self):
         self.frames = {}
@@ -189,6 +192,7 @@ class Enemy(Entity):
         self.rect.y += self.direction.y * self.spd * dt
         self.collision('vertical', self.direction)
         self.enemy_collision('vertical',dt)
+        self.image_rect.center = self.rect.center
         
     def enemy_collision(self,direction,dt):
         for sprite in self.game.enemy_sprites:

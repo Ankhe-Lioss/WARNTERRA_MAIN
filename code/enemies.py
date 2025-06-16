@@ -1,4 +1,4 @@
-from entities import Enemy
+from entity import Enemy
 from enemy_skills import *
 
 class Poro(Enemy):

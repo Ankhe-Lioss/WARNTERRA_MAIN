@@ -1,10 +1,7 @@
 from setting import *
-from entities import *
-from player import Player
-from groups import *
+from groups import AllSprites
 from setlevel import *
 from cursor import *
-from weapon import *
 
 # THIS FKING MAIN GAME SIHFHFHFHFHFHFHFHF
 class Game:

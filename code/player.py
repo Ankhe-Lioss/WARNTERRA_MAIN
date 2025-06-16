@@ -1,5 +1,5 @@
 from setting import *
-from entities import Entity
+from entity import Entity
 
 class Player(Entity):
     def __init__(self, pos, game):

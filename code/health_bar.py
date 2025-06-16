@@ -1,5 +1,5 @@
 from setting import *
-from entities import *
+from entity import *
 
 health_bar_full_image = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '5.png'))
 health_bar_empty_image = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '0.png'))

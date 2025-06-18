@@ -1,6 +1,6 @@
 from setting import *
 from enemies import *
-
+from sprites import *
 def spawn_poro(pos,game):
     Poro(pos, game)
 def spawn_meele(pos,game):
@@ -46,7 +46,8 @@ class spawn_animation(pygame.sprite.Sprite):
                 spawn_karthus((self.rect.center),self.game)
             if self.enemy_name=='Chogath':
                 Spawm_chogath((self.rect.center),self.game)
-                
+            if self.enemy_name=='Check_in':
+                Check_in((self.rect.center),self.game)
     def update(self, dt):
         self.animate(dt)
         self.spawn()

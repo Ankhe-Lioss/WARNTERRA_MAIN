@@ -22,7 +22,6 @@ class Game:
         # States
         self.running = True
         self.pausing = False
-        
         # Groups
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()
@@ -35,10 +34,9 @@ class Game:
         setlevel(self)
         
         # Testing
-        spawn_enmey_wave(0, self)
-        
-        
-    
+
+        self.spawn_numb=0
+        self.wave=0
     def run(self):
         while self.running:
             
@@ -65,6 +63,10 @@ class Game:
             player_rect.center += offset
             pygame.draw.rect(self.display_surface, 'green', player_rect, 2)
             pygame.draw.circle(self.display_surface, 'blue', CENTER, radius=50, width=2)"""
+            #Enemies Spawning
+            if self.spawn_numb == 0:
+                spawn_enmey_wave(self.wave % len(self.spawnlist), game)
+                self.wave += 1
 
             # CURSOR
             cursor(game)

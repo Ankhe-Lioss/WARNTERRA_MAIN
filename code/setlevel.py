@@ -10,7 +10,7 @@ def setlevel(game):
     #
     #
     game.level=0
-    map = load_pygame(os.path.join( 'data', 'maps', 'Test_level.tmx'))
+    map = load_pygame(os.path.join( 'data', 'maps', 'Level0.tmx'))
     game.spawnlist={
         #1=list[value=(obj.name,x,y)
     }
@@ -36,3 +36,4 @@ def setlevel(game):
 def spawn_enmey_wave(wave,game):
     for obj in game.spawnlist[f'{wave}']:
         spawn_animation((obj[1], obj[2]), game, obj[0])
+        game.spawn_numb+=1

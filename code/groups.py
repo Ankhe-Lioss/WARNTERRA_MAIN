@@ -18,6 +18,8 @@ class AllSprites(pygame.sprite.Group):
 
         for layer in [ground_sprites, object_sprites, top_sprites]:
             for sprite in sorted(layer, key=lambda sprite: (sprite.image_rect if hasattr(sprite, 'image_rect') else sprite.rect).centery):
+                if hasattr(sprite, 'visible') and sprite.visible==False:
+                    continue
                 self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)
                 if SHOW_HITBOX and not hasattr(sprite, 'top_sprite') and not hasattr(sprite, 'ground') and hasattr(sprite, 'rect') and sprite.rect is not None:
                     """if sprite.rect == None:

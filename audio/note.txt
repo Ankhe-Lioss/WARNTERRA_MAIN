@@ -1,0 +1,9 @@
+folder: audio \ skills, projectiles
+
+Đ dùng giọng nha, dùng full sfx
+
+skills -> [Tên skill].ogg
+projectiles -> [Tên đạn].ogg
+
+âm thanh skills sẽ được phát lúc thi triển
+âm thanh projectiles sẽ được phát lúc va chạm mục tiêu

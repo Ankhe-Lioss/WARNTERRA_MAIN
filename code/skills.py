@@ -13,6 +13,10 @@ class Skill:
         # Stats
         self.cooldown, self.warmup, self.cast_time = skill_stats[self.name]
         self.remaining = self.warmup
+        
+        # Audio
+        if os.path.exists(os.path.join('audio', 'skills', f'{self.name}.ogg')):
+            self.sound = pygame.mixer.Sound(os.path.join('audio', 'skills', f'{self.name}.ogg'))
     
     def cast(self):
         if self.ready and not self.user.stunned and not self.user.silenced:
@@ -20,17 +24,16 @@ class Skill:
         else:
             self.warning()
     
-    def asound(self): pass
-    def dsound(self): pass
     
     def activate(self):
-        self.asound()
+        if self.sound:
+            self.sound.play()
+            
         self.ready = False
         self.casting = True
         self.remaining = self.cast_time
 
     def deactivate(self):
-        self.dsound()
         self.casting = False
         self.remaining = self.cooldown
         

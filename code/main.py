@@ -18,7 +18,6 @@ class Game:
         
         # Times
         self.clock = pygame.time.Clock()
-        
         # States
         self.running = True
         self.pausing = False

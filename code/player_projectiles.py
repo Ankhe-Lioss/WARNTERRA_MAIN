@@ -21,9 +21,10 @@ class Gauntlet_q_skill(Player_projectiles):
             self.game.player.weap.e_skill.remaining -= 2000
             
             for sprite in collision_sprites:
-                    sprite.take_damage(self.dmg)
-                    self.play_sound()
-                    self.kill()
+                sprite.take_damage(self.dmg)
+                self.play_sound()
+                self.kill()
+                break
 
 class Gauntlet_e_skill(Player_projectiles):
     def __init__(self, pos, direction, game):

@@ -76,6 +76,7 @@ class Projectiles(pygame.sprite.Sprite):
                     self.play_sound()
                     self.apply(sprite)
                     self.kill()
+                    break
                 else:
                     if not hasattr(sprite, "get_shot"):
                         sprite.take_damage(self.dmg)

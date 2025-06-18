@@ -172,7 +172,8 @@ class Enemy(Entity):
     
     def death(self):
         super().death()
-        self.game.spawn_numb
+        self.game.spawn_numb -= 1
+        
     def cal_dis(self):
         # get direction
         player_pos = pygame.Vector2(self.player.rect.center)

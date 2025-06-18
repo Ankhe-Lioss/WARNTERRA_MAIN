@@ -13,7 +13,7 @@ class Gauntlet_primary(Skill):
         pproj.Gauntlet_primary(self.user.rect.center, self.user.facing_dir, self.game)
         
         # Test
-        self.user.status.add(Poisoned(3000, 100, self.game, self.user))
+        #self.user.status.add(Poisoned(3000, 50, self.game, self.user))
 
 class Gauntlet_q_skill(Skill):
     def __init__(self, user, game):
@@ -32,14 +32,15 @@ class Gauntlet_e_skill(Skill):
     def activate(self):
         super().activate()        
         self.user.channeling = True
-        self.fake = pproj.Gauntlet_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
+        self.pos, self.dir = self.user.rect.copy().center, self.user.facing_dir.copy()
+        self.fake = pproj.Gauntlet_e_skill(self.pos, self.dir, self.game)
         self.fake.bullet_collision = lambda: None
         self.fake.spd = 0
         
     def deactivate(self):
         super().deactivate()
         self.fake.kill()
-        pproj.Gauntlet_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
+        pproj.Gauntlet_e_skill(self.pos, self.dir, self.game)
         self.user.channeling = False
 
 class Gauntlet_secondary(Skill):
@@ -51,7 +52,9 @@ class Gauntlet_secondary(Skill):
         super().activate()
         self.user.mode = {"dir" : self.user.facing_dir.copy(), "spd" : 2000, "type" : "dash"}
         self.user.forced_moving = True
-        self.user.heal(200)
+        
+        # Test
+        #self.user.heal(200)
         
     def deactivate(self):
         super().deactivate()

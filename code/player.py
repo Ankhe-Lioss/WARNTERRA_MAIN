@@ -22,7 +22,7 @@ class Player(Entity):
         self._load_images()
         self.image: pygame.Surface = self.frames[self.facing_state][self.frame_index]
         self.image_rect = self.image.get_frect(center=self.pos)
-        self.rect = self.image_rect.inflate(-30, -30)
+        self.rect = self.image_rect.inflate(-30, -20)
         
         # Hitbox
         self.direction = pygame.Vector2()
@@ -82,8 +82,8 @@ class Player(Entity):
             if not enemy.ghost and self.rect.colliderect(enemy.rect):
                 self.forced_moving = True
                 dir = (pygame.Vector2(self.rect.center) - pygame.Vector2(enemy.rect.center))
-                self.mode = {"spd" : 1000, "dir" : dir.normalize() if dir else dir, "type" : "knockback"}
-                self.knockback_remaining = 0.02
+                self.mode = {"spd" : 800, "dir" : dir.normalize() if dir else dir, "type" : "knockback"}
+                self.knockback_remaining = 0.1
         
         if self.forced_moving:
             if self.mode["type"] != "knockback":

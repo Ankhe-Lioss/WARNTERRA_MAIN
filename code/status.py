@@ -29,8 +29,9 @@ class Stunned(Status):
         self.owner.stunned = False
         
     def update(self, dt):
-        super().update(dt)
         self.owner.stunned = True
+        super().update(dt)
+        
 
 class Poisoned(Status):
     def __init__(self, duration, dps, game, owner):

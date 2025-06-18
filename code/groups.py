@@ -1,6 +1,6 @@
 from setting import *
 
-SHOW_HITBOX = True
+SHOW_HITBOX = False
 
 class AllSprites(pygame.sprite.Group):
     def __init__(self):

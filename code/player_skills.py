@@ -1,6 +1,7 @@
 from skills import Skill
 from setting import *
 import player_projectiles as pproj
+from status import *
 
 class Gauntlet_primary(Skill):
     def __init__(self, user, game):
@@ -10,12 +11,14 @@ class Gauntlet_primary(Skill):
     def activate(self):
         super().activate()
         pproj.Gauntlet_primary(self.user.rect.center, self.user.facing_dir, self.game)
+        
+        # Test
+        self.user.status.add(Poisoned(3000, 100, self.game, self.user))
 
 class Gauntlet_q_skill(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
-        print(self.remaining)
     
     def activate(self):
         super().activate()
@@ -29,11 +32,14 @@ class Gauntlet_e_skill(Skill):
     def activate(self):
         super().activate()        
         self.user.channeling = True
-        self.bow = pproj.Gauntlet_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
+        self.fake = pproj.Gauntlet_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
+        self.fake.bullet_collision = lambda: None
+        self.fake.spd = 0
         
     def deactivate(self):
         super().deactivate()
-        self.bow.spd = player_projectiles["Gauntlet_e_skill"][1]
+        self.fake.kill()
+        pproj.Gauntlet_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
         self.user.channeling = False
 
 class Gauntlet_secondary(Skill):
@@ -45,6 +51,7 @@ class Gauntlet_secondary(Skill):
         super().activate()
         self.user.mode = {"dir" : self.user.facing_dir.copy(), "spd" : 2000, "type" : "dash"}
         self.user.forced_moving = True
+        self.user.heal(200)
         
     def deactivate(self):
         super().deactivate()

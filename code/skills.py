@@ -18,17 +18,18 @@ class Skill:
         if os.path.exists(os.path.join('audio', 'skills', f'{self.name}.ogg')):
             self.sound = pygame.mixer.Sound(os.path.join('audio', 'skills', f'{self.name}.ogg'))
     
+    def play_sound(self):
+        if hasattr(self, 'sound'):
+            self.sound.play()
+    
     def cast(self):
         if self.ready and not self.user.stunned and not self.user.silenced:
             self.activate()
         else:
             self.warning()
     
-    
     def activate(self):
-        if self.sound:
-            self.sound.play()
-            
+        self.play_sound()
         self.ready = False
         self.casting = True
         self.remaining = self.cast_time

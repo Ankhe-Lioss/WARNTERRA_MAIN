@@ -27,7 +27,7 @@ def setlevel(game):
     for obj in map.get_layer_by_name('Entities'):
         if obj.name == 'Player':
             game.player = Player((obj.x, obj.y), game)
-            game.player.weap = Bow(game)
+            game.player.weap = Gauntlet(game)
         else:
             if not obj.type in game.spawnlist:
                 game.spawnlist[obj.type] = []

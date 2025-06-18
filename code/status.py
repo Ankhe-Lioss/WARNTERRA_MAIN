@@ -27,6 +27,10 @@ class Stunned(Status):
 
     def unapply(self):
         self.owner.stunned = False
+        
+    def update(self, dt):
+        super().update(dt)
+        self.owner.stunned = True
 
 class Poisoned(Status):
     def __init__(self, duration, dps, game, owner):
@@ -40,9 +44,9 @@ class Poisoned(Status):
         super().update(dt)
         cur_tick = int(self.remaining) // 250
         if self.remaining > 0 and cur_tick != self.ticks:
-            print(self.remaining, self.ticks)
+            #print(self.remaining, self.ticks)
             self.ticks = cur_tick
-            self.owner.take_damage(self.dps / 4, tag="DoT")
+            self.owner.take_damage(self.dps / 4, type="DoT")
 
 class Slowed(Status):
     def __init__(self, duration, ratio, game, owner):

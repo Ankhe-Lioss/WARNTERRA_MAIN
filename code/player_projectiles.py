@@ -22,6 +22,7 @@ class Gauntlet_q_skill(Player_projectiles):
             
             for sprite in collision_sprites:
                     sprite.take_damage(self.dmg)
+                    self.play_sound()
                     self.kill()
 
 class Gauntlet_e_skill(Player_projectiles):
@@ -31,7 +32,6 @@ class Gauntlet_e_skill(Player_projectiles):
         super().__init__(pos, direction, game)
         self.wall_piercing = True
         self.e_piercing = True
-        self.spd = 0
     
     def apply(self, target):
         target.status.add(Slowed(2000, 0.75, self.game, target))

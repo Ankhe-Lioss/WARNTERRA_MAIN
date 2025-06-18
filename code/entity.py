@@ -66,10 +66,14 @@ class Entity(pygame.sprite.Sprite):
         if type == "normal":
             Flyout_number(self.rect.center, int(delta), (200, 0, 0), self.game)
         
+        if type == "DoT":
+            Flyout_number(self.rect.center, int(delta), (0, 165, 0), self.game, font_size=20)
+        
         if self.hp <= 0:
             self.death()
         
     def heal(self, healing):
+        Flyout_number(self.rect.center, "+" + str(int(healing)), (0, 255, 0), self.game)
         self.hp = min(self.hp + healing, self.maxhp)
     
     def death(self):

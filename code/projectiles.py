@@ -22,8 +22,13 @@ class Projectiles(pygame.sprite.Sprite):
         self.frame_id = 0
         self.image = self.frames[self.frame_id]
         
+        # Rect
         self.image_rect = self.image.get_frect(center=pos)
         self.rect = self.image.get_frect(center=pos)
+        
+        # Audio
+        if os.path.exists(os.path.join('audio', 'projectiles', f'{self.name}.ogg')):
+            self.sound = pygame.mixer.Sound(os.path.join('audio', 'projectiles', f'{self.name}.ogg'))
     
     def _load_images(self):
         folder, folder1 = self.source.split(" ")
@@ -56,6 +61,10 @@ class Projectiles(pygame.sprite.Sprite):
     
     def apply(self, target):
         pass
+    
+    def play_sound(self):
+        if hasattr(self, 'sound'):
+            self.sound.play()
         
     def bullet_collision(self):
         collision_sprites = pygame.sprite.spritecollide(self, self.target, False, pygame.sprite.collide_mask)
@@ -64,11 +73,13 @@ class Projectiles(pygame.sprite.Sprite):
                 
                 if not hasattr(self, "e_piercing") or not self.e_piercing:
                     sprite.take_damage(self.dmg)
+                    self.play_sound()
                     self.apply(sprite)
                     self.kill()
                 else:
                     if not hasattr(sprite, "get_shot"):
                         sprite.take_damage(self.dmg)
+                        self.play_sound()
                         self.apply(sprite)
                         sprite.get_shot = [self]
                     else:
@@ -79,6 +90,7 @@ class Projectiles(pygame.sprite.Sprite):
                                 
                         if not this_sprite_got_shot_by_this_proj:
                             sprite.take_damage(self.dmg)
+                            self.play_sound()
                             self.apply(sprite)
                             sprite.get_shot.append(self)
 

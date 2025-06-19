@@ -243,7 +243,7 @@
   <object id="86" name="Chogath" type="3" x="184" y="954">
    <point/>
   </object>
-  <object id="88" name="Veigar" type="4" x="271" y="205">
+  <object id="88" name="Veigar" type="0" x="280.333" y="2351.67">
    <point/>
   </object>
   <object id="90" name="Check_in" type="0" x="193" y="1886.67" width="160" height="128"/>

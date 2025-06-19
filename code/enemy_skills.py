@@ -12,7 +12,7 @@ class Karthus_primary(Skill):
         
     def activate(self):
         super().activate()
-        eproj.Karthus_Primary(self.user.rect.center, self.user.direction, (self.user.game.all_sprites, self.user.game.enemy_projectiles), self.user.game)
+        eproj.Karthus_Primary(self.user, self.user.direction, self.user.game)
         self.user.state='Attacking'
         
     def deactivate(self):
@@ -50,3 +50,53 @@ class Chogath_stomp(Skill):
         super().deactivate()
         self.user.state = 'Walking'
         self.user.channeling = False
+
+class Veigar_primary(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+
+    def activate(self):
+        super().activate()
+        eproj.Veigar_Primary(self.user, self.user.direction, self.user.game)
+        self.user.state='Attacking'
+
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'
+
+class Veigar_secondary(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        
+        dir = self.user.direction.copy()
+        
+        eproj.Veigar_Secondary(self.user, dir, self.user.game)
+        eproj.Veigar_Secondary(self.user, dir.rotate(18), self.user.game)
+        eproj.Veigar_Secondary(self.user, dir.rotate(-18), self.user.game)
+        eproj.Veigar_Secondary(self.user, dir.rotate(36), self.user.game)
+        eproj.Veigar_Secondary(self.user, dir.rotate(-36), self.user.game)
+        
+        self.user.state='Attacking'
+    
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'
+
+class Veigar_ult(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+
+    def activate(self):
+        super().activate()
+        eproj.Veigar_Ult(self.user, self.user.game)
+        self.user.state='Attacking'
+    
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'

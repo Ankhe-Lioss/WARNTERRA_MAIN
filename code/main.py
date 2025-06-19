@@ -12,6 +12,7 @@ class Game:
         # Display
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.mouse.set_visible(False)
+        #pygame.display.toggle_fullscreen() 
     
         # Caption
         pygame.display.set_caption("Warnterra 1.0")
@@ -36,11 +37,20 @@ class Game:
 
         self.spawn_numb=0
         self.wave=0
+        self.delay = 0
+        
     def run(self):
         while self.running:
             
             # Data time
             dt = self.clock.tick(FPS) / 1000
+            
+            # fullscreen
+            
+            if pygame.key.get_pressed()[pygame.K_F11] and self.delay <= 0:
+                pygame.display.toggle_fullscreen()
+                self.delay = 5
+            self.delay -= dt * 1000
             
             # Get events    
             for event in pygame.event.get():
@@ -53,7 +63,7 @@ class Game:
             # TESTING AREA
             self.all_sprites.draw(self.player.rect)
             self.all_sprites.update(dt)
-        
+
             """target_pos = self.player.rect.center
             offset = pygame.Vector2()
             offset.x = -(target_pos[0] - WINDOW_WIDTH / 2)

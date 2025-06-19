@@ -1,14 +1,17 @@
 from setting import *
 from enemies import *
+from bosses import *
 from sprites import *
-def spawn_poro(pos,game):
-    Poro(pos, game)
-def spawn_meele(pos,game):
-    Meele(pos, game)
-def spawn_karthus(pos,game):
-    Karthus(pos, game)
-def Spawm_chogath(pos,game):
-    Chogath(pos, game)
+    
+enemy_classes = {
+    'Poro': Poro,
+    'Meele': Meele,
+    'Karthus': Karthus,
+    'Chogath': Chogath,
+    'Check_in': Check_in,
+    'Veigar': Veigar
+}
+
 def spawn_animation(pos,game,enemy_name):
     spawn_animation(pos,(game.all_sprites),game,enemy_name)
 
@@ -38,16 +41,11 @@ class spawn_animation(pygame.sprite.Sprite):
     def spawn(self):
         if pygame.time.get_ticks()-self.spawn_time>=self.lifetime:
             self.kill()
-            if self.enemy_name=='Poro':
-                spawn_poro((self.rect.center),self.game)
-            if self.enemy_name=='Meele':
-                spawn_meele((self.rect.center),self.game)
-            if self.enemy_name=='Karthus':
-                spawn_karthus((self.rect.center),self.game)
-            if self.enemy_name=='Chogath':
-                Spawm_chogath((self.rect.center),self.game)
-            if self.enemy_name=='Check_in':
-                Check_in((self.rect.topleft),self.game)
+
+            if self.enemy_name in enemy_classes:
+                enemy_class = enemy_classes[self.enemy_name]
+                enemy_class(self.rect.center, self.game)
+
     def update(self, dt):
         self.animate(dt)
         self.spawn()

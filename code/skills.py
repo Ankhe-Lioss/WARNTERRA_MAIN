@@ -7,7 +7,7 @@ class Skill:
         self.game = game
         
         # States
-        self.ready = True
+        self.ready = False
         self.casting = False
         
         # Stats

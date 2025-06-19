@@ -10,23 +10,23 @@ def setlevel(game):
     #
     #
     game.level=0
-    map = load_pygame(os.path.join( 'data', 'maps', 'Level0.tmx'))
+    game.map = load_pygame(os.path.join( 'data', 'maps', 'Level0.tmx'))
     game.spawnlist={
         #1=list[value=(obj.name,x,y)
     }
     game.doorlist=[]
-    for x, y, image in map.get_layer_by_name('Tile Layer 1').tiles():
+    for x, y, image in game.map.get_layer_by_name('Tile Layer 1').tiles():
         Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites)
-    for x, y, image in map.get_layer_by_name('Tile Layer 2').tiles():
+    for x, y, image in game.map.get_layer_by_name('Tile Layer 2').tiles():
         Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites)
-    for obj in map.get_layer_by_name('Objects'):
+    for obj in game.map.get_layer_by_name('Objects'):
         CollisionSprite((obj.x, obj.y), obj.image, (game.all_sprites, game.collision_sprites))
 
-    for obj in map.get_layer_by_name('Collisions'):
+    for obj in game.map.get_layer_by_name('Collisions'):
         CollisionSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), game.collision_sprites)
-    for obj in map.get_layer_by_name('Door'):
+    for obj in game.map.get_layer_by_name('Door'):
         game.doorlist.append(((obj.x, obj.y), obj.image))
-    for obj in map.get_layer_by_name('Entities'):
+    for obj in game.map.get_layer_by_name('Entities'):
         if obj.name == 'Player':
             game.player = Player((obj.x, obj.y), game)
             game.player.weap = Gauntlet(game)

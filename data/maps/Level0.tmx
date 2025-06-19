@@ -246,9 +246,9 @@
   <object id="88" name="Veigar" type="4" x="271" y="205">
    <point/>
   </object>
-  <object id="90" name="Check_in" type="0" x="195" y="1933.67" width="160" height="128"/>
-  <object id="91" name="Check_in" type="1" x="192.333" y="1190" width="160" height="128"/>
-  <object id="92" name="Check_in" type="3" x="193.333" y="416" width="160" height="128"/>
+  <object id="90" name="Check_in" type="0" x="193" y="1886.67" width="160" height="128"/>
+  <object id="91" name="Check_in" type="1" x="194" y="1173" width="160" height="128"/>
+  <object id="92" name="Check_in" type="3" x="201.333" y="357" width="160" height="128"/>
  </objectgroup>
  <objectgroup id="3" name="Collisions" locked="1">
   <object id="7" x="-18" y="-40" width="538" height="102"/>

@@ -47,7 +47,7 @@ class spawn_animation(pygame.sprite.Sprite):
             if self.enemy_name=='Chogath':
                 Spawm_chogath((self.rect.center),self.game)
             if self.enemy_name=='Check_in':
-                Check_in((self.rect.center),self.game)
+                Check_in((self.rect.topleft),self.game)
     def update(self, dt):
         self.animate(dt)
         self.spawn()

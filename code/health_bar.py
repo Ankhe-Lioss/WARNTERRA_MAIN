@@ -12,9 +12,10 @@ class Background_healthbar(pygame.sprite.Sprite):
     def __init__(self,user):
         super().__init__(user.game.all_sprites)
         self.user = user
-        self.top_sprite = True  # This sprite is always on top
         self.image = health_bar_empty_image
         self.image_rect = self.image.get_rect(topleft=(user.rect.x + 10, user.rect.y - 10))
+        self.type = 'top'
+        
     def update(self, dt):
         if self.user.hp <= 0:
             self.kill()
@@ -29,10 +30,10 @@ class Percentage_healthbar(pygame.sprite.Sprite):
     def __init__(self, user):
         super().__init__(user.game.all_sprites)
         self.user = user
-        self.top_sprite = True
         self.original_image = health_bar_full_image  # Keep the original full bar image
         self.image = self.original_image.copy()  # Create an editable copy
         self.image_rect = self.image.get_rect(topleft=(user.rect.x + 10, user.rect.y - 10))
+        self.type = 'top'
 
     def update(self, dt):
         if self.user.hp <= 0:

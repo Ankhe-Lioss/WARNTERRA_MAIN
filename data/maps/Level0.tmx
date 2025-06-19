@@ -243,10 +243,10 @@
   <object id="86" name="Chogath" type="3" x="184" y="954">
    <point/>
   </object>
-  <object id="88" name="Veigar" type="0" x="280.333" y="2351.67">
+  <object id="88" name="Veigar" type="1" x="280.333" y="2351.67">
    <point/>
   </object>
-  <object id="90" name="Check_in" type="0" x="193" y="1886.67" width="160" height="128"/>
+  <object id="90" name="Check_in" type="0" x="173" y="1947" width="200" height="128"/>
   <object id="91" name="Check_in" type="1" x="194" y="1173" width="160" height="128"/>
   <object id="92" name="Check_in" type="3" x="201.333" y="357" width="160" height="128"/>
  </objectgroup>

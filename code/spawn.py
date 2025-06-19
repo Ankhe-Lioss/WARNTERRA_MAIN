@@ -34,6 +34,7 @@ class spawn_animation(pygame.sprite.Sprite):
         for i in range(15):
             surf=pygame.image.load(os.path.join('images', 'enviroment','enemy_spawn_animation', f'{i}.png')).convert_alpha()
             self.frames.append(surf)
+            
     def animate(self, dt):
         self.frame_index += self.animation_speed * dt
         self.image = self.frames[int(self.frame_index % len(self.frames))]

@@ -29,15 +29,18 @@ class Game:
         self.player_projectiles = pygame.sprite.Group()
         self.enemy_projectiles = pygame.sprite.Group()
         self.collision_sprites = pygame.sprite.Group()
-        
-        # Player
-        setlevel(self)
 
-        # Testing
+        # Stat for levels
 
-        self.spawn_numb=0
-        self.wave=0
+        self.spawn_numb = 0
+        self.checked_in = True
+        self.room = 0
+        self.wave = 0
         self.delay = 0
+        self.level = 1
+        self.state = 'in_level'
+        setlevel(self)
+        #(self.spawnlist)
         
     def run(self):
         while self.running:
@@ -60,6 +63,9 @@ class Game:
             # FILL
             self.display_surface.fill('gray36')
             
+            #Enemies Spawning
+            check_game_state(self)
+            
             # TESTING AREA
             self.all_sprites.draw(self.player.rect)
             self.all_sprites.update(dt)
@@ -72,8 +78,8 @@ class Game:
             player_rect.center += offset
             pygame.draw.rect(self.display_surface, 'green', player_rect, 2)
             pygame.draw.circle(self.display_surface, 'blue', CENTER, radius=50, width=2)"""
-            #Enemies Spawning
-            check_game_state(self)
+            
+            
             # CURSOR
             cursor(game)
 

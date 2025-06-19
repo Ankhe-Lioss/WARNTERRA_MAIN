@@ -117,7 +117,7 @@ class Flyout_number(pygame.sprite.Sprite):
         self.image_rect = self.image.get_frect(center=pos)
         self.lifetime = 0.5
         self.spawn_time = pygame.time.get_ticks()
-        self.top_sprite = True  # Ensure this sprite is drawn on top of others
+        self.type = 'top'
     
     def update(self, dt):
         elapsed_time = pygame.time.get_ticks() - self.spawn_time

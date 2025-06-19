@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="87" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="99">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="87" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="106">
  <tileset firstgid="1" source="../tilesets/dungeon_sprite_sheet.tsx"/>
  <tileset firstgid="97" source="../tilesets/dungeon_floor.tsx"/>
  <tileset firstgid="112" source="../tilesets/dungeon_object.tsx"/>
@@ -200,8 +200,11 @@
   <object id="58" gid="151" x="58.6667" y="2534" width="64" height="36"/>
  </objectgroup>
  <objectgroup id="7" name="Door">
-  <object id="95" gid="180" x="224" y="1600" width="96" height="45"/>
-  <object id="97" name="basic door" gid="180" x="224" y="1376" width="96" height="45"/>
+  <object id="101" name="front_door" gid="182" x="224" y="1600" width="96" height="53"/>
+  <object id="102" name="back_door" gid="181" x="224" y="1440" width="96" height="53"/>
+  <object id="103" name="front_door" gid="182" x="224" y="864" width="96" height="53"/>
+  <object id="104" name="back_door" gid="181" x="224" y="608" width="96" height="53"/>
+  <object id="105" gid="181" x="224" y="2144" width="96" height="53"/>
  </objectgroup>
  <objectgroup id="5" name="Entities">
   <object id="45" name="Player" x="308" y="2624">
@@ -243,11 +246,11 @@
   <object id="88" name="Veigar" type="4" x="271" y="205">
    <point/>
   </object>
-  <object id="90" name="Check_in" type="0" x="192" y="1950.67" width="160" height="128"/>
-  <object id="91" name="Check_in" type="1" x="193.333" y="1216" width="160" height="128"/>
-  <object id="92" name="Check_in" type="3" x="193.333" y="416" width="160" height="128"/>
+  <object id="90" name="Check_in" type="0" x="193" y="1886.67" width="160" height="128"/>
+  <object id="91" name="Check_in" type="1" x="194" y="1173" width="160" height="128"/>
+  <object id="92" name="Check_in" type="3" x="201.333" y="357" width="160" height="128"/>
  </objectgroup>
- <objectgroup id="3" name="Collisions" visible="0" locked="1">
+ <objectgroup id="3" name="Collisions" locked="1">
   <object id="7" x="-18" y="-40" width="538" height="102"/>
   <object id="13" x="326" y="542" width="184" height="310"/>
   <object id="14" x="-4" y="538" width="220" height="318"/>

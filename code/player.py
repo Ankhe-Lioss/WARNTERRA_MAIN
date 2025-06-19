@@ -22,7 +22,7 @@ class Player(Entity):
         self._load_images()
         self.image: pygame.Surface = self.frames[self.facing_state][self.frame_index]
         self.image_rect = self.image.get_frect(center=self.pos)
-        self.rect = self.image_rect.inflate(-30, -20)
+        self.rect = self.image_rect.inflate(0, -20)
         
         # Hitbox
         self.direction = pygame.Vector2()

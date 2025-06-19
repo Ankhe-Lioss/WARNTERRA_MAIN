@@ -31,7 +31,7 @@ class Game:
         
         # Player
         setlevel(self)
-        
+
         # Testing
 
         self.spawn_numb=0

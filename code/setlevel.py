@@ -14,6 +14,7 @@ def setlevel(game):
     game.spawnlist={
         #1=list[value=(obj.name,x,y)
     }
+    game.doorlist=[]
     for x, y, image in map.get_layer_by_name('Tile Layer 1').tiles():
         Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites)
     for x, y, image in map.get_layer_by_name('Tile Layer 2').tiles():
@@ -23,7 +24,8 @@ def setlevel(game):
 
     for obj in map.get_layer_by_name('Collisions'):
         CollisionSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), game.collision_sprites)
-
+    for obj in map.get_layer_by_name('Door'):
+        game.doorlist.append(((obj.x, obj.y), obj.image))
     for obj in map.get_layer_by_name('Entities'):
         if obj.name == 'Player':
             game.player = Player((obj.x, obj.y), game)
@@ -37,7 +39,13 @@ def spawn_enmey_wave(wave,game):
     for obj in game.spawnlist[f'{wave}']:
         spawn_animation((obj[1], obj[2]), game, obj[0])
         game.spawn_numb+=1
+def spawn_door(doorlist,game):
+    for obj in doorlist:
+        Door(obj[0], obj[1], (game.all_sprites, game.collision_sprites))
 def check_game_state(game):
+
+    if game.wave==1 and game.spawn_numb==0:
+        spawn_door(game.doorlist, game)
     if game.spawn_numb == 0:
         spawn_enmey_wave(game.wave, game)
         game.wave += 1

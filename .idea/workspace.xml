@@ -7,75 +7,16 @@
     <list default="true" id="ee4a0f70-305e-49b1-b297-9d90997c641d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/entity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/groups.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/setlevel.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/setlevel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/spawn.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/spawn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/sprites.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_120.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_141.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_142.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_149.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_17.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_185.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_188.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_195.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_196.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_200.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_222.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_230.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_253.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_263.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_264.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_266.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_269.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_270.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_273.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_276.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_279.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_285.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_291.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_292.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_308.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_339.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_340.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_344.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_349.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_352.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_353.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_355.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_356.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_357.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_358.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_360.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_366.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_369.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_370.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_380.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_382.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_384.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_393.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_396.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_398.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Object/object_91.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Tilesets/base_out_atlas.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Tilesets/terrain.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/graphics/Tilesets/terrain_atlas.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Test_level.tmx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tilesets/Objects.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tilesets/terrain.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tilesets/terrain_atlas.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/untitled.tiled-project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/untitled.tiled-session" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/player/up_left/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/player/up_left/0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/player/up_left/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/player/up_left/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/player/up_left/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/player/up_left/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/player/up_left/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/player/up_left/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/player/up_right/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/player/up_right/0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/player/up_right/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/player/up_right/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/player/up_right/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/player/up_right/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/player/up_right/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/player/up_right/3.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +29,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/code/entity.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/main.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/code/player.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/setlevel.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/spawn.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/sprites.py" root0="SKIP_INSPECTION" />
@@ -106,7 +48,7 @@
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "lsh",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/Git/WARNTERRA_MAIN",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -163,6 +105,7 @@
       <workItem from="1750156045053" duration="782000" />
       <workItem from="1750265212446" duration="95000" />
       <workItem from="1750265325758" duration="774000" />
+      <workItem from="1750305021443" duration="426000" />
     </task>
     <servers />
   </component>
@@ -185,6 +128,6 @@
     <SUITE FILE_PATH="coverage/WARNTERRA_MAIN$main.coverage" NAME="main Coverage Results" MODIFIED="1749887973987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/load_audio_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750266158919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/WARNTERRA_MAIN$enemies.coverage" NAME="enemies Coverage Results" MODIFIED="1749887503521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750156086701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750305397030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
   </component>
 </project>

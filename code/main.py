@@ -48,7 +48,7 @@ class Game:
                     self.running = False
             
             # FILL
-            self.display_surface.fill('darkgray')
+            self.display_surface.fill('gray36')
             
             # TESTING AREA
             self.all_sprites.draw(self.player.rect)
@@ -63,7 +63,6 @@ class Game:
             pygame.draw.rect(self.display_surface, 'green', player_rect, 2)
             pygame.draw.circle(self.display_surface, 'blue', CENTER, radius=50, width=2)"""
             #Enemies Spawning
-            print(self.spawn_numb)
             if self.spawn_numb == 0:
                 spawn_enmey_wave(self.wave, game)
                 self.wave += 1

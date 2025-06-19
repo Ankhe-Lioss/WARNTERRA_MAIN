@@ -29,7 +29,7 @@ class Player(Entity):
         
     
     def update_animation(self, dt):
-        self.frame_index = self.frame_index + (6 * dt if self.direction and not self.stunned else 0)
+        self.frame_index = self.frame_index + 6 * dt if self.direction and not self.stunned else 0
         self.image = self.frames[self.facing_state][int(self.frame_index) % len(self.frames[self.facing_state])]
             
     

@@ -6,10 +6,30 @@
   <component name="ChangeListManager">
     <list default="true" id="ee4a0f70-305e-49b1-b297-9d90997c641d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/setlevel.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/setlevel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Level0.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/data/maps/Level0.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Attacking/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Walking/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Walking/0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Walking/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Walking/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Walking/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Walking/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Walking/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Walking/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Walking/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Walking/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Chogath/Walking/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Chogath/Walking/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Attacking/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Walking/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Walking/0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Walking/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Walking/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Walking/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Walking/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Walking/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Walking/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Walking/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Walking/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemies/Veigar/Walking/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/enemies/Veigar/Walking/5.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,23 +55,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.enemies.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.setlevel.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "lsh",
-    "last_opened_file_path": "D:/Git/WARNTERRA_MAIN",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.enemies.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.setlevel.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;lsh&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Git/WARNTERRA_MAIN&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="WARNTERRA_MAIN" />
@@ -110,6 +130,7 @@
       <workItem from="1750321265434" duration="2142000" />
       <workItem from="1750326216121" duration="88000" />
       <workItem from="1750326876778" duration="161000" />
+      <workItem from="1750352084986" duration="688000" />
     </task>
     <servers />
   </component>
@@ -132,7 +153,7 @@
     <SUITE FILE_PATH="coverage/WARNTERRA_MAIN$main.coverage" NAME="main Coverage Results" MODIFIED="1749887973987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/load_audio_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750266158919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/WARNTERRA_MAIN$enemies.coverage" NAME="enemies Coverage Results" MODIFIED="1749887503521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750326962382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750353106487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/main_py$setlevel.coverage" NAME="setlevel Coverage Results" MODIFIED="1750321504449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
   </component>
 </project>

@@ -39,10 +39,13 @@ def spawn_enmey_wave(wave,game):
     for obj in game.spawnlist[f'{wave}']:
         spawn_animation((obj[1], obj[2]), game, obj[0])
         game.spawn_numb+=1
+        
 def spawn_door(doorlist,game):
     for obj in doorlist:
         Door(obj[0], obj[1], (game.all_sprites, game.collision_sprites))
 def check_game_state(game):
+
+    print(f'Wave: {game.wave} Spawned: {game.spawn_numb}')
 
     if game.wave==1 and game.spawn_numb==0:
         spawn_door(game.doorlist, game)

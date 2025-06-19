@@ -34,7 +34,8 @@ class Check_in(pygame.sprite.Sprite):
     def update(self, dt):
         if pygame.sprite.spritecollide(self, self.game.player_sprites,False):
             self.kill()
-            self.game.spawn_numb-=1
+            self.game.spawn_numb -= 1
+
 
 
 class Door(pygame.sprite.Sprite):

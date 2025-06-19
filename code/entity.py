@@ -36,6 +36,7 @@ class Entity(pygame.sprite.Sprite):
         self.mode = None
         self.silenced = False
         self.ghost = False
+        self.rooted = False
         
         # Status
         self.status = set()
@@ -83,7 +84,7 @@ class Entity(pygame.sprite.Sprite):
         self.kill()
     
     def move(self, dt):
-        if self.channeling or self.stunned:
+        if self.channeling or self.stunned or self.rooted:
             return
         
         self.rect.x += self.direction.x * self.spd * dt
@@ -93,6 +94,9 @@ class Entity(pygame.sprite.Sprite):
         self.image_rect.center = self.rect.center
     
     def forced_move(self, dir, dt):
+        if self.rooted or self.stunned:
+            return
+        
         forced_spd = self.mode["spd"]
         self.rect.x += dir.x * forced_spd * dt
         self.collision('horizontal', dir)
@@ -187,7 +191,7 @@ class Enemy(Entity):
     def move_enemy(self,dt):
         # update the rect position + collision
         
-        if self.channeling or self.stunned or self.forced_moving:
+        if self.channeling or self.stunned or self.forced_moving or self.rooted:
             return
         
         distance = self.distance_vector.length()

@@ -84,3 +84,17 @@ class Healing(Status):
             #print(self.remaining, self.ticks)
             self.ticks = cur_tick
             self.owner.heal(self.hps / 4, type="overtime")
+            
+class Rooted(Status):
+    def __init__(self, duration, game, owner):
+        self.name = self.__class__.__name__
+        super().__init__(duration, game)
+        self.owner = owner
+        self.owner.rooted = True
+
+    def unapply(self):
+        self.owner.rooted = False
+        
+    def update(self, dt):
+        self.owner.rooted = True
+        super().update(dt)       

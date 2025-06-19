@@ -37,3 +37,7 @@ def spawn_enmey_wave(wave,game):
     for obj in game.spawnlist[f'{wave}']:
         spawn_animation((obj[1], obj[2]), game, obj[0])
         game.spawn_numb+=1
+def check_game_state(game):
+    if game.spawn_numb == 0:
+        spawn_enmey_wave(game.wave, game)
+        game.wave += 1

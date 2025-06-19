@@ -63,10 +63,7 @@ class Game:
             pygame.draw.rect(self.display_surface, 'green', player_rect, 2)
             pygame.draw.circle(self.display_surface, 'blue', CENTER, radius=50, width=2)"""
             #Enemies Spawning
-            if self.spawn_numb == 0:
-                spawn_enmey_wave(self.wave, game)
-                self.wave += 1
-
+            check_game_state(self)
             # CURSOR
             cursor(game)
 

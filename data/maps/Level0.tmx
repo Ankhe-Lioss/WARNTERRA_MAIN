@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="87" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="93">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="87" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="99">
  <tileset firstgid="1" source="../tilesets/dungeon_sprite_sheet.tsx"/>
  <tileset firstgid="97" source="../tilesets/dungeon_floor.tsx"/>
  <tileset firstgid="112" source="../tilesets/dungeon_object.tsx"/>
+ <tileset firstgid="180" source="../tilesets/Door.tsx"/>
  <layer id="2" name="Tile Layer 1" width="48" height="87">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -197,6 +198,10 @@
   <object id="56" gid="170" x="122.333" y="2395.33" width="26" height="40"/>
   <object id="57" gid="170" x="141" y="2396" width="26" height="40"/>
   <object id="58" gid="151" x="58.6667" y="2534" width="64" height="36"/>
+ </objectgroup>
+ <objectgroup id="7" name="Door">
+  <object id="95" gid="180" x="224" y="1600" width="96" height="45"/>
+  <object id="97" name="basic door" gid="180" x="224" y="1376" width="96" height="45"/>
  </objectgroup>
  <objectgroup id="5" name="Entities">
   <object id="45" name="Player" x="308" y="2624">

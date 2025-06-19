@@ -54,7 +54,7 @@ class Gauntlet_secondary(Skill):
         self.user.forced_moving = True
         
         # Test
-        #self.user.heal(200)
+        self.user.heal(100)
         
     def deactivate(self):
         super().deactivate()

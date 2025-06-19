@@ -6,8 +6,9 @@ class Poro(Enemy):
         self.name='Poro'
         super().__init__(pos, game)
         self.rect = self.rect.inflate(-30, -30)
-        self.primary=Poro_stomp(self, game)
-        self.skills.append(self.primary)
+        self.skills = {
+            'primary': Poro_stomp(self, game),
+        }
         self.ghost = True
 
 class Meele(Enemy):
@@ -24,8 +25,9 @@ class Karthus(Enemy):
         self.rect = self.rect.inflate(-20, 0)
         self.asymmetry=True
         self.attack_time=1000
-        self.primary = Karthus_primary(self, game)
-        self.skills.append(self.primary)
+        self.skills = {
+            "primary" : Karthus_primary(self, game)
+        }
         
 class Chogath(Enemy):
     def __init__(self, pos, game):
@@ -34,5 +36,8 @@ class Chogath(Enemy):
         self.rect = self.rect.inflate(0, 0)
         self.asymmetry=True
         self.attack_time=1000
-        self.primary = Chogath_stomp(self, game)
-        self.skills.append(self.primary)
+        self.skills = {
+            "primary" : Chogath_stomp(self, game)
+        }
+
+        

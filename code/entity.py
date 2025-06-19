@@ -72,8 +72,11 @@ class Entity(pygame.sprite.Sprite):
         if self.hp <= 0:
             self.death()
         
-    def heal(self, healing):
-        Flyout_number(self.rect.center, "+" + str(int(healing)), (0, 255, 0), self.game)
+    def heal(self, healing, type="normal"):
+        if type == "normal":
+            Flyout_number(self.rect.center, "+" + str(int(healing)), (0, 255, 0), self.game)
+        elif type == "overtime":
+            Flyout_number(self.rect.center, "+" + str(int(healing)), (0, 255, 0), self.game, font_size=20)
         self.hp = min(self.hp + healing, self.maxhp)
     
     def death(self):
@@ -139,7 +142,7 @@ class Enemy(Entity):
         self.death_duration = 0.5
         
         # Skill
-        self.skills = []
+        self.skills = {}
         
         # State
         self.frame_index = 0
@@ -220,8 +223,8 @@ class Enemy(Entity):
     def attacking(self):
         if self.distance_vector.length() <= self.atk_range:
             for skill in self.skills:
-                if skill.ready:
-                    skill.cast()
+                if self.skills[skill].ready:
+                    self.skills[skill].cast()
                     
     def update(self, dt):
         if self.death_time==0:
@@ -229,10 +232,29 @@ class Enemy(Entity):
                 #check_status(self,dt)
                 pass
             self.cal_dis()
-            for skill in self.skills:
-                skill.update(dt)
+            for skill_name in self.skills:
+                self.skills[skill_name].update(dt)
             self.attacking()
             self.move_enemy(dt)
             self.animate(dt)
         else:
             self.death_timer()
+
+class Boss(Enemy):
+    def __init__(self, pos, game):
+        super().__init__(pos, game)
+        
+        # Boss specific attributes
+        self.phase = 1
+        self.phase_change_hp = 0.5 * self.maxhp  # Change phase at 50% HP
+        self.special_skills = []  # List of special skills for the boss
+
+    def update(self, dt):
+        super().update(dt)
+        if self.hp <= self.phase_change_hp and self.phase == 1:
+            self.phase = 2
+            self.change_phase()
+
+    def change_phase(self):
+        # Logic to change the boss's behavior or appearance when changing phases
+        pass

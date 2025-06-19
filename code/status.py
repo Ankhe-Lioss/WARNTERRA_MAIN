@@ -30,8 +30,7 @@ class Stunned(Status):
         
     def update(self, dt):
         self.owner.stunned = True
-        super().update(dt)
-        
+        super().update(dt)       
 
 class Poisoned(Status):
     def __init__(self, duration, dps, game, owner):
@@ -69,3 +68,19 @@ class Silenced(Status):
 
     def unapply(self):
         self.owner.silenced = False
+        
+class Healing(Status):
+    def __init__(self, duration, hps, game, owner):
+        self.name = self.__class__.__name__
+        super().__init__(duration, game)
+        self.owner = owner
+        self.hps = hps
+        self.ticks = int(self.remaining) // 250
+    
+    def update(self, dt):
+        super().update(dt)
+        cur_tick = int(self.remaining) // 250
+        if self.remaining > 0 and cur_tick != self.ticks:
+            #print(self.remaining, self.ticks)
+            self.ticks = cur_tick
+            self.owner.heal(self.hps / 4, type="overtime")

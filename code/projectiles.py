@@ -66,22 +66,23 @@ class Projectiles(pygame.sprite.Sprite):
         if hasattr(self, 'sound'):
             self.sound.play()
         
+    def collide(self, sprite):
+        sprite.take_damage(self.dmg)
+        self.play_sound()
+        self.apply(sprite)
+    
     def bullet_collision(self):
         collision_sprites = pygame.sprite.spritecollide(self, self.target, False, pygame.sprite.collide_mask)
         if collision_sprites:
             for sprite in collision_sprites:
                 
                 if not hasattr(self, "e_piercing") or not self.e_piercing:
-                    sprite.take_damage(self.dmg)
-                    self.play_sound()
-                    self.apply(sprite)
+                    self.collide(sprite)
                     self.kill()
                     break
                 else:
                     if not hasattr(sprite, "get_shot"):
-                        sprite.take_damage(self.dmg)
-                        self.play_sound()
-                        self.apply(sprite)
+                        self.collide(sprite)
                         sprite.get_shot = [self]
                     else:
                         this_sprite_got_shot_by_this_proj = False
@@ -90,9 +91,7 @@ class Projectiles(pygame.sprite.Sprite):
                                 this_sprite_got_shot_by_this_proj = True
                                 
                         if not this_sprite_got_shot_by_this_proj:
-                            sprite.take_damage(self.dmg)
-                            self.play_sound()
-                            self.apply(sprite)
+                            self.collide(sprite)
                             sprite.get_shot.append(self)
 
 class Player_projectiles(Projectiles):
@@ -105,10 +104,11 @@ class Player_projectiles(Projectiles):
         self.dmg = self.scale * self.game.player.atk                    
              
 class Enemy_projectiles(Projectiles):
-    def __init__(self, pos, direction, groups, game):
+    def __init__(self, user, direction, game):
         # Init
-        super().__init__(game.player_sprites, pos, direction, game.enemy_projectiles, game)
+        self.user = user
+        super().__init__(game.player_sprites, self.user.rect.center, direction, game.enemy_projectiles, game)
         
         # Calcu
         self.scale, self.spd = enemy_projectiles[self.name]
-        self.dmg = self.scale * self.game.player.atk
+        self.dmg = self.scale * self.user.atk

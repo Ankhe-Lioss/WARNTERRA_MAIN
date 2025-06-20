@@ -88,6 +88,7 @@ class Veigar_secondary(Skill):
     def deactivate(self):
         super().deactivate()
         self.user.state='Walking'
+        
 class Veigar_ult(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
@@ -101,6 +102,7 @@ class Veigar_ult(Skill):
     def deactivate(self):
         super().deactivate()
         self.user.state='Walking'
+        
 class Veigar_w(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
@@ -109,10 +111,10 @@ class Veigar_w(Skill):
     def activate(self):
         super().activate()
         for _ in range(10):
-            angle = random.uniform(0, 2 * math.pi)  # 0–360 degrees
+            angle = random.uniform(0, 2 * pi)  # 0–360 degrees
             distance = random.uniform(0, 360)  # Anywhere within the circle
-            offset_x = math.cos(angle) * distance
-            offset_y = math.sin(angle) * distance
+            offset_x = cos(angle) * distance
+            offset_y = sin(angle) * distance
             spawn_pos = (self.user.player.rect.center.x + offset_x, self.user.player.rect.center.y + offset_y)
 
             Spawn_darkmatter(self.user, spawn_pos, self.user.game)

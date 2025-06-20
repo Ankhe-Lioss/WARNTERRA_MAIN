@@ -30,7 +30,7 @@ class Check_in(pygame.sprite.Sprite):
         self.image = pygame.image.load(os.path.join('images','enviroment','check_in','0.png'))
         self.rect = self.image.get_rect(topleft=pos)
         self.image_rect = self.image.get_rect(topleft=pos)
-        self.visible = True
+        self.visible = False #SAHIUDSAHDUIIDU
         
     def update(self, dt):
         if pygame.sprite.spritecollide(self, self.game.player_sprites,False):
@@ -47,4 +47,4 @@ class Door(pygame.sprite.Sprite):
         self.image = surf
         self.image_rect = self.image.get_rect(topleft=pos)
         self.rect = self.image.get_frect(topleft=pos)
-        self.type = 'door'
+        self.type = 'wall'

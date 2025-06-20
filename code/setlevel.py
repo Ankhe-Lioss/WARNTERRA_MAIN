@@ -14,6 +14,7 @@ def setlevel(game):
     }
     game.checkins = {}
     game.doorlist = []
+    game.doors = set()
     # Ground and Walls
     for x, y, image in game.map.get_layer_by_name('Ground').tiles():
         Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'ground')
@@ -57,9 +58,14 @@ def setlevel(game):
     print(game.room_numb)
     
     
-def spawn_door(doorlist,game):
-    for obj in doorlist:
-        Door(obj[0], obj[1], (game.all_sprites, game.collision_sprites))
+def spawn_door(game):
+    for obj in game.doorlist:
+        game.doors.add(Door(obj[0], obj[1], (game.all_sprites, game.collision_sprites)))
+        
+def open_door(game):
+    for door in game.doors:
+        door.kill()
+        del door
 
 def spawn_wave(game):
     for obj in game.spawnlist[game.room][game.wave]:
@@ -82,12 +88,16 @@ def update_level(game):
             game.level += 1
             setlevel(game)
         game.room += 1
+        
         spawn_room(game)
+        if game.room > 0:
+            spawn_door(game)
+            
         game.wave = -1
     
     if game.spawn_numb == 1 and game.room > 0:
         if game.wave >= len(game.spawnlist[game.room]) - 1:
-            pass
+            open_door(game)
         else:
             game.wave += 1
             spawn_wave(game)

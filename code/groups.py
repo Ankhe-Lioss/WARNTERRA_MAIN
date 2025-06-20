@@ -18,7 +18,7 @@ class AllSprites(pygame.sprite.Group):
         top_sprites = [sprite for sprite in self if hasattr(sprite, 'type') and sprite.type == 'top']
 
         for layer in [ground_sprites, floor_sprites, object_sprites, top_sprites]:
-            for sprite in sorted(layer, key=lambda sprite: (sprite.image_rect if hasattr(sprite, 'image_rect') else sprite.rect).centery):
+            for sprite in sorted(layer, key=lambda sprite: (sprite.image_rect if hasattr(sprite, 'image_rect') else sprite.rect).midtop[1]):
                 if hasattr(sprite, 'visible') and sprite.visible==False:
                     continue
                 self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)

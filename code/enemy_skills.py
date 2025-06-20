@@ -29,10 +29,12 @@ class Poro_stomp(Skill):
         super().activate()
         aoe.Poro_Stomp(self.user.rect.center,self.user.game,self.user.atk)
         self.user.state = 'Attacking'
+        self.user.channeling = True
 
     def deactivate(self):
         super().deactivate()
         self.user.state = 'Walking'
+        self.user.channeling = False
         
 class Chogath_stomp(Skill):
     def __init__(self, user, game):

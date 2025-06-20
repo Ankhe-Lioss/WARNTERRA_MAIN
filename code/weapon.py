@@ -13,7 +13,23 @@ class Weap(pygame.sprite.Sprite):
         self.image_rect = self.image.get_frect(center=self.player.image_rect.center)
         
         # Import skills
-        
+
+    def joystick_input(self):
+
+        if pygame.joystick.get_count() > 0:
+            self.joystick = pygame.joystick.Joystick(0)
+            self.joystick.init()
+        else:
+            return
+        if self.joystick.get_button(4):
+            self.primary.cast()
+        if self.joystick.get_button(5):
+            self.secondary.cast()
+        if self.joystick.get_axis(4) > 0.5:
+            self.q_skill.cast()
+        if self.joystick.get_axis(5) > 0.5:
+            self.e_skill.cast()
+
     def input(self):
         if pygame.mouse.get_pressed()[0]:
             self.primary.cast()
@@ -26,11 +42,12 @@ class Weap(pygame.sprite.Sprite):
     
     def update(self, dt):
         self.input()
+        self.joystick_input()
         self.primary.update(dt)
         self.secondary.update(dt)
         self.q_skill.update(dt)
         self.e_skill.update(dt)
-    
+
 
 class Gauntlet(Weap):
     def __init__(self, game):

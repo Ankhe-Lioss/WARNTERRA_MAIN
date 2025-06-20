@@ -66,7 +66,7 @@ class Chogath_Rupture(Area_of_effect):
     def __init__(self, pos,game,user_atk):
         self.enemy_sprites=game.player_sprites
         self.name='Chogath_Rupture'
-        super().__init__(pos,groups,game,user_atk)
+        super().__init__(pos,game,user_atk)
 
     def apply(self, target):
         target.status.add(Stunned(1000, self.game, target))

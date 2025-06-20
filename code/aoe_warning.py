@@ -34,6 +34,7 @@ class Spawn_aoe(pygame.sprite.Sprite):
     def update(self, dt):
         self.animate(dt)
         self.spawn()
+        
 class Spawn_rupture(Spawn_aoe):
     def __init__(self, pos, game, user_atk):
         self.name='Spawn_rupture'
@@ -42,6 +43,7 @@ class Spawn_rupture(Spawn_aoe):
         if pygame.time.get_ticks() - self.spawn_time >= self.lifetime:
             self.kill()
             Chogath_Rupture(self.pos, self.game, self.user_atk)
+            
 class Spawn_darkmatter(Spawn_aoe):
     def __init__(self, pos, game, user_atk):
         self.name='Spawn_darkmatter'

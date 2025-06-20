@@ -108,10 +108,10 @@ class Veigar_w(Skill):
         super().activate()
         for _ in range(10):
             angle = random.uniform(0, 2 * math.pi)  # 0–360 degrees
-            distance = random.uniform(0, radius)  # Anywhere within the circle
+            distance = random.uniform(0, 360)  # Anywhere within the circle
             offset_x = math.cos(angle) * distance
             offset_y = math.sin(angle) * distance
-            spawn_pos = (center_x + offset_x, center_y + offset_y)
+            spawn_pos = (self.user.player.rect.center.x + offset_x, self.user.player.rect.center.y + offset_y)
 
             Spawn_darkmatter(self.user, spawn_pos, self.user.game)
         self.user.state = 'Attacking'

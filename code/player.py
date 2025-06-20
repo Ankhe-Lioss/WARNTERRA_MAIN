@@ -53,8 +53,8 @@ class Player(Entity):
         move_x = self.joystick.get_axis(0)
         move_y = self.joystick.get_axis(1)
 
-        self.direction.x = move_x if abs(move_x) >= 0.07 else 0
-        self.direction.y = move_y if abs(move_y) >= 0.07 else 0
+        self.direction.x += move_x if abs(move_x) >= 0.07 else 0
+        self.direction.y += move_y if abs(move_y) >= 0.07 else 0
 
         if self.direction.length_squared() > 0:
             self.direction = self.direction.normalize()

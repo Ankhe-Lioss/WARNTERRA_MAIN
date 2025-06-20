@@ -26,8 +26,38 @@ class Player(Entity):
         
         # Hitbox
         self.direction = pygame.Vector2()
-        
-    
+    def joystick_input(self):
+
+        if pygame.joystick.get_count() > 0:
+            self.joystick = pygame.joystick.Joystick(0)
+            self.joystick.init()
+        else:
+            return
+
+
+        # Handle right stick (assumed for facing direction)
+        right_x = self.joystick.get_axis(2)
+        right_y = self.joystick.get_axis(3)
+
+        self.facing_dir.x = right_x if abs(right_x) >= 0.07 else 0
+        self.facing_dir.y = right_y if abs(right_y) >= 0.07 else 0
+
+        if self.facing_dir.length_squared() > 0:
+            self.facing_dir = self.facing_dir.normalize()
+
+        # D-pad (hat) input for movement direction
+        hat_x, hat_y = self.joystick.get_hat(0)
+        self.direction.x = hat_x
+        self.direction.y = -hat_y  # Flip Y for game world
+        move_x = self.joystick.get_axis(0)
+        move_y = self.joystick.get_axis(1)
+
+        self.direction.x = move_x if abs(move_x) >= 0.07 else 0
+        self.direction.y = move_y if abs(move_y) >= 0.07 else 0
+
+        if self.direction.length_squared() > 0:
+            self.direction = self.direction.normalize()
+
     def update_animation(self, dt):
         self.frame_index = self.frame_index + 6 * dt if self.direction and not self.stunned else 0
         self.image = self.frames[self.facing_state][int(self.frame_index) % len(self.frames[self.facing_state])]
@@ -39,6 +69,7 @@ class Player(Entity):
         player_pos = pygame.Vector2(CENTER)
         self.facing_dir = (mouse_pos - player_pos)
         self.facing_dir = self.facing_dir.normalize() if self.facing_dir else self.facing_dir
+    def update_facing_state(self):
         angle = - degrees(atan2(self.facing_dir.x, self.facing_dir.y)) + 180
         
         self.facing_state = self.facing[int((angle + 22.5 if angle <= 337.5 else angle + 22.5 - 360) / 45)]
@@ -58,12 +89,18 @@ class Player(Entity):
         self.direction = self.direction.normalize() if self.direction else self.direction
     
     def update(self, dt):
+
+        #mouse and keyboard
         self.input()
+        self.update_facing()
+        #controller
+        self.joystick_input()
+        #update facing
         if not self.stunned:
-            self.update_facing()
-        
+            self.update_facing_state()
+        #move with entity
         super().update(dt) # move
-        
+        #animation update
         self.update_animation(dt)
         self.collide_with_enemies(dt)
     

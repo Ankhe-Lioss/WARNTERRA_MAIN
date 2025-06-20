@@ -16,7 +16,7 @@ class Game:
     
         # Caption
         pygame.display.set_caption("Warnterra 1.0")
-        
+
         # Times
         self.clock = pygame.time.Clock()
         # States

@@ -40,4 +40,47 @@ class Chogath(Enemy):
             "primary" : Chogath_stomp(self, game)
         }
 
-        
+class Lulu(Enemy):
+    def __init__(self, pos, game):
+        self.name = self.__class__.__name__
+        super().__init__(pos, game)
+        self.rect = self.rect.inflate(0, 0)
+        self.asymmetry=True
+        self.attack_time=1000
+        self.skills = {
+            "primary" : Lulu_primary(self, game),
+            "buff" : Lulu_buff(self, game)
+        }
+
+class Soraka(Enemy):
+    def __init__(self, pos, game):
+        self.name = self.__class__.__name__
+        super().__init__(pos, game)
+        self.rect = self.rect.inflate(0, 0)
+        self.asymmetry=True
+        self.attack_time=1000
+        self.skills = {
+            
+        }
+
+class Maokai(Enemy):
+    def __init__(self, pos, game):
+        self.name = self.__class__.__name__
+        super().__init__(pos, game)
+        self.rect = self.rect.inflate(0, 0)
+        self.asymmetry=True
+        self.attack_time=1000
+        self.skills = {
+            
+        }
+
+class Nocturne(Enemy):
+    def __init__(self, pos, game):
+        self.name = self.__class__.__name__
+        super().__init__(pos, game)
+        self.rect = self.rect.inflate(0, 0)
+        self.asymmetry=True
+        self.attack_time=1000
+        self.skills = {
+            
+        }

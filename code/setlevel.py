@@ -55,8 +55,7 @@ def setlevel(game):
                         game.spawnlist[obj.properties['room']][obj.properties['wave']] = []
                     game.spawnlist[obj.properties['room']][obj.properties['wave']].append((obj.name, obj.x, obj.y))
     game.room_numb = len(game.spawnlist)
-    print(game.room_numb)
-    
+
     
 def spawn_door(game):
     for obj in game.doorlist:
@@ -103,6 +102,5 @@ def update_level(game):
             spawn_wave(game)
 
 def check_game_state(game):
-    print(game.wave)
     if game.state == "in_level":
         update_level(game)

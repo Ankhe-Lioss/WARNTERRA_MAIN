@@ -560,14 +560,14 @@
    </properties>
    <point/>
   </object>
-  <object id="284" name="Poro" x="753.333" y="2630.67">
+  <object id="284" name="Poro" x="761.333" y="2630.67">
    <properties>
     <property name="room" type="int" value="2"/>
     <property name="wave" type="int" value="1"/>
    </properties>
    <point/>
   </object>
-  <object id="285" name="Poro" x="750.666" y="2701.34">
+  <object id="285" name="Poro" x="761.333" y="2702.67">
    <properties>
     <property name="room" type="int" value="2"/>
     <property name="wave" type="int" value="1"/>

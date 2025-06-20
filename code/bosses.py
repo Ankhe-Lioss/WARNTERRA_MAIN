@@ -9,16 +9,5 @@ class Veigar(Boss):
         self.skills = {
             'primary': Veigar_primary(self, game),
             'secondary': Veigar_secondary(self, game),
-            #'aoe' : Veigar_aoe(self, game),
-            
+            'ult': Veigar_ult(self, game),
         }
-    
-    def change_phase(self):
-        super().change_phase()
-        self.skills = {
-            'secondary' : Veigar_secondary(self, self.game),
-            #'cage' : Veigar_cage(self, game)
-            'ult': Veigar_ult(self, self.game),
-        }
-        self.skills['secondary'].warmup = 1000
-        self.skills['secondary'].cooldown = 1000

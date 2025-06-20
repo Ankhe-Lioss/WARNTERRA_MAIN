@@ -1,5 +1,4 @@
 from projectiles import *
-from status import *
 
 class Karthus_Primary(Enemy_projectiles):
     def __init__(self, user, direction, game):
@@ -38,11 +37,3 @@ class Veigar_Ult(Enemy_projectiles):
         sprite.take_damage(sprite.maxhp * 0.5, pen=0.5, type="normal")
         self.play_sound()
 
-class Lulu_Primary(Enemy_projectiles):
-    def __init__(self, user, direction, game):
-        self.name = self.__class__.__name__
-        self.source='Lulu Primary'
-        super().__init__(user, direction, game)
-    
-    def apply(self, target):
-        target.status.add(Slowed(3000, 0.5, self.game, target))

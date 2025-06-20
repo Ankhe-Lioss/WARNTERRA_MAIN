@@ -4,8 +4,8 @@ from player import *
 from weapon import *
 from spawn import *
 
+
 def setlevel(game):
-    print("Setting Level", game.level)
     game.room = -1
     
     game.map = load_pygame(os.path.join( 'data', 'maps', f'Level{game.level}.tmx'))
@@ -42,7 +42,6 @@ def setlevel(game):
             # Temporary weapon
             game.player.weap = Gauntlet(game)
         else:
-            print("adding", obj)
             if 'room' in obj.properties:
                 if obj.name == "Check_in":
                     game.checkins[obj.properties['room']] = (obj.x, obj.y)
@@ -55,16 +54,9 @@ def setlevel(game):
                         #print(obj.properties['room'], obj.properties['wave'])
                         game.spawnlist[obj.properties['room']][obj.properties['wave']] = []
                     game.spawnlist[obj.properties['room']][obj.properties['wave']].append((obj.name, obj.x, obj.y))
-    game.room_numb = len(game.checkins) - 1
-    print(game.room_numb)
+    game.room_numb = len(game.spawnlist)
+
     
-def endlevel(game):
-    for group in [game.all_sprites, game.player_sprites, game.enemy_sprites, game.player_projectiles, game.enemy_projectiles, game.collision_sprites]:
-        for sprite in group:
-            sprite.kill()
-
-    # Stat for levels
-
 def spawn_door(game):
     for obj in game.doorlist:
         game.doors.add(Door(obj[0], obj[1], (game.all_sprites, game.collision_sprites)))
@@ -93,10 +85,7 @@ def update_level(game):
     if game.spawn_numb == 0:
         if game.room == game.room_numb:
             game.level += 1
-            game.player.updstat()
-            endlevel(game)
             setlevel(game)
-            return
         game.room += 1
         
         spawn_room(game)
@@ -113,6 +102,5 @@ def update_level(game):
             spawn_wave(game)
 
 def check_game_state(game):
-    #print(game.wave)
     if game.state == "in_level":
         update_level(game)

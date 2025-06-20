@@ -9,9 +9,7 @@ enemy_classes = {
     'Karthus': Karthus,
     'Chogath': Chogath,
     'Check_in': Check_in,
-    'Veigar': Veigar,
-    'Lulu' : Lulu,
-    'Nocturne' : Nocturne
+    'Veigar': Veigar
 }
 
 def spawn_animation(pos,game,enemy_name):

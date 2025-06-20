@@ -2,8 +2,8 @@ from setting import *
 from status import *
 
 class Area_of_effect(pygame.sprite.Sprite):
-    def __init__(self,pos,groups,game,user_atk):
-        super().__init__(groups)
+    def __init__(self,pos,game,user_atk):
+        super().__init__(game.all_sprites)
         self.user_atk=user_atk
         self.game = game
 
@@ -57,16 +57,21 @@ class Area_of_effect(pygame.sprite.Sprite):
         pass
             
 class Poro_Stomp(Area_of_effect):
-    def __init__(self, pos, groups, game,user_atk):
+    def __init__(self, pos,game,user_atk):
         self.enemy_sprites=game.player_sprites
         self.name='Poro_Stomp'
-        super().__init__(pos,groups,game,user_atk)
+        super().__init__(pos,game,user_atk)
         
 class Chogath_Rupture(Area_of_effect):
-    def __init__(self, pos, groups, game,user_atk):
+    def __init__(self, pos,game,user_atk):
         self.enemy_sprites=game.player_sprites
         self.name='Chogath_Rupture'
         super().__init__(pos,groups,game,user_atk)
 
     def apply(self, target):
         target.status.add(Stunned(1000, self.game, target))
+class Veigar_Darkmatter(Area_of_effect):
+    def __init__(self, pos,game,user_atk):
+        self.enemy_sprites=game.player_sprites
+        self.name='Veigar_Darkmatter'
+        super().__init__(pos,game,user_atk)

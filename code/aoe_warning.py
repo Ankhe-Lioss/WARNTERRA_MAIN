@@ -1,19 +1,22 @@
 from aoe import *
-class Spawn_rupture(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, game,user_atk):
-        super().__init__(groups)
+Spawn_aoe_dict={  '''aoe skill=[frame_number,life_time]'''
+    'Spawn_rupture':(3,500),
+    'Spawn_darkmatter':(3,1000)
+}
+class Spawn_aoe(pygame.sprite.Sprite):
+    def __init__(self, pos, game,user_atk):
+        super().__init__(game.all_sprites)
         #pass to aoe
         self.game=game
-        self.groups=groups
         self.pos=pos
         self.user_atk=user_atk
-
-        #
+        #pass from dic
+        self.frame_number=Spawn_aoe_dict[self.name][0]
+        self.lifetime=Spawn_aoe_dict[self.name][1]
         self.frame_index = 0
         self.frames=[]
         self.load_frame()
         self.animation_speed = 6
-        self.lifetime=500
         self.spawn_time=pygame.time.get_ticks()
         self.image = self.frames[0]
         self.rect = self.image.get_frect(center=pos)
@@ -21,16 +24,28 @@ class Spawn_rupture(pygame.sprite.Sprite):
 
     def load_frame(self):
         for i in range(3):
-            surf=pygame.image.load(os.path.join('images', 'enviroment','spawn_rupture', f'{i}.png')).convert_alpha()
+            surf=pygame.image.load(os.path.join('images', 'enviroment',f'{self.name}', f'{i}.png')).convert_alpha()
             self.frames.append(surf)
 
-    def spawn(self):
-        if pygame.time.get_ticks() - self.spawn_time >= self.lifetime:
-            self.kill()
-            Chogath_Rupture(self.pos,self.groups,self.game,self.user_atk)
     def animate(self, dt):
         self.frame_index += self.animation_speed * dt
         self.image = self.frames[int(self.frame_index % len(self.frames))]
     def update(self, dt):
         self.animate(dt)
         self.spawn()
+class Spawn_rupture(Spawn_aoe):
+    def __init__(self, pos, game, user_atk):
+        self.name='Spawn_rupture'
+        super.__init__( pos, game, user_atk)
+    def spawn(self):
+        if pygame.time.get_ticks() - self.spawn_time >= self.lifetime:
+            self.kill()
+            Chogath_Rupture(self.pos, self.game, self.user_atk)
+class Spawn_darkmatter(Spawn_aoe):
+    def __init__(self, pos, game, user_atk):
+        self.name='Spawn_darkmatter'
+        super.__init__( pos, game, user_atk)
+    def spawn(self):
+        if pygame.time.get_ticks() - self.spawn_time >= self.lifetime:
+            self.kill()
+            Veigar_Darkmatter(self.pos, self.game, self.user_atk)

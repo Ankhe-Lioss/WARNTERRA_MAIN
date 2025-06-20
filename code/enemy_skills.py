@@ -27,7 +27,7 @@ class Poro_stomp(Skill):
 
     def activate(self):
         super().activate()
-        aoe.Poro_Stomp(self.user.rect.center,self.user.game.all_sprites,self.user.game,self.user.atk)
+        aoe.Poro_Stomp(self.user.rect.center,self.user.game,self.user.atk)
         self.user.state = 'Attacking'
 
     def deactivate(self):
@@ -42,7 +42,7 @@ class Chogath_stomp(Skill):
 
     def activate(self):
         super().activate()
-        aoew.Spawn_rupture(self.user.player.rect.center, self.user.game.all_sprites, self.user.game, self.user.atk)
+        aoew.Spawn_rupture(self.user.player.rect.center, self.user.game, self.user.atk)
         self.user.state = 'Attacking'
         self.user.channeling = True
 
@@ -86,7 +86,6 @@ class Veigar_secondary(Skill):
     def deactivate(self):
         super().deactivate()
         self.user.state='Walking'
-
 class Veigar_ult(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
@@ -100,3 +99,27 @@ class Veigar_ult(Skill):
     def deactivate(self):
         super().deactivate()
         self.user.state='Walking'
+class Veigar_w(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+
+    def activate(self):
+        super().activate()
+        for _ in range(10):
+            angle = random.uniform(0, 2 * math.pi)  # 0–360 degrees
+            distance = random.uniform(0, radius)  # Anywhere within the circle
+            offset_x = math.cos(angle) * distance
+            offset_y = math.sin(angle) * distance
+            spawn_pos = (center_x + offset_x, center_y + offset_y)
+
+            Spawn_darkmatter(self.user, spawn_pos, self.user.game)
+        self.user.state = 'Attacking'
+        self.user.channeling = True
+
+    def deactivate(self):
+        super().deactivate()
+        self.user.state = 'Walking'
+        self.user.channeling = False
+
+

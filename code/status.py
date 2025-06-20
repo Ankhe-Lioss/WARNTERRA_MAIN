@@ -98,3 +98,25 @@ class Rooted(Status):
     def update(self, dt):
         self.owner.rooted = True
         super().update(dt)       
+        
+class Buff(Status):
+    def __init__(self, duration, ratio, type, game, owner):
+        self.name = self.__class__.__name__
+        super().__init__(duration, game)
+        self.owner = owner
+        self.ratio = ratio
+        self.type = type
+        if type == 'atk':
+            owner.atk *= 1 + ratio
+        elif type == 'def':
+            owner.def_ *= 1 + ratio
+        elif type == 'spd':
+            owner.spd *= 1 + ratio
+
+    def unapply(self):
+        if self.type == 'atk':
+            self.owner.atk /= 1 + self.ratio
+        elif self.type == 'def':
+            self.owner.def_ /= 1 + self.ratio
+        elif self.type == 'spd':
+            self.owner.spd /= 1 + self.ratio

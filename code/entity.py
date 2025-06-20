@@ -24,11 +24,6 @@ class Entity(pygame.sprite.Sprite):
         
         self.updstat()
         
-        self.hp = self.maxhp
-        self.atk = self.baseatk
-        self.def_ = self.basedef
-        self.spd = self.basespd
-        
         #states
         self.channeling = False
         self.forced_moving = False
@@ -49,6 +44,11 @@ class Entity(pygame.sprite.Sprite):
         self.maxhp = self.raw_hp + self.level * self.hp_multiplier
         self.baseatk = self.raw_atk + self.level * self.atk_multiplier
         self.basedef = self.raw_def + self.level * self.def_multiplier
+        
+        self.hp = self.maxhp
+        self.atk = self.baseatk
+        self.def_ = self.basedef
+        self.spd = self.basespd
 
     def collision(self, dir_type, dir):
         for sprite in self.game.collision_sprites:
@@ -61,6 +61,9 @@ class Entity(pygame.sprite.Sprite):
                     if dir.y > 0: self.rect.bottom = sprite.rect.top
     
     def take_damage(self, dmg, pen = 0, type="normal"):
+        if dmg < 0:
+            dmg = 0    
+    
         delta = dmg / (1 + 0.01 * self.def_ * (1 - pen))
         self.hp -= delta
         

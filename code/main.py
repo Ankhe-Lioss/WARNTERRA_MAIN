@@ -37,7 +37,7 @@ class Game:
         self.room = 0
         self.wave = 0
         self.delay = 0
-        self.level = 1
+        self.level = 3
         self.state = 'in_level'
         setlevel(self)
         #(self.spawnlist)
@@ -65,6 +65,7 @@ class Game:
             
             #Enemies Spawning
             check_game_state(self)
+            # print(game.level)
             
             # TESTING AREA
             self.all_sprites.draw(self.player.rect)

@@ -112,9 +112,9 @@ class Player(Entity):
         self.taking_dmg = True
     
     def death(self):
-        self.game.running = False
-        print('u loose bitchess')
-    
+        self.game.game_state = "in_start_menu"
+        self.game.pausing=True
+
     def collide_with_enemies(self, dt):
         for enemy in self.game.enemy_sprites:
             if not enemy.ghost and self.rect.colliderect(enemy.rect):

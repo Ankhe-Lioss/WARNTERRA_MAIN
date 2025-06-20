@@ -8,6 +8,7 @@ def load_menu(game):
 	game.audio_img = pygame.image.load('images/menu/button_audio.png').convert_alpha()
 	game.keys_img = pygame.image.load('images/menu/button_keys.png').convert_alpha()
 	game.back_img = pygame.image.load('images/menu/button_back.png').convert_alpha()
+	game.start_img = pygame.image.load('images/menu/button_start.png').convert_alpha()
 	game.resume_button = Button(304, 125, game.resume_img, 1)
 	game.options_button = Button(304, 250, game.options_img, 1)
 	game.quit_button = Button(304, 375, game.quit_img, 1)
@@ -15,6 +16,8 @@ def load_menu(game):
 	game.audio_button = Button(225, 200, game.audio_img, 1)
 	game.keys_button = Button(246, 325, game.keys_img, 1)
 	game.back_button = Button(332, 450, game.back_img, 1)
+	game.start_button = Button(640, 360, game.start_img, 1)
+	game.quit_start_button = Button(640, 460, game.quit_img, 1)
 class Button():
 	def __init__(self, x, y, image, scale):
 		width = image.get_width()

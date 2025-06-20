@@ -5,7 +5,7 @@ from groups import AllSprites
 from setlevel import *
 from cursor import *
 from button import *
-
+from background import *
 
 # THIS FKING MAIN GAME SIHFHFHFHFHFHFHFHF
 class Game:
@@ -45,9 +45,10 @@ class Game:
         # game load asset
         load_menu(self)
 
-        self.game_state = 'in_game'
+        self.game_state = 'in_start_menu'
         self.menu_state = 'main'
         self.pausing = True
+        self.background = Background()
 
     def run(self):
         while self.running:
@@ -61,7 +62,7 @@ class Game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.pausing = not self.pausing
-                    if event.key == pygame.K_F11 and self.screen_toggle - pygame.time.get_ticks() < -500:
+                    if event.key == pygame.K_F11 and self.screen_toggle - pygame.time.get_ticks() < -5000:
                         pygame.display.toggle_fullscreen()
                         self.screen_toggle = pygame.time.get_ticks()
 
@@ -75,8 +76,8 @@ class Game:
             self.all_sprites.draw(self.player.rect)
             if not self.pausing:
                 self.all_sprites.update(dt)
-            else:
-                self.draw_menu()
+
+            self.draw_menu(dt)
             # CURSOR
             cursor(game)
 
@@ -85,8 +86,8 @@ class Game:
         # Cútd
         pygame.quit()
 
-    def draw_menu(self):
-        if self.pausing:
+    def draw_menu(self,dt):
+        if self.pausing and self.game_state == 'in_game':
             # Optional dark overlay
             overlay = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
             overlay.set_alpha(180)
@@ -110,6 +111,15 @@ class Game:
                     print("Change Key Bindings")
                 if self.back_button.draw(self.display_surface):
                     self.menu_state = "main"
+        if self.game_state == 'in_start_menu':
+            self.background.draw(dt,self.display_surface)
+            if game.start_button.draw(self.display_surface):
+                self.__init__()
+                self.game_state = "in_game"
+                self.pausing = False
+            if game.quit_start_button.draw(self.display_surface):
+                self.running = False
+
 
     def draw_text(text, font, text_col, x, y):
         img = font.render(text, True, text_col)

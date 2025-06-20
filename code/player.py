@@ -44,7 +44,8 @@ class Player(Entity):
 
         if self.facing_dir.length_squared() > 0:
             self.facing_dir = self.facing_dir.normalize()
-
+        else:
+            self.facing_dir = pygame.Vector2(0,1)
         # D-pad (hat) input for movement direction
         hat_x, hat_y = self.joystick.get_hat(0)
         self.direction.x = hat_x

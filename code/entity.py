@@ -217,16 +217,7 @@ class Enemy(Entity):
                             self.rect.x -= self.direction.x * self.spd * dt
                         else:
                             self.rect.y -= self.direction.y * self.spd * dt
-    def destroy(self):
-        self.death_time=pygame.time.get_ticks()
-        destroy_surf=pygame.mask.from_surface(self.frames['Walking'][0]).to_surface()
-        destroy_surf.set_colorkey('black')
-        self.image=destroy_surf
-        
-    def death_timer(self):
-        if pygame.time.get_ticks()-self.death_time>=self.death_duration:
-            self.kill()
-            
+
     def attacking(self):
         if self.distance_vector.length() <= self.atk_range:
             for skill in self.skills:

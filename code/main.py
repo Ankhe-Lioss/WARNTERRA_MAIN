@@ -24,7 +24,6 @@ class Game:
         self.clock = pygame.time.Clock()
         # States
         self.running = True
-        self.pausing = False
         # Groups
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()
@@ -48,6 +47,7 @@ class Game:
 
         self.game_state = 'in_game'
         self.menu_state = 'main'
+        self.pausing = True
 
     def run(self):
         while self.running:
@@ -61,9 +61,9 @@ class Game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.pausing = not self.pausing
-                    if event.key == pygame.K_F11 and self.screen_toggle - self.clock.get_time() < -5:
+                    if event.key == pygame.K_F11 and self.screen_toggle - pygame.time.get_ticks() < -500:
                         pygame.display.toggle_fullscreen()
-                        self.screen_toggle = self.clock.get_time()
+                        self.screen_toggle = pygame.time.get_ticks()
 
             # FILL
             self.display_surface.fill('gray36')
@@ -89,7 +89,7 @@ class Game:
         if self.pausing:
             # Optional dark overlay
             overlay = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
-            overlay.set_alpha(100)
+            overlay.set_alpha(180)
             overlay.fill((255, 255, 255))
             self.display_surface.blit(overlay, (0, 0))
 

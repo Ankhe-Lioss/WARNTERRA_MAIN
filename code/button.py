@@ -1,4 +1,5 @@
 from setting import *
+import random
 def load_menu(game):
 	game.resume_img = pygame.image.load("images/menu/button_resume.png").convert_alpha()
 	game.options_img = pygame.image.load("images/menu/button_options.png").convert_alpha()
@@ -8,8 +9,8 @@ def load_menu(game):
 	game.keys_img = pygame.image.load('images/menu/button_keys.png').convert_alpha()
 	game.back_img = pygame.image.load('images/menu/button_back.png').convert_alpha()
 	game.resume_button = Button(304, 125, game.resume_img, 1)
-	game.options_button = Button(297, 250, game.options_img, 1)
-	game.quit_button = Button(336, 375, game.quit_img, 1)
+	game.options_button = Button(304, 250, game.options_img, 1)
+	game.quit_button = Button(304, 375, game.quit_img, 1)
 	game.video_button = Button(226, 75, game.video_img, 1)
 	game.audio_button = Button(225, 200, game.audio_img, 1)
 	game.keys_button = Button(246, 325, game.keys_img, 1)
@@ -25,18 +26,28 @@ class Button():
 
 	def draw(self, surface):
 		action = False
-		#get mouse position
 		pos = pygame.mouse.get_pos()
 
-		#check mouseover and clicked conditions
+		# Default position
+		draw_x = self.rect.x
+		draw_y = self.rect.y
+
+		# Check if mouse is over the button
 		if self.rect.collidepoint(pos):
-			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+			# Add slight random offset for "vibration" effect
+			draw_x += random.randint(-1, 1)
+			draw_y += random.randint(-1, 1)
+
+			# Handle click
+			if pygame.mouse.get_pressed()[0] == 1 and not self.clicked:
 				self.clicked = True
 				action = True
 
+		# Reset click when mouse released
 		if pygame.mouse.get_pressed()[0] == 0:
 			self.clicked = False
 
-		#draw button on screen
-		surface.blit(self.image, (self.rect.x, self.rect.y))
+		# Draw with possible vibration offset
+		surface.blit(self.image, (draw_x, draw_y))
+
 		return action

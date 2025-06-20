@@ -27,7 +27,6 @@ class spawn_animation(pygame.sprite.Sprite):
         self.enemy_name=enemy_name
         self.animation_speed = 10
         self.lifetime=1500
-        self.spawn_time=pygame.time.get_ticks()
         self.image = self.frames[0]
         self.rect = self.image.get_frect(topleft=pos)
         self.image_rect = self.image.get_rect(topleft=pos)
@@ -42,7 +41,7 @@ class spawn_animation(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frame_index % len(self.frames))]
         
     def spawn(self):
-        if pygame.time.get_ticks()-self.spawn_time>=self.lifetime:
+        if self.lifetime<=0:
             self.kill()
 
             if self.enemy_name in enemy_classes:
@@ -50,5 +49,6 @@ class spawn_animation(pygame.sprite.Sprite):
                 enemy_class(self.rect.center, self.game)
 
     def update(self, dt):
+        self.lifetime -= dt*1000
         self.animate(dt)
         self.spawn()

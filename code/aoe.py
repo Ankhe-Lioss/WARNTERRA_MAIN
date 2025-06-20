@@ -17,7 +17,6 @@ class Area_of_effect(pygame.sprite.Sprite):
         self.frames = []
         self.load_frame()
         self.animation_speed = self.frame_number/self.lifetime*1000
-        self.spawn_time = pygame.time.get_ticks()
         self.image = self.frames[0]
         self.image_rect = self.image.get_frect(center=pos)
         self.rect = self.image.get_frect(center=pos)
@@ -50,7 +49,8 @@ class Area_of_effect(pygame.sprite.Sprite):
     def update(self, dt):
         self.animate(dt)
         self.aoe_collision()
-        if pygame.time.get_ticks()-self.spawn_time>=self.lifetime:
+        self.lifetime-=1000*dt
+        if self.lifetime <= 0:
             self.kill()
             
     def apply(self, target):

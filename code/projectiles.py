@@ -12,7 +12,7 @@ class Projectiles(pygame.sprite.Sprite):
         self.angle = degrees(atan2(self.direction.x, self.direction.y)) - 90
         
         # Hitbox
-        self.spawn_time = pygame.time.get_ticks()
+
         self.lifetime = 5000
         
         # Loading appearance

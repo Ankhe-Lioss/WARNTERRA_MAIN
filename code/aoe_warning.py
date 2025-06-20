@@ -18,7 +18,6 @@ class Spawn_aoe(pygame.sprite.Sprite):
         self.frames=[]
         self.load_frame()
         self.animation_speed = 6
-        self.spawn_time=pygame.time.get_ticks()
         self.image = self.frames[0]
         self.rect = self.image.get_frect(center=pos)
         self.image_rect = self.image.get_frect(center=pos)
@@ -32,23 +31,21 @@ class Spawn_aoe(pygame.sprite.Sprite):
         self.frame_index += self.animation_speed * dt
         self.image = self.frames[int(self.frame_index % len(self.frames))]
     def update(self, dt):
+        self.lifetime -= dt*1000
+        if self.lifetime <= 0:
+            self.kill()
+            self.spawn()
         self.animate(dt)
-        self.spawn()
-        
 class Spawn_rupture(Spawn_aoe):
     def __init__(self, pos, game, user_atk):
         self.name='Spawn_rupture'
         super().__init__( pos, game, user_atk)
     def spawn(self):
-        if pygame.time.get_ticks() - self.spawn_time >= self.lifetime:
-            self.kill()
-            Chogath_Rupture(self.pos, self.game, self.user_atk)
+        Chogath_Rupture(self.pos, self.game, self.user_atk)
             
 class Spawn_darkmatter(Spawn_aoe):
     def __init__(self, pos, game, user_atk):
         self.name='Spawn_darkmatter'
         super().__init__( pos, game, user_atk)
     def spawn(self):
-        if pygame.time.get_ticks() - self.spawn_time >= self.lifetime:
-            self.kill()
-            Veigar_Darkmatter(self.pos, self.game, self.user_atk)
+        Veigar_Darkmatter(self.pos, self.game, self.user_atk)

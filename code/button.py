@@ -33,9 +33,9 @@ def load_menu(game):
 	game.options_button = Button(540, 460, game.options_img, 1)
 
 	#death menu
-	game.death_to_quit_button = Button(400, 355, game.death_to_quit_img, 1)
-	game.death_to_start_button = Button(400, 263, game.death_to_start_img, 1)
-	game.death_to_restart_button = Button(400, 180, game.death_to_restart_img, 1)
+	game.death_to_quit_button = Button(400, 420, game.death_to_quit_img, 1)
+	game.death_to_start_button = Button(400, 340, game.death_to_start_img, 1)
+	game.death_to_restart_button = Button(400, 260, game.death_to_restart_img, 1)
 class Button():
 	def __init__(self, x, y, image, scale):
 		width = image.get_width()

@@ -4,6 +4,7 @@ import aoe
 import aoe_warning as aoew
 from setting import *
 from status import *
+import random
 
 class Karthus_primary(Skill):
     def __init__(self, user, game):
@@ -108,7 +109,10 @@ class Veigar_aoe(Skill):
 
     def activate(self):
         super().activate()
+        for _ in range(2):
+            pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(80, 160), 0).rotate(randrange(0, 360))
 
+            aoew.Spawn_darkmatter(pos, self.game, self.user.atk)
         pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(1, 0).rotate(randrange(0, 360))
 
         aoew.Spawn_darkmatter(pos, self.game, self.user.atk)

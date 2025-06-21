@@ -1,21 +1,26 @@
 from setting import *
 import random
+
 def load_menu(game):
-	game.resume_img = pygame.image.load("images/menu/button_resume.png").convert_alpha()
-	game.options_img = pygame.image.load("images/menu/button_options.png").convert_alpha()
-	game.quit_img = pygame.image.load("images/menu/button_quit.png").convert_alpha()
-	game.video_img = pygame.image.load('images/menu/button_video.png').convert_alpha()
-	game.audio_img = pygame.image.load('images/menu/button_audio.png').convert_alpha()
-	game.keys_img = pygame.image.load('images/menu/button_keys.png').convert_alpha()
-	game.back_img = pygame.image.load('images/menu/button_back.png').convert_alpha()
-	game.start_img = pygame.image.load('images/menu/button_start.png').convert_alpha()
-	game.restart_img = pygame.image.load('images/menu/button_restart.png').convert_alpha()
-	print(game.restart_img)
+	game.resume_img = pygame.image.load(os.path.join('images','menu','button_resume.png')).convert_alpha()
+	game.options_img = pygame.image.load(os.path.join('images','menu','button_options.png')).convert_alpha()
+	game.quit_img = pygame.image.load(os.path.join('images','menu','button_quit.png')).convert_alpha()
+	game.video_img = pygame.image.load(os.path.join('images','menu','button_video.png')).convert_alpha()
+	game.audio_img = pygame.image.load(os.path.join('images','menu','button_audio.png')).convert_alpha()
+	game.keys_img = pygame.image.load(os.path.join('images','menu','button_keys.png')).convert_alpha()
+	game.back_img = pygame.image.load(os.path.join('images','menu','button_back.png')).convert_alpha()
+	game.start_img = pygame.image.load(os.path.join('images','menu','button_start.png')).convert_alpha()
+	game.restart_img = pygame.image.load(os.path.join('images','menu','button_restart.png')).convert_alpha()
+	game.startmenu_img = pygame.image.load(os.path.join('images','menu','button_startmenu.png')).convert_alpha()
+	game.deathmenu_img = pygame.image.load(os.path.join('images','menu','death_menu.png')).convert_alpha()
+	game.death_to_start_img = pygame.image.load(os.path.join('images','menu','button_death_to_start.png')).convert_alpha()
+	game.death_to_quit_img = pygame.image.load(os.path.join('images','menu','button_death_to_quit.png')).convert_alpha()
+	game.death_to_restart_img = pygame.image.load(os.path.join('images','menu','button_death_to_restart.png')).convert_alpha()
 	#pause menu
 	game.resume_button = Button(304, 125, game.resume_img, 1)
 	game.quit_button = Button(304, 375, game.quit_img, 1)
 	game.restart_button = Button(304, 250, game.restart_img, 1)
-
+	game.startmenu_button = Button(304, 500, game.startmenu_img, 1)
 	#option menu
 	game.video_button = Button(226, 75, game.video_img, 1)
 	game.audio_button = Button(225, 200, game.audio_img, 1)
@@ -27,6 +32,10 @@ def load_menu(game):
 	game.quit_start_button = Button(540, 360, game.quit_img, 1)
 	game.options_button = Button(540, 460, game.options_img, 1)
 
+	#death menu
+	game.death_to_quit_button = Button(400, 263, game.death_to_quit_img, 1)
+	game.death_to_start_button = Button(400, 355, game.death_to_start_img, 1)
+	game.death_to_restart_button = Button(400, 180, game.death_to_restart_img, 1)
 class Button():
 	def __init__(self, x, y, image, scale):
 		width = image.get_width()

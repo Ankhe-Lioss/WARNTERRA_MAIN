@@ -13,6 +13,7 @@ class Veigar_Primary(Enemy_projectiles):
         self.name = self.__class__.__name__
         self.source='Veigar Primary'
         super().__init__(user, direction, game)
+        self.rect.inflate(-20, -20)
 
 class Veigar_Secondary(Enemy_projectiles):
     def __init__(self, user, direction, game):
@@ -25,6 +26,9 @@ class Veigar_Ult(Enemy_projectiles):
         self.name = self.__class__.__name__
         self.source='Veigar Ult'
         super().__init__(user, pygame.Vector2(0, 0), game)
+        self.image = pygame.transform.scale(self.image, (0.75, 0.75))
+        self.image_rect = self.image.get_frect()
+        self.rect = self.image_rect.inflate(-10, -10)
         self.wall_piercing = True
         self.lifetime = 20000
     

@@ -1,11 +1,11 @@
 entity_stats = {
 #   "enemy_name" : (hp, atk, def, spd, hp_multiplier, atk_multiplier, def_multiplier, atk_range, keep_range)
-    "Player" : (500 , 500, 15, 400, 50 , 25  , 2.5, 0   , 0  ),
+    "Player" : (500 , 100, 15, 400, 50 , 25  , 2.5, 0   , 0  ),
     "Poro"   : (250 , 50 , 10, 450, 75 , 25  , 3  , 20  , 10 ),
     "Meele"  : (500 , 45 , 10, 300, 65 , 30  , 1.5, 50  , 10 ),
     "Karthus": (250 , 75 , 10, 200, 25 , 75  , 1  , 650 , 400),
     "Chogath": (700 , 40 , 15, 200, 150, 20  , 2  , 200 , 100),
-    "Veigar" : (8000, 100, 20, 250, 400, 50  , 5  , 1000, 500),
+    "Veigar" : (8000, 80 , 20, 250, 400, 40  , 5  , 1000, 550),
     "Lulu"   : (300 , 20 ,  5, 250, 60 , 10  , 0.5, 750 , 600),
     "Nocturne":(450 , 60 , 20,   0, 50 , 30  , 2  , 1000, 900)
 }
@@ -33,7 +33,7 @@ skill_stats = {
     "Veigar_primary" : (1800, 1000, 200),
     "Veigar_secondary" : (3800, 4000, 200),
     
-    "Veigar_ult" : (19500, 0, 500),
+    "Veigar_ult" : (29500, 0, 500),
     "Veigar_aoe" : (0, 10000, 500),
     "Veigar_cage" : (10000, 10000, 10000)
 }
@@ -56,7 +56,7 @@ enemy_projectiles = {
     "Lulu_Primary" : (0.5, 600),
 # Veigar
     "Veigar_Primary" : (1, 750),
-    "Veigar_Secondary" : (1, 500),
+    "Veigar_Secondary" : (0.75, 500),
     "Veigar_Ult" : (0, 700)
 }
 

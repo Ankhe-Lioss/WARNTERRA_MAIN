@@ -108,14 +108,10 @@ class Veigar_aoe(Skill):
 
     def activate(self):
         super().activate()
-        for _ in range(10):
-            angle = random.uniform(0, 2 * pi)  # 0–360 degrees
-            distance = random.uniform(0, 360)  # Anywhere within the circle
-            offset_x = cos(angle) * distance
-            offset_y = sin(angle) * distance
-            spawn_pos = (self.user.player.rect.center.x + offset_x, self.user.player.rect.center.y + offset_y)
 
-            aoew.Spawn_darkmatter(self.user, spawn_pos, self.user.game)
+        pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(1, 0).rotate(randrange(0, 360))
+
+        aoew.Spawn_darkmatter(pos, self.game, self.user.atk)
         self.user.state = 'Attacking'
         self.user.channeling = True
 
@@ -155,3 +151,4 @@ class Lulu_buff(Skill):
             enemy.status.add(Buff(5000, 0.3, 'atk', self.game, enemy))
             
         self.user.state='Walking'
+

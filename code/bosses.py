@@ -9,7 +9,7 @@ class Veigar(Boss):
         self.skills = {
             'primary': Veigar_primary(self, game),
             'secondary': Veigar_secondary(self, game),
-            #'aoe' : Veigar_aoe(self, game),
+            'aoe' : Veigar_aoe(self, game),
             
         }
     
@@ -21,4 +21,4 @@ class Veigar(Boss):
             'ult': Veigar_ult(self, self.game),
         }
         self.skills['secondary'].warmup = 1000
-        self.skills['secondary'].cooldown = 1000
+        self.skills['secondary'].cooldown = 2000

@@ -4,7 +4,7 @@ Spawn_aoe_dict={  #aoe skill=[frame_number,life_time]d
     'Spawn_darkmatter':(3,1000)
 }
 class Spawn_aoe(pygame.sprite.Sprite):
-    def __init__(self, pos, game,user_atk):
+    def __init__(self, pos, game, user_atk):
         super().__init__(game.all_sprites)
         #pass to aoe
         self.game=game

@@ -26,7 +26,12 @@ class spawn_animation(pygame.sprite.Sprite):
         self.load_frame()
         self.enemy_name=enemy_name
         self.animation_speed = 10
-        self.lifetime=1500
+        self.lifetime = 1500
+        
+        # Skip for check in
+        if enemy_name == 'Check_in':
+            self.lifetime = 0
+            
         self.image = self.frames[0]
         self.rect = self.image.get_frect(topleft=pos)
         self.image_rect = self.image.get_rect(topleft=pos)

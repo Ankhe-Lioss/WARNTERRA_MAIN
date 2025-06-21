@@ -3,6 +3,7 @@ from setting import *
 class Skill:
     def __init__(self, user, game):
         # Weapon related
+        self.name = self.__class__.__name__
         self.user = user
         self.game = game
         
@@ -27,7 +28,7 @@ class Skill:
             self.activate()
         else:
             self.warning()
-    
+
     def activate(self):
         self.play_sound()
         self.ready = False
@@ -45,7 +46,6 @@ class Skill:
                 self.deactivate()
             else:
                 self.ready = True
-        
 
     def warning(self):
         pass

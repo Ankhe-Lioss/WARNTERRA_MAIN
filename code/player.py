@@ -1,17 +1,26 @@
 from setting import *
 from entity import Entity
+from player_skills import PlayerSkills
 
 class Player(Entity):
     def __init__(self, pos, game):
         self.name = "Player"
-        
-        # Initializing
+        self.weapon_type = "gauntlet"  # <- make sure this is first
+
         super().__init__(game.player_sprites, game)
         self.game = game
-        
-        # Loading stats
         self.pos = pos
+
+        # Skill setup
+        skills_obj = PlayerSkills(self, game)
+        self.skills_gauntlet = skills_obj.skills_gauntlet
+        self.skills_bow = skills_obj.skills_bow
+        self.skills = self.skills_gauntlet if self.weapon_type == "gauntlet" else self.skills_bow
+
         
+        # Attach current skill set based on weapon
+        self.skills = self.skills_gauntlet if self.weapon_type == "gauntlet" else self.skills_bow
+
         # States
         self.facing = ("up", "up_right", "right", "down_right", "down", "down_left", "left", "up_left")
         self.facing_state = "right"
@@ -102,6 +111,9 @@ class Player(Entity):
         #move with entity
         super().update(dt) # move
         #animation update
+        for skill in self.skills.values():
+            skill.update(dt)
+
         self.update_animation(dt)
         self.collide_with_enemies(dt)
     

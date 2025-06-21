@@ -126,3 +126,21 @@ class Bow_e_skill(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
+class PlayerSkills:
+    def __init__(self, user, game):
+        self.user = user
+        self.game = game
+        self.skills_gauntlet = {
+            "Left": Gauntlet_primary(user, game),
+            "Right": Gauntlet_secondary(user, game),
+            "Q": Gauntlet_q_skill(user, game),
+            "E": Gauntlet_e_skill(user, game)            
+        }
+        
+        # Bow Skills
+        self.skills_bow = {
+        "Left": Bow_primary(user, game),
+        "Right": Bow_secondary(user, game),
+        "Q": Bow_q_skill(user, game),
+        "E": Bow_e_skill(user, game),
+        }

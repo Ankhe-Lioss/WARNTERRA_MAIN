@@ -6,6 +6,7 @@ from setlevel import *
 from cursor import *
 from button import *
 from background import *
+from UI import UI
 
 # THIS FKING MAIN GAME SIHFHFHFHFHFHFHFHF
 class Game:
@@ -33,15 +34,13 @@ class Game:
         self.menu_state = 'main'
         self.pausing = True
         self.background = Background()
-    def restart(self):  # Groups
+    def restart(self):
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()
         self.enemy_sprites = pygame.sprite.Group()
         self.player_projectiles = pygame.sprite.Group()
         self.enemy_projectiles = pygame.sprite.Group()
         self.collision_sprites = pygame.sprite.Group()
-
-        # Stat for levels
 
         self.spawn_numb = 0
         self.checked_in = True
@@ -50,7 +49,10 @@ class Game:
         self.screen_toggle = 0
         self.level = 3
         self.state = 'in_level'
-        setlevel(self)
+
+        setlevel(self)  
+
+        self.ui = UI(self, self.player, self.display_surface)
     def run(self):
         self.restart()
         while self.running:
@@ -70,8 +72,8 @@ class Game:
                     if event.key == pygame.K_F1:
                         self.player.death()
                     if event.key == pygame.K_F2:
-                        self.player.atk=1000
-                        self.player.hp=10000
+                        self.player.atk=10000000
+                        self.player.hp=1000000
                 if event.type == pygame.JOYBUTTONDOWN:
                     if event.button == 7:
                         self.pausing = not self.pausing
@@ -87,11 +89,17 @@ class Game:
                 self.all_sprites.update(dt)
 
             self.draw_menu(dt)
+            
             # CURSOR
             check_cursor(self)
-
+            
             # UPDATE (LAST)
+            # UPDATE (LAST)
+            if self.game_state == 'in_game':
+                self.ui.update(dt)
+
             pygame.display.update()
+            
         # Cútd
         pygame.quit()
 

@@ -60,6 +60,11 @@ class Gauntlet(Weap):
         self.e_skill = Gauntlet_e_skill(self.player, self.game)
         self.secondary = Gauntlet_secondary(self.player, self.game)
 
+        self.player.skills["Left"] = self.primary
+        self.player.skills["Right"] = self.secondary
+        self.player.skills["Q"] = self.q_skill
+        self.player.skills["E"] = self.e_skill
+
 class Bow(Weap):
     def __init__(self, game):
         self.name = self.__class__.__name__
@@ -70,3 +75,8 @@ class Bow(Weap):
         self.q_skill = Bow_q_skill(self.player, self.game)
         self.e_skill = Bow_e_skill(self.player, self.game)
         self.secondary = Bow_secondary(self.player, self.game)
+
+        self.player.skills["Left"] = self.primary
+        self.player.skills["Right"] = self.secondary
+        self.player.skills["Q"] = self.q_skill
+        self.player.skills["E"] = self.e_skill

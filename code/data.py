@@ -35,7 +35,7 @@ skill_stats = {
     
     "Veigar_ult" : (29500, 0, 500),
     "Veigar_aoe" : (0, 0, 500),
-    "Veigar_cage" : (10000, 0, 6000)
+    "Veigar_cage" : (10000, 0, 5000)
 }
 
 player_projectiles = {

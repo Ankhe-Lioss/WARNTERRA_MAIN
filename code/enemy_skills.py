@@ -109,11 +109,12 @@ class Veigar_aoe(Skill):
 
     def activate(self):
         super().activate()
-        for _ in range(2):
-            pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(80, 160), 0).rotate(randrange(0, 360))
+        if self.user.phase == 1:
+            for _ in range(2):
+                pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(120, 320), 0).rotate(randrange(0, 360))
 
             aoew.Spawn_darkmatter(pos, self.game, self.user.atk)
-        pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(1, 0).rotate(randrange(0, 360))
+        pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(1, 0).rotate(randrange(0, 360)) * random.randint(80, 200)
 
         aoew.Spawn_darkmatter(pos, self.game, self.user.atk)
         self.user.state = 'Attacking'
@@ -156,3 +157,20 @@ class Lulu_buff(Skill):
             
         self.user.state='Walking'
 
+class Veigar_cage(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+
+    def activate(self):
+        super().activate()
+        # Example: ring around player with outer radius 120, inner radius 80
+        self.cage = eproj.Veigar_Cage(self.user.player.rect.center, outer_radius=300, inner_radius=280, game=self.user.game)
+        self.user.state = 'Attacking'
+        self.user.channeling = True
+
+    def deactivate(self):
+        super().deactivate()
+        self.user.state = 'Walking'
+        self.user.channeling = False
+        self.cage.kill()

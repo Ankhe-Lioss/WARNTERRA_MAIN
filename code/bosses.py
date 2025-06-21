@@ -18,7 +18,6 @@ class Veigar(Boss):
         super().change_phase()
         self.skills = {
             'secondary' : Veigar_secondary(self, self.game),
-            #'cage' : Veigar_cage(self, game)
             'ult': Veigar_ult(self, self.game),
         }
         self.skills['secondary'].warmup = 1000
@@ -40,6 +39,7 @@ class Veigar(Boss):
             else:
                 del self.skills['secondary']
                 self.skills['aoe'] = Veigar_aoe(self, self.game)
+                self.skills['cage'] = Veigar_cage(self, self.game)
                 
                 self.phase_remaining = 6000
                 

@@ -66,7 +66,11 @@ class Game:
                     if event.key == pygame.K_F11 and self.screen_toggle - pygame.time.get_ticks() < -5000:
                         pygame.display.toggle_fullscreen()
                         self.screen_toggle = pygame.time.get_ticks()
-
+                    if event.key == pygame.K_F1:
+                        self.player.death()
+                    if event.key == pygame.K_F2:
+                        self.player.atk=10000000
+                        self.player.hp=1000000
             # FILL
             self.display_surface.fill('gray36')
 
@@ -93,6 +97,8 @@ class Game:
         if self.game_state == 'in_start_menu':
             self.background.draw(dt,self.display_surface)
             self.start_menu()
+        if self.game_state == 'in_death_menu':
+            self.death_menu()
     def start_menu(self):
         if self.menu_state == 'main':
             if game.start_button.draw(self.display_surface):
@@ -128,8 +134,22 @@ class Game:
             if self.restart_button.draw(self.display_surface):
                 self.restart()
                 self.pausing = False
-
-
+            if self.startmenu_button.draw(self.display_surface):
+                self.game_state = "in_start_menu"
+    def death_menu(self):
+        overlay = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
+        overlay.set_alpha(180)
+        overlay.fill((0, 0,0))
+        self.display_surface.blit(overlay, (0, 0))
+        self.display_surface.blit(self.deathmenu_img, (183, 120))
+        if self.death_to_quit_button.draw(self.display_surface):
+            self.running = False
+        if self.death_to_start_button.draw(self.display_surface):
+            self.game_state = "in_start_menu"
+        if self.death_to_restart_button.draw(self.display_surface):
+                self.restart()
+                self.game_state = "in_game"
+                self.pausing = False
 if __name__ == "__main__":
     game = Game()
     game.run()

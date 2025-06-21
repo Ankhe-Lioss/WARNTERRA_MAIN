@@ -112,7 +112,7 @@ class Player(Entity):
         self.taking_dmg = True
     
     def death(self):
-        self.game.game_state = "in_start_menu"
+        self.game.game_state = "in_death_menu"
         self.game.pausing=True
 
     def collide_with_enemies(self, dt):

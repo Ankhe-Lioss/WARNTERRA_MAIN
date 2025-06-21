@@ -24,7 +24,15 @@ class Game:
         self.clock = pygame.time.Clock()
         # States
         self.running = True
-        # Groups
+
+        # game load asset
+        load_menu(self)
+
+        self.game_state = 'in_start_menu'
+        self.menu_state = 'main'
+        self.pausing = True
+        self.background = Background()
+    def restart(self):  # Groups
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()
         self.enemy_sprites = pygame.sprite.Group()
@@ -42,15 +50,8 @@ class Game:
         self.level = 3
         self.state = 'in_level'
         setlevel(self)
-        # game load asset
-        load_menu(self)
-
-        self.game_state = 'in_start_menu'
-        self.menu_state = 'main'
-        self.pausing = True
-        self.background = Background()
-
     def run(self):
+        self.restart()
         while self.running:
             # Data time
             dt = self.clock.tick(FPS) / 1000
@@ -88,42 +89,45 @@ class Game:
 
     def draw_menu(self,dt):
         if self.pausing and self.game_state == 'in_game':
-            # Optional dark overlay
-            overlay = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
-            overlay.set_alpha(180)
-            overlay.fill((255, 255, 255))
-            self.display_surface.blit(overlay, (0, 0))
-
-            if self.menu_state == "main":
-                if self.resume_button.draw(self.display_surface):
-                    self.pausing = False
-                if self.options_button.draw(self.display_surface):
-                    self.menu_state = "options"
-                if self.quit_button.draw(self.display_surface):
-                    self.running = False
-
-            elif self.menu_state == "options":
-                if self.video_button.draw(self.display_surface):
-                    print("Video Settings")
-                if self.audio_button.draw(self.display_surface):
-                    print("Audio Settings")
-                if self.keys_button.draw(self.display_surface):
-                    print("Change Key Bindings")
-                if self.back_button.draw(self.display_surface):
-                    self.menu_state = "main"
+            self.pause_menu()
         if self.game_state == 'in_start_menu':
             self.background.draw(dt,self.display_surface)
+            self.start_menu()
+    def start_menu(self):
+        if self.menu_state == 'main':
             if game.start_button.draw(self.display_surface):
-                self.__init__()
+                self.restart()
                 self.game_state = "in_game"
                 self.pausing = False
             if game.quit_start_button.draw(self.display_surface):
                 self.running = False
+            if self.options_button.draw(self.display_surface):
+                self.menu_state = "options"
+        if self.menu_state == "options":
+            if self.video_button.draw(self.display_surface):
+                print("Video Settings")
+            if self.audio_button.draw(self.display_surface):
+                print("Audio Settings")
+            if self.keys_button.draw(self.display_surface):
+                print("Change Key Bindings")
+            if self.back_button.draw(self.display_surface):
+                self.menu_state = "main"
+    def pause_menu(self):
+        # Optional dark overlay
+        overlay = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
+        overlay.set_alpha(180)
+        overlay.fill((255, 255, 255))
+        self.display_surface.blit(overlay, (0, 0))
 
+        if self.menu_state == "main":
+            if self.resume_button.draw(self.display_surface):
+                self.pausing = False
 
-    def draw_text(text, font, text_col, x, y):
-        img = font.render(text, True, text_col)
-        self.display_surface.blit(img, (x, y))
+            if self.quit_button.draw(self.display_surface):
+                self.running = False
+            if self.restart_button.draw(self.display_surface):
+                self.restart()
+                self.pausing = False
 
 
 if __name__ == "__main__":

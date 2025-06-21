@@ -101,7 +101,7 @@ class Veigar_ult(Skill):
     def deactivate(self):
         super().deactivate()
         self.user.state='Walking'
-        
+      
 class Veigar_aoe(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__

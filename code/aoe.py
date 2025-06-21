@@ -70,6 +70,7 @@ class Chogath_Rupture(Area_of_effect):
 
     def apply(self, target):
         target.status.add(Stunned(1000, self.game, target))
+        
 class Veigar_Darkmatter(Area_of_effect):
     def __init__(self, pos,game,user_atk):
         self.enemy_sprites=game.player_sprites

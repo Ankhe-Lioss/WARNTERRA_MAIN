@@ -1,6 +1,6 @@
 entity_stats = {
 #   "enemy_name" : (hp, atk, def, spd, hp_multiplier, atk_multiplier, def_multiplier, atk_range, keep_range)
-    "Player" : (500 , 100, 15, 400, 50 , 25  , 2.5, 0   , 0  ),
+    "Player" : (500 , 125, 15, 400, 75 , 25  , 2.5, 0   , 0  ),
     "Poro"   : (250 , 50 , 10, 450, 75 , 25  , 3  , 20  , 10 ),
     "Meele"  : (500 , 45 , 10, 300, 65 , 30  , 1.5, 50  , 10 ),
     "Karthus": (250 , 75 , 10, 200, 25 , 75  , 1  , 650 , 400),
@@ -30,12 +30,12 @@ skill_stats = {
     "Lulu_primary" : (4000, 1000, 1000),
     "Lulu_buff" : (9000, 3000, 1000),
 # Veigar
-    "Veigar_primary" : (1800, 1000, 200),
-    "Veigar_secondary" : (3800, 4000, 200),
+    "Veigar_primary" : (1800, 0, 200),
+    "Veigar_secondary" : (3800, 3000, 200),
     
     "Veigar_ult" : (29500, 0, 500),
-    "Veigar_aoe" : (0, 10000, 500),
-    "Veigar_cage" : (10000, 10000, 10000)
+    "Veigar_aoe" : (0, 0, 500),
+    "Veigar_cage" : (10000, 0, 6000)
 }
 
 player_projectiles = {

@@ -1,7 +1,7 @@
 from aoe import *
 Spawn_aoe_dict={  #aoe skill=[frame_number,life_time]d
-    'Spawn_rupture':(3,500),
-    'Spawn_darkmatter':(3,1000)
+    'Spawn_rupture':(3, 500),
+    'Spawn_darkmatter':(3, 1000)
 }
 class Spawn_aoe(pygame.sprite.Sprite):
     def __init__(self, pos, game, user_atk):
@@ -36,6 +36,7 @@ class Spawn_aoe(pygame.sprite.Sprite):
             self.kill()
             self.spawn()
         self.animate(dt)
+        
 class Spawn_rupture(Spawn_aoe):
     def __init__(self, pos, game, user_atk):
         self.name='Spawn_rupture'

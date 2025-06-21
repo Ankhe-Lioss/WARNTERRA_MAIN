@@ -27,6 +27,7 @@ class Game:
 
         # game load asset
         load_menu(self)
+        check_cursor(self)
 
         self.game_state = 'in_start_menu'
         self.menu_state = 'main'
@@ -71,6 +72,9 @@ class Game:
                     if event.key == pygame.K_F2:
                         self.player.atk=10000000
                         self.player.hp=1000000
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 7:
+                        self.pausing = not self.pausing
             # FILL
             self.display_surface.fill('gray36')
 
@@ -84,7 +88,7 @@ class Game:
 
             self.draw_menu(dt)
             # CURSOR
-            cursor(game)
+            check_cursor(self)
 
             # UPDATE (LAST)
             pygame.display.update()
@@ -99,13 +103,27 @@ class Game:
             self.start_menu()
         if self.game_state == 'in_death_menu':
             self.death_menu()
+        if self.pausing or not(self.game_state == 'in_game'):
+            if self.have_joystick:
+                # A button (Restart)
+                if self.joystick.get_button(0):
+                    self.restart()
+                    self.pausing = False
+                    self.game_state = 'in_game'
+                # X button (Quit)
+                if self.joystick.get_button(2):
+                    self.running = False
+
+                # B button (Back to Start Menu)
+                if self.joystick.get_button(1):
+                    self.game_state = "in_start_menu"
     def start_menu(self):
         if self.menu_state == 'main':
-            if game.start_button.draw(self.display_surface):
+            if self.start_button.draw(self.display_surface):
                 self.restart()
                 self.game_state = "in_game"
                 self.pausing = False
-            if game.quit_start_button.draw(self.display_surface):
+            if self.quit_start_button.draw(self.display_surface):
                 self.running = False
             if self.options_button.draw(self.display_surface):
                 self.menu_state = "options"
@@ -118,6 +136,7 @@ class Game:
                 print("Change Key Bindings")
             if self.back_button.draw(self.display_surface):
                 self.menu_state = "main"
+
     def pause_menu(self):
         # Optional dark overlay
         overlay = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -125,17 +144,18 @@ class Game:
         overlay.fill((255, 255, 255))
         self.display_surface.blit(overlay, (0, 0))
 
-        if self.menu_state == "main":
-            if self.resume_button.draw(self.display_surface):
-                self.pausing = False
 
-            if self.quit_button.draw(self.display_surface):
-                self.running = False
-            if self.restart_button.draw(self.display_surface):
-                self.restart()
-                self.pausing = False
-            if self.startmenu_button.draw(self.display_surface):
-                self.game_state = "in_start_menu"
+        if self.resume_button.draw(self.display_surface):
+            self.pausing = False
+
+        if self.quit_button.draw(self.display_surface):
+            self.running = False
+        if self.restart_button.draw(self.display_surface):
+            self.restart()
+            self.pausing = False
+        if self.startmenu_button.draw(self.display_surface):
+            self.game_state = "in_start_menu"
+
     def death_menu(self):
         overlay = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
         overlay.set_alpha(180)

@@ -132,7 +132,8 @@ class Buff(Status):
             owner.def_ *= 1 + ratio
         elif type == 'spd':
             owner.spd *= 1 + ratio
-    def update(self, dt):
+    def update_position(self):
+
         self.image_rect.center=self.owner.image_rect.midbottom+self.offset
     def unapply(self):
         if self.type == 'atk':

@@ -54,7 +54,7 @@ class Veigar_Cage(pygame.sprite.Sprite):
     def __init__(self, center, outer_radius, inner_radius, game):
         super().__init__(game.all_sprites)
         self.game = game
-        self.lifetime
+        self.lifetime = 5000
         self.center = center
         self.inner_radius = inner_radius
         self.outer_radius = outer_radius

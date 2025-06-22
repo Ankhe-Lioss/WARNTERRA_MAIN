@@ -82,5 +82,7 @@ class Nocturne(Enemy):
         self.asymmetry=True
         self.attack_time=1000
         self.skills = {
-            
+            'sprint' : Nocturne_sprint(self, self.game)
         }
+        self.attacked = False
+        self.cross_wall = True

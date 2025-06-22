@@ -28,9 +28,9 @@ def load_menu(game):
 	game.back_button = Button(332, 450, game.back_img, 1)
 
 	#start menu
-	game.start_button = Button(540, 260, game.start_img, 1)
-	game.quit_start_button = Button(540, 360, game.quit_img, 1)
-	game.options_button = Button(540, 460, game.options_img, 1)
+	game.start_button = Button(565, 260, game.start_img, 1)
+	game.quit_start_button = Button(540, 460, game.quit_img, 1)
+	game.options_button = Button(540, 360, game.options_img, 1)
 
 	#death menu
 	game.death_to_quit_button = Button(400, 420, game.death_to_quit_img, 1)

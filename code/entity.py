@@ -32,6 +32,7 @@ class Entity(pygame.sprite.Sprite):
         self.silenced = False
         self.ghost = False
         self.rooted = False
+        self.cross_wall = False
         
         # Status
         self.status = set()
@@ -91,9 +92,13 @@ class Entity(pygame.sprite.Sprite):
             return
         
         self.rect.x += self.direction.x * self.spd * dt
-        self.collision('horizontal', self.direction)
+        if not self.cross_wall:
+            self.collision('horizontal', self.direction)
+        
         self.rect.y += self.direction.y * self.spd * dt
-        self.collision('vertical', self.direction)
+        if not self.cross_wall:
+            self.collision('vertical', self.direction)
+        
         self.image_rect.center = self.rect.center
     
     def forced_move(self, dir, dt):
@@ -101,10 +106,16 @@ class Entity(pygame.sprite.Sprite):
             return
         
         forced_spd = self.mode["spd"]
+        
+        
         self.rect.x += dir.x * forced_spd * dt
-        self.collision('horizontal', dir)
+        if not self.cross_wall:
+            self.collision('horizontal', dir)
+            
         self.rect.y += dir.y * forced_spd * dt
-        self.collision('vertical', dir)
+        if not self.cross_wall:
+            self.collision('vertical', dir)
+            
         self.image_rect.center = self.rect.center
     
     def update(self, dt):
@@ -194,6 +205,10 @@ class Enemy(Entity):
     def move_enemy(self,dt):
         # update the rect position + collision
         
+        if self.forced_moving:
+            self.forced_move(self.mode['dir'], dt)
+            return
+        
         if self.channeling or self.stunned or self.forced_moving or self.rooted:
             return
         
@@ -202,11 +217,14 @@ class Enemy(Entity):
             return
         
         self.rect.x += self.direction.x * self.spd * dt
-        self.collision('horizontal', self.direction)
-        self.enemy_collision('horizontal',dt)
+        if not self.cross_wall:
+            self.collision('horizontal', self.direction)
+            self.enemy_collision('horizontal',dt)
         self.rect.y += self.direction.y * self.spd * dt
-        self.collision('vertical', self.direction)
-        self.enemy_collision('vertical',dt)
+        
+        if not self.cross_wall:
+            self.collision('vertical', self.direction)
+            self.enemy_collision('vertical',dt)
         self.image_rect.center = self.rect.center
         
     def enemy_collision(self,direction,dt):

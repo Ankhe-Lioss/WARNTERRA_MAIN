@@ -132,6 +132,11 @@ class Player(Entity):
                 dir = (pygame.Vector2(self.rect.center) - pygame.Vector2(enemy.rect.center))
                 self.mode = {"spd" : 800, "dir" : dir.normalize() if dir else dir, "type" : "knockback"}
                 self.knockback_remaining = 0.1
+                
+                if enemy.name == 'Nocturne' and enemy.state == 'Attacking' and not enemy.attacked:
+                    enemy.attacked = True
+                    self.take_damage(enemy.atk)
+            
         
         if self.forced_moving:
             if self.mode["type"] != "knockback":

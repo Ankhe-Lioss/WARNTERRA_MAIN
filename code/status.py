@@ -5,24 +5,38 @@ class Status(pygame.sprite.Sprite):
         self.remaining = duration
         self.game = game
         super().__init__(game.all_sprites)
-        
-        self.image = pygame.surface.Surface(size=(0, 0))
-        self.image_rect = pygame.rect.FRect()
+        self.frame_index = 0
+        self.frames=[]
+        self.load_images()
+        self.image =self.frames[self.frame_index]
+        self.image_rect = self.image.get_rect(center=self.owner.rect.center)
+    def load_images(self):
+        for i in range(5):
+            surf=pygame.image.load(os.path.join('images','status',f'{self.name}',f'{i}.png'))
+            self.frames.append(surf)
 
     def unapply(self):
         pass
 
+    def update_animation(self,dt):
+        self.frame_index +=6*dt
+        self.image = self.frames[int(self.frame_index) % len(self.frames)]
+    def update_position(self):
+        self.image_rect.center = self.owner.image_rect.center + self.offset
     def update(self, dt):
+        self.update_animation(dt)
+        self.update_position()
         self.remaining -= dt * 1000
         if self.remaining <= 0:
             self.unapply()
-            self.kill()       
+            self.kill()
 
 class Stunned(Status):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__
-        super().__init__(duration, game)
         self.owner = owner
+        self.offset=pygame.Vector2(0, 0)
+        super().__init__(duration, game)
         self.owner.stunned = True
 
     def unapply(self):
@@ -35,8 +49,9 @@ class Stunned(Status):
 class Poisoned(Status):
     def __init__(self, duration, dps, game, owner):
         self.name = self.__class__.__name__
-        super().__init__(duration, game)
         self.owner = owner
+        self.offset=pygame.Vector2(0, 0)
+        super().__init__(duration, game)
         self.dps = dps
         self.ticks = int(self.remaining) // 250
     
@@ -51,8 +66,9 @@ class Poisoned(Status):
 class Slowed(Status):
     def __init__(self, duration, ratio, game, owner):
         self.name = self.__class__.__name__
-        super().__init__(duration, game)
+        self.offset=pygame.Vector2(0, 0)
         self.owner = owner
+        super().__init__(duration, game)
         self.ratio = ratio
         self.owner.spd *= (1 - self.ratio)
 
@@ -62,8 +78,9 @@ class Slowed(Status):
 class Silenced(Status):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__
-        super().__init__(duration, game)
         self.owner = owner
+        self.offset=pygame.Vector2(0, 0)
+        super().__init__(duration, game)
         self.owner.silenced = True
 
     def unapply(self):
@@ -72,8 +89,9 @@ class Silenced(Status):
 class Healing(Status):
     def __init__(self, duration, hps, game, owner):
         self.name = self.__class__.__name__
-        super().__init__(duration, game)
         self.owner = owner
+        self.offset=pygame.Vector2(0, 0)
+        super().__init__(duration, game)
         self.hps = hps
         self.ticks = int(self.remaining) // 250
     
@@ -88,8 +106,9 @@ class Healing(Status):
 class Rooted(Status):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__
-        super().__init__(duration, game)
         self.owner = owner
+        self.offset=pygame.Vector2(0, 0)
+        super().__init__(duration, game)
         self.owner.rooted = True
 
     def unapply(self):
@@ -102,8 +121,9 @@ class Rooted(Status):
 class Buff(Status):
     def __init__(self, duration, ratio, type, game, owner):
         self.name = self.__class__.__name__
-        super().__init__(duration, game)
         self.owner = owner
+        self.offset=pygame.Vector2(0,-15)
+        super().__init__(duration, game)
         self.ratio = ratio
         self.type = type
         if type == 'atk':
@@ -112,7 +132,9 @@ class Buff(Status):
             owner.def_ *= 1 + ratio
         elif type == 'spd':
             owner.spd *= 1 + ratio
+    def update_position(self):
 
+        self.image_rect.center=self.owner.image_rect.midbottom+self.offset
     def unapply(self):
         if self.type == 'atk':
             self.owner.atk /= 1 + self.ratio

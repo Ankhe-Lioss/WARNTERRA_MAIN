@@ -3,61 +3,64 @@ from sprites import *
 from player import *
 from weapon import *
 from spawn import *
+from UI import UI  # Make sure UI is imported
 
 def setlevel(game):
     print("Setting Level", game.level)
     game.room = -1
-    
-    game.map = load_pygame(os.path.join( 'data', 'maps', f'Level{game.level}.tmx'))
-    game.spawnlist={
-        #1=list[value=(obj.name,x,y)
-    }
+
+    # Load TMX map
+    game.map = load_pygame(os.path.join('data', 'maps', f'Level{game.level}.tmx'))
+
+    # Initialize structures
+    game.spawnlist = {}
     game.checkins = {}
     game.doorlist = []
     game.doors = set()
+
     # Ground and Walls
     for x, y, image in game.map.get_layer_by_name('Ground').tiles():
         Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'ground')
-        
+
     for x, y, image in game.map.get_layer_by_name('Floor').tiles():
         Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'floor')
-    
+
     for x, y, image in game.map.get_layer_by_name('Wall').tiles():
         Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'wall')
-    
+
     # Collision Sprites
     for obj in game.map.get_layer_by_name('Objects'):
         CollisionSprite((obj.x, obj.y), obj.image, (game.all_sprites, game.collision_sprites))
 
     for obj in game.map.get_layer_by_name('Collisions'):
         CollisionSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), game.collision_sprites)
-        
+
     for obj in game.map.get_layer_by_name('Door'):
         game.doorlist.append(((obj.x, obj.y), obj.image))
-        
+
     for obj in game.map.get_layer_by_name('Entities'):
         if obj.name == 'Player':
+            # Create new player
             game.player = Player((obj.x, obj.y), game)
-            
-            # Temporary weapon
-            game.player.weap = Gauntlet(game)
+            game.player.weap = Bow(game)
+
+            # Reinitialize the UI with the new player
+            game.ui = UI(game, game.player, game.display_surface)
+
         else:
             print("adding", obj)
             if 'room' in obj.properties:
                 if obj.name == "Check_in":
                     game.checkins[obj.properties['room']] = (obj.x, obj.y)
                 else:
-                    if not obj.properties['room'] in game.spawnlist:
-                        game.spawnlist[obj.properties['room']] = {}
-                        
-                    if not obj.properties['wave'] in game.spawnlist[obj.properties['room']]:
-                            
-                        #print(obj.properties['room'], obj.properties['wave'])
-                        game.spawnlist[obj.properties['room']][obj.properties['wave']] = []
-                    game.spawnlist[obj.properties['room']][obj.properties['wave']].append((obj.name, obj.x, obj.y))
+                    room = obj.properties['room']
+                    wave = obj.properties['wave']
+                    game.spawnlist.setdefault(room, {})
+                    game.spawnlist[room].setdefault(wave, [])
+                    game.spawnlist[room][wave].append((obj.name, obj.x, obj.y))
+
     game.room_numb = len(game.checkins) - 1
-    print(game.room_numb)
-    
+
 def endlevel(game):
     for group in [game.all_sprites, game.player_sprites, game.enemy_sprites, game.player_projectiles, game.enemy_projectiles, game.collision_sprites]:
         for sprite in group:

@@ -1,6 +1,8 @@
 import pygame
+import os
 from setting import *
 from data import skill_stats, entity_stats
+from entity import Boss
 
 class UI:
     def __init__(self, user, player, display_surface):
@@ -9,20 +11,18 @@ class UI:
         self.display_surface = display_surface
 
         # Fonts
-# Fonts
         self.font = pygame.font.SysFont("Segoe UI", 20, bold=True)
         self.level_font = pygame.font.SysFont("Segoe UI", 28, bold=True)
         self.cooldown_font = pygame.font.SysFont("Segoe UI", 18, bold=True)
 
-        # Health bar (moved to the right)
-        self.health_rect = pygame.Rect(60, 20, 200, 24)
+        # Health bar position (bottom left side)
+        self.health_rect = pygame.Rect(60, WINDOW_HEIGHT - 70, 200, 24)
 
-        # Skill boxes
+        # Boss HP bar (top center)
+        self.boss_health_rect = pygame.Rect((WINDOW_WIDTH - 500) // 2, 50, 500, 26)
+
+        # Skill UI
         self.skill_size = (48, 48)
-        self.skill_positions = {
-            "Q": pygame.Rect(WINDOW_WIDTH - 140, WINDOW_HEIGHT - 80, *self.skill_size),
-            "E": pygame.Rect(WINDOW_WIDTH - 70,  WINDOW_HEIGHT - 80, *self.skill_size),
-        }
         self.skill_icons = {
             "Left": pygame.image.load(os.path.join('images', 'projectiles','Gauntlet', 'Primary', '0.png')),
             "Right": pygame.image.load(os.path.join('images', 'projectiles','Gauntlet', 'Secondary', '0.png')),
@@ -30,105 +30,137 @@ class UI:
             "E": pygame.image.load(os.path.join('images', 'projectiles','Gauntlet', 'SkillE', '0.png')),
         }
 
-        # Health values
-        self.max_hp = self.player.maxhp
+        # HP smoothing
         self.display_hp = self.player.hp
         self.hp_delay_speed = 100
 
+        self.boss_display_hp = 0
+        self.boss_hp_delay_speed = 120
+        self.current_boss = None
 
-    def draw_health_bar(self, dt):
-        pygame.draw.rect(self.display_surface, (255, 255, 255), self.health_rect, width=2, border_radius=8)
-        inner_rect = self.health_rect.inflate(-4, -4)
-        pygame.draw.rect(self.display_surface, (30, 30, 30), inner_rect, border_radius=6)
+        #track player level
+        self.last_level = self.player.level
 
-        current_hp = max(0, min(self.player.hp, self.max_hp))
+    def draw_entity_health_bar(self, entity, rect, dt, display_hp_ref, delay_speed, color_fg, color_bg, label=None):
+        pygame.draw.rect(self.display_surface, (255, 255, 255), rect, width=2, border_radius=6)
+        inner_rect = rect.inflate(-4, -4)
+        pygame.draw.rect(self.display_surface, (30, 30, 30), inner_rect, border_radius=4)
 
-        # Smooth transition of delayed HP bar
-        if self.display_hp > current_hp:
-            self.display_hp -= self.hp_delay_speed * dt
-            if self.display_hp < current_hp:
-                self.display_hp = current_hp
-        elif self.display_hp < current_hp:
-            self.display_hp = current_hp
+        current_hp = max(0, min(entity.hp, entity.maxhp))
 
-        green_width = int(inner_rect.width * (current_hp / self.max_hp))
-        red_width = int(inner_rect.width * (self.display_hp / self.max_hp))
+        if display_hp_ref[0] > current_hp:
+            display_hp_ref[0] -= delay_speed * dt
+            if display_hp_ref[0] < current_hp:
+                display_hp_ref[0] = current_hp
+        elif display_hp_ref[0] < current_hp:
+            display_hp_ref[0] = current_hp
+
+        green_width = int(inner_rect.width * (current_hp / entity.maxhp))
+        red_width = int(inner_rect.width * (display_hp_ref[0] / entity.maxhp))
 
         red_rect = pygame.Rect(inner_rect.left, inner_rect.top, red_width, inner_rect.height)
         green_rect = pygame.Rect(inner_rect.left, inner_rect.top, green_width, inner_rect.height)
 
-        pygame.draw.rect(self.display_surface, (200, 50, 50), red_rect, border_radius=6)
-        pygame.draw.rect(self.display_surface, (50, 200, 50), green_rect, border_radius=6)
+        pygame.draw.rect(self.display_surface, color_bg, red_rect, border_radius=4)
+        pygame.draw.rect(self.display_surface, color_fg, green_rect, border_radius=4)
 
-        text = self.font.render(f"{int(current_hp)}/{self.max_hp}", True, (255, 255, 255))
-        text_rect = text.get_rect(center=self.health_rect.center)
+        if label:
+            label_surf = self.font.render(label, True, (255, 255, 255))
+            label_rect = label_surf.get_rect(midbottom=(rect.centerx, rect.top - 5))
+            self.display_surface.blit(label_surf, label_rect)
+
+ # Determine font color (black for boss HP, white otherwise)
+        if isinstance(entity, Boss):
+            text_color = (0, 0, 0)  # black for boss bar
+        else:
+            text_color = (255, 255, 255)
+
+        text = self.font.render(f"{int(current_hp)}/{int(entity.maxhp)}", True, text_color)
+        text_rect = text.get_rect(center=rect.center)
         self.display_surface.blit(text, text_rect)
 
+    def draw_health_bar(self, dt):
+        self.draw_entity_health_bar(
+            entity=self.player,
+            rect=self.health_rect,
+            dt=dt,
+            display_hp_ref=[self.display_hp],
+            delay_speed=self.hp_delay_speed,
+            color_fg=(50, 200, 50),
+            color_bg=(200, 50, 50),
+            label="PLAYER"
+        )
 
+    def draw_boss_bar(self, dt):
+        boss = next((sprite for sprite in self.user.enemy_sprites if isinstance(sprite, Boss)), None)
+        if boss is None or not boss.alive():
+            self.current_boss = None
+            return
 
+        if self.current_boss != boss:
+            self.current_boss = boss
+            self.boss_display_hp = boss.hp
+
+                # Choose background color based on phase
+        if hasattr(boss, 'phase') and boss.phase >= 2:
+            bg_color = (255, 255, 255)  # White for phase 2+
+        else:
+            bg_color = (200, 50, 50)    # Default dark red
+
+        self.draw_entity_health_bar(
+            entity=boss,
+            rect=self.boss_health_rect,
+            dt=dt,
+            display_hp_ref=[self.boss_display_hp],
+            delay_speed=self.boss_hp_delay_speed,
+            color_fg=(255, 100, 100),  # Foreground always red
+            color_bg=bg_color,
+            label=boss.name.upper() + (f" - PHASE {boss.phase}" if hasattr(boss, 'phase') else "")
+        )
+
+    
     def draw_level_circle(self):
-        # Render text
         text = self.level_font.render(f"{self.player.level}", True, (255, 255, 255))
-        text_rect = text.get_rect()
-
-        # Circle radius
         padding = 12
-        radius = max(text_rect.width, text_rect.height) // 2 + padding
+        radius = max(text.get_width(), text.get_height()) // 2 + padding
 
-        # Position to the left of health bar with slight overlap
-        overlap = 8
-        center_x = self.health_rect.left - radius + overlap
+        center_x = self.health_rect.left  # anchors to HP bar left
         center_y = self.health_rect.centery
 
-        # Draw circle background
         pygame.draw.circle(self.display_surface, (60, 60, 60), (center_x, center_y), radius)
         pygame.draw.circle(self.display_surface, (255, 255, 255), (center_x, center_y), radius, width=2)
 
-        # Blit centered text
-        text_pos = text.get_rect(center=(center_x, center_y))
-        self.display_surface.blit(text, text_pos)
-
+        text_rect = text.get_rect(center=(center_x, center_y))
+        self.display_surface.blit(text, text_rect)
 
     def draw_skill_boxes(self, dt):
         skill_keys = ['Left', 'Right', 'Q', 'E']
-
         for index, key in enumerate(skill_keys):
             if key not in self.player.skills:
                 continue
-
             skill = self.player.skills[key]
 
-            # Compute cooldown logic
-            if skill.casting:
-                cooldown_ratio = skill.remaining / skill.cast_time if skill.cast_time else 0
-                cooldown_time = int(skill.remaining / 1000) + 1
-            elif not skill.ready:
-                cooldown_ratio = skill.remaining / skill.cooldown if skill.cooldown else 0
-                cooldown_time = int(skill.remaining / 1000) + 1
+            cooldown_ratio = skill.remaining / skill.cooldown if skill.cooldown else 0
+            cooldown_time = skill.remaining / 1000
+
+            if cooldown_time > 0.9:
+                cooldown_time = int(cooldown_time) + 1
             else:
-                cooldown_ratio = 0
-                cooldown_time = 0
+                cooldown_time = int(cooldown_time * 10) / 10.0
+
 
             cooldown_ratio = max(0, min(cooldown_ratio, 1))
 
-            # Box position
-            x = 30 + index * 70
-            y = WINDOW_HEIGHT - 70
+            # Align to bottom-right
+            x = WINDOW_WIDTH - (70 * (4 - index)) - 30
+            y = WINDOW_HEIGHT - 80
             box_rect = pygame.Rect(x, y, 60, 60)
 
-            # Blinking effect during cooldown
             blink = int(pygame.time.get_ticks() / 300) % 2 == 0
-            if skill.ready:
-                bg_color = (200, 200, 200)
-            elif blink:
-                bg_color = (90, 90, 90)
-            else:
-                bg_color = (60, 60, 60)
+            bg_color = (200, 200, 200) if skill.ready else (90, 90, 90 if blink else 60)
 
-            # Draw background box
             pygame.draw.rect(self.display_surface, bg_color, box_rect, border_radius=8)
 
-            # Draw icon always, but with dark overlay if not ready
             if key in self.skill_icons:
                 icon = pygame.transform.scale(self.skill_icons[key], (48, 48))
                 self.display_surface.blit(icon, (x + 6, y + 6))
@@ -137,16 +169,14 @@ class UI:
                     overlay.fill((0, 0, 0, 120))
                     self.display_surface.blit(overlay, (x + 6, y + 6))
 
-            # Fill overlay for cooldown (bottom-up)
             if not skill.ready:
                 fill_height = int(60 * cooldown_ratio)
                 fill_rect = pygame.Rect(x, y + (60 - fill_height), 60, fill_height)
-                pygame.draw.rect(self.display_surface, (100, 100, 100), fill_rect, border_radius=8)
+                if not skill.casting:
+                    pygame.draw.rect(self.display_surface, (100, 100, 100), fill_rect, border_radius=8)
 
-            # Border
             pygame.draw.rect(self.display_surface, (255, 255, 255), box_rect, width=2, border_radius=8)
 
-            # Key label with shadow
             label_color = 'black' if skill.ready else 'white'
             label = self.font.render(key, True, label_color)
             shadow = self.font.render(key, True, 'gray20')
@@ -155,17 +185,23 @@ class UI:
             self.display_surface.blit(shadow, shadow_rect)
             self.display_surface.blit(label, label_rect)
 
-            # Cooldown text (centered)
-            if cooldown_time > 0:
-                cd_text = self.cooldown_font.render(str(cooldown_time), True, 'white')
+            if cooldown_time > 0 and not skill.casting:
                 cd_shadow = self.cooldown_font.render(str(cooldown_time), True, 'black')
+                cd_text = self.cooldown_font.render(str(cooldown_time), True, 'white')
+                    
                 cd_rect = cd_text.get_rect(center=(x + 30, y + 16))
                 cd_shadow_rect = cd_text.get_rect(center=(x + 31, y + 17))
                 self.display_surface.blit(cd_shadow, cd_shadow_rect)
                 self.display_surface.blit(cd_text, cd_rect)
 
-
     def update(self, dt):
+        # Detect level up
+        if self.player.level != self.last_level:
+            self.last_level = self.player.level
+            self.display_hp = self.player.hp  
+
         self.draw_health_bar(dt)
         self.draw_level_circle()
         self.draw_skill_boxes(dt)
+        self.draw_boss_bar(dt)
+

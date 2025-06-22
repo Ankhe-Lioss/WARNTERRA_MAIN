@@ -38,6 +38,9 @@ class UI:
         self.boss_hp_delay_speed = 120
         self.current_boss = None
 
+        #track player level
+        self.last_level = self.player.level
+
     def draw_entity_health_bar(self, entity, rect, dt, display_hp_ref, delay_speed, color_fg, color_bg, label=None):
         pygame.draw.rect(self.display_surface, (255, 255, 255), rect, width=2, border_radius=6)
         inner_rect = rect.inflate(-4, -4)
@@ -178,7 +181,13 @@ class UI:
                 self.display_surface.blit(cd_text, cd_rect)
 
     def update(self, dt):
+        # Detect level up
+        if self.player.level != self.last_level:
+            self.last_level = self.player.level
+            self.display_hp = self.player.hp  
+
         self.draw_health_bar(dt)
         self.draw_level_circle()
         self.draw_skill_boxes(dt)
         self.draw_boss_bar(dt)
+

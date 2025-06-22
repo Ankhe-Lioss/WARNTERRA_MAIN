@@ -207,10 +207,10 @@ class Nocturne_sprint(Skill):
     def activate(self):
         super().activate()
         self.user.state='Attacking'
-        self.target_pos = self.game.player.rect.center
+        self.target_pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(0, 100)).rotate(random.randrange(0, 360))
         self.user.attacked = False
-        spd = (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.user.rect.center)).length() / self.cast_time * 1000
-        dir = (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.user.rect.center)).normalize()
+        spd = (pygame.Vector2(self.target_pos) - pygame.Vector2(self.user.rect.center)).length() / self.cast_time * 1000
+        dir = (pygame.Vector2(self.target_pos) - pygame.Vector2(self.user.rect.center)).normalize()
         self.user.forced_moving = True
         self.user.mode = {
             "dir" : dir,
@@ -222,3 +222,18 @@ class Nocturne_sprint(Skill):
         self.user.state='Walking'
         self.user.forced_moving = False
         self.user.mode = None
+
+class Maokai_primary(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+
+    def activate(self):
+        super().activate()
+        eproj.Maokai_Primary(self.user, self.user.direction, self.user.game)
+        self.user.heal(self.user.maxhp * 0.5)
+        self.user.state='Attacking'
+
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'

@@ -85,6 +85,8 @@ class Entity(pygame.sprite.Sprite):
         self.hp = min(self.hp + healing, self.maxhp)
     
     def death(self):
+        for stt in self.status:
+            stt.kill()
         self.kill()
     
     def move(self, dt):
@@ -219,12 +221,12 @@ class Enemy(Entity):
         self.rect.x += self.direction.x * self.spd * dt
         if not self.cross_wall:
             self.collision('horizontal', self.direction)
-            self.enemy_collision('horizontal',dt)
+        self.enemy_collision('horizontal',dt)
         self.rect.y += self.direction.y * self.spd * dt
         
         if not self.cross_wall:
             self.collision('vertical', self.direction)
-            self.enemy_collision('vertical',dt)
+        self.enemy_collision('vertical',dt)
         self.image_rect.center = self.rect.center
         
     def enemy_collision(self,direction,dt):

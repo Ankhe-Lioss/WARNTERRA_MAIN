@@ -7,7 +7,8 @@ entity_stats = {
     "Chogath": (700 , 40 , 15, 200, 150, 20  , 2  , 200 , 100),
     "Veigar" : (8000, 80 , 20, 250, 400, 80  , 5  , 1000, 550),
     "Lulu"   : (300 , 20 ,  5, 250, 60 , 10  , 0.5, 750 , 600),
-    "Nocturne":(400 , 60 , 20,   0, 80 , 30  , 2  , 1000, 900)
+    "Nocturne":(400 , 60 , 20,   0, 80 , 30  , 2  , 5000, 900),
+    "Maokai" : (800 , 30 , 20, 150, 95 , 11  , 3  , 200 , 100)
 }
 
 skill_stats = {
@@ -30,6 +31,7 @@ skill_stats = {
     "Lulu_primary" : (4000, 1000, 1000),
     "Lulu_buff" : (9000, 3000, 1000),
     "Nocturne_sprint" : (3000, 2000, 500),
+    "Maokai_primary" : (4000, 0, 1000),
 # Veigar
     "Veigar_primary" : (1800, 0, 200),
     "Veigar_secondary" : (3800, 3000, 200),
@@ -58,6 +60,7 @@ enemy_projectiles = {
 #   "proj" : (atk_scale_multification, speed)
     "Karthus_Primary" : (0.5, 750),
     "Lulu_Primary" : (0.5, 600),
+    "Maokai_Primary" : (1, 800),
 # Veigar
     "Veigar_Primary" : (0.8, 750),
     "Veigar_Secondary" : (0.65, 500),

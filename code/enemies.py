@@ -71,7 +71,7 @@ class Maokai(Enemy):
         self.asymmetry=True
         self.attack_time=1000
         self.skills = {
-            
+            'primary' : Maokai_primary(self, self.game)
         }
 
 class Nocturne(Enemy):

@@ -11,7 +11,9 @@ enemy_classes = {
     'Check_in': Check_in,
     'Veigar': Veigar,
     'Lulu' : Lulu,
-    'Nocturne' : Nocturne
+    'Nocturne' : Nocturne,
+    'Maokai' : Maokai,
+    'Soraka' : Soraka
 }
 
 def spawn_animation(pos,game,enemy_name):

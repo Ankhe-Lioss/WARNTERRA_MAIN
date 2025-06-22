@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="57" height="141" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="255">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="57" height="141" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="284">
  <tileset firstgid="1" source="../tilesets/dungeon_sprite_sheet.tsx"/>
  <tileset firstgid="97" source="../tilesets/dungeon_floor.tsx"/>
  <tileset firstgid="112" source="../tilesets/dungeon_object.tsx"/>
@@ -476,18 +476,190 @@
     <property name="room" type="int" value="3"/>
    </properties>
   </object>
-  <object id="253" name="Nocturne" x="86" y="3096">
+  <object id="253" name="Nocturne" x="78" y="3126">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
-  <object id="254" x="-272" y="3210">
+  <object id="259" name="Nocturne" x="1254" y="3114">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="260" name="Maokai" x="644" y="3408">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="261" name="Lulu" x="644" y="3210">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="262" name="Nocturne" x="94" y="2740">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="263" name="Nocturne" x="656" y="2204">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="264" name="Nocturne" x="1222" y="2738">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="265" name="Nocturne" x="1010" y="2292">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="266" name="Nocturne" x="346" y="2280">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="267" name="Chogath" x="512" y="2468">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="268" name="Chogath" x="868" y="2466">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="269" name="Maokai" x="344" y="2514">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="270" name="Maokai" x="1008" y="2534">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="271" name="Karthus" x="1110" y="2158">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="272" name="Karthus" x="128" y="2172">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="273" name="Karthus" x="654" y="1224">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="274" name="Nocturne" x="554" y="1302">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="275" name="Nocturne" x="740" y="1302">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="276" name="Nocturne" x="906" y="1302">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="277" name="Nocturne" x="392" y="1298">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="278" name="Lulu" x="1186" y="1776">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="279" name="Lulu" x="88" y="1208">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="280" name="Maokai" x="236" y="1308">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="281" name="Maokai" x="1054" y="1710">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="282" name="Chogath" x="298" y="1674">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="283" name="Chogath" x="1068" y="1290">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="3" name="Collisions">
+ <objectgroup id="3" name="Collisions" visible="0" locked="1">
   <object id="220" x="187.833" y="3983.83" width="107" height="540"/>
   <object id="221" x="285.833" y="4455.83" width="805" height="93"/>
   <object id="222" x="1011.83" y="3920.83" width="173" height="545"/>

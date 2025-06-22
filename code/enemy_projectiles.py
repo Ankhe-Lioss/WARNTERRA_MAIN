@@ -115,3 +115,14 @@ class Speed_Buff(Enemy_projectiles):
     def update(self, dt):
         super().update(dt)
         self.skill.remaining = self.skill.cooldown
+
+class Maokai_Primary(Enemy_projectiles):
+    def __init__(self, user, direction, game):
+        self.name = self.__class__.__name__
+        self.source='Maokai Primary'
+        self.wall_piercing = True
+        super().__init__(user, user.rect.center, direction, game)
+        self.lifetime = 250
+    
+    def apply(self, target):
+        target.status.add(Slowed(1000, 0.6, self.game, target))

@@ -7,7 +7,8 @@ class Healthbar(pygame.sprite.Sprite):
         self.type = 'top'
 
         # Load bar images AFTER display is initialized
-        self.bar_empty = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '0.png')).convert_alpha()
+        self.bar_bg = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '0.png')).convert_alpha()
+        self.bar_empty = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '3.png')).convert_alpha()
         self.bar_full  = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '5.png')).convert_alpha()
 
         # Bar configuration
@@ -52,7 +53,8 @@ class Healthbar(pygame.sprite.Sprite):
 
         green_width = int(self.width * hp_ratio)
         red_width = int(self.width * delayed_ratio)
-
+        # Background layer
+        self.image.blit(self.bar_bg, (0, 0))
         # Red (delayed) layer
         if red_width > 0:
             red_bar = self.bar_empty.subsurface(pygame.Rect(0, 0, red_width, self.height)).copy()
@@ -62,3 +64,5 @@ class Healthbar(pygame.sprite.Sprite):
         if green_width > 0:
             green_bar = self.bar_full.subsurface(pygame.Rect(0, 0, green_width, self.height)).copy()
             self.image.blit(green_bar, (0, 0))
+        
+

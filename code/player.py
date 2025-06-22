@@ -15,8 +15,6 @@ class Player(Entity):
         skills_obj = PlayerSkills(self, game)
         self.skills_gauntlet = skills_obj.skills_gauntlet
         self.skills_bow = skills_obj.skills_bow
-        self.skills = self.skills_gauntlet if self.weapon_type == "gauntlet" else self.skills_bow
-
         
         # Attach current skill set based on weapon
         self.skills = self.skills_gauntlet if self.weapon_type == "gauntlet" else self.skills_bow

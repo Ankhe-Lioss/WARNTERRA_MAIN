@@ -67,9 +67,9 @@ class Projectiles(pygame.sprite.Sprite):
             self.sound.play()
         
     def collide(self, sprite):
-        sprite.take_damage(self.dmg)
         self.play_sound()
         self.apply(sprite)
+        sprite.take_damage(self.dmg)
     
     def bullet_collision(self):
         collision_sprites = pygame.sprite.spritecollide(self, self.target, False, pygame.sprite.collide_mask)

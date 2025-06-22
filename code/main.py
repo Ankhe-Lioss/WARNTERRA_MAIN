@@ -108,7 +108,7 @@ class Game:
         pygame.quit()
 
     def draw_menu(self,dt):
-        if self.pausing and self.game_state == 'in_game':
+        if self.pausing and self.game_state == 'in_game' and self.menu_state == 'main':
             self.pause_menu()
         if self.game_state == 'in_start_menu':
             self.background.draw(dt,self.display_surface)
@@ -195,6 +195,11 @@ class Game:
                 self.pausing = False
                 self.death_menu_audio.stop()
                 self.current_BGM = None
+    def weapon_choosing_menu(self):
+        if self.bow_button.draw(self.display_surface):
+            pass
+        if self.gauntlet_button.draw(self.display_surface):
+            pass
 if __name__ == "__main__":
     game = Game()
     game.run()

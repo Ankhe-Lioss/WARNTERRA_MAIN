@@ -35,7 +35,8 @@ class Status(pygame.sprite.Sprite):
         if self.remaining <= 0:
             self.unapply()
             self.kill()
-
+        if self.owner.hp<=0:
+            self.kill()
 class Stunned(Status):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__

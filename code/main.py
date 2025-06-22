@@ -48,7 +48,7 @@ class Game:
         self.room = 0
         self.wave = 0
         self.screen_toggle = 0
-        self.level = 3
+        self.level = 1
         self.state = 'in_level'
 
         setlevel(self)  
@@ -80,7 +80,7 @@ class Game:
                     if event.button == 7:
                         self.pausing = not self.pausing
             # FILL
-            self.display_surface.fill('gray36')
+            self.display_surface.fill('gray12')
 
             # Enemies Spawning
             check_game_state(self)
@@ -146,7 +146,7 @@ class Game:
             if self.audio_button.draw(self.display_surface):
                 print("Audio Settings")
             if self.keys_button.draw(self.display_surface):
-                print("Change Key Bindings")
+                    ("Change Key Bindings")
             if self.back_button.draw(self.display_surface):
                 self.menu_state = "main"
 

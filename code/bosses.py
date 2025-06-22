@@ -71,3 +71,6 @@ class Veigar(Boss):
                 self.skills['secondary'].cooldown = 1000
                 
                 self.phase_remaining = 10000
+
+class Soraka(Boss):
+    pass

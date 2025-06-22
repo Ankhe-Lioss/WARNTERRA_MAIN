@@ -120,6 +120,7 @@ class Game:
                     self.restart()
                     self.pausing = False
                     self.game_state = 'in_game'
+                    pygame.mixer.stop()
                 # X button (Quit)
                 if self.joystick.get_button(2):
                     self.running = False
@@ -127,6 +128,8 @@ class Game:
                 # B button (Back to Start Menu)
                 if self.joystick.get_button(1):
                     self.game_state = "in_start_menu"
+                    pygame.mixer.stop()
+
     def start_menu(self):
         self.start_menu_audio.play(-1)
         if self.menu_state == 'main':

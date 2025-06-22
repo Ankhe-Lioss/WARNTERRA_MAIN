@@ -43,7 +43,7 @@ skill_stats = {
 # Soraka
     "Soraka_heal" : (2000, 1000, 1000),
     "Soraka_primary" : (500, 0, 1000),
-    "Soraka_cc_1" : (4000, 3000, 1000),
+    "Soraka_cc_1" : (3000, 3000, 1000),
     "Soraka_cc_2" : (4000, 1000, 1000),
     "Soraka_ult" : (5000, 2000, 1000),
 # Other
@@ -69,8 +69,8 @@ enemy_projectiles = {
     "Lulu_Primary" : (0.5, 600),
     "Maokai_Primary" : (1, 800),
 # Veigar
-    "Veigar_Primary" : (0.8, 750),
-    "Veigar_Secondary" : (0.65, 500),
+    "Veigar_Primary" : (0.6, 750),
+    "Veigar_Secondary" : (0.5, 500),
     "Veigar_Ult" : (0, 700),
 # Other
     "Healing_Buff" : (0, 0),

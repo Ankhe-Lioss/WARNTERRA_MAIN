@@ -45,7 +45,23 @@ def setlevel(game):
         if obj.name == 'Player':
             # Create new player
             game.player = Player((obj.x, obj.y), game)
-            game.player.weap = Gauntlet(game)
+            game.player.weap = Bow(game)
+            
+#                              /\
+#                             /TH\
+#                            /IS F\
+#                           / KING \
+#                          / WEAPON \
+#                         /__________\
+#                            |    |
+#                            |    |                            
+#                            |    |
+#                            |    |
+#                            |    |
+#                            |    |
+#                            |    |
+#                            |____|
+
 
             # Reinitialize the UI with the new player
             game.ui = UI(game, game.player, game.display_surface)
@@ -64,7 +80,7 @@ def setlevel(game):
 
     game.room_numb = len(game.checkins) - 1
 
-def endlevel(game):
+def endlevel(game):#
     for group in [game.all_sprites, game.player_sprites, game.enemy_sprites, game.player_projectiles, game.enemy_projectiles, game.collision_sprites]:
         for sprite in group:
             sprite.kill()

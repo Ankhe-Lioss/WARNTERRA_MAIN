@@ -34,6 +34,7 @@ class Game:
         self.menu_state = 'main'
         self.pausing = True
         self.background = Background()
+        
     def restart(self):
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()

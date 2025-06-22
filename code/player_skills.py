@@ -5,7 +5,13 @@ from status import *
 import aoe
 import aoe_warning as aoew
 
-class Gauntlet_primary(Skill):
+class Player_skill(Skill):
+    def __init__(self, user, game):
+        super().__init__(user, game)
+        self.icon = pygame.image.load(os.path.join("images", "icons", "Player_skills", f"{self.name}.png")).convert_alpha()
+        self.icon = pygame.transform.scale(self.icon, (48, 48))
+
+class Gauntlet_primary(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
@@ -17,7 +23,7 @@ class Gauntlet_primary(Skill):
         # Test
         #self.user.status.add(Poisoned(3000, 50, self.game, self.user))
 
-class Gauntlet_q_skill(Skill):
+class Gauntlet_q_skill(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
@@ -26,7 +32,7 @@ class Gauntlet_q_skill(Skill):
         super().activate()
         pproj.Gauntlet_q_skill(self.user.rect.center, self.user.facing_dir, self.game)
 
-class Gauntlet_e_skill(Skill):
+class Gauntlet_e_skill(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
@@ -45,7 +51,7 @@ class Gauntlet_e_skill(Skill):
         pproj.Gauntlet_e_skill(self.pos, self.dir, self.game)
         self.user.channeling = False
 
-class Gauntlet_secondary(Skill):
+class Gauntlet_secondary(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
@@ -63,7 +69,7 @@ class Gauntlet_secondary(Skill):
         self.user.mode = None
         self.user.forced_moving = False
 
-class Bow_primary(Skill):
+class Bow_primary(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
@@ -72,7 +78,7 @@ class Bow_primary(Skill):
         super().activate()
         pproj.Bow_primary(self.user.rect.center, self.user.facing_dir, self.game)
     
-class Bow_secondary(Skill):
+class Bow_secondary(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
@@ -85,7 +91,7 @@ class Bow_secondary(Skill):
         super().deactivate()
         self.user.weap.primary = Bow_primary(self.user, self.game)
 
-class Bow_primary_enhanced(Skill):
+class Bow_primary_enhanced(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
@@ -100,7 +106,7 @@ class Bow_primary_enhanced(Skill):
         pproj.Bow_primary_enhanced(shooting_pos + shooting_dir.rotate(135) * 25, shooting_dir, self.game)
         pproj.Bow_primary_enhanced(shooting_pos + shooting_dir.rotate(-135) * 25, shooting_dir, self.game)
     
-class Bow_q_skill(Skill):
+class Bow_q_skill(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
@@ -124,7 +130,7 @@ class Bow_q_skill(Skill):
     def deactivate(self):
         super().deactivate()
 
-class Bow_e_skill(Skill):
+class Bow_e_skill(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)

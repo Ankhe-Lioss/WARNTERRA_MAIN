@@ -187,12 +187,7 @@ class Summon_healing_buff(Skill):
         
     def activate(self):
         super().activate()
-        self.buff = eproj.Healing_Buff(self.user, self.pos, self.game)
-
-    def update(self, dt):
-        super().update(dt)
-        if hasattr(self, 'buff') and self.buff:
-            self.remaining = self.cooldown            
+        self.buff = eproj.Healing_Buff(self.user, self.pos, self.game, self)    
 
 class Summon_speed_buff(Skill):
     def __init__(self, user, pos, game):
@@ -202,9 +197,4 @@ class Summon_speed_buff(Skill):
         
     def activate(self):
         super().activate()
-        self.buff = eproj.Speed_Buff(self.user, self.pos, self.game)
-
-    def update(self, dt):
-        super().update(dt)
-        if hasattr(self, 'buff') and not self.buff.used:
-            self.remaining = self.cooldown            
+        self.buff = eproj.Speed_Buff(self.user, self.pos, self.game, self)   

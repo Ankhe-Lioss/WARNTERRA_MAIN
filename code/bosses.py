@@ -19,17 +19,24 @@ class Veigar(Boss):
     
     def change_phase(self):
         super().change_phase()
-        self.skills = {
-            'secondary' : Veigar_secondary(self, self.game),
-            'ult': Veigar_ult(self, self.game),
-        }
+        self.mode = 1
+        self.phase_remaining = 5000
+        
+        if 'primary' in self.skills:
+            del self.skills['primary']
+        if 'aoe' in self.skills:
+            del self.skills['aoe']
+        
+        self.skills['ult'] = Veigar_ult(self, self.game)
+        self.skills['secondary'] = Veigar_secondary(self, self.game)
+        
         self.skills['secondary'].warmup = 1000
         self.skills['secondary'].cooldown = 2000
         self.phase = 2
         self.mode = 1
     
     def update(self, dt):
-        print(self.skills['speed'].cooldown)
+        print(self.skills['speed'].remaining)
         super().update(dt)
         self.phase_remaining -= dt * 1000
         if self.mode == 1 and self.phase_remaining <= 0: # 1 to 2

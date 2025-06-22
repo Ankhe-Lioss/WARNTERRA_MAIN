@@ -37,8 +37,8 @@ skill_stats = {
     "Veigar_aoe" : (0, 0, 500),
     "Veigar_cage" : (10000, 0, 5000),
 # Other
-    "Summon_healing_buff" : (15000, 0, 0),
-    "Summon_speed_buff" : (15000, 0, 0)
+    "Summon_healing_buff" : (20000, 0, 0),
+    "Summon_speed_buff" : (20000, 0, 0)
 }
 
 player_projectiles = {

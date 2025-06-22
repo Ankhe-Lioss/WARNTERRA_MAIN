@@ -147,3 +147,10 @@ class Buff(Status):
             self.owner.def_ /= 1 + self.ratio
         elif self.type == 'spd':
             self.owner.spd /= 1 + self.ratio
+class Dark_aura(Status):
+    def __init__(self, duration, game, owner):
+        self.name = self.__class__.__name__
+        self.owner = owner
+        self.offset=pygame.Vector2(1, 0)
+        super().__init__(duration, game)
+

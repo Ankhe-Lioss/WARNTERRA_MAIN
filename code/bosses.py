@@ -35,7 +35,7 @@ class Veigar(Boss):
         self.skills['secondary'].cooldown = 2000
         self.phase = 2
         self.mode = 1
-    
+        self.aura=Dark_aura(1000000,self.game,self)
     def update(self, dt):
         #print(self.skills['speed'].remaining)
         super().update(dt)

@@ -198,3 +198,27 @@ class Summon_speed_buff(Skill):
     def activate(self):
         super().activate()
         self.buff = eproj.Speed_Buff(self.user, self.pos, self.game, self)   
+
+class Nocturne_sprint(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        self.user.state='Attacking'
+        self.target_pos = self.game.player.rect.center
+        self.user.attacked = False
+        spd = (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.user.rect.center)).length() / self.cast_time * 1000
+        dir = (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.user.rect.center)).normalize()
+        self.user.forced_moving = True
+        self.user.mode = {
+            "dir" : dir,
+            "spd" : spd
+        }
+        
+    def deactivate(self):
+        super().deactivate()        
+        self.user.state='Walking'
+        self.user.forced_moving = False
+        self.user.mode = None

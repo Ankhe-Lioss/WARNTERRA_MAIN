@@ -7,7 +7,7 @@ entity_stats = {
     "Chogath": (700 , 40 , 15, 200, 150, 20  , 2  , 200 , 100),
     "Veigar" : (8000, 80 , 20, 250, 400, 80  , 5  , 1000, 550),
     "Lulu"   : (300 , 20 ,  5, 250, 60 , 10  , 0.5, 750 , 600),
-    "Nocturne":(450 , 60 , 20,   0, 50 , 30  , 2  , 1000, 900)
+    "Nocturne":(400 , 60 , 20,   0, 80 , 30  , 2  , 1000, 900)
 }
 
 skill_stats = {
@@ -29,6 +29,7 @@ skill_stats = {
     "Karthus_primary" : (1000, 1000, 500),
     "Lulu_primary" : (4000, 1000, 1000),
     "Lulu_buff" : (9000, 3000, 1000),
+    "Nocturne_sprint" : (3000, 2000, 500),
 # Veigar
     "Veigar_primary" : (1800, 0, 200),
     "Veigar_secondary" : (3800, 3000, 200),

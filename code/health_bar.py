@@ -22,7 +22,7 @@ class Healthbar(pygame.sprite.Sprite):
         self.image_rect = self.rect  # For compatibility with your custom draw()
 
         self.display_hp = self.user.hp
-        self.hp_delay_speed = 80  # adjust for red bar trailing
+        self.hp_delay_speed = self.user.maxhp / 2  # adjust for red bar trailing
 
     def update(self, dt):
         if self.user.hp <= 0:

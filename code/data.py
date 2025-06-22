@@ -5,7 +5,7 @@ entity_stats = {
     "Meele"  : (500 , 45 , 10, 300, 65 , 30  , 1.5, 50  , 10 ),
     "Karthus": (250 , 75 , 10, 200, 25 , 75  , 1  , 650 , 400),
     "Chogath": (700 , 40 , 15, 200, 150, 20  , 2  , 200 , 100),
-    "Veigar" : (8000, 80 , 20, 250, 400, 80  , 5  , 1000, 550),
+    "Veigar" : (12600,80 , 25, 250, 792, 80  , 5  , 1000, 550),
     "Lulu"   : (300 , 20 ,  5, 250, 60 , 10  , 0.5, 750 , 600),
     "Nocturne":(400 , 80 , 20,   0, 40 , 30  , 2  , 5000, 900),
     "Maokai" : (800 , 30 , 20, 100, 95 , 11  , 3  , 200 , 100)
@@ -19,11 +19,11 @@ skill_stats = {
     "Gauntlet_q_skill" : (4800, 0, 200),
     "Gauntlet_e_skill" : (14250, 10000, 750),
     
-    "Bow_primary" : (1000, 1000, 0),
+    "Bow_primary" : (1000, 500, 0),
     "Bow_primary_enhanced": (450, 500, 150),
     "Bow_secondary": (6500, 5000, 3500),
     "Bow_q_skill": (3800, 1000, 200),
-    "Bow_e_skill": (10000, 5000, 300),
+    "Bow_e_skill": (12000, 6000, 300),
 #enemy
     "Poro_stomp" : (1500, 0, 1000),
     "Chogath_stomp" : (2500, 1000, 750),
@@ -46,9 +46,9 @@ skill_stats = {
 
 player_projectiles = {
 #   "proj" : (atk_scale_multification, speed)
-    "Gauntlet_primary" : (1, 1000),
+    "Gauntlet_primary" : (1.5, 1200),
     "Gauntlet_q_skill" : (3, 1000),
-    "Gauntlet_e_skill" : (2, 700),
+    "Gauntlet_e_skill" : (2.5, 700),
     
     "Bow_primary" : (1, 1000),
     "Bow_primary_enhanced": (0.4, 800),
@@ -76,5 +76,5 @@ Aoe_stat={
     'Chogath_Rupture':(2, 5, 1000),
     'Veigar_Darkmatter':(1.5, 9, 500),
 # Player
-    'Bow_explosion' : (2, 8, 500)    
+    'Bow_explosion' : (1, 8, 500)    
 }

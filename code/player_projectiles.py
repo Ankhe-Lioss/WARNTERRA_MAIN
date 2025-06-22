@@ -70,5 +70,5 @@ class Bow_e_skill(Player_projectiles):
         self.wall_piercing = True
     
     def apply(self, target):
-        target.status.add(Stunned(5000, self.game, target))
+        target.status.add(Stunned(3000, self.game, target))
         Bow_explosion(self.rect.center, self.game, self.game.player.atk)

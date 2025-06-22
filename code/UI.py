@@ -31,7 +31,7 @@ class UI:
         }
 
         # Health values
-        self.max_hp = entity_stats.get("Player", (0, 0, 0, 0))[0]
+        self.max_hp = self.player.maxhp
         self.display_hp = self.player.hp
         self.hp_delay_speed = 100
 

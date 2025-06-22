@@ -1,0 +1,7 @@
+"""
+UI:
+1. Chỉnh lại icon skill bất cứ khi nào cập nhật skill (k chỉ khi load vũ khí)
+2. Cooldown dưới 1s thì sẽ hiện là 0.x
+3. Chỉnh lại thanh máu trên map (ng chơi -> xanh, fix bug thanh xám)
+4. Load icon tùy theo loại weap (hiện tại cả 2 weap load icon như nhau) 
+"""

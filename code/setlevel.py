@@ -40,7 +40,7 @@ def setlevel(game):
             game.player = Player((obj.x, obj.y), game)
             
             # Temporary weapon
-            game.player.weap = Gauntlet(game)
+            game.player.weap = Bow(game)
         else:
             print("adding", obj)
             if 'room' in obj.properties:

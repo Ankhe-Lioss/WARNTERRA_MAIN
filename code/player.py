@@ -111,8 +111,8 @@ class Player(Entity):
         #move with entity
         super().update(dt) # move
         #animation update
-        for skill in self.skills.values():
-            skill.update(dt)
+        """for skill in self.skills.values():
+            skill.update(dt)"""
 
         self.update_animation(dt)
         self.collide_with_enemies(dt)

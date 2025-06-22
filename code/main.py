@@ -72,8 +72,8 @@ class Game:
                     if event.key == pygame.K_F1:
                         self.player.death()
                     if event.key == pygame.K_F2:
-                        self.player.atk=10000000
-                        self.player.hp=1000000
+                        self.player.atk=1000
+                        self.player.hp=100000
                 if event.type == pygame.JOYBUTTONDOWN:
                     if event.button == 7:
                         self.pausing = not self.pausing

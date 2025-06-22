@@ -45,8 +45,8 @@ player_projectiles = {
     "Gauntlet_e_skill" : (2, 700),
     
     "Bow_primary" : (1, 1000),
-    "Bow_primary_enhanced": (0.3, 800),
-    "Bow_q_skill": (0.2, 700),
+    "Bow_primary_enhanced": (0.5, 800),
+    "Bow_q_skill": (0.5, 700),
     "Bow_e_skill": (0, 600)
 }
 

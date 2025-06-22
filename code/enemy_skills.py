@@ -110,13 +110,13 @@ class Veigar_aoe(Skill):
     def activate(self):
         super().activate()
         if self.user.phase == 1:
-            for _ in range(2):
-                pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(120, 320), 0).rotate(randrange(0, 360))
-
+            for _ in range(3):
+                pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(0, 360), 0).rotate(randrange(0, 360))
+                aoew.Spawn_darkmatter(pos, self.game, self.user.atk)
+        else:
+            pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(0, 120), 0).rotate(randrange(0, 360))
             aoew.Spawn_darkmatter(pos, self.game, self.user.atk)
-        pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(1, 0).rotate(randrange(0, 360)) * random.randint(80, 200)
 
-        aoew.Spawn_darkmatter(pos, self.game, self.user.atk)
         self.user.state = 'Attacking'
         self.user.channeling = True
 
@@ -132,7 +132,11 @@ class Lulu_primary(Skill):
         
     def activate(self):
         super().activate()
-        eproj.Lulu_Primary(self.user, self.user.direction, self.user.game)
+        
+        deviation = random.randint(0, 30)
+        
+        eproj.Lulu_Primary(self.user, self.user.direction.rotate(15).rotate(deviation), self.user.game)
+        eproj.Lulu_Primary(self.user, self.user.direction.rotate(-15).rotate(deviation), self.user.game)
         self.user.state='Attacking'
         
     def deactivate(self):

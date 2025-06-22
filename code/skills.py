@@ -3,7 +3,6 @@ from setting import *
 class Skill:
     def __init__(self, user, game):
         # Weapon related
-        self.name = self.__class__.__name__
         self.user = user
         self.game = game
         

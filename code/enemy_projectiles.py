@@ -55,6 +55,9 @@ class Veigar_Cage(pygame.sprite.Sprite):
         super().__init__(game.all_sprites)
         self.game = game
 
+        self.center = center
+        self.inner_radius = inner_radius
+        self.outer_radius = outer_radius
         size = outer_radius * 2
         self.image = pygame.Surface((size, size), pygame.SRCALPHA)
         # Draw outer circle (ring)
@@ -68,10 +71,9 @@ class Veigar_Cage(pygame.sprite.Sprite):
     def update(self, dt):
         player = self.game.player
         
-        offset_x = int(player.rect.left - self.rect.left)
-        offset_y = int(player.rect.top - self.rect.top)
+        dist = (pygame.Vector2(player.rect.center) - pygame.Vector2(self.center)).length()
 
-        if self.mask.overlap(pygame.mask.from_surface(self.image), (offset_x, offset_y)):
+        if self.inner_radius - 20 <= dist and dist <= self.outer_radius + 20:
             if not hasattr(player, "caged") or not player.caged:
                 player.status.add(Stunned(3000, self.game, player))
                 player.caged = True

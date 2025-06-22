@@ -6,27 +6,27 @@ class Karthus_Primary(Enemy_projectiles):
         self.name = self.__class__.__name__
         self.source='Karthus Primary'
         self.wall_piercing = True
-        super().__init__(user, direction, game)
+        super().__init__(user, user.rect.center, direction, game)
 
 class Veigar_Primary(Enemy_projectiles):
     def __init__(self, user, direction, game):
         self.name = self.__class__.__name__
         self.source='Veigar Primary'
-        super().__init__(user, direction, game)
+        super().__init__(user, user.rect.center, direction, game)
         self.rect.inflate(-50, -50)
 
 class Veigar_Secondary(Enemy_projectiles):
     def __init__(self, user, direction, game):
         self.name = self.__class__.__name__
         self.source='Veigar Secondary'
-        super().__init__(user, direction, game)
+        super().__init__(user, user.rect.center, direction, game)
         self.rect.inflate_ip(-30, -30)
 
 class Veigar_Ult(Enemy_projectiles):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         self.source='Veigar Ult'
-        super().__init__(user, pygame.Vector2(0, 0), game)
+        super().__init__(user, user.rect.center, pygame.Vector2(0, 0), game)
         self.rect = self.image_rect.inflate(-80, -80)
         self.wall_piercing = True
         self.lifetime = 20000
@@ -45,7 +45,7 @@ class Lulu_Primary(Enemy_projectiles):
     def __init__(self, user, direction, game):
         self.name = self.__class__.__name__
         self.source='Lulu Primary'
-        super().__init__(user, direction, game)
+        super().__init__(user, user.rect.center, direction, game)
     
     def apply(self, target):
         target.status.add(Slowed(3000, 0.5, self.game, target))
@@ -79,3 +79,27 @@ class Veigar_Cage(pygame.sprite.Sprite):
                 player.caged = True
         else:
             player.caged = False
+
+class Healing_Buff(Enemy_projectiles):
+    def __init__(self, user, pos, game):
+        self.name = self.__class__.__name__
+        self.source = "Other Healing_buff"
+        super().__init__(user, pos, pygame.Vector2(), game)
+        self.lifetime = 999999999
+        self.used = False
+    
+    def apply(self, target):
+        target.status.add(Healing(2000, 75, self.game, target))
+        self.used = True
+
+class Speed_Buff(Enemy_projectiles):
+    def __init__(self, user, pos, game):
+        self.name = self.__class__.__name__
+        self.source = "Other Speed_buff"
+        super().__init__(user, pos, pygame.Vector2(), game)
+        self.lifetime = 999999999
+        self.used = False
+    
+    def apply(self, target):
+        target.status.add(Buff(5000, 0.3, 'spd', self.game, target))
+        self.used = True

@@ -5,7 +5,7 @@ entity_stats = {
     "Meele"  : (500 , 45 , 10, 300, 65 , 30  , 1.5, 50  , 10 ),
     "Karthus": (250 , 75 , 10, 200, 25 , 75  , 1  , 650 , 400),
     "Chogath": (700 , 40 , 15, 200, 150, 20  , 2  , 200 , 100),
-    "Veigar" : (8000, 80 , 20, 250, 400, 40  , 5  , 1000, 550),
+    "Veigar" : (8000, 80 , 20, 250, 400, 80  , 5  , 1000, 550),
     "Lulu"   : (300 , 20 ,  5, 250, 60 , 10  , 0.5, 750 , 600),
     "Nocturne":(450 , 60 , 20,   0, 50 , 30  , 2  , 1000, 900)
 }
@@ -35,7 +35,10 @@ skill_stats = {
     
     "Veigar_ult" : (29500, 0, 500),
     "Veigar_aoe" : (0, 0, 500),
-    "Veigar_cage" : (10000, 0, 5000)
+    "Veigar_cage" : (10000, 0, 5000),
+# Other
+    "Summon_healing_buff" : (15000, 0, 0),
+    "Summon_speed_buff" : (15000, 0, 0)
 }
 
 player_projectiles = {
@@ -45,9 +48,9 @@ player_projectiles = {
     "Gauntlet_e_skill" : (2, 700),
     
     "Bow_primary" : (1, 1000),
-    "Bow_primary_enhanced": (0.5, 800),
+    "Bow_primary_enhanced": (0.4, 800),
     "Bow_q_skill": (0.5, 700),
-    "Bow_e_skill": (0.5, 600)
+    "Bow_e_skill": (1.5, 600)
 }
 
 enemy_projectiles = {
@@ -55,16 +58,19 @@ enemy_projectiles = {
     "Karthus_Primary" : (0.5, 750),
     "Lulu_Primary" : (0.5, 600),
 # Veigar
-    "Veigar_Primary" : (1, 750),
-    "Veigar_Secondary" : (0.75, 500),
-    "Veigar_Ult" : (0, 700)
+    "Veigar_Primary" : (0.8, 750),
+    "Veigar_Secondary" : (0.65, 500),
+    "Veigar_Ult" : (0, 700),
+# Other
+    "Healing_Buff" : (0, 0),
+    "Speed_Buff" : (0, 0)
 }
 
 Aoe_stat={
 #   aoe skill=[scale_atk,frame_number,life_time]
     'Poro_Stomp':(0.5, 3, 1000),
     'Chogath_Rupture':(2, 5, 1000),
-    'Veigar_Darkmatter':(2, 9, 500),
+    'Veigar_Darkmatter':(1.5, 9, 500),
 # Player
-    'Bow_explosion' : (1.5, 8, 500)    
+    'Bow_explosion' : (2.5, 8, 500)    
 }

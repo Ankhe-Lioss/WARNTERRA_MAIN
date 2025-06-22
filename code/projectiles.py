@@ -104,10 +104,10 @@ class Player_projectiles(Projectiles):
         self.dmg = self.scale * self.game.player.atk                    
              
 class Enemy_projectiles(Projectiles):
-    def __init__(self, user, direction, game):
+    def __init__(self, user, pos, direction, game):
         # Init
         self.user = user
-        super().__init__(game.player_sprites, self.user.rect.center, direction, game.enemy_projectiles, game)
+        super().__init__(game.player_sprites, pos, direction, game.enemy_projectiles, game)
         
         # Calcu
         self.scale, self.spd = enemy_projectiles[self.name]

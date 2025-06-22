@@ -168,7 +168,7 @@ class Enemy(Entity):
     
     def load_frames(self):
         self.frames = {}
-        for i in self.states :
+        for i in self.states:
             self.frames[i] = []
             for k in range(0, 6):
                 surf = pygame.image.load(os.path.join('images', 'enemies',f'{self.name}',f'{i}',f'{k}.png')).convert_alpha()

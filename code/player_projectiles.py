@@ -1,5 +1,6 @@
 from projectiles import *
 from status import *
+from aoe import *
 
 class Gauntlet_primary(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -69,3 +70,4 @@ class Bow_e_skill(Player_projectiles):
     
     def apply(self, target):
         target.status.add(Stunned(5000, self.game, target))
+        Bow_explosion(self.rect.center, self.game, self.game.player.atk)

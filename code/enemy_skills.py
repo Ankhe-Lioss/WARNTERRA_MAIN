@@ -178,3 +178,33 @@ class Veigar_cage(Skill):
         self.user.state = 'Walking'
         self.user.channeling = False
         self.cage.kill()
+
+class Summon_healing_buff(Skill):
+    def __init__(self, user, pos, game):
+        self.name = self.__class__.__name__
+        self.pos = pos
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        self.buff = eproj.Healing_Buff(self.user, self.pos, self.game)
+
+    def update(self, dt):
+        super().update(dt)
+        if hasattr(self, 'buff') and self.buff:
+            self.remaining = self.cooldown            
+
+class Summon_speed_buff(Skill):
+    def __init__(self, user, pos, game):
+        self.name = self.__class__.__name__
+        self.pos = pos
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        self.buff = eproj.Speed_Buff(self.user, self.pos, self.game)
+
+    def update(self, dt):
+        super().update(dt)
+        if hasattr(self, 'buff') and not self.buff.used:
+            self.remaining = self.cooldown            

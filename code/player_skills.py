@@ -2,6 +2,8 @@ from skills import Skill
 from setting import *
 import player_projectiles as pproj
 from status import *
+import aoe
+import aoe_warning as aoew
 
 class Gauntlet_primary(Skill):
     def __init__(self, user, game):
@@ -54,7 +56,7 @@ class Gauntlet_secondary(Skill):
         self.user.forced_moving = True
         
         # Test
-        self.user.heal(100)
+        #self.user.heal(100)
         
     def deactivate(self):
         super().deactivate()
@@ -126,6 +128,10 @@ class Bow_e_skill(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        arrow = pproj.Bow_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
         
 class PlayerSkills:
     def __init__(self, user, game):

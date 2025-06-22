@@ -169,7 +169,7 @@ class Veigar_cage(Skill):
     def activate(self):
         super().activate()
         # Example: ring around player with outer radius 120, inner radius 80
-        self.cage = eproj.Veigar_Cage(self.user.player.rect.center, outer_radius=300, inner_radius=280, game=self.user.game)
+        self.cage = eproj.Veigar_Cage(self.user.player.rect.center, outer_radius=240, inner_radius=220, game=self.user.game)
         self.user.state = 'Attacking'
         self.user.channeling = True
 

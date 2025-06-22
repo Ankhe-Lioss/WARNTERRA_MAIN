@@ -22,7 +22,7 @@ skill_stats = {
     "Bow_primary_enhanced": (450, 500, 150),
     "Bow_secondary": (6500, 5000, 3500),
     "Bow_q_skill": (3800, 1000, 200),
-    "Bow_e_skill": (16000, 5000, 300),
+    "Bow_e_skill": (10000, 5000, 300),
 #enemy
     "Poro_stomp" : (1500, 0, 1000),
     "Chogath_stomp" : (2500, 1000, 750),
@@ -47,7 +47,7 @@ player_projectiles = {
     "Bow_primary" : (1, 1000),
     "Bow_primary_enhanced": (0.5, 800),
     "Bow_q_skill": (0.5, 700),
-    "Bow_e_skill": (0, 600)
+    "Bow_e_skill": (0.5, 600)
 }
 
 enemy_projectiles = {
@@ -64,5 +64,7 @@ Aoe_stat={
 #   aoe skill=[scale_atk,frame_number,life_time]
     'Poro_Stomp':(0.5, 3, 1000),
     'Chogath_Rupture':(2, 5, 1000),
-    'Veigar_Darkmatter':(2, 9, 1000)
+    'Veigar_Darkmatter':(2, 9, 500),
+# Player
+    'Bow_explosion' : (1.5, 8, 500)    
 }

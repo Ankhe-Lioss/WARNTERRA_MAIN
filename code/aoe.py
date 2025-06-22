@@ -16,6 +16,9 @@ class Area_of_effect(pygame.sprite.Sprite):
         self.frame_index = 0
         self.frames = []
         self.load_frame()
+        self.load_sound()
+        if hasattr(self, 'sound'):
+            self.sound.play()
         self.animation_speed = self.frame_number/self.lifetime*1000
         self.image = self.frames[0]
         self.image_rect = self.image.get_frect(center=pos)
@@ -25,6 +28,10 @@ class Area_of_effect(pygame.sprite.Sprite):
         for i in range(self.frame_number):
             surf=pygame.image.load(os.path.join('images', 'aoe',f'{self.name}', f'{i}.png')).convert_alpha()
             self.frames.append(surf)
+            
+    def load_sound(self):
+        if os.path.exists(os.path.join("audio", "aoe", f"{self.name}.ogg")):
+            self.sound = pygame.mixer.Sound(os.path.join("audio", "aoe", f"{self.name}.ogg"))
             
     def animate(self, dt):
         self.frame_index += self.animation_speed * dt
@@ -76,3 +83,12 @@ class Veigar_Darkmatter(Area_of_effect):
         self.enemy_sprites=game.player_sprites
         self.name='Veigar_Darkmatter'
         super().__init__(pos,game,user_atk)
+
+class Bow_explosion(Area_of_effect):
+    def __init__(self, pos,game,user_atk):
+        self.enemy_sprites=game.enemy_sprites
+        self.name = self.__class__.__name__
+        super().__init__(pos,game,user_atk)
+    
+    def apply(self, target):
+        target.status.add(Slowed(5000, 0.9, self.game, target))

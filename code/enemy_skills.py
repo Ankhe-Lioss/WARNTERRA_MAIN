@@ -245,14 +245,14 @@ class Soraka_heal(Skill):
         super().activate()
         self.user.state='Attacking'
         if self.game.spawn_numb == 2: #only boss and check in
-            self.user.heal(self.user.atk * 4)
+            self.user.heal(self.user.atk * 1)
             return
         
-        target = self.game.enemy_sprites[0]
+        target = random.choice(list(self.game.enemy_sprites))
         for enemy in self.game.enemy_sprites:
-            if enemy.hp / enemy.maxhp < target.hp / target.maxhp:
+            if enemy.hp / enemy.maxhp < target.hp / target.maxhp and enemy is not self.user:
                 target = enemy
-        target.heal(self.user.atk * 5)
+        target.heal(self.user.atk * 2)
         
     def deactivate(self):
         super().deactivate()
@@ -268,7 +268,10 @@ class Soraka_ult(Skill):
         self.user.state='Attacking'
         
         for enemy in self.game.enemy_sprites:
-            enemy.heal(self.user.atk * 3)
+            if enemy is self.user:
+                enemy.heal(self.user.atk * 0.5)
+            else:
+                enemy.heal(self.user.atk * 1.5)
         
     def deactivate(self):
         super().deactivate()

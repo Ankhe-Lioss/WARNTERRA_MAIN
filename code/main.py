@@ -36,6 +36,7 @@ class Game:
         self.pausing = True
         self.background = Background()
         self.current_BGM = None
+        self.level = 1
         
     def restart(self):
         self.all_sprites = AllSprites()
@@ -50,7 +51,6 @@ class Game:
         self.room = 0
         self.wave = 0
         self.screen_toggle = 0
-        self.level = 3
         self.state = 'in_level'
 
         setlevel(self)  
@@ -86,6 +86,10 @@ class Game:
 
             # Enemies Spawning
             check_game_state(self)
+            
+            # REPEATING TESTS
+            #print(self.spawn_numb)
+            
 
             # Game State
             self.all_sprites.draw(self.player.rect)

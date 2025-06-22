@@ -68,6 +68,14 @@ class Entity(pygame.sprite.Sprite):
             dmg = 0    
     
         delta = dmg / (1 + 0.01 * self.def_ * (1 - pen))
+        
+        if hasattr(self, "invulnerable") and self.hp - delta < self.maxhp * self.invulnerable:
+            delta = self.hp - self.invulnerable * self.maxhp
+            
+        if hasattr(self, "invulnerable") and delta == 0:
+            Flyout_number(self.rect.center, "immune", (40, 40, 160), self.game, font_size=32)
+            return
+        
         self.hp -= delta
         
         if type == "normal":
@@ -84,7 +92,11 @@ class Entity(pygame.sprite.Sprite):
             Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game)
         elif type == "overtime":
             Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game, font_size=20)
-        self.hp = min(self.hp + healing, self.maxhp)
+        
+        if isinstance(self, Boss) and self.phase == 2:
+            self.hp = min(self.hp + healing, self.maxhp / 2)
+        else:
+            self.hp = min(self.hp + healing, self.maxhp)
     
     def death(self):
         self.kill()

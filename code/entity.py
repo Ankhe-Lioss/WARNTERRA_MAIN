@@ -263,6 +263,8 @@ class Boss(Enemy):
     def __init__(self, pos, game):
         super().__init__(pos, game)
         
+        pygame.mixer.music.fadeout(2000)
+        
         # Boss specific attributes
         self.phase = 1
         self.phase_change_hp = 0.5 * self.maxhp  # Change phase at 50% HP
@@ -270,6 +272,10 @@ class Boss(Enemy):
 
     def update(self, dt):
         super().update(dt)
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.load(os.path.join("audio", "BGM", f"{self.name}.wav"))
+            pygame.mixer.music.play(loops=-1)
+            
         if self.hp <= self.phase_change_hp and self.phase == 1:
             self.phase = 2
             self.change_phase()
@@ -277,3 +283,8 @@ class Boss(Enemy):
     def change_phase(self):
         # Logic to change the boss's behavior or appearance when changing phases
         pass
+
+    def death(self):
+        super().death()
+        self.game.current_BGM = None
+        pygame.mixer.music.fadeout(1000)

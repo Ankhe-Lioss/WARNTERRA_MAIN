@@ -35,6 +35,7 @@ class Poro_stomp(Skill):
         super().deactivate()
         self.user.state = 'Walking'
         self.user.channeling = False
+
 class Chogath_stomp(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
@@ -231,6 +232,44 @@ class Maokai_primary(Skill):
         self.user.heal(self.user.maxhp * 0.5)
         self.user.state='Attacking'
 
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'
+
+class Soraka_heal(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        self.user.state='Attacking'
+        if self.game.spawn_numb == 2: #only boss and check in
+            self.user.heal(self.user.atk * 4)
+            return
+        
+        target = self.game.enemy_sprites[0]
+        for enemy in self.game.enemy_sprites:
+            if enemy.hp / enemy.maxhp < target.hp / target.maxhp:
+                target = enemy
+        target.heal(self.user.atk * 5)
+        
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'
+
+class Soraka_ult(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        self.user.state='Attacking'
+        
+        for enemy in self.game.enemy_sprites:
+            enemy.heal(self.user.atk * 3)
+        
     def deactivate(self):
         super().deactivate()
         self.user.state='Walking'

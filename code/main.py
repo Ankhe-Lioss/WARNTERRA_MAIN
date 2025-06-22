@@ -30,10 +30,12 @@ class Game:
         load_menu(self)
         check_cursor(self)
 
+        self.state = None
         self.game_state = 'in_start_menu'
         self.menu_state = 'main'
         self.pausing = True
         self.background = Background()
+        self.current_BGM = None
         
     def restart(self):
         self.all_sprites = AllSprites()
@@ -178,6 +180,9 @@ class Game:
         overlay.fill((0, 0,0))
         self.display_surface.blit(overlay, (0, 0))
         self.display_surface.blit(self.deathmenu_img, (183, 120))
+        
+        self.current_BGM = 'death'
+        pygame.mixer.music.stop()
         self.death_menu_audio.play(-1)
         if self.death_to_quit_button.draw(self.display_surface):
             self.running = False
@@ -189,6 +194,7 @@ class Game:
                 self.game_state = "in_game"
                 self.pausing = False
                 self.death_menu_audio.stop()
+                self.current_BGM = None
 if __name__ == "__main__":
     game = Game()
     game.run()

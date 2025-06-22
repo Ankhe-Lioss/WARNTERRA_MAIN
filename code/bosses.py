@@ -6,6 +6,7 @@ class Veigar(Boss):
     def __init__(self, groups, game):
         self.name = 'Veigar'
         super().__init__(groups, game)
+        
         self.skills = {
             'primary': Veigar_primary(self, game),
             'secondary': Veigar_secondary(self, game),
@@ -36,7 +37,7 @@ class Veigar(Boss):
         self.mode = 1
     
     def update(self, dt):
-        print(self.skills['speed'].remaining)
+        #print(self.skills['speed'].remaining)
         super().update(dt)
         self.phase_remaining -= dt * 1000
         if self.mode == 1 and self.phase_remaining <= 0: # 1 to 2

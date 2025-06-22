@@ -5,15 +5,17 @@ class Status(pygame.sprite.Sprite):
         self.remaining = duration
         self.game = game
         super().__init__(game.all_sprites)
+        self.scale_ratio = self.owner.rect.w / game.player.rect.w / 1.2
         self.frame_index = 0
         self.frames=[]
         self.load_images()
-        self.image =self.frames[self.frame_index]
+        self.image = self.frames[self.frame_index]
         self.image_rect = self.image.get_rect(center=self.owner.rect.center)
         
     def load_images(self):
         for i in range(5):
-            surf=pygame.image.load(os.path.join('images','status',f'{self.name}',f'{i}.png'))
+            surf = pygame.image.load(os.path.join('images','status',f'{self.name}',f'{i}.png')).convert_alpha()
+            surf = pygame.transform.scale_by(surf, self.scale_ratio)
             self.frames.append(surf)
 
     def unapply(self):
@@ -24,11 +26,9 @@ class Status(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frame_index) % len(self.frames)]
         
     def update_position(self):
-        self.image_rect.center = pygame.math.Vector2(self.owner.image_rect.midbottom) + self.offset
+        self.image_rect.center = pygame.Vector2(self.owner.image_rect.center) + self.offset * self.scale_ratio
         
     def update(self, dt):
-        if self.owner.hp <= 0:
-            self.kill()
         self.update_animation(dt)
         self.update_position()
         self.remaining -= dt * 1000
@@ -40,12 +40,10 @@ class Stunned(Status):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__
         self.owner = owner
-        self.offset=pygame.Vector2(0, -10)
+        self.offset=pygame.Vector2(0, -20)
         super().__init__(duration, game)
         self.owner.stunned = True
-    def update_position(self):
 
-        self.image_rect.center= pygame.Vector2(self.owner.image_rect.midtop) + self.offset
     def unapply(self):
         self.owner.stunned = False
         
@@ -73,7 +71,7 @@ class Poisoned(Status):
 class Slowed(Status):
     def __init__(self, duration, ratio, game, owner):
         self.name = self.__class__.__name__
-        self.offset=pygame.Vector2(0, -50)
+        self.offset=pygame.Vector2(0, -25)
         self.owner = owner
         super().__init__(duration, game)
         self.ratio = ratio
@@ -129,7 +127,7 @@ class Buff(Status):
     def __init__(self, duration, ratio, type, game, owner):
         self.name = self.__class__.__name__
         self.owner = owner
-        self.offset=pygame.Vector2(0,-15)
+        self.offset=pygame.Vector2(0, -20)
         super().__init__(duration, game)
         self.ratio = ratio
         self.type = type
@@ -140,6 +138,7 @@ class Buff(Status):
         elif type == 'spd':
             owner.spd *= 1 + ratio
     def update_position(self):
+
         self.image_rect.center=self.owner.image_rect.midbottom+self.offset
     def unapply(self):
         if self.type == 'atk':

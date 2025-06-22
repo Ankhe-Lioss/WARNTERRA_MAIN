@@ -43,6 +43,9 @@ class Bow_primary(Player_projectiles):
         self.source = "Bow Primary"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
+    
+    def apply(self, target):
+        target.status.add(Slowed(500, 0.2, self.game, target))
 
 class Bow_primary_enhanced(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -60,7 +63,7 @@ class Bow_q_skill(Player_projectiles):
         super().__init__(pos, direction, game)
     
     def apply(self, target):
-        target.status.add(Slowed(1500, 0.6, self.game, target))
+        target.status.add(Slowed(1000, 0.6, self.game, target))
 
 class Bow_e_skill(Player_projectiles):
     def __init__(self, pos, direction, game):

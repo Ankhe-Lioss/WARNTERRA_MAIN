@@ -40,6 +40,8 @@ class Entity(pygame.sprite.Sprite):
         self.rect = pygame.rect.FRect()
         
         self.healthbar = Healthbar(self)
+        if isinstance(self, Boss):
+            self.healthbar.kill()
         
     def updstat(self):
         self.maxhp = self.raw_hp + self.level * self.hp_multiplier

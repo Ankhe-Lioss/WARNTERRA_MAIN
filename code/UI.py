@@ -52,7 +52,7 @@ class UI:
             display_hp_ref[0] = current_hp
 
         green_width = int(inner_rect.width * (current_hp / entity.maxhp))
-        red_width = int(inner_rect.width * (display_hp_ref[0] / entity.maxhp))
+        red_width = int(inner_rect.width * (max_hp / entity.maxhp))
 
         red_rect = pygame.Rect(inner_rect.left, inner_rect.top, red_width, inner_rect.height)
         green_rect = pygame.Rect(inner_rect.left, inner_rect.top, green_width, inner_rect.height)
@@ -120,7 +120,7 @@ class UI:
                 color_bg=bg_color,
                 label=boss.name.upper() + (f" - PHASE {boss.phase}" if hasattr(boss, 'phase') else ""),
                 cur=(boss.hp - boss.maxhp / 2) * 2,
-                mx=(boss.hp / 2)
+                mx=boss.maxhp
             )
         else:
             self.draw_entity_health_bar(
@@ -133,7 +133,7 @@ class UI:
                 color_bg=bg_color,
                 label=boss.name.upper() + (f" - PHASE {boss.phase}" if hasattr(boss, 'phase') else ""),
                 cur=boss.hp * 2,
-                mx=(boss.hp / 2)
+                mx=boss.maxhp
             )
 
     

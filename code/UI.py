@@ -69,7 +69,13 @@ class UI:
             label_rect = label_surf.get_rect(midbottom=(rect.centerx, rect.top - 5))
             self.display_surface.blit(label_surf, label_rect)
 
-        text = self.font.render(f"{int(current_hp)}/{int(entity.maxhp)}", True, (255, 255, 255))
+ # Determine font color (black for boss HP, white otherwise)
+        if isinstance(entity, Boss):
+            text_color = (0, 0, 0)  # black for boss bar
+        else:
+            text_color = (255, 255, 255)
+
+        text = self.font.render(f"{int(current_hp)}/{int(entity.maxhp)}", True, text_color)
         text_rect = text.get_rect(center=rect.center)
         self.display_surface.blit(text, text_rect)
 
@@ -95,16 +101,23 @@ class UI:
             self.current_boss = boss
             self.boss_display_hp = boss.hp
 
+                # Choose background color based on phase
+        if hasattr(boss, 'phase') and boss.phase >= 2:
+            bg_color = (255, 255, 255)  # White for phase 2+
+        else:
+            bg_color = (200, 50, 50)    # Default dark red
+
         self.draw_entity_health_bar(
             entity=boss,
             rect=self.boss_health_rect,
             dt=dt,
             display_hp_ref=[self.boss_display_hp],
             delay_speed=self.boss_hp_delay_speed,
-            color_fg=(255, 100, 100),
-            color_bg=(200, 50, 50),
+            color_fg=(255, 100, 100),  # Foreground always red
+            color_bg=bg_color,
             label=boss.name.upper() + (f" - PHASE {boss.phase}" if hasattr(boss, 'phase') else "")
         )
+
     
     def draw_level_circle(self):
         text = self.level_font.render(f"{self.player.level}", True, (255, 255, 255))
@@ -127,15 +140,14 @@ class UI:
                 continue
             skill = self.player.skills[key]
 
-            if skill.casting:
-                cooldown_ratio = skill.remaining / skill.cast_time if skill.cast_time else 0
-                cooldown_time = int(skill.remaining / 1000) + 1
-            elif not skill.ready:
-                cooldown_ratio = skill.remaining / skill.cooldown if skill.cooldown else 0
-                cooldown_time = int(skill.remaining / 1000) + 1
+            cooldown_ratio = skill.remaining / skill.cooldown if skill.cooldown else 0
+            cooldown_time = skill.remaining / 1000
+
+            if cooldown_time > 0.9:
+                cooldown_time = int(cooldown_time) + 1
             else:
-                cooldown_ratio = 0
-                cooldown_time = 0
+                cooldown_time = int(cooldown_time * 10) / 10.0
+
 
             cooldown_ratio = max(0, min(cooldown_ratio, 1))
 
@@ -160,7 +172,8 @@ class UI:
             if not skill.ready:
                 fill_height = int(60 * cooldown_ratio)
                 fill_rect = pygame.Rect(x, y + (60 - fill_height), 60, fill_height)
-                pygame.draw.rect(self.display_surface, (100, 100, 100), fill_rect, border_radius=8)
+                if not skill.casting:
+                    pygame.draw.rect(self.display_surface, (100, 100, 100), fill_rect, border_radius=8)
 
             pygame.draw.rect(self.display_surface, (255, 255, 255), box_rect, width=2, border_radius=8)
 
@@ -172,9 +185,10 @@ class UI:
             self.display_surface.blit(shadow, shadow_rect)
             self.display_surface.blit(label, label_rect)
 
-            if cooldown_time > 0:
-                cd_text = self.cooldown_font.render(str(cooldown_time), True, 'white')
+            if cooldown_time > 0 and not skill.casting:
                 cd_shadow = self.cooldown_font.render(str(cooldown_time), True, 'black')
+                cd_text = self.cooldown_font.render(str(cooldown_time), True, 'white')
+                    
                 cd_rect = cd_text.get_rect(center=(x + 30, y + 16))
                 cd_shadow_rect = cd_text.get_rect(center=(x + 31, y + 17))
                 self.display_surface.blit(cd_shadow, cd_shadow_rect)

@@ -54,6 +54,7 @@ class Veigar(Boss):
                 
             else:
                 del self.skills['aoe']
+                del self.skills['cage']
                 self.skills['secondary'] = Veigar_secondary(self, self.game)
                 self.skills['secondary'].cooldown = 1000
                 

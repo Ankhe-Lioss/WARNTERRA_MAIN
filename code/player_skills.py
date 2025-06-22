@@ -54,7 +54,7 @@ class Gauntlet_secondary(Skill):
         self.user.forced_moving = True
         
         # Test
-        #self.user.heal(100)
+        self.user.heal(100)
         
     def deactivate(self):
         super().deactivate()
@@ -126,6 +126,7 @@ class Bow_e_skill(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
+        
 class PlayerSkills:
     def __init__(self, user, game):
         self.user = user

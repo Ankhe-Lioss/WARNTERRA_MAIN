@@ -623,7 +623,7 @@
    </properties>
    <point/>
   </object>
-  <object id="279" name="Lulu" x="90" y="1212">
+  <object id="279" name="Lulu" x="108" y="1194">
    <properties>
     <property name="room" type="int" value="3"/>
     <property name="wave" type="int" value="1"/>

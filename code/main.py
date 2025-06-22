@@ -47,7 +47,7 @@ class Game:
         self.room = 0
         self.wave = 0
         self.screen_toggle = 0
-        self.level = 4
+        self.level = 3
         self.state = 'in_level'
 
         setlevel(self)  

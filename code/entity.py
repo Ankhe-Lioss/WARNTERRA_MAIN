@@ -79,9 +79,9 @@ class Entity(pygame.sprite.Sprite):
         
     def heal(self, healing, type="normal"):
         if type == "normal":
-            Flyout_number(self.rect.center, "+" + str(int(healing)), (0, 255, 0), self.game)
+            Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game)
         elif type == "overtime":
-            Flyout_number(self.rect.center, "+" + str(int(healing)), (0, 255, 0), self.game, font_size=20)
+            Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game, font_size=20)
         self.hp = min(self.hp + healing, self.maxhp)
     
     def death(self):

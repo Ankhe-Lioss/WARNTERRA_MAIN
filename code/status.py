@@ -10,6 +10,7 @@ class Status(pygame.sprite.Sprite):
         self.load_images()
         self.image =self.frames[self.frame_index]
         self.image_rect = self.image.get_rect(center=self.owner.rect.center)
+        
     def load_images(self):
         for i in range(5):
             surf=pygame.image.load(os.path.join('images','status',f'{self.name}',f'{i}.png'))
@@ -21,8 +22,10 @@ class Status(pygame.sprite.Sprite):
     def update_animation(self,dt):
         self.frame_index +=6*dt
         self.image = self.frames[int(self.frame_index) % len(self.frames)]
+        
     def update_position(self):
-        self.image_rect.center = self.owner.image_rect.center + self.offset
+        self.image_rect.center = pygame.Vector2(self.owner.image_rect.midbottom) + self.offset
+        
     def update(self, dt):
         self.update_animation(dt)
         self.update_position()
@@ -66,7 +69,7 @@ class Poisoned(Status):
 class Slowed(Status):
     def __init__(self, duration, ratio, game, owner):
         self.name = self.__class__.__name__
-        self.offset=pygame.Vector2(0, 0)
+        self.offset=pygame.Vector2(0, -20)
         self.owner = owner
         super().__init__(duration, game)
         self.ratio = ratio

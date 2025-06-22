@@ -67,6 +67,7 @@ class Bow_e_skill(Player_projectiles):
         self.source = "Bow SkillE"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
+        self.wall_piercing = True
     
     def apply(self, target):
         target.status.add(Stunned(5000, self.game, target))

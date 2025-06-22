@@ -151,14 +151,12 @@ class Lulu_buff(Skill):
     def activate(self):
         super().activate()
         self.user.state='Attacking'
-        
-    def deactivate(self):
-        super().deactivate()
-        
         for enemy in self.game.enemy_sprites:
             enemy.status.add(Buff(2000, 0.5, 'spd', self.game, enemy))
             enemy.status.add(Buff(5000, 0.3, 'atk', self.game, enemy))
-            
+        
+    def deactivate(self):
+        super().deactivate()
         self.user.state='Walking'
 
 class Veigar_cage(Skill):

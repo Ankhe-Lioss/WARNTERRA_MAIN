@@ -7,9 +7,9 @@ entity_stats = {
     "Chogath": (700 , 40 , 15, 200, 150, 20  , 2  , 200 , 100),
     "Veigar" : (8000, 80 , 20, 250, 400, 80  , 5  , 1000, 550),
     "Lulu"   : (300 , 20 ,  5, 250, 60 , 10  , 0.5, 750 , 600),
-    "Nocturne":(400 , 60 , 20,   0, 80 , 30  , 2  , 5000, 900),
-    "Maokai" : (800 , 30 , 20, 150, 95 , 11  , 3  , 200 , 100)
-}
+    "Nocturne":(400 , 80 , 20,   0, 40 , 30  , 2  , 5000, 900),
+    "Maokai" : (800 , 30 , 20, 100, 95 , 11  , 3  , 200 , 100)
+} 
 
 skill_stats = {
 #   "Skill" : (cooldown, warmup, cast_time)
@@ -17,7 +17,7 @@ skill_stats = {
     "Gauntlet_primary" : (1000, 0, 0),
     "Gauntlet_secondary" : (2000, 0, 100),
     "Gauntlet_q_skill" : (4800, 0, 200),
-    "Gauntlet_e_skill" : (19250, 10000, 750),
+    "Gauntlet_e_skill" : (14250, 10000, 750),
     
     "Bow_primary" : (1000, 1000, 0),
     "Bow_primary_enhanced": (450, 500, 150),
@@ -53,7 +53,7 @@ player_projectiles = {
     "Bow_primary" : (1, 1000),
     "Bow_primary_enhanced": (0.4, 800),
     "Bow_q_skill": (0.5, 700),
-    "Bow_e_skill": (1.5, 600)
+    "Bow_e_skill": (1, 600)
 }
 
 enemy_projectiles = {
@@ -76,5 +76,5 @@ Aoe_stat={
     'Chogath_Rupture':(2, 5, 1000),
     'Veigar_Darkmatter':(1.5, 9, 500),
 # Player
-    'Bow_explosion' : (2.5, 8, 500)    
+    'Bow_explosion' : (2, 8, 500)    
 }

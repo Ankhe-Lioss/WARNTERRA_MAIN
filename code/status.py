@@ -24,9 +24,11 @@ class Status(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frame_index) % len(self.frames)]
         
     def update_position(self):
-        self.image_rect.center = pygame.Vector2(self.owner.image_rect.midbottom) + self.offset
+        self.image_rect.center = pygame.math.Vector2(self.owner.image_rect.midbottom) + self.offset
         
     def update(self, dt):
+        if self.owner.hp <= 0:
+            self.kill()
         self.update_animation(dt)
         self.update_position()
         self.remaining -= dt * 1000
@@ -38,10 +40,12 @@ class Stunned(Status):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__
         self.owner = owner
-        self.offset=pygame.Vector2(0, 0)
+        self.offset=pygame.Vector2(0, -10)
         super().__init__(duration, game)
         self.owner.stunned = True
+    def update_position(self):
 
+        self.image_rect.center= pygame.Vector2(self.owner.image_rect.midtop) + self.offset
     def unapply(self):
         self.owner.stunned = False
         
@@ -69,7 +73,7 @@ class Poisoned(Status):
 class Slowed(Status):
     def __init__(self, duration, ratio, game, owner):
         self.name = self.__class__.__name__
-        self.offset=pygame.Vector2(0, -20)
+        self.offset=pygame.Vector2(0, -50)
         self.owner = owner
         super().__init__(duration, game)
         self.ratio = ratio
@@ -136,7 +140,6 @@ class Buff(Status):
         elif type == 'spd':
             owner.spd *= 1 + ratio
     def update_position(self):
-
         self.image_rect.center=self.owner.image_rect.midbottom+self.offset
     def unapply(self):
         if self.type == 'atk':

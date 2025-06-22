@@ -128,11 +128,14 @@ class Game:
                 if self.joystick.get_button(1):
                     self.game_state = "in_start_menu"
     def start_menu(self):
+        self.start_menu_audio.play(-1)
         if self.menu_state == 'main':
+            game.display_surface.blit(self.title_img, (295, 8))
             if self.start_button.draw(self.display_surface):
                 self.restart()
                 self.game_state = "in_game"
                 self.pausing = False
+                game.start_menu_audio.stop()
             if self.quit_start_button.draw(self.display_surface):
                 self.running = False
             if self.options_button.draw(self.display_surface):
@@ -172,14 +175,17 @@ class Game:
         overlay.fill((0, 0,0))
         self.display_surface.blit(overlay, (0, 0))
         self.display_surface.blit(self.deathmenu_img, (183, 120))
+        self.death_menu_audio.play(-1)
         if self.death_to_quit_button.draw(self.display_surface):
             self.running = False
         if self.death_to_start_button.draw(self.display_surface):
             self.game_state = "in_start_menu"
+            self.death_menu_audio.stop()
         if self.death_to_restart_button.draw(self.display_surface):
                 self.restart()
                 self.game_state = "in_game"
                 self.pausing = False
+                self.death_menu_audio.stop()
 if __name__ == "__main__":
     game = Game()
     game.run()

@@ -35,7 +35,6 @@ class Poro_stomp(Skill):
         super().deactivate()
         self.user.state = 'Walking'
         self.user.channeling = False
-        
 class Chogath_stomp(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
@@ -110,8 +109,8 @@ class Veigar_aoe(Skill):
     def activate(self):
         super().activate()
         if self.user.phase == 1:
-            for _ in range(3):
-                pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(0, 360), 0).rotate(randrange(0, 360))
+            for _ in range(2):
+                pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(0, 160), 0).rotate(randrange(0, 360))
                 aoew.Spawn_darkmatter(pos, self.game, self.user.atk)
         else:
             pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(0, 120), 0).rotate(randrange(0, 360))

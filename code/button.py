@@ -16,6 +16,12 @@ def load_menu(game):
 	game.death_to_start_img = pygame.image.load(os.path.join('images','menu','button_death_to_start.png')).convert_alpha()
 	game.death_to_quit_img = pygame.image.load(os.path.join('images','menu','button_death_to_quit.png')).convert_alpha()
 	game.death_to_restart_img = pygame.image.load(os.path.join('images','menu','button_death_to_restart.png')).convert_alpha()
+	game.title_img = pygame.image.load(os.path.join('images','menu','title.png')).convert_alpha()
+	#load_audio
+	game.start_menu_audio=pygame.mixer.Sound(os.path.join('audio','menu','Start_menu.wav'))
+	game.start_menu_audio.set_volume(0.3)
+	game.death_menu_audio=pygame.mixer.Sound(os.path.join('audio','menu','Death_menu.wav'))
+	game.death_menu_audio.set_volume(0.04)
 	#pause menu
 	game.resume_button = Button(304, 125, game.resume_img, 1)
 	game.quit_button = Button(304, 500, game.quit_img, 1)
@@ -28,9 +34,9 @@ def load_menu(game):
 	game.back_button = Button(332, 450, game.back_img, 1)
 
 	#start menu
-	game.start_button = Button(565, 260, game.start_img, 1)
-	game.quit_start_button = Button(540, 460, game.quit_img, 1)
-	game.options_button = Button(540, 360, game.options_img, 1)
+	game.start_button = Button(535, 260, game.start_img, 1)
+	game.quit_start_button = Button(510, 460, game.quit_img, 1)
+	game.options_button = Button(510, 360, game.options_img, 1)
 
 	#death menu
 	game.death_to_quit_button = Button(400, 420, game.death_to_quit_img, 1)

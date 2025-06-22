@@ -10,7 +10,7 @@ class UI:
         self.player = player
         self.display_surface = display_surface
         self.weap = player.weap.__class__.__name__
-
+        self.boss_name_font=pygame.font.Font(os.path.join('images','font','UncialAntiqua-Regular.ttf'), 20)
         # Fonts
         self.font = pygame.font.SysFont("Segoe UI", 20, bold=True)
         self.level_font = pygame.font.SysFont("Segoe UI", 28, bold=True)
@@ -61,7 +61,7 @@ class UI:
         pygame.draw.rect(self.display_surface, color_fg, green_rect, border_radius=4)
 
         if label:
-            label_surf = self.font.render(label, True, (255, 255, 255))
+            label_surf = self.boss_name_font.render(label, True, (255, 255, 255))
             label_rect = label_surf.get_rect(midbottom=(rect.centerx, rect.top - 5))
             self.display_surface.blit(label_surf, label_rect)
 

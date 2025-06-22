@@ -12,7 +12,7 @@ class Healthbar(pygame.sprite.Sprite):
         self.bar_full  = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '5.png')).convert_alpha()
 
         # Bar configuration
-        self.width = 30
+        self.width = 32
         self.height = 5
         self.offset_y = -10
 
@@ -51,8 +51,8 @@ class Healthbar(pygame.sprite.Sprite):
         hp_ratio = max(0, min(1, self.user.hp / self.user.maxhp))
         delayed_ratio = max(0, min(1, self.display_hp / self.user.maxhp))
 
-        green_width = int(self.width * hp_ratio)
-        red_width = int(self.width * delayed_ratio)
+        green_width = int(1+30* hp_ratio)
+        red_width = int(1+30 * delayed_ratio)
         # Background layer
         self.image.blit(self.bar_bg, (0, 0))
         # Red (delayed) layer

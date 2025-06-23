@@ -99,17 +99,17 @@ class Game:
 
             # Game State
             self.all_sprites.draw(self.player.rect)
-            if not self.pausing:
+            if not self.pausing and self.weapon_choose==False:
                 self.all_sprites.update(dt)
-
+            if self.game_state == 'in_game':
+                self.ui.update(dt)
             self.draw_menu(dt)
             # CURSOR
             check_cursor(self)
             
             # UPDATE (LAST)
             # UPDATE (LAST)
-            if self.game_state == 'in_game':
-                self.ui.update(dt)
+
 
             pygame.display.update()
             
@@ -117,10 +117,11 @@ class Game:
         pygame.quit()
 
     def draw_menu(self,dt):
-        if self.pausing and self.game_state == 'in_game' and self.menu_state == 'main':
-            self.pause_menu()
         if self.weapon_choose:
             self.weapon_choosing_menu()
+        if self.pausing and self.game_state == 'in_game' and self.menu_state == 'main':
+            self.pause_menu()
+
         if self.game_state == 'in_start_menu':
             self.background.draw(dt,self.display_surface)
             self.start_menu()
@@ -150,6 +151,7 @@ class Game:
                 self.restart()
                 self.pausing = False
                 game.start_menu_audio.stop()
+                self.weapon_choose=True
             if self.quit_start_button.draw(self.display_surface):
                 self.running = False
             if self.options_button.draw(self.display_surface):
@@ -180,6 +182,7 @@ class Game:
         if self.restart_button.draw(self.display_surface):
             self.restart()
             self.pausing = False
+            self.weapon_choose=True
         if self.startmenu_button.draw(self.display_surface):
             self.game_state = "in_start_menu"
     def death_menu(self):
@@ -203,8 +206,10 @@ class Game:
                 self.pausing = False
                 self.death_menu_audio.stop()
                 self.current_BGM = None
+                self.weapon_choose=True
 
     def weapon_choosing_menu(self):
+
         if self.bow_button.draw(self.display_surface):
             self.player.weap.kill()
             self.player.weap = Bow(self)
@@ -218,7 +223,7 @@ class Game:
             self.player.weap = Gauntlet(self)
             self.pausing = False
             self.game_state = "in_game"
-            self.menu_state = "main"  # ✅ Corrected line
+            self.menu_state = "main"
             self.weapon_choose = False
 if __name__ == "__main__":
     game = Game()

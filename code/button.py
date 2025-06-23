@@ -46,8 +46,8 @@ def load_menu(game):
 	game.death_to_restart_button = Button(400, 260, game.death_to_restart_img, 1)
 
 	#weapon menu
-	game.bow_button=Button(120, 249, game.bow_button_img, 0.5)
-	game.gauntlet_button=Button(747, 197, game.gauntlet_button_img, 0.5)
+	game.bow_button=Button(83, 453, game.bow_button_img, 0.25)
+	game.gauntlet_button=Button(869,414, game.gauntlet_button_img, 0.25)
 class Button():
 	def __init__(self, x, y, image, scale):
 		width = image.get_width()
@@ -60,7 +60,7 @@ class Button():
 	def draw(self, surface):
 		action = False
 		pos = pygame.mouse.get_pos()
-
+		mouse_pressed = pygame.mouse.get_pressed()[0]
 		# Default position
 		draw_x = self.rect.x
 		draw_y = self.rect.y
@@ -72,13 +72,19 @@ class Button():
 			draw_y += random.randint(-1, 1)
 
 			# Handle click
-			if pygame.mouse.get_pressed()[0] == 1 and not self.clicked:
+			if mouse_pressed and not self.clicked:
 				self.clicked = True
 				action = True
+			else:
+				# If mouse leaves the button while still pressed, cancel the click
+				self.clicked = False
 
 		# Reset click when mouse released
-		if pygame.mouse.get_pressed()[0] == 0:
+
+		if not mouse_pressed:
 			self.clicked = False
+
+
 
 		# Draw with possible vibration offset
 		surface.blit(self.image, (draw_x, draw_y))

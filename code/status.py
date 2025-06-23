@@ -5,18 +5,37 @@ class Status(pygame.sprite.Sprite):
         self.remaining = duration
         self.game = game
         super().__init__(game.all_sprites)
+
         self.scale_ratio = self.owner.rect.w / game.player.rect.w / 1.2
         self.frame_index = 0
-        self.frames=[]
+        self.frames = []
+        self.icon = None  # Static icon for UI
+
         self.load_images()
+        self.load_icon()
+
         self.image = self.frames[self.frame_index]
         self.image_rect = self.image.get_rect(center=self.owner.rect.center)
-        
+
     def load_images(self):
         for i in range(5):
-            surf = pygame.image.load(os.path.join('images','status',f'{self.name}',f'{i}.png')).convert_alpha()
+            surf = pygame.image.load(os.path.join('images', 'status', f'{self.name}', f'{i}.png')).convert_alpha()
             surf = pygame.transform.scale_by(surf, self.scale_ratio)
             self.frames.append(surf)
+
+    def load_icon(self):
+        if self.name == 'Buff' and hasattr(self, 'type'):
+            # Buff icons use a subfolder for types
+            icon_path = os.path.join('images', 'icons', 'status', 'Buff', f'{self.type}.png')
+        else:
+            # Default: load by status name
+            icon_path = os.path.join('images', 'icons', 'status', f'{self.name}.png')
+
+        if os.path.exists(icon_path):
+            icon_surf = pygame.image.load(icon_path).convert_alpha()
+            self.icon = pygame.transform.scale(icon_surf, (24,24))
+        else:
+            self.icon = None
 
     def unapply(self):
         pass

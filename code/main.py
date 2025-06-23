@@ -37,7 +37,7 @@ class Game:
         self.background = Background()
         self.current_BGM = None
         self.level = 1
-        self.weapon_choose=False
+        self.weapon_choose=True
 
     def restart(self):
         self.all_sprites = AllSprites()
@@ -103,7 +103,6 @@ class Game:
                 self.all_sprites.update(dt)
 
             self.draw_menu(dt)
-            self.weapon_choosing_menu()
             # CURSOR
             check_cursor(self)
             
@@ -120,6 +119,8 @@ class Game:
     def draw_menu(self,dt):
         if self.pausing and self.game_state == 'in_game' and self.menu_state == 'main':
             self.pause_menu()
+        if self.weapon_choose:
+            self.weapon_choosing_menu()
         if self.game_state == 'in_start_menu':
             self.background.draw(dt,self.display_surface)
             self.start_menu()
@@ -202,22 +203,23 @@ class Game:
                 self.pausing = False
                 self.death_menu_audio.stop()
                 self.current_BGM = None
-        if self.weapon_choose==True:
-            self.weapon_choosing_menu()
+
     def weapon_choosing_menu(self):
         if self.bow_button.draw(self.display_surface):
             self.player.weap.kill()
-            self.player.weap=Bow(self)
+            self.player.weap = Bow(self)
             self.pausing = False
             self.game_state = "in_game"
             self.menu_state = "main"
+            self.weapon_choose = False
+
         if self.gauntlet_button.draw(self.display_surface):
             self.player.weap.kill()
-            self.player.weap=Gauntlet(self)
+            self.player.weap = Gauntlet(self)
             self.pausing = False
             self.game_state = "in_game"
-            self.game_state="main"
-
+            self.menu_state = "main"  # ✅ Corrected line
+            self.weapon_choose = False
 if __name__ == "__main__":
     game = Game()
     game.run()

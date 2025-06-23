@@ -46,7 +46,7 @@ def load_menu(game):
 	game.death_to_restart_button = Button(400, 260, game.death_to_restart_img, 1)
 
 	#weapon menu
-	game.bow_button=Button(243, 249, game.bow_button_img, 0.5)
+	game.bow_button=Button(120, 249, game.bow_button_img, 0.5)
 	game.gauntlet_button=Button(747, 197, game.gauntlet_button_img, 0.5)
 class Button():
 	def __init__(self, x, y, image, scale):

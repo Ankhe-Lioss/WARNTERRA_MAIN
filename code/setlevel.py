@@ -46,7 +46,6 @@ def setlevel(game):
             # Create new player
             game.player = Player((obj.x, obj.y), game)
             game.player.weap = Bow(game)
-
             # Reinitialize the UI with the new player
             game.ui = UI(game, game.player, game.display_surface)
 

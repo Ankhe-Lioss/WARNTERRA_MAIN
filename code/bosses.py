@@ -98,7 +98,7 @@ class Soraka(Boss):
         self.game.wave += 1
         from setlevel import spawn_wave
         spawn_wave(self.game)
-    
+
     def update(self, dt):
         super().update(dt)
         if self.game.spawn_numb > 2:

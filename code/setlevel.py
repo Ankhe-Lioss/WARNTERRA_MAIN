@@ -50,9 +50,10 @@ def setlevel(game):
             if hasattr(game,'chosen_weap'):
                 game.player.weap=game.chosen_weap(game)
             else:
-                game.player.weap=Bow(game)
+
+                game.player.weap=pygame.sprite.Sprite()
             # Reinitialize the UI with the new player
-            game.ui = UI(game, game.player, game.display_surface)
+            #game.ui = UI(game, game.player, game.display_surface)
 
         else:
             if 'room' in obj.properties:

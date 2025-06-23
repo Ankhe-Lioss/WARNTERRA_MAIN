@@ -5,7 +5,7 @@ Spawn_aoe_dict={  #aoe skill=[frame_number,life_time]d
     'Spawn_rupture':(3, 500),
     'Spawn_darkmatter':(6, 1000),
     'Spawn_Soraka_star' : (6, 1000),
-    'Spawn_Soraka_cc' : (6, 2000)
+    'Spawn_Soraka_cc' : (12, 2000)
 }
 class Spawn_aoe(pygame.sprite.Sprite):
     def __init__(self, pos, game, user_atk):
@@ -72,7 +72,7 @@ class Spawn_Soraka_cc(Spawn_aoe):
     def update(self, dt):
         super().update(dt)
         if (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.pos)).length() <= self.radius:
-            self.game.player.status.add(Silenced(dt * 1000, self.game, self.game.player))
+            self.game.player.status.add(Silenced(100, self.game, self.game.player))
     
     def spawn(self):
         if (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.pos)).length() <= self.radius and self.user.phase == 2:

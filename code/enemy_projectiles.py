@@ -116,6 +116,24 @@ class Speed_Buff(Enemy_projectiles):
         super().update(dt)
         self.skill.remaining = self.skill.cooldown
 
+
+class Attack_Buff(Enemy_projectiles):
+    def __init__(self, user, pos, game, skill):
+        self.name = self.__class__.__name__
+        self.source = "Other Attacking_buff"
+        super().__init__(user, pos, pygame.Vector2(), game)
+        self.lifetime = 999999999
+        self.used = False
+        self.skill = skill
+
+    def apply(self, target):
+        target.status.add(Buff(5000, 0.3, 'atk', self.game, target))
+        self.used = True
+
+    def update(self, dt):
+        super().update(dt)
+        self.skill.remaining = self.skill.cooldown
+
 class Maokai_Primary(Enemy_projectiles):
     def __init__(self, user, direction, game):
         self.name = self.__class__.__name__

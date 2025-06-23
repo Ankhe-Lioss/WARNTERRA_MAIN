@@ -47,7 +47,8 @@ skill_stats = {
     "Soraka_ult" : (5000, 2000, 1000),
 # Other
     "Summon_healing_buff" : (20000, 0, 0),
-    "Summon_speed_buff" : (20000, 0, 0)
+    "Summon_speed_buff" : (20000, 0, 0),
+    "Summon_attack_buff" : (20000, 0, 0)
 }
 
 player_projectiles = {

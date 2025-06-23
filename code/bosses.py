@@ -83,7 +83,10 @@ class Soraka(Boss):
         self.skills = {
             'heal' : Soraka_heal(self, game),
             'aoe' : Soraka_primary(self, game),
-            'cc' : Soraka_cc(self, game)
+            'cc' : Soraka_cc(self, game),
+            'heal1': Summon_attack_buff(self, (110, 3230), game),
+            'heal2': Summon_attack_buff(self, (1455, 3230), game),
+            'atk': Summon_healing_buff(self, (780, 3390), game)
         }
         self.phase = 1
     

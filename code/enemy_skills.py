@@ -195,7 +195,17 @@ class Summon_speed_buff(Skill):
         
     def activate(self):
         super().activate()
-        self.buff = eproj.Speed_Buff(self.user, self.pos, self.game, self)   
+        self.buff = eproj.Speed_Buff(self.user, self.pos, self.game, self)
+
+class Summon_attack_buff(Skill):
+    def __init__(self, user, pos, game):
+        self.name = self.__class__.__name__
+        self.pos = pos
+        super().__init__(user, game)
+
+    def activate(self):
+        super().activate()
+        self.buff = eproj.Attack_Buff(self.user, self.pos, self.game, self)
 
 class Nocturne_sprint(Skill):
     def __init__(self, user, game):

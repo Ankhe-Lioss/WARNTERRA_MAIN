@@ -38,7 +38,7 @@ class Game:
         self.pausing = True
         self.background = Background()
         self.current_BGM = None
-        self.level = 0                             #LEVEL
+        self.level = 2                              #LEVEL
         self.weapon_choose=False
 
     def restart(self):

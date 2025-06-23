@@ -24,7 +24,7 @@ class Status(pygame.sprite.Sprite):
             self.frames.append(surf)
 
     def load_icon(self):
-        if self.name == 'Buff' and hasattr(self, 'type'):
+        if hasattr(self, 'type'):
             # Buff icons use a subfolder for types
             icon_path = os.path.join('images', 'icons', 'status', 'Buff', f'{self.type}.png')
         else:
@@ -108,6 +108,10 @@ class Silenced(Status):
         super().__init__(duration, game)
         self.owner.silenced = True
 
+    def update(self, dt):
+        self.owner.silenced = True
+        super().update(dt)
+
     def unapply(self):
         self.owner.silenced = False
         
@@ -149,8 +153,12 @@ class Buff(Status):
         self.owner = owner
         self.offset=pygame.Vector2(0, -20)
         super().__init__(duration, game)
-        self.ratio = ratio
+
         self.type = type
+        self.load_icon()
+
+        self.ratio = ratio
+
         if type == 'atk':
             owner.atk *= 1 + ratio
         elif type == 'def':

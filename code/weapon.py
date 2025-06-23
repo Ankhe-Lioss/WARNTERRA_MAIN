@@ -90,4 +90,10 @@ class Bow(Weap):
         self.e_skill = Bow_e_skill(self.player, self.game)
         self.secondary = Bow_secondary(self.player, self.game)
 
+class Bazooka(Weap):
+    def __init__(self, game):
+        self.name = self.__class__.__name__
+        super().__init__(game)
 
+        # Import skills
+        self.primary = Tracking_missile(self.player, self.game)

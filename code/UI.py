@@ -139,7 +139,7 @@ class UI:
 
     
     def draw_level_circle(self):
-        text = self.level_font.render(f"{self.player.level}", True, (255, 255, 255))
+        text = self.level_font.render(f"{self.player.level+1}", True, (255, 255, 255))
         padding = 12
         radius = max(text.get_width(), text.get_height()) // 2 + padding
 

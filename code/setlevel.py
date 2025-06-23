@@ -1,7 +1,6 @@
 from weapon import *
 from sprites import *
 from player import *
-from weapon import *
 from spawn import *
 from UI import UI  # Make sure UI is imported
 
@@ -44,7 +43,14 @@ def setlevel(game):
         if obj.name == 'Player':
             # Create new player
             game.player = Player((obj.x, obj.y), game)
-            game.player.weap = Bow(game)
+
+            # kill weapon
+            if hasattr(game.player, 'weap'):
+                game.player.weap.kill()
+            if hasattr(game,'chosen_weap'):
+                game.player.weap=game.chosen_weap(game)
+            else:
+                game.player.weap=Bow(game)
             # Reinitialize the UI with the new player
             game.ui = UI(game, game.player, game.display_surface)
 

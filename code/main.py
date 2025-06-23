@@ -13,15 +13,15 @@ class Game:
     def __init__(self):
         # Initializing
         pygame.init()
-        self.game_font = pygame.font.Font(os.path.join('images', 'font', 'oldenglishtextmt.ttf'),35)
+        self.game_font = pygame.font.Font(os.path.join('images', 'font', 'oldenglishtextmt.ttf'),40)
         # Display
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.mouse.set_visible(False)
 
         # Caption
         pygame.display.set_caption("Warnterra")
-        #icon = pygame.image.load(os.path.join('images', 'UI', 'icon.png')).convert_alpha()
-        #pygame.display.set_icon(icon)
+        icon = pygame.image.load(os.path.join('images', 'UI', 'icon.png')).convert_alpha()
+        pygame.display.set_icon(icon)
         # Times
         self.clock = pygame.time.Clock()
         # States
@@ -31,6 +31,7 @@ class Game:
         load_menu(self)
         check_cursor(self)
 
+
         self.state = None
         self.game_state = 'in_start_menu'
         self.menu_state = 'main'
@@ -38,7 +39,7 @@ class Game:
         self.background = Background()
         self.current_BGM = None
         self.level = 0                             #LEVEL
-        self.weapon_choose=True
+        self.weapon_choose=False
 
     def restart(self):
         self.all_sprites = AllSprites()
@@ -141,6 +142,7 @@ class Game:
                     self.game_state = 'in_game'
                     self.menu_state = True
                     pygame.mixer.stop()
+                    self.weapon_choose=True
                 # X button (Quit)
                 if self.joystick.get_button(2):
                     self.running = False
@@ -161,7 +163,7 @@ class Game:
                 self.weapon_choose=True
             if self.quit_start_button.draw(self.display_surface):
                 self.running = False
-            if self.options_button.draw(self.display_surface):
+            '''if self.options_button.draw(self.display_surface):
                 self.menu_state = "options"
         if self.menu_state == "options":
             if self.video_button.draw(self.display_surface):
@@ -171,7 +173,7 @@ class Game:
             if self.keys_button.draw(self.display_surface):
                     ("Change Key Bindings")
             if self.back_button.draw(self.display_surface):
-                self.menu_state = "main"
+                self.menu_state = "main"'''
 
     def pause_menu(self):
         # Optional dark overlay
@@ -238,6 +240,7 @@ class Game:
             self.game_state = "in_game"
             self.menu_state = "main"
             self.weapon_choose = False
+            self.chosen_weap = Bow
 
         if self.gauntlet_button.draw(self.display_surface):
             self.player.weap.kill()
@@ -246,6 +249,7 @@ class Game:
             self.game_state = "in_game"
             self.menu_state = "main"
             self.weapon_choose = False
+            self.chosen_weap = Gauntlet
 if __name__ == "__main__":
     game = Game()
     game.run()

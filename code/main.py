@@ -13,14 +13,15 @@ class Game:
     def __init__(self):
         # Initializing
         pygame.init()
-
+        self.game_font = pygame.font.Font(os.path.join('images', 'font', 'oldenglishtextmt.ttf'),35)
         # Display
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.mouse.set_visible(False)
 
         # Caption
-        pygame.display.set_caption("Warnterra 1.0")
-
+        pygame.display.set_caption("Warnterra")
+        #icon = pygame.image.load(os.path.join('images', 'UI', 'icon.png')).convert_alpha()
+        #pygame.display.set_icon(icon)
         # Times
         self.clock = pygame.time.Clock()
         # States
@@ -118,7 +119,7 @@ class Game:
 
     def draw_menu(self,dt):
         if self.weapon_choose:
-            self.weapon_choosing_menu()
+            self.weapon_choosing_menu( )
 
         if self.pausing and self.game_state == 'in_game' and self.menu_state == 'main':
             self.pause_menu()
@@ -128,6 +129,9 @@ class Game:
             self.start_menu()
         if self.game_state == 'in_death_menu':
             self.death_menu()
+            wave_text = self.game_font.render(f"Level Reached: {self.level+1}", True, (20, 40, 0))
+            wave_rect = wave_text.get_rect(topleft=(281, 520))  # Adjust Y as needed
+            self.display_surface.blit(wave_text, wave_rect)
         if self.pausing or not(self.game_state == 'in_game'):
             if self.have_joystick:
                 # A button (Restart)

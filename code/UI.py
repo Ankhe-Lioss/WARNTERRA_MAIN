@@ -3,6 +3,7 @@ import os
 from setting import *
 from data import skill_stats, entity_stats
 from entity import Boss
+from status import *
 
 class UI:
     def __init__(self, game, player, display_surface):
@@ -150,6 +151,42 @@ class UI:
 
         text_rect = text.get_rect(center=(center_x, center_y))
         self.display_surface.blit(text, text_rect)
+    
+    def draw_status_effects(self):
+        status_bar_top = self.health_rect.bottom + 6
+        icon_size = 24
+        spacing = 4
+
+        # Collect all status effects owned by player
+        all_effects = [
+            sprite for sprite in self.game.all_sprites
+            if isinstance(sprite, Status) and sprite.owner == self.player
+        ]
+
+        # Group by unique key: name + type (to separate same-name different effects)
+        grouped_effects = {}
+        for effect in all_effects:
+            key = effect.name + (getattr(effect, 'type', '') or '')
+            if key not in grouped_effects or effect.remaining > grouped_effects[key].remaining:
+                grouped_effects[key] = effect
+
+        # Sort for consistency
+        effects = sorted(grouped_effects.values(), key=lambda e: e.name + getattr(e, 'type', ''))
+
+        for index, effect in enumerate(effects):
+            # Load icon or fallback to frame
+            if not effect.icon:
+                continue
+            icon = effect.icon
+
+            # Draw icon
+            icon_x = self.health_rect.left + index * (icon_size + spacing)
+            icon_y = status_bar_top
+            self.display_surface.blit(icon, (icon_x, icon_y))
+
+            # Draw white border
+            border_rect = pygame.Rect(icon_x, icon_y, icon_size, icon_size)
+            pygame.draw.rect(self.display_surface, (255, 255, 255), border_rect, 1)
 
     def draw_skill_boxes(self, dt):
         skill_keys = ['Left', 'Right', 'Q', 'E']
@@ -220,5 +257,6 @@ class UI:
         self.draw_health_bar(dt)
         self.draw_level_circle()
         self.draw_skill_boxes(dt)
+        self.draw_status_effects()
         self.draw_boss_bar(dt)
 

@@ -92,3 +92,9 @@ class Bow_explosion(Area_of_effect):
     
     def apply(self, target):
         target.status.add(Slowed(5000, 0.9, self.game, target))
+
+class Soraka_star(Area_of_effect):
+    def __init__(self, pos,game,user_atk):
+        self.enemy_sprites=game.player_sprites
+        self.name=self.__class__.__name__
+        super().__init__(pos,game,user_atk)

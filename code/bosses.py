@@ -76,9 +76,14 @@ class Soraka(Boss):
     def __init__(self, groups, game):
         self.name = 'Soraka'
         super().__init__(groups, game)
-                
+        
+        self.states.append('Healing')
+        self.load_frames()
+        
         self.skills = {
-            'heal' : Soraka_heal(self, game)
+            'heal' : Soraka_heal(self, game),
+            'aoe' : Soraka_primary(self, game),
+            'cc' : Soraka_cc(self, game)
         }
         self.phase = 1
     

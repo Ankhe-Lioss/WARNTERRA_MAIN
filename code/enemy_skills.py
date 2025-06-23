@@ -243,7 +243,7 @@ class Soraka_heal(Skill):
         
     def activate(self):
         super().activate()
-        self.user.state='Attacking'
+        self.user.state='Healing'
         if self.game.spawn_numb == 2: #only boss and check in
             self.user.heal(self.user.atk * 1)
             return
@@ -265,13 +265,44 @@ class Soraka_ult(Skill):
         
     def activate(self):
         super().activate()
-        self.user.state='Attacking'
+        self.user.state='Healing'
         
         for enemy in self.game.enemy_sprites:
             if enemy is self.user:
                 enemy.heal(self.user.atk * 0.5)
             else:
                 enemy.heal(self.user.atk * 1.5)
+        
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'
+
+class Soraka_primary(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        self.user.state='Attacking'
+        
+        deviation = pygame.Vector2(random.randint(0, 160), 0).rotate(random.randrange(0, 360))
+        aoew.Spawn_Soraka_star(pygame.Vector2(self.game.player.rect.center) + deviation, self.game, self.user.atk)
+        
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'
+
+class Soraka_cc(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        self.user.state='Attacking'
+        
+        aoew.Spawn_Soraka_cc(self.game.player.rect.center, self.game, self.user)
         
     def deactivate(self):
         super().deactivate()

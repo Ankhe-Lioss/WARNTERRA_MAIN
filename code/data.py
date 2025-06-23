@@ -43,8 +43,7 @@ skill_stats = {
 # Soraka
     "Soraka_heal" : (2000, 1000, 1000),
     "Soraka_primary" : (500, 0, 1000),
-    "Soraka_cc_1" : (3000, 3000, 1000),
-    "Soraka_cc_2" : (4000, 1000, 1000),
+    "Soraka_cc" : (5000, 3000, 1000),
     "Soraka_ult" : (5000, 2000, 1000),
 # Other
     "Summon_healing_buff" : (20000, 0, 0),
@@ -74,7 +73,8 @@ enemy_projectiles = {
     "Veigar_Ult" : (0, 700),
 # Other
     "Healing_Buff" : (0, 0),
-    "Speed_Buff" : (0, 0)
+    "Speed_Buff" : (0, 0),
+    "Attack_Buff" : (0, 0)
 }
 
 Aoe_stat={
@@ -82,6 +82,7 @@ Aoe_stat={
     'Poro_Stomp':(0.5, 3, 1000),
     'Chogath_Rupture':(2, 5, 1000),
     'Veigar_Darkmatter':(1, 9, 500),
+    'Soraka_star': (0.5, 4, 400),
 # Player
     'Bow_explosion' : (1, 8, 500)    
 }

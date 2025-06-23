@@ -36,8 +36,8 @@ class Game:
         self.pausing = True
         self.background = Background()
         self.current_BGM = None
-        self.level = 0
-        self.weapon_choose=False
+        self.level = 0                             #LEVEL
+        self.weapon_choose=True
 
     def restart(self):
         self.all_sprites = AllSprites()

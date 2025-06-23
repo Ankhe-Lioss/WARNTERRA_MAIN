@@ -6,14 +6,13 @@ from spawn import *
 from UI import UI  # Make sure UI is imported
 
 def setlevel(game):
-    print("Setting Level", game.level)
-    
+    level = game.level%5+1
     
     
     game.room = -1
 
     # Load TMX map
-    game.map = load_pygame(os.path.join('data', 'maps', f'Level{game.level}.tmx'))
+    game.map = load_pygame(os.path.join('data', 'maps', f'Level{level}.tmx'))
 
     # Initialize structures
     game.spawnlist = {}
@@ -50,7 +49,6 @@ def setlevel(game):
             game.ui = UI(game, game.player, game.display_surface)
 
         else:
-            print("adding", obj)
             if 'room' in obj.properties:
                 if obj.name == "Check_in":
                     game.checkins[obj.properties['room']] = (obj.x, obj.y)

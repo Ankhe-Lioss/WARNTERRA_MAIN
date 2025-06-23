@@ -36,8 +36,8 @@ class Game:
         self.pausing = True
         self.background = Background()
         self.current_BGM = None
-        self.level = 1
-        self.weapon_choose=True
+        self.level = 0
+        self.weapon_choose=False
 
     def restart(self):
         self.all_sprites = AllSprites()
@@ -119,6 +119,7 @@ class Game:
     def draw_menu(self,dt):
         if self.weapon_choose:
             self.weapon_choosing_menu()
+
         if self.pausing and self.game_state == 'in_game' and self.menu_state == 'main':
             self.pause_menu()
 
@@ -134,6 +135,7 @@ class Game:
                     self.restart()
                     self.pausing = False
                     self.game_state = 'in_game'
+                    self.menu_state = True
                     pygame.mixer.stop()
                 # X button (Quit)
                 if self.joystick.get_button(2):
@@ -143,6 +145,7 @@ class Game:
                 if self.joystick.get_button(1):
                     self.game_state = "in_start_menu"
                     pygame.mixer.stop()
+
     def start_menu(self):
         self.start_menu_audio.play(-1)
         if self.menu_state == 'main' :
@@ -209,7 +212,21 @@ class Game:
                 self.weapon_choose=True
 
     def weapon_choosing_menu(self):
-
+        if self.have_joystick:
+            if self.joystick.get_button(4):
+                self.player.weap.kill()
+                self.player.weap = Bow(self)
+                self.pausing = False
+                self.game_state = "in_game"
+                self.menu_state = "main"
+                self.weapon_choose = False
+            elif self.joystick.get_button(5):
+                self.player.weap.kill()
+                self.player.weap = Gauntlet(self)
+                self.pausing = False
+                self.game_state = "in_game"
+                self.menu_state = "main"
+                self.weapon_choose = False
         if self.bow_button.draw(self.display_surface):
             self.player.weap.kill()
             self.player.weap = Bow(self)

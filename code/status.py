@@ -54,7 +54,8 @@ class Status(pygame.sprite.Sprite):
         if self.remaining <= 0:
             self.unapply()
             self.kill()
-
+        if self.owner.hp<=0:
+            self.kill()
 class Stunned(Status):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__
@@ -166,3 +167,12 @@ class Buff(Status):
             self.owner.def_ /= 1 + self.ratio
         elif self.type == 'spd':
             self.owner.spd /= 1 + self.ratio
+class Dark_aura(Status):
+    def __init__(self, duration, game, owner):
+        self.name = self.__class__.__name__
+        self.owner = owner
+        self.offset=pygame.Vector2(1, 0)
+        super().__init__(duration, game)
+        for frame in self.frames:
+            frame.set_alpha(150)
+

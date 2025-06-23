@@ -1,6 +1,6 @@
 from setting import *
 from player_skills import *
-
+import math
 class Weap(pygame.sprite.Sprite):
     def __init__(self, game):
         super().__init__(game.all_sprites)
@@ -10,6 +10,7 @@ class Weap(pygame.sprite.Sprite):
         # Init
         self.surf = pygame.image.load(os.path.join('images', 'weapon', f'{self.name}.png')).convert_alpha()
         self.image = self.surf
+        self.image_rotate=self.surf.copy()
         self.image_rect = self.image.get_frect(center=self.player.image_rect.center)
         
         # Import skills
@@ -29,7 +30,18 @@ class Weap(pygame.sprite.Sprite):
             self.q_skill.cast()
         if self.joystick.get_axis(5) > 0.5:
             self.e_skill.cast()
+    def update_pos(self):
+        weapon_offset = pygame.math.Vector2(10, -25)  # adjust for hand position
+        dx = self.player.facing_dir.x
+        dy = self.player.facing_dir.y
+        weapon_angle = math.degrees(math.atan2(-dy, dx))  -90# negative dy because of screen coords
 
+        # Rotate weapon image
+        rotated_weapon = pygame.transform.rotate(self.image_rotate, weapon_angle)
+        self.image=rotated_weapon
+        # Update position (adjust for rotated image center)
+        # ("up", "up_right", "right", "down_right", "down", "down_left", "left", "up_left"
+        self.image_rect = rotated_weapon.get_rect(center=self.player.rect.center + weapon_offset.rotate(-weapon_angle))
     def input(self):
         if pygame.mouse.get_pressed()[0]:
             self.primary.cast()
@@ -41,6 +53,7 @@ class Weap(pygame.sprite.Sprite):
             self.e_skill.cast()
     
     def update(self, dt):
+        self.update_pos()
         self.player.skills["Left"] = self.primary
         self.player.skills["Right"] = self.secondary
         self.player.skills["Q"] = self.q_skill

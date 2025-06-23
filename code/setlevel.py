@@ -6,11 +6,13 @@ from spawn import *
 from UI import UI  # Make sure UI is imported
 
 def setlevel(game):
-    print("Setting Level", game.level)
+    level = game.level%5+1
+    
+    
     game.room = -1
 
     # Load TMX map
-    game.map = load_pygame(os.path.join('data', 'maps', f'Level{game.level}.tmx'))
+    game.map = load_pygame(os.path.join('data', 'maps', f'Level{level}.tmx'))
 
     # Initialize structures
     game.spawnlist = {}
@@ -43,12 +45,10 @@ def setlevel(game):
             # Create new player
             game.player = Player((obj.x, obj.y), game)
             game.player.weap = Bow(game)
-
             # Reinitialize the UI with the new player
             game.ui = UI(game, game.player, game.display_surface)
 
         else:
-            print("adding", obj)
             if 'room' in obj.properties:
                 if obj.name == "Check_in":
                     game.checkins[obj.properties['room']] = (obj.x, obj.y)
@@ -93,6 +93,12 @@ def spawn_room(game):
     This function checks the game state and spawns enemies or doors as needed."""
 
 def update_level(game):
+    # BGM
+    if not pygame.mixer.get_busy() and game.game_state == "in_game" and game.current_BGM is None:
+        pygame.mixer.music.load(os.path.join("audio", "BGM", "normal.wav"))
+        pygame.mixer.music.play(loops=-1)
+        game.current_BGM = "normal.wav"
+    
     if game.spawn_numb == 0:
         if game.room == game.room_numb:
             game.level += 1

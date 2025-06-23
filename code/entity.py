@@ -68,6 +68,14 @@ class Entity(pygame.sprite.Sprite):
             dmg = 0    
     
         delta = dmg / (1 + 0.01 * self.def_ * (1 - pen))
+        
+        if hasattr(self, "invulnerable") and self.hp - delta < self.maxhp * self.invulnerable:
+            delta = self.hp - self.invulnerable * self.maxhp
+            
+        if hasattr(self, "invulnerable") and delta == 0:
+            Flyout_number(self.rect.center, "immune", (40, 40, 160), self.game, font_size=32)
+            return
+        
         self.hp -= delta
         
         if type == "normal":
@@ -84,7 +92,11 @@ class Entity(pygame.sprite.Sprite):
             Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game)
         elif type == "overtime":
             Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game, font_size=20)
-        self.hp = min(self.hp + healing, self.maxhp)
+        
+        if isinstance(self, Boss) and self.phase == 2:
+            self.hp = min(self.hp + healing, self.maxhp / 2)
+        else:
+            self.hp = min(self.hp + healing, self.maxhp)
     
     def death(self):
         self.kill()
@@ -263,6 +275,8 @@ class Boss(Enemy):
     def __init__(self, pos, game):
         super().__init__(pos, game)
         
+        pygame.mixer.music.fadeout(2000)
+        
         # Boss specific attributes
         self.phase = 1
         self.phase_change_hp = 0.5 * self.maxhp  # Change phase at 50% HP
@@ -270,6 +284,10 @@ class Boss(Enemy):
 
     def update(self, dt):
         super().update(dt)
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.load(os.path.join("audio", "BGM", f"{self.name}.wav"))
+            pygame.mixer.music.play(loops=-1)
+            
         if self.hp <= self.phase_change_hp and self.phase == 1:
             self.phase = 2
             self.change_phase()
@@ -277,3 +295,8 @@ class Boss(Enemy):
     def change_phase(self):
         # Logic to change the boss's behavior or appearance when changing phases
         pass
+
+    def death(self):
+        super().death()
+        self.game.current_BGM = None
+        pygame.mixer.music.fadeout(1000)

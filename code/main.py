@@ -30,11 +30,15 @@ class Game:
         load_menu(self)
         check_cursor(self)
 
+        self.state = None
         self.game_state = 'in_start_menu'
         self.menu_state = 'main'
         self.pausing = True
         self.background = Background()
-        
+        self.current_BGM = None
+        self.level = 0                             #LEVEL
+        self.weapon_choose=True
+
     def restart(self):
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()
@@ -48,14 +52,18 @@ class Game:
         self.room = 0
         self.wave = 0
         self.screen_toggle = 0
-        self.level = 1
         self.state = 'in_level'
 
-        setlevel(self)  
+        setlevel(self)
 
         self.ui = UI(self, self.player, self.display_surface)
+
+        # Set states to show weapon choosing menu
+        self.game_state = "in_game"
+        self.pausing = True
     def run(self):
         self.restart()
+        self.game_state = "in_start_menu"
         while self.running:
             # Data time
             dt = self.clock.tick(FPS) / 1000
@@ -84,21 +92,24 @@ class Game:
 
             # Enemies Spawning
             check_game_state(self)
+            
+            # REPEATING TESTS
+            #print(self.spawn_numb)
+            
 
             # Game State
             self.all_sprites.draw(self.player.rect)
-            if not self.pausing:
+            if not self.pausing and self.weapon_choose==False:
                 self.all_sprites.update(dt)
-
+            if self.game_state == 'in_game':
+                self.ui.update(dt)
             self.draw_menu(dt)
-            
             # CURSOR
             check_cursor(self)
             
             # UPDATE (LAST)
             # UPDATE (LAST)
-            if self.game_state == 'in_game':
-                self.ui.update(dt)
+
 
             pygame.display.update()
             
@@ -106,8 +117,12 @@ class Game:
         pygame.quit()
 
     def draw_menu(self,dt):
-        if self.pausing and self.game_state == 'in_game':
+        if self.weapon_choose:
+            self.weapon_choosing_menu()
+
+        if self.pausing and self.game_state == 'in_game' and self.menu_state == 'main':
             self.pause_menu()
+
         if self.game_state == 'in_start_menu':
             self.background.draw(dt,self.display_surface)
             self.start_menu()
@@ -120,6 +135,7 @@ class Game:
                     self.restart()
                     self.pausing = False
                     self.game_state = 'in_game'
+                    self.menu_state = True
                     pygame.mixer.stop()
                 # X button (Quit)
                 if self.joystick.get_button(2):
@@ -132,13 +148,13 @@ class Game:
 
     def start_menu(self):
         self.start_menu_audio.play(-1)
-        if self.menu_state == 'main':
+        if self.menu_state == 'main' :
             game.display_surface.blit(self.title_img, (295, 8))
             if self.start_button.draw(self.display_surface):
                 self.restart()
-                self.game_state = "in_game"
                 self.pausing = False
                 game.start_menu_audio.stop()
+                self.weapon_choose=True
             if self.quit_start_button.draw(self.display_surface):
                 self.running = False
             if self.options_button.draw(self.display_surface):
@@ -169,15 +185,18 @@ class Game:
         if self.restart_button.draw(self.display_surface):
             self.restart()
             self.pausing = False
+            self.weapon_choose=True
         if self.startmenu_button.draw(self.display_surface):
             self.game_state = "in_start_menu"
-
     def death_menu(self):
         overlay = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
         overlay.set_alpha(180)
         overlay.fill((0, 0,0))
         self.display_surface.blit(overlay, (0, 0))
         self.display_surface.blit(self.deathmenu_img, (183, 120))
+        
+        self.current_BGM = 'death'
+        pygame.mixer.music.stop()
         self.death_menu_audio.play(-1)
         if self.death_to_quit_button.draw(self.display_surface):
             self.running = False
@@ -189,6 +208,40 @@ class Game:
                 self.game_state = "in_game"
                 self.pausing = False
                 self.death_menu_audio.stop()
+                self.current_BGM = None
+                self.weapon_choose=True
+
+    def weapon_choosing_menu(self):
+        if self.have_joystick:
+            if self.joystick.get_button(4):
+                self.player.weap.kill()
+                self.player.weap = Bow(self)
+                self.pausing = False
+                self.game_state = "in_game"
+                self.menu_state = "main"
+                self.weapon_choose = False
+            elif self.joystick.get_button(5):
+                self.player.weap.kill()
+                self.player.weap = Gauntlet(self)
+                self.pausing = False
+                self.game_state = "in_game"
+                self.menu_state = "main"
+                self.weapon_choose = False
+        if self.bow_button.draw(self.display_surface):
+            self.player.weap.kill()
+            self.player.weap = Bow(self)
+            self.pausing = False
+            self.game_state = "in_game"
+            self.menu_state = "main"
+            self.weapon_choose = False
+
+        if self.gauntlet_button.draw(self.display_surface):
+            self.player.weap.kill()
+            self.player.weap = Gauntlet(self)
+            self.pausing = False
+            self.game_state = "in_game"
+            self.menu_state = "main"
+            self.weapon_choose = False
 if __name__ == "__main__":
     game = Game()
     game.run()

@@ -6,7 +6,7 @@ class Veigar(Boss):
     def __init__(self, groups, game):
         self.name = 'Veigar'
         super().__init__(groups, game)
-        
+                
         self.skills = {
             'primary': Veigar_primary(self, game),
             'secondary': Veigar_secondary(self, game),
@@ -35,7 +35,7 @@ class Veigar(Boss):
         self.skills['secondary'].cooldown = 2000
         self.phase = 2
         self.mode = 1
-    
+        self.aura=Dark_aura(1000000,self.game,self)
     def update(self, dt):
         #print(self.skills['speed'].remaining)
         super().update(dt)
@@ -73,4 +73,36 @@ class Veigar(Boss):
                 self.phase_remaining = 10000
 
 class Soraka(Boss):
-    pass
+    def __init__(self, groups, game):
+        self.name = 'Soraka'
+        super().__init__(groups, game)
+        
+        self.states.append('Healing')
+        self.load_frames()
+        
+        self.skills = {
+            'heal' : Soraka_heal(self, game),
+            'aoe' : Soraka_primary(self, game),
+            'cc' : Soraka_cc(self, game)
+        }
+        self.phase = 1
+    
+    def change_phase(self):
+        super().change_phase()
+        del self.skills['heal']
+        self.skills['ult'] = Soraka_ult(self, self.game)
+        
+        self.game.wave += 1
+        from setlevel import spawn_wave
+        spawn_wave(self.game)
+    
+    def update(self, dt):
+        super().update(dt)
+        if self.game.spawn_numb > 2:
+            if self.phase == 1:
+                self.invulnerable = 0.50001
+            else:
+                self.invulnerable = 0.01
+        else:
+            if hasattr(self, 'invulnerable'):
+                del self.invulnerable

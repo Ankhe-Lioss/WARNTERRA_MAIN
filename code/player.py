@@ -6,7 +6,6 @@ class Player(Entity):
     def __init__(self, pos, game):
         self.name = "Player"
         self.weapon_type = "gauntlet"  # <- make sure this is first
-
         super().__init__(game.player_sprites, game)
         self.game = game
         self.pos = pos
@@ -29,8 +28,9 @@ class Player(Entity):
         self._load_images()
         self.image: pygame.Surface = self.frames[self.facing_state][self.frame_index]
         self.image_rect = self.image.get_frect(center=self.pos)
-        self.rect = self.image_rect.inflate(0, -20)
-        
+        self.rect = self.image_rect.inflate(0, -30)
+        self.image_offset = (0, -15)
+
         # Hitbox
         self.direction = pygame.Vector2()
     def joystick_input(self):

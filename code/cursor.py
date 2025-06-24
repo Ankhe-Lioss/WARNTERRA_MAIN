@@ -11,6 +11,6 @@ def check_cursor(game):
         game.have_joystick = False
     cursorxy=pygame.Vector2(pygame.mouse.get_pos())
     if not game.have_joystick:
-        game.display_surface.blit(cursor_image.convert_alpha(), cursorxy + (-5, -5))
+        game.display_surface.blit(cursor_image.convert_alpha(), cursorxy + (-8, -8))
     if pygame.mouse.get_pressed()[1]:
         print(cursorxy)

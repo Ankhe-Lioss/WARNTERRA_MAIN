@@ -61,7 +61,6 @@ class Projectiles(pygame.sprite.Sprite):
     
     def apply(self, target):
         pass
-    
     def play_sound(self):
         if hasattr(self, 'sound'):
             self.sound.play()
@@ -72,7 +71,7 @@ class Projectiles(pygame.sprite.Sprite):
         sprite.take_damage(self.dmg)
     
     def bullet_collision(self):
-        collision_sprites = pygame.sprite.spritecollide(self, self.target, False, pygame.sprite.collide_mask)
+        collision_sprites = pygame.sprite.spritecollide(self, self.target, False)
         if collision_sprites:
             for sprite in collision_sprites:
                 

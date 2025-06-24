@@ -108,12 +108,13 @@ class Entity(pygame.sprite.Sprite):
         self.rect.x += self.direction.x * self.spd * dt
         if not self.cross_wall:
             self.collision('horizontal', self.direction)
-        
+
         self.rect.y += self.direction.y * self.spd * dt
         if not self.cross_wall:
             self.collision('vertical', self.direction)
         
-        self.image_rect.center = self.rect.center
+        offset = getattr(self, 'image_offset', (0, 0))
+        self.image_rect.center = (pygame.math.Vector2(self.rect.center) + offset)
     
     def forced_move(self, dir, dt):
         if self.rooted or self.stunned:

@@ -16,7 +16,7 @@ class Game:
         self.game_font = pygame.font.Font(os.path.join('images', 'font', 'oldenglishtextmt.ttf'),40)
         # Display
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-        pygame.mouse.set_visible(False)
+        pygame.mouse.set_visible(True)
 
         # Caption
         pygame.display.set_caption("Warnterra")

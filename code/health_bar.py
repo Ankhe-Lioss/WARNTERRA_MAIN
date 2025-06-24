@@ -14,7 +14,7 @@ class Healthbar(pygame.sprite.Sprite):
         # Bar configuration
         self.width = 32
         self.height = 5
-        self.offset_y = -10
+        self.offset_y =-5
 
         self.image = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
         self.rect = self.image.get_rect(midbottom=user.rect.midtop)
@@ -38,7 +38,7 @@ class Healthbar(pygame.sprite.Sprite):
             self.display_hp = self.user.hp
 
         # Update position
-        self.rect.midbottom = self.user.rect.midtop
+        self.rect.midbottom = self.user.image_rect.midtop
         self.rect.y += self.offset_y
 
         # Re-render bar

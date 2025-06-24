@@ -2,7 +2,7 @@ import pygame.math
 
 from setting import *
 
-SHOW_HITBOX = True
+SHOW_HITBOX = False
 
 class AllSprites(pygame.sprite.Group):
     def __init__(self):
@@ -20,7 +20,7 @@ class AllSprites(pygame.sprite.Group):
         top_sprites = [sprite for sprite in self if hasattr(sprite, 'type') and sprite.type == 'top']
 
         for layer in [ground_sprites, floor_sprites, object_sprites, top_sprites]:
-            for sprite in sorted(layer, key=lambda sprite: sprite.image_rect.y if hasattr(sprite, 'image_rect') else sprite.rect.y):
+            for sprite in sorted(layer, key=lambda sprite: sprite.image_rect.bottom if hasattr(sprite, 'image_rect') else sprite.rect.bottom):
                 if hasattr(sprite, 'visible') and sprite.visible==False:
                     continue
                 sprite_offset = pygame.math.Vector2(sprite.image_rect.center) - pygame.math.Vector2(player.rect.center)

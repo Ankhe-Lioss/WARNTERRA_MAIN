@@ -112,7 +112,7 @@ class Game:
             # Game State
             self.all_sprites.draw(self.player)
             if not self.pausing and self.weapon_choose==False:
-                self.all_sprites.update(dt)
+                self.all_sprites.update(dt,self.player)
             '''if self.game_state == 'in_game':
                 self.ui.update(dt)'''
             self.draw_menu(dt)

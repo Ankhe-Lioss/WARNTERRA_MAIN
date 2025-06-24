@@ -30,10 +30,22 @@ class AllSprites(pygame.sprite.Group):
                 self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)
 
                 # Step 1: Create full-screen overlay
-
+                if hasattr(sprite, 'type'):
+                    continue
+                image_rect_outline = sprite.image_rect.copy()
+                image_rect_outline.topleft += self.offset
+                pygame.draw.rect(self.display_surface, (255, 255, 100), image_rect_outline, 1)  # Light yellow
                 if SHOW_HITBOX and not hasattr(sprite, 'type') and sprite.rect is not None:
                     if sprite.rect == None:
                         print(sprite.__class__.__name__, "has no rect attribute")
                     rect = sprite.rect.copy()
                     rect.topleft += self.offset
                     pygame.draw.rect(self.display_surface, 'red', rect, 1)
+    def update(self, dt,player):
+        for sprite in self.sprites():
+            if not hasattr(sprite, 'image_rect') or sprite.image_rect is None:
+                continue
+
+            sprite_offset = pygame.math.Vector2(sprite.image_rect.center) - pygame.math.Vector2(player.rect.center)
+            if sprite_offset.length() < 4000:  # or 1000, or whatever makes sense
+                sprite.update(dt)

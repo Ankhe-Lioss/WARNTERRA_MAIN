@@ -182,5 +182,5 @@ class Dark_aura(Status):
         self.offset=pygame.Vector2(1, 0)
         super().__init__(duration, game)
         for frame in self.frames:
-            frame.set_alpha(150)
+            frame.set_alpha(100)
 

@@ -45,7 +45,7 @@ class Status(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frame_index) % len(self.frames)]
         
     def update_position(self):
-        self.image_rect.center = pygame.Vector2(self.owner.image_rect.center) + self.offset * self.scale_ratio
+        self.image_rect.center = pygame.Vector2(self.owner.rect.center) + self.offset * self.scale_ratio
         
     def update(self, dt):
         self.update_animation(dt)
@@ -167,7 +167,7 @@ class Buff(Status):
             owner.spd *= 1 + ratio
     def update_position(self):
 
-        self.image_rect.center=self.owner.image_rect.midbottom+self.offset
+        self.image_rect.center=self.owner.rect.midbottom+self.offset
     def unapply(self):
         if self.type == 'atk':
             self.owner.atk /= 1 + self.ratio

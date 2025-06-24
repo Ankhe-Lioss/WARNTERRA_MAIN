@@ -2,7 +2,7 @@ import pygame.math
 
 from setting import *
 
-SHOW_HITBOX = False
+SHOW_HITBOX = True
 
 class AllSprites(pygame.sprite.Group):
     def __init__(self):
@@ -31,9 +31,9 @@ class AllSprites(pygame.sprite.Group):
 
                 # Step 1: Create full-screen overlay
 
-                '''if SHOW_HITBOX and not hasattr(sprite, 'type') and sprite.rect is not None:
-                    """if sprite.rect == None:
-                        print(sprite.__class__.__name__, "has no rect attribute")"""
+                if SHOW_HITBOX and not hasattr(sprite, 'type') and sprite.rect is not None:
+                    if sprite.rect == None:
+                        print(sprite.__class__.__name__, "has no rect attribute")
                     rect = sprite.rect.copy()
                     rect.topleft += self.offset
-                    pygame.draw.rect(self.display_surface, 'red', rect, 1)'''
+                    pygame.draw.rect(self.display_surface, 'red', rect, 1)

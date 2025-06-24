@@ -5,8 +5,10 @@ from enemy_skills import *
 class Veigar(Boss):
     def __init__(self, groups, game):
         self.name = 'Veigar'
+
+        self.image_offset = (-25, -40)
         super().__init__(groups, game)
-                
+        self.rect=self.rect.inflate(-100,-80   )
         self.skills = {
             'primary': Veigar_primary(self, game),
             'secondary': Veigar_secondary(self, game),

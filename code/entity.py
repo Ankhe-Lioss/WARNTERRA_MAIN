@@ -190,6 +190,8 @@ class Enemy(Entity):
         # rect
         self.rect = self.image.get_frect(center=pos)
         self.image_rect = self.rect.copy()
+        offset = getattr(self, 'image_offset', (0, 0))
+        self.image_rect.center = (pygame.math.Vector2(self.rect.center) + offset)
     
     def load_frames(self):
         self.frames = {}
@@ -239,8 +241,8 @@ class Enemy(Entity):
         
         if not self.cross_wall:
             self.collision('vertical', self.direction)
-        self.enemy_collision('vertical',dt)
-        self.image_rect.center = self.rect.center
+        offset = getattr(self, 'image_offset', (0, 0))
+        self.image_rect.center = (pygame.math.Vector2(self.rect.center) + offset)
         
     def enemy_collision(self,direction,dt):
         for sprite in self.game.enemy_sprites:

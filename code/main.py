@@ -38,15 +38,18 @@ class Game:
         self.pausing = True
         self.background = Background()
         self.current_BGM = None
-        self.level = 4                            #LEVEL
+        self.level = 2         #LEVEL
         self.weapon_choose=False
 
-
+        #fps cal
         self.font = pygame.font.Font(None, 24)  # You can use your game font here
         self.lowest_fps = float('inf')
         self.fps_timer = 0
         self.fps_interval = 5
         self.displayed_lowest_fps = 0
+        self.total_fps = 0
+        self.frame_count = 0
+        self.average_fps = 0
     def restart(self):
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()
@@ -107,7 +110,7 @@ class Game:
             
 
             # Game State
-            self.all_sprites.draw(self.player.rect)
+            self.all_sprites.draw(self.player)
             if not self.pausing and self.weapon_choose==False:
                 self.all_sprites.update(dt)
             '''if self.game_state == 'in_game':
@@ -118,28 +121,38 @@ class Game:
             
             # UPDATE (LAST)
             # UPDATE (LAST)
-            # --- FPS Monitoring ---
-            current_fps = self.clock.get_fps()
-            if current_fps > 0 and current_fps < self.lowest_fps:
-                self.lowest_fps = current_fps
-
-            self.fps_timer += dt
-            if self.fps_timer >= self.fps_interval:
-                self.displayed_lowest_fps = self.lowest_fps
-                self.lowest_fps = float('inf')  # Reset for next interval
-                self.fps_timer = 0
-
-            # --- Draw FPS info on screen ---
-            fps_text = self.font.render(f"FPS: {current_fps:.1f}", True, 'white')
-            lowest_fps_text = self.font.render(f"Lowest (5s): {self.displayed_lowest_fps:.1f}", True, 'red')
-
-            self.display_surface.blit(fps_text, (10, 10))
-            self.display_surface.blit(lowest_fps_text, (10, 30))
+            self.show_fps(dt)
             pygame.display.update()
-            
         # Cútd
         pygame.quit()
+    def show_fps(self,dt):
+        # --- FPS Monitoring ---
+        current_fps = self.clock.get_fps()
+        if current_fps > 0 and current_fps < self.lowest_fps:
+            self.lowest_fps = current_fps
 
+        self.total_fps += current_fps
+        self.frame_count += 1
+
+        self.fps_timer += dt
+        if self.fps_timer >= self.fps_interval:
+            self.displayed_lowest_fps = self.lowest_fps
+            self.average_fps = self.total_fps / self.frame_count if self.frame_count > 0 else 0
+
+            # Reset for next interval
+            self.lowest_fps = float('inf')
+            self.total_fps = 0
+            self.frame_count = 0
+            self.fps_timer = 0
+
+        # --- Draw FPS info on screen ---
+        fps_text = self.font.render(f"FPS: {current_fps:.1f}", True, 'white')
+        lowest_fps_text = self.font.render(f"Lowest (5s): {self.displayed_lowest_fps:.1f}", True, 'red')
+        average_fps_text = self.font.render(f"Average (5s): {self.average_fps:.1f}", True, 'yellow')
+
+        self.display_surface.blit(fps_text, (10, 10))
+        self.display_surface.blit(lowest_fps_text, (10, 30))
+        self.display_surface.blit(average_fps_text, (10, 50))
     def draw_menu(self,dt):
         if self.weapon_choose:
             self.weapon_choosing_menu( )

@@ -1,5 +1,6 @@
 from setting import *
 from health_bar import Healthbar
+from helper import Delay
 
 class Entity(pygame.sprite.Sprite):
     def __init__(self, groups, game):
@@ -213,6 +214,7 @@ class Enemy(Entity):
         self.game.spawn_numb -= 1
         for stt in self.status:
             stt.kill()
+            
     def cal_dis(self):
         # get direction
         player_pos = pygame.Vector2(self.player.rect.center)
@@ -301,5 +303,5 @@ class Boss(Enemy):
 
     def death(self):
         super().death()
-        self.game.current_BGM = None
         pygame.mixer.music.fadeout(1000)
+        Delay(1100, lambda: setattr(self.game, "current_BGM", None), self.game)

@@ -37,7 +37,8 @@ class Veigar(Boss):
         self.skills['secondary'].cooldown = 2000
         self.phase = 2
         self.mode = 1
-        self.aura=Dark_aura(1000000,self.game,self)
+        self.aura=Dark_aura(2000,self.game,self)
+        
     def update(self, dt):
         #print(self.skills['speed'].remaining)
         super().update(dt)
@@ -100,6 +101,7 @@ class Soraka(Boss):
         self.game.wave += 1
         from setlevel import spawn_wave
         spawn_wave(self.game)
+        self.aura=Dark_aura(2000,self.game,self)
 
     def update(self, dt):
         super().update(dt)

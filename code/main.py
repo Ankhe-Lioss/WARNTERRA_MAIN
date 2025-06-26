@@ -38,8 +38,10 @@ class Game:
         self.pausing = True
         self.background = Background()
         self.current_BGM = None
-        self.level =4         #LEVEL
+        self.level = 5         #LEVEL
         self.weapon_choose=False
+        
+        self.level -= 1 
 
         #fps cal
         self.font = pygame.font.Font(None, 20)  # You can use your game font here
@@ -57,6 +59,8 @@ class Game:
         self.player_projectiles = pygame.sprite.Group()
         self.enemy_projectiles = pygame.sprite.Group()
         self.collision_sprites = pygame.sprite.Group()
+        
+        self.delays = set()
 
         self.spawn_numb = 0
         self.checked_in = True
@@ -102,8 +106,10 @@ class Game:
             self.display_surface.fill('gray12')
 
 
-
             check_game_state(self)
+            for delay in self.delays.copy():
+                delay.update(dt)
+            
             
             # REPEATING TESTS
             #print(self.spawn_numb)

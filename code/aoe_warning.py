@@ -24,7 +24,7 @@ class Spawn_aoe(pygame.sprite.Sprite):
         self.animation_speed = 6
         self.image = self.frames[0]
         self.rect = self.image.get_frect(center=pos)
-        self.radius = float(self.rect.top) + 20
+        self.radius = self.rect.width / 2 + 20
         self.image_rect = self.image.get_frect(center=pos)
 
     def load_frame(self):
@@ -73,6 +73,12 @@ class Spawn_Soraka_cc(Spawn_aoe):
         super().update(dt)
         if (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.pos)).length() <= self.radius:
             self.game.player.status.add(Silenced(100, self.game, self.game.player))
+        
+        
+        # CHECK
+        offset = self.game.all_sprites.offset
+        screen_pos = pygame.Vector2(self.rect.center) + offset
+        pygame.draw.circle(pygame.display.get_surface(), 'aqua', screen_pos, self.radius, width=5)
     
     def spawn(self):
         if (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.pos)).length() <= self.radius and self.user.phase == 2:

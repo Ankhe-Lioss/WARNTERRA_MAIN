@@ -152,8 +152,8 @@ class Lulu_buff(Skill):
         super().activate()
         self.user.state='Attacking'
         for enemy in self.game.enemy_sprites:
-            enemy.status.add(Buff(2000, 0.5, 'spd', self.game, enemy))
-            enemy.status.add(Buff(4000, 0.3, 'atk', self.game, enemy))
+            Buff(2000, 0.5, 'spd', self.game, enemy)
+            Buff(4000, 0.3, 'atk', self.game, enemy)
         
     def deactivate(self):
         super().deactivate()

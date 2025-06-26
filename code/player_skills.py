@@ -21,7 +21,7 @@ class Gauntlet_primary(Player_skill):
         pproj.Gauntlet_primary(self.user.rect.center, self.user.facing_dir, self.game)
         
         # Test
-        #self.user.status.add(Poisoned(3000, 50, self.game, self.user))
+        #Poisoned(3000, 50, self.game, self.user)
 
 class Gauntlet_q_skill(Player_skill):
     def __init__(self, user, game):

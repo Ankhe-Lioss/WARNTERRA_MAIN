@@ -76,7 +76,7 @@ class Chogath_Rupture(Area_of_effect):
         super().__init__(pos,game,user_atk)
 
     def apply(self, target):
-        target.status.add(Stunned(1000, self.game, target))
+        Stunned(1000, self.game, target)
         
 class Veigar_Darkmatter(Area_of_effect):
     def __init__(self, pos,game,user_atk):
@@ -91,7 +91,7 @@ class Bow_explosion(Area_of_effect):
         super().__init__(pos,game,user_atk)
     
     def apply(self, target):
-        target.status.add(Slowed(5000, 0.9, self.game, target))
+        Slowed(5000, 0.9, self.game, target)
 
 class Soraka_star(Area_of_effect):
     def __init__(self, pos,game,user_atk):

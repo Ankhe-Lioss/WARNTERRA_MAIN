@@ -36,7 +36,7 @@ class Gauntlet_e_skill(Player_projectiles):
         self.e_piercing = True
     
     def apply(self, target):
-        target.status.add(Slowed(2000, 0.75, self.game, target))
+        Slowed(2000, 0.75, self.game, target)
 
 class Bow_primary(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -45,7 +45,7 @@ class Bow_primary(Player_projectiles):
         super().__init__(pos, direction, game)
     
     def apply(self, target):
-        target.status.add(Slowed(500, 0.2, self.game, target))
+        Slowed(500, 0.2, self.game, target)
 
 class Bow_primary_enhanced(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -54,7 +54,7 @@ class Bow_primary_enhanced(Player_projectiles):
         super().__init__(pos, direction, game)
     
     def apply(self, target):
-        target.status.add(Slowed(500, 0.3, self.game, target))
+        Slowed(500, 0.3, self.game, target)
 
 class Bow_q_skill(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -63,7 +63,7 @@ class Bow_q_skill(Player_projectiles):
         super().__init__(pos, direction, game)
     
     def apply(self, target):
-        target.status.add(Slowed(1000, 0.6, self.game, target))
+        Slowed(1000, 0.6, self.game, target)
 
 class Bow_e_skill(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -73,5 +73,5 @@ class Bow_e_skill(Player_projectiles):
         self.wall_piercing = True
     
     def apply(self, target):
-        target.status.add(Stunned(3000, self.game, target))
+        Stunned(3000, self.game, target)
         Bow_explosion(self.rect.center, self.game, self.game.player.atk)

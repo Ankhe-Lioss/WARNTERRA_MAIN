@@ -36,7 +36,7 @@ class Entity(pygame.sprite.Sprite):
         self.cross_wall = False
         
         # Status
-        self.status = set()
+        # Removed
         
         self.rect = pygame.rect.FRect()
         
@@ -212,8 +212,6 @@ class Enemy(Entity):
     def death(self):
         super().death()
         self.game.spawn_numb -= 1
-        for stt in self.status:
-            stt.kill()
             
     def cal_dis(self):
         # get direction
@@ -264,9 +262,6 @@ class Enemy(Entity):
                     
     def update(self, dt):
         if self.death_time==0:
-            if len(self.status)!=0:
-                #check_status(self,dt)
-                pass
             self.cal_dis()
             for skill_name in self.skills:
                 self.skills[skill_name].update(dt)

@@ -72,7 +72,7 @@ class Spawn_Soraka_cc(Spawn_aoe):
     def update(self, dt):
         super().update(dt)
         if (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.pos)).length() <= self.radius:
-            self.game.player.status.add(Silenced(100, self.game, self.game.player))
+            Silenced(100, self.game, self.game.player)
         
         
         # CHECK
@@ -82,5 +82,5 @@ class Spawn_Soraka_cc(Spawn_aoe):
     
     def spawn(self):
         if (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.pos)).length() <= self.radius and self.user.phase == 2:
-            self.game.player.status.add(Rooted(2000, self.game, self.game.player))
+            Rooted(2000, self.game, self.game.player)
             

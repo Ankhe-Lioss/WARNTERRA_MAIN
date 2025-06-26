@@ -3,7 +3,7 @@ import pygame.math
 from setting import *
 
 SHOW_HITBOX = False
-
+Show_image=False
 class AllSprites(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
@@ -13,28 +13,35 @@ class AllSprites(pygame.sprite.Group):
     def draw(self, player):
         self.offset.x = -(player.rect.centerx - WINDOW_WIDTH / 2)
         self.offset.y = -(player.rect.centery - WINDOW_HEIGHT / 2)
-        
-        ground_sprites = [sprite for sprite in self if hasattr(sprite, 'type') and sprite.type == 'ground']
-        floor_sprites = [sprite for sprite in self if hasattr(sprite, 'type') and sprite.type == 'floor']
-        object_sprites = [sprite for sprite in self if not hasattr(sprite, 'type') or not sprite.type in ['ground', 'floor', 'top', 'collision', 'door']]
-        top_sprites = [sprite for sprite in self if hasattr(sprite, 'type') and sprite.type == 'top']
+        ground_sprites = []
+        floor_sprites = []
+        object_sprites = []
+        top_sprites = []
+
+        for sprite in self:
+            if not hasattr(sprite, 'get_draw') or sprite.get_draw==False:
+                continue
+            sprite_type = getattr(sprite, 'type', None)
+            if sprite_type == 'ground':
+                ground_sprites.append(sprite)
+            elif sprite_type == 'floor':
+                floor_sprites.append(sprite)
+            elif sprite_type == 'top':
+                top_sprites.append(sprite)
+            elif sprite_type not in ['ground', 'floor', 'top', 'collision', 'door']:
+                object_sprites.append(sprite)
+            elif sprite_type is None:
+                object_sprites.append(sprite)
 
         for layer in [ground_sprites, floor_sprites, object_sprites, top_sprites]:
             for sprite in sorted(layer, key=lambda sprite: sprite.image_rect.bottom if hasattr(sprite, 'image_rect') else sprite.rect.bottom):
                 if hasattr(sprite, 'visible') and sprite.visible==False:
                     continue
-                sprite_offset = pygame.math.Vector2(sprite.image_rect.center) - pygame.math.Vector2(player.rect.center)
-                if sprite_offset.length() > 1000 :
-                    continue
-
                 self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)
-
-                # Step 1: Create full-screen overlay
-                if hasattr(sprite, 'type'):
-                    continue
-                image_rect_outline = sprite.image_rect.copy()
-                image_rect_outline.topleft += self.offset
-                pygame.draw.rect(self.display_surface, (255, 255, 100), image_rect_outline, 1)  # Light yellow
+                if Show_image and not hasattr(sprite, 'type') :
+                    image_rect_outline = sprite.image_rect.copy()
+                    image_rect_outline.topleft += self.offset
+                    pygame.draw.rect(self.display_surface, (255, 255, 100), image_rect_outline, 1)  # Light yellow
                 if SHOW_HITBOX and not hasattr(sprite, 'type') and sprite.rect is not None:
                     if sprite.rect == None:
                         print(sprite.__class__.__name__, "has no rect attribute")
@@ -47,5 +54,6 @@ class AllSprites(pygame.sprite.Group):
                 continue
 
             sprite_offset = pygame.math.Vector2(sprite.image_rect.center) - pygame.math.Vector2(player.rect.center)
-            if sprite_offset.length() < 4000:  # or 1000, or whatever makes sense
+            sprite.get_draw = True if sprite_offset.length_squared() < 1000 * 1000 else False
+            if sprite_offset.length_squared() < 4000*4000:  # or 1000, or whatever makes sense
                 sprite.update(dt)

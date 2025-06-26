@@ -38,11 +38,11 @@ class Game:
         self.pausing = True
         self.background = Background()
         self.current_BGM = None
-        self.level = 2         #LEVEL
+        self.level =4         #LEVEL
         self.weapon_choose=False
 
         #fps cal
-        self.font = pygame.font.Font(None, 24)  # You can use your game font here
+        self.font = pygame.font.Font(None, 20)  # You can use your game font here
         self.lowest_fps = float('inf')
         self.fps_timer = 0
         self.fps_interval = 5
@@ -146,13 +146,9 @@ class Game:
             self.fps_timer = 0
 
         # --- Draw FPS info on screen ---
-        fps_text = self.font.render(f"FPS: {current_fps:.1f}", True, 'white')
-        lowest_fps_text = self.font.render(f"Lowest (5s): {self.displayed_lowest_fps:.1f}", True, 'red')
-        average_fps_text = self.font.render(f"Average (5s): {self.average_fps:.1f}", True, 'yellow')
-
+        fps_text = self.font.render(f"{current_fps:.1f} Lowest(5s): {self.displayed_lowest_fps:.1f} Avg(5s): {self.average_fps:.1f}", True, 'red')
         self.display_surface.blit(fps_text, (10, 10))
-        self.display_surface.blit(lowest_fps_text, (10, 30))
-        self.display_surface.blit(average_fps_text, (10, 50))
+
     def draw_menu(self,dt):
         if self.weapon_choose:
             self.weapon_choosing_menu( )

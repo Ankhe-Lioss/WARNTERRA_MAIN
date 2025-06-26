@@ -41,7 +41,7 @@ class Weap(pygame.sprite.Sprite):
         self.image=rotated_weapon
         # Update position (adjust for rotated image center)
         # ("up", "up_right", "right", "down_right", "down", "down_left", "left", "up_left"
-        self.image_rect = rotated_weapon.get_rect(center=self.player.rect.center + weapon_offset.rotate(-weapon_angle))
+        self.image_rect = rotated_weapon.get_rect(center=self.player.image_rect.center + weapon_offset.rotate(-weapon_angle))
     def input(self):
         if pygame.mouse.get_pressed()[0]:
             self.primary.cast()

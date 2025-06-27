@@ -18,22 +18,14 @@ class Status(pygame.sprite.Sprite):
         self.image_rect = self.image.get_rect(center=self.owner.rect.center)
 
     def load_images(self):
-        for i in range(5):
-            surf = pygame.image.load(os.path.join('images', 'status', f'{self.name}', f'{i}.png')).convert_alpha()
-            surf = pygame.transform.scale_by(surf, self.scale_ratio)
-            self.frames.append(surf)
+
+        self.frames = [pygame.transform.scale_by(surf, self.scale_ratio) for surf in
+            self.game.status_frames[self.name]]
 
     def load_icon(self):
-        if hasattr(self, 'type'):
-            # Buff icons use a subfolder for types
-            icon_path = os.path.join('images', 'icons', 'status', 'Buff', f'{self.type}.png')
-        else:
-            # Default: load by status name
-            icon_path = os.path.join('images', 'icons', 'status', f'{self.name}.png')
-
-        if os.path.exists(icon_path):
-            icon_surf = pygame.image.load(icon_path).convert_alpha()
-            self.icon = pygame.transform.scale(icon_surf, (24,24))
+        icon_key = getattr(self, 'type', self.name)
+        if hasattr(self.game, 'status_icons') and icon_key in self.game.status_icons:
+            self.icon = self.game.status_icons[icon_key]
         else:
             self.icon = None
 

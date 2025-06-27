@@ -19,18 +19,13 @@ class Spawn_aoe(pygame.sprite.Sprite):
         self.frame_number=self.stat[0]
         self.lifetime=self.stat[1]
         self.frame_index = 0
-        self.frames=[]
-        self.load_frame()
+        self.frames = self.game.aoe_warning_frames[self.name]
         self.animation_speed = 6
         self.image = self.frames[0]
         self.rect = self.image.get_frect(center=pos)
         self.radius = self.rect.width / 2 + 20
         self.image_rect = self.image.get_frect(center=pos)
 
-    def load_frame(self):
-        for i in range(self.frame_number):
-            surf=pygame.image.load(os.path.join('images', 'enviroment',f'{self.name}', f'{i}.png')).convert_alpha()
-            self.frames.append(surf)
 
     def animate(self, dt):
         self.frame_index += self.animation_speed * dt

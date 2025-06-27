@@ -1,5 +1,4 @@
-import pygame
-import os
+from setting import *
 
 def check_cursor(game):
     if pygame.joystick.get_count() > 0:

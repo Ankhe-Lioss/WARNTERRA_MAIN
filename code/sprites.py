@@ -27,7 +27,7 @@ class Check_in(pygame.sprite.Sprite):
     def __init__(self, pos, game):
         super().__init__(game.all_sprites)
         self.game = game
-        self.image = pygame.image.load(os.path.join('images','enviroment','check_in','0.png'))
+        self.image = game.check_in_image
         self.rect = self.image.get_rect(topleft=pos)
         self.image_rect = self.image.get_rect(topleft=pos)
         self.visible = False #SAHIUDSAHDUIIDU

@@ -184,7 +184,7 @@ class Enemy(Entity):
         self.state='Walking'
         
         #load image
-        self.load_frames()
+        self.frames=game.enemy_frames[self.name]
         
         # image
         self.image = self.frames['Walking'][0]
@@ -195,13 +195,7 @@ class Enemy(Entity):
 
         self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
     
-    def load_frames(self):
-        self.frames = {}
-        for i in self.states:
-            self.frames[i] = []
-            for k in range(0, 6):
-                surf = pygame.image.load(os.path.join('images', 'enemies',f'{self.name}',f'{i}',f'{k}.png')).convert_alpha()
-                self.frames[i].append(surf)
+
     
     def animate(self, dt):
         self.frame_index += self.animation_spd * dt

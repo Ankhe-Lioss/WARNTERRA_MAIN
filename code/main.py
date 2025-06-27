@@ -7,7 +7,7 @@ from cursor import *
 from button import *
 from background import *
 from UI import UI
-
+from preload import *
 # THIS FKING MAIN GAME SIHFHFHFHFHFHFHFHF
 class Game:
     def __init__(self):
@@ -26,11 +26,11 @@ class Game:
         self.clock = pygame.time.Clock()
         # States
         self.running = True
-
+        preload_all_image(self)
         # game load asset
         load_menu(self)
-        self.cursor_image = pygame.image.load(os.path.join('images', 'UI', 'cursor.png')).convert_alpha()
-
+        print(self.enemy_frames)
+        print(self.projectile_frames)
         check_cursor(self)
 
 

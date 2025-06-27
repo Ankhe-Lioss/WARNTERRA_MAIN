@@ -29,15 +29,16 @@ class Projectiles(pygame.sprite.Sprite):
         # Audio
         if os.path.exists(os.path.join('audio', 'projectiles', f'{self.name}.ogg')):
             self.sound = pygame.mixer.Sound(os.path.join('audio', 'projectiles', f'{self.name}.ogg'))
-    
+
     def _load_images(self):
         folder, folder1 = self.source.split(" ")
-
-        for i in range(4):
-            surf = pygame.image.load(os.path.join('images', 'projectiles', f'{folder}',f'{folder1}',f'{i}.png')).convert_alpha()
-            surf = pygame.transform.rotozoom(surf, self.angle,1)
-            self.frames.append(surf)
-        
+        # Use preloaded frames
+        base_frames = self.game.projectile_frames.get(folder, {}).get(folder1, [])
+        self.frames = []
+        for surf in base_frames:
+            # Rotate each frame as needed
+            rotated = pygame.transform.rotozoom(surf, self.angle, 1)
+            self.frames.append(rotated)
     def _animate(self, dt):
         self.frame_id += self.animation_spd * dt
         self.image = self.frames[int(self.frame_id) % len(self.frames)]

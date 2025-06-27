@@ -7,12 +7,17 @@
     <list default="true" id="ee4a0f70-305e-49b1-b297-9d90997c641d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/aoe.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/aoe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/aoe_warning.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/aoe_warning.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/bosses.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/bosses.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/cursor.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/cursor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/enemy_projectiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/enemy_projectiles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/entity.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/health_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/health_bar.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/player_projectiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/player_projectiles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/projectiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/projectiles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/setting.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/setting.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/spawn.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/spawn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/sprites.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/status.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/status.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +49,10 @@
     <setting file="file://$PROJECT_DIR$/code/health_bar.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/main.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/player.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/code/preload_all_image.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/projectiles.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/setlevel.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/code/setting.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/spawn.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/sprites.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/code/status.py" root0="SKIP_INSPECTION" />
@@ -185,6 +192,9 @@
       <workItem from="1750867763760" duration="50000" />
       <workItem from="1750891942152" duration="673000" />
       <workItem from="1750913999082" duration="3085000" />
+      <workItem from="1750993375639" duration="529000" />
+      <workItem from="1750994502089" duration="569000" />
+      <workItem from="1750995328116" duration="4016000" />
     </task>
     <servers />
   </component>
@@ -222,7 +232,7 @@
     <SUITE FILE_PATH="coverage/projectiles_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750778979353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/main_py$check_images.coverage" NAME="check images Coverage Results" MODIFIED="1750478631992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/images" />
     <SUITE FILE_PATH="coverage/WARNTERRA_MAIN$enemies.coverage" NAME="enemies Coverage Results" MODIFIED="1749887503521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750958833769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750999167673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/main_py$button.coverage" NAME="button Coverage Results" MODIFIED="1750478642107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/main_py$setlevel.coverage" NAME="setlevel Coverage Results" MODIFIED="1750321504449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
   </component>

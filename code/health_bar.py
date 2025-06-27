@@ -7,10 +7,9 @@ class Healthbar(pygame.sprite.Sprite):
         self.type = 'top'
 
         # Load bar images AFTER display is initialized
-        self.bar_bg = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '0.png')).convert_alpha()
-        self.bar_empty = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '3.png')).convert_alpha()
-        self.bar_full  = pygame.image.load(os.path.join('images', 'UI', 'health_bar', '5.png')).convert_alpha()
-
+        self.bar_bg = user.game.bar_bg
+        self.bar_empty = user.game.bar_empty
+        self.bar_full = user.game.bar_full
         # Bar configuration
         self.width = 32
         self.height = 5

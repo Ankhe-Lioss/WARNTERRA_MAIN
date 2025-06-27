@@ -14,8 +14,7 @@ class Area_of_effect(pygame.sprite.Sprite):
         #graphic loading
 
         self.frame_index = 0
-        self.frames = []
-        self.load_frame()
+        self.frames = self.game.aoe_frames[self.name]
         self.load_sound()
         if hasattr(self, 'sound'):
             self.sound.play()
@@ -24,11 +23,7 @@ class Area_of_effect(pygame.sprite.Sprite):
         self.image_rect = self.image.get_frect(center=pos)
         self.rect = self.image.get_frect(center=pos)
         
-    def load_frame(self):
-        for i in range(self.frame_number):
-            surf=pygame.image.load(os.path.join('images', 'aoe',f'{self.name}', f'{i}.png')).convert_alpha()
-            self.frames.append(surf)
-            
+
     def load_sound(self):
         if os.path.exists(os.path.join("audio", "aoe", f"{self.name}.ogg")):
             self.sound = pygame.mixer.Sound(os.path.join("audio", "aoe", f"{self.name}.ogg"))

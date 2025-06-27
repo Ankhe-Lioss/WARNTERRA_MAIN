@@ -24,25 +24,7 @@ class Healthbar(pygame.sprite.Sprite):
         self.display_hp = self.user.hp
         self.hp_delay_speed = self.user.maxhp / 2  # adjust for red bar trailing
 
-    def update(self, dt):
-        if self.user.hp <= 0:
-            self.kill()
-            return
 
-        # Smooth red bar decay
-        if self.display_hp > self.user.hp:
-            self.display_hp -= self.hp_delay_speed * dt
-            if self.display_hp < self.user.hp:
-                self.display_hp = self.user.hp
-        elif self.display_hp < self.user.hp:
-            self.display_hp = self.user.hp
-
-        # Update position
-        self.rect.midbottom = self.user.image_rect.midtop
-        self.rect.y += self.offset_y
-
-        # Re-render bar
-        self.render_bar()
 
     def render_bar(self):
         self.image.fill((0, 0, 0, 0))  # clear
@@ -65,4 +47,22 @@ class Healthbar(pygame.sprite.Sprite):
             green_bar = self.bar_full.subsurface(pygame.Rect(0, 0, green_width, self.height)).copy()
             self.image.blit(green_bar, (0, 0))
         
+    def update(self, dt):
+        if self.user.hp <= 0:
+            self.kill()
+            return
 
+        # Smooth red bar decay
+        if self.display_hp > self.user.hp:
+            self.display_hp -= self.hp_delay_speed * dt
+            if self.display_hp < self.user.hp:
+                self.display_hp = self.user.hp
+        elif self.display_hp < self.user.hp:
+            self.display_hp = self.user.hp
+
+        # Update position
+        self.rect.midbottom = self.user.image_rect.midtop
+        self.rect.y += self.offset_y
+
+        # Re-render bar
+        self.render_bar()

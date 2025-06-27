@@ -45,7 +45,7 @@ class Area_of_effect(pygame.sprite.Sprite):
             self.hit_enemies = set()
 
         # Check for collisions
-        collision_sprites = pygame.sprite.spritecollide(self, self.enemy_sprites, False, pygame.sprite.collide_mask)
+        collision_sprites = pygame.sprite.spritecollide(self, self.enemy_sprites, False)
         if collision_sprites:
             for sprite in collision_sprites:
                 if sprite not in self.hit_enemies:

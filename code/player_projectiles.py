@@ -15,7 +15,7 @@ class Gauntlet_q_skill(Player_projectiles):
         super().__init__(pos, direction, game)
     
     def bullet_collision(self):
-        collision_sprites = pygame.sprite.spritecollide(self, self.target, False, pygame.sprite.collide_mask)
+        collision_sprites = pygame.sprite.spritecollide(self, self.target, False)
         if collision_sprites:
             
             self.game.player.weap.q_skill.remaining -= 2000

@@ -13,11 +13,11 @@ class Game:
     def __init__(self):
         # Initializing
         pygame.init()
-        self.game_font = pygame.font.Font(os.path.join('images', 'font', 'oldenglishtextmt.ttf'),40)
+
         # Display
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.mouse.set_visible(False)
-
+        self.game_font = pygame.font.Font(os.path.join('images', 'font', 'oldenglishtextmt.ttf'), 40)
         # Caption
         pygame.display.set_caption("Warnterra")
         icon = pygame.image.load(os.path.join('images', 'UI', 'icon.png')).convert_alpha()
@@ -29,6 +29,8 @@ class Game:
 
         # game load asset
         load_menu(self)
+        self.cursor_image = pygame.image.load(os.path.join('images', 'UI', 'cursor.png')).convert_alpha()
+
         check_cursor(self)
 
 

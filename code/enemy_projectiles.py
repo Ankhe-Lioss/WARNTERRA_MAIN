@@ -66,8 +66,6 @@ class Veigar_Cage(pygame.sprite.Sprite):
         pygame.draw.circle(self.image, (0, 0, 0, 0), (outer_radius, outer_radius), inner_radius)
         self.rect = self.image.get_rect(center=center)
         self.image_rect = self.rect.copy()
-        self.mask = pygame.mask.from_surface(self.image)
-
     def update(self, dt):
         player = self.game.player
         self.lifetime -= dt * 1000

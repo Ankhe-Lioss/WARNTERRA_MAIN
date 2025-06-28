@@ -249,13 +249,9 @@ class UI:
                 self.display_surface.blit(cd_text, cd_rect)
 
     def update(self, dt):
-        # Detect level up
-        if self.player.level != self.last_level:
-            self.last_level = self.player.level
-            self.display_hp = self.player.hp  
 
-        self.draw_health_bar(dt)
-        self.draw_level_circle()
+        #self.draw_health_bar(dt)
+        #self.draw_level_circle()
         self.draw_skill_boxes(dt)
         self.draw_status_effects()
         self.draw_boss_bar(dt)

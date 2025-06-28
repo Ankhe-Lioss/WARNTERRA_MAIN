@@ -30,7 +30,6 @@ class Game:
         # game load asset
         load_menu(self)
         print(self.enemy_frames)
-        print(self.projectile_frames)
         check_cursor(self)
 
 
@@ -121,8 +120,8 @@ class Game:
             self.all_sprites.draw(self.player)
             if not self.pausing and self.weapon_choose==False:
                 self.all_sprites.update(dt,self.player)
-            '''if self.game_state == 'in_game':
-                self.ui.update(dt)'''
+            if self.game_state == 'in_game':
+                self.ui.update(dt)
             self.draw_menu(dt)
             # CURSOR
             check_cursor(self)

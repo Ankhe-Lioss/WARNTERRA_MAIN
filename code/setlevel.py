@@ -43,7 +43,7 @@ def setlevel(game):
         if obj.name == 'Player':
             # Create new player
             game.player = Player((obj.x, obj.y), game)
-
+            game.player.weap=Bow(game)
             # kill weapon
             if hasattr(game.player, 'weap'):
                 game.player.weap.kill()
@@ -53,7 +53,7 @@ def setlevel(game):
 
                 game.player.weap=pygame.sprite.Sprite()
             # Reinitialize the UI with the new player
-            #game.ui = UI(game, game.player, game.display_surface)
+            game.ui = UI(game, game.player, game.display_surface)
 
         else:
             if 'room' in obj.properties:

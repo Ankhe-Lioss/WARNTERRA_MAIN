@@ -1,7 +1,7 @@
 from setting import *
 from entity import Entity
 from player_skills import PlayerSkills
-
+from health_bar import *
 class Player(Entity):
     def __init__(self, pos, game):
         self.name = "Player"
@@ -30,7 +30,7 @@ class Player(Entity):
         self.image: pygame.Surface = self.frames[self.facing_state][self.frame_index]
         self.rect = self.image.get_frect(center=self.pos)
         self.image_rect = self.rect.copy()
-
+        self.player_health_bar=Player_healthbar(self)
         self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
 
         # Hitbox
@@ -106,6 +106,7 @@ class Player(Entity):
         #controller
         self.joystick_input()
         #update facing
+        self.player_health_bar.update(dt)
         if not self.stunned:
             self.update_facing_state()
         #move with entity

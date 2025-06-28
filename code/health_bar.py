@@ -65,3 +65,55 @@ class Healthbar(pygame.sprite.Sprite):
 
         # Re-render bar
         self.render_bar()
+
+
+class Player_healthbar(pygame.sprite.Sprite):
+    def __init__(self, user):
+        self.user = user
+        self.type = 'top'
+
+        # Load bar images AFTER display is initialized
+        self.bar_bg_frames=[]
+        self.load_image()
+        self.frame_index = 0
+        self.bar_bg = self.bar_bg_frames[self.frame_index]
+        self.bar_full =pygame.image.load(os.path.join('images','UI',"player_health_bar","5.png")).convert_alpha()
+        # Bar configuration
+        self.font=pygame.font.Font(os.path.join('images', 'font', 'DungeonChunk.ttf'), 20)
+        self.level_font = pygame.font.Font(os.path.join('images', 'font', 'DungeonChunk.ttf'), 43)
+
+        self.image = pygame.Surface((self.bar_bg.width, self.bar_bg.height), pygame.SRCALPHA)
+    def load_image(self):
+        for i in range(1,5):
+            surf=pygame.image.load(os.path.join('images','UI',"player_health_bar",f"{i}.png")).convert_alpha()
+            self.bar_bg_frames.append(surf)
+    def render_bar(self):
+        self.image.fill((0, 0, 0, 0))  # clear
+        # Calculate %s
+        hp_ratio = max(0, min(1, self.user.hp / self.user.maxhp))
+
+        red_width = int(74 + 138 * hp_ratio)
+
+        if red_width > 0:
+            red_bar = self.bar_full.subsurface(pygame.Rect(0, 0, red_width,self.bar_bg.height)).copy()
+            self.image.blit(red_bar, (0, 0))
+
+        self.bar_bg=self.bar_bg_frames[int(self.frame_index % 4)]
+        # Background layer
+        self.image.blit(self.bar_bg, (0, 0))
+        text=self.font.render(f"{int(self.user.hp)}/{int(self.user.maxhp)}", True, 'White')
+        self.image.blit(text,(90,52))
+        text=self.level_font.render(f"{int(self.user.game.level+1)}", True, 'White')
+        self.image.blit(text,(28,36))
+    def update(self, dt):
+        if self.user.hp <= 0:
+            self.kill()
+            return
+
+        # Smooth red bar decay
+
+        # Update position
+        self.frame_index += 6 * dt
+        # Re-render bar
+        self.render_bar()
+        self.user.game.display_surface.blit(self.image, (0,600))

@@ -12,8 +12,10 @@ class Weap(pygame.sprite.Sprite):
         self.image = self.surf
         self.image_rotate=self.surf.copy()
         self.image_rect = self.image.get_frect(center=self.player.image_rect.center)
-        self.skill_bar=pygame.image.load(os.path.join('images','UI','skill_bar','skill_bar.png')).convert_alpha()
+        self.skill_bar=game.skill_bar
         # Import skills
+        self.cooldown_font = pygame.font.SysFont("Segoe UI", 18, bold=True)
+        self.font = pygame.font.SysFont("Segoe UI", 17, bold=True)
 
 
     def joystick_input(self):
@@ -45,8 +47,62 @@ class Weap(pygame.sprite.Sprite):
         self.image_rect = rotated_weapon.get_rect(center=self.player.image_rect.center + weapon_offset.rotate(-weapon_angle))
 
     def draw_skill_bar(self):
-        surf=self.skill_bar
-        self.game.display_surface.blit(surf, (894, 571))
+        surf = self.skill_bar
+        base_x, base_y = 894, 571  # top-left of vine UI
+        self.game.display_surface.blit(surf, (base_x, base_y))
+
+        skill_keys = ['Left', 'Right', 'Q', 'E']
+        for index, key in enumerate(skill_keys):
+            if key not in self.player.skills:
+                continue
+            skill = self.player.skills[key]
+
+            cooldown_ratio = skill.remaining / skill.cooldown if skill.cooldown else 0
+
+            cooldown_time = skill.remaining / 1000
+            if cooldown_time > 0.9:
+                cooldown_time = int(cooldown_time) + 1
+            else:
+                cooldown_time = int(cooldown_time * 10) / 10.0
+
+            cooldown_ratio = max(0, min(cooldown_ratio, 1))
+
+            x = base_x + 41 + index * 53
+            y = base_y + 45
+            icon_rect = pygame.Rect(x, y, 42, 42)
+
+
+            # Background (only visible if icon has transparency)
+            bg_color = (200, 200, 200)
+            pygame.draw.rect(self.game.display_surface, bg_color, icon_rect, border_radius=6)
+
+            # Resize and draw skill icon to 42x42
+            icon_resized = pygame.transform.smoothscale(skill.icon, (42, 42))
+            self.game.display_surface.blit(icon_resized, icon_rect)
+
+            # Cooldown overlay
+            if not skill.ready:
+                overlay = pygame.Surface((42, 42), pygame.SRCALPHA)
+                overlay.fill((0, 0, 0, 120))
+                self.game.display_surface.blit(overlay, icon_rect.topleft)
+
+                fill_height = int(42 * cooldown_ratio)
+                fill_rect = pygame.Rect(x, y + (42 - fill_height), 42, fill_height)
+                if not skill.casting:
+                    pygame.draw.rect(self.game.display_surface, (80, 80, 80), fill_rect, border_radius=6)
+
+            # Key Label (below icon)
+            label_color = 'bisque' if skill.ready else 'gray'
+            label = self.font.render(key, True, label_color)
+            label_rect = label.get_rect(center=(x + 21, y + 55))
+            self.game.display_surface.blit(label, label_rect)
+
+            # Cooldown text (top-center)
+            if cooldown_time > 0 and not skill.casting:
+                cd_text = self.cooldown_font.render(str(cooldown_time), True, 'white')
+                cd_rect = cd_text.get_rect(center=(x + 21, y + 17))
+                self.game.display_surface.blit(cd_text, cd_rect)
+
     def update(self, dt):
         self.update_pos()
         self.player.skills["Left"] = self.primary

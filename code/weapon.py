@@ -11,7 +11,6 @@ class Weap(pygame.sprite.Sprite):
         self.surf = pygame.image.load(os.path.join('images', 'weapon', f'{self.name}.png')).convert_alpha()
         self.image = self.surf
         self.image_rotate=self.surf.copy()
-        self.image_rect = self.image.get_frect(center=self.player.image_rect.center)
         
         # Import skills
 
@@ -42,15 +41,7 @@ class Weap(pygame.sprite.Sprite):
         # Update position (adjust for rotated image center)
         # ("up", "up_right", "right", "down_right", "down", "down_left", "left", "up_left"
         self.image_rect = rotated_weapon.get_rect(center=self.player.image_rect.center + weapon_offset.rotate(-weapon_angle))
-    def input(self):
-        if pygame.mouse.get_pressed()[0]:
-            self.primary.cast()
-        if pygame.mouse.get_pressed()[2]:
-            self.secondary.cast()
-        if pygame.key.get_pressed()[pygame.K_q]:
-            self.q_skill.cast()
-        if pygame.key.get_pressed()[pygame.K_e]:
-            self.e_skill.cast()
+
     
     def update(self, dt):
         self.update_pos()
@@ -59,7 +50,6 @@ class Weap(pygame.sprite.Sprite):
         self.player.skills["Q"] = self.q_skill
         self.player.skills["E"] = self.e_skill
 
-        self.input()
         self.joystick_input()
         self.primary.update(dt)
         self.secondary.update(dt)

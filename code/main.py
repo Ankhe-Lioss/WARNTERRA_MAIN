@@ -18,15 +18,14 @@ class Game:
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.mouse.set_visible(False)
         self.game_font = pygame.font.Font(os.path.join('images', 'font', 'oldenglishtextmt.ttf'), 40)
-        # Caption
+        # Captiona
+        preload_all_image(self)
         pygame.display.set_caption("Warnterra")
-        icon = pygame.image.load(os.path.join('images', 'UI', 'icon.png')).convert_alpha()
-        pygame.display.set_icon(icon)
+        pygame.display.set_icon(self.icon)
         # Times
         self.clock = pygame.time.Clock()
         # States
         self.running = True
-        preload_all_image(self)
         # game load asset
         load_menu(self)
         print(self.enemy_frames)
@@ -120,8 +119,8 @@ class Game:
             self.all_sprites.draw(self.player)
             if not self.pausing and self.weapon_choose==False:
                 self.all_sprites.update(dt,self.player)
-            if self.game_state == 'in_game':
-                self.ui.update(dt)
+            '''if self.game_state == 'in_game':
+                self.ui.update(dt)'''
             self.draw_menu(dt)
             # CURSOR
             check_cursor(self)

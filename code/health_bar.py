@@ -92,7 +92,7 @@ class Player_healthbar(pygame.sprite.Sprite):
         # Calculate %s
         hp_ratio = max(0, min(1, self.user.hp / self.user.maxhp))
 
-        red_width = int(74 + 138 * hp_ratio)
+        red_width = int(92 + 175 * hp_ratio)
 
         if red_width > 0:
             red_bar = self.bar_full.subsurface(pygame.Rect(0, 0, red_width,self.bar_bg.height)).copy()
@@ -102,9 +102,9 @@ class Player_healthbar(pygame.sprite.Sprite):
         # Background layer
         self.image.blit(self.bar_bg, (0, 0))
         text=self.font.render(f"{int(self.user.hp)}/{int(self.user.maxhp)}", True, 'White')
-        self.image.blit(text,(90,52))
+        self.image.blit(text,(105,66))
         text=self.level_font.render(f"{int(self.user.game.level+1)}", True, 'White')
-        self.image.blit(text,(28,36))
+        self.image.blit(text,(43,51))
     def update(self, dt):
         if self.user.hp <= 0:
             self.kill()
@@ -116,4 +116,4 @@ class Player_healthbar(pygame.sprite.Sprite):
         self.frame_index += 6 * dt
         # Re-render bar
         self.render_bar()
-        self.user.game.display_surface.blit(self.image, (0,600))
+        self.user.game.display_surface.blit(self.image, (0,570))

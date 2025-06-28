@@ -97,7 +97,16 @@ class Player(Entity):
         self.direction.x = int(keys[pygame.K_RIGHT] or keys[pygame.K_d]) - int(keys[pygame.K_LEFT] or keys[pygame.K_a])
         self.direction.y = int(keys[pygame.K_DOWN] or keys[pygame.K_s]) - int(keys[pygame.K_UP] or keys[pygame.K_w])
         self.direction = self.direction.normalize() if self.direction else self.direction
-    
+        #skill input
+        if hasattr(self,'weap'):
+            if pygame.mouse.get_pressed()[0]:
+                self.weap.primary.cast()
+            if pygame.mouse.get_pressed()[2]:
+                self.weap.secondary.cast()
+            if pygame.key.get_pressed()[pygame.K_q]:
+                self.weap.q_skill.cast()
+            if pygame.key.get_pressed()[pygame.K_e]:
+                self.weap.e_skill.cast()
     def update(self, dt):
 
         #mouse and keyboard

@@ -6,11 +6,10 @@ class Player(Entity):
     def __init__(self, pos, game):
         self.name = "Player"
         self.weapon_type = "gauntlet"  # <- make sure this is first
-        self.image_offset = (0, -15)
+        self.image_offset = (0, -20)
         super().__init__(game.player_sprites, game)
         self.game = game
         self.pos = pos
-
         # Skill setup
         skills_obj = PlayerSkills(self, game)
         self.skills_gauntlet = skills_obj.skills_gauntlet
@@ -31,6 +30,8 @@ class Player(Entity):
         self.rect = self.image.get_frect(center=self.pos)
         self.image_rect = self.rect.copy()
         self.player_health_bar=Player_healthbar(self)
+        self.rect = self.rect.inflate(0, -30)
+
         self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
 
         # Hitbox
@@ -69,7 +70,7 @@ class Player(Entity):
             self.direction = self.direction.normalize()
 
     def update_animation(self, dt):
-        self.frame_index = self.frame_index + 6 * dt if self.direction and not self.stunned else 0
+        self.frame_index = self.frame_index + 10 * dt if self.direction and not self.stunned else 0
         self.image = self.frames[self.facing_state][int(self.frame_index) % len(self.frames[self.facing_state])]
             
     

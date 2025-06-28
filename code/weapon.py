@@ -11,8 +11,10 @@ class Weap(pygame.sprite.Sprite):
         self.surf = pygame.image.load(os.path.join('images', 'weapon', f'{self.name}.png')).convert_alpha()
         self.image = self.surf
         self.image_rotate=self.surf.copy()
-        
+        self.image_rect = self.image.get_frect(center=self.player.image_rect.center)
+        self.skill_bar=pygame.image.load(os.path.join('images','UI','skill_bar','skill_bar.png')).convert_alpha()
         # Import skills
+
 
     def joystick_input(self):
 
@@ -39,10 +41,12 @@ class Weap(pygame.sprite.Sprite):
         rotated_weapon = pygame.transform.rotate(self.image_rotate, weapon_angle)
         self.image=rotated_weapon
         # Update position (adjust for rotated image center)
-        # ("up", "up_right", "right", "down_right", "down", "down_left", "left", "up_left"
+
         self.image_rect = rotated_weapon.get_rect(center=self.player.image_rect.center + weapon_offset.rotate(-weapon_angle))
 
-    
+    def draw_skill_bar(self):
+        surf=self.skill_bar
+        self.game.display_surface.blit(surf, (894, 571))
     def update(self, dt):
         self.update_pos()
         self.player.skills["Left"] = self.primary
@@ -56,6 +60,7 @@ class Weap(pygame.sprite.Sprite):
         self.q_skill.update(dt)
         self.e_skill.update(dt)
 
+        self.draw_skill_bar()
 
 class Gauntlet(Weap):
     def __init__(self, game):

@@ -43,7 +43,7 @@ class Bow_primary(Player_projectiles):
         self.source = "Bow Primary"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
-    
+        self.rect=self.rect.inflate(-43, -43)
     def apply(self, target):
         Slowed(500, 0.2, self.game, target)
 
@@ -61,7 +61,7 @@ class Bow_q_skill(Player_projectiles):
         self.source = "Bow SkillQ"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
-    
+        self.rect=self.rect.inflate(-33, -33)
     def apply(self, target):
         Slowed(1000, 0.6, self.game, target)
 

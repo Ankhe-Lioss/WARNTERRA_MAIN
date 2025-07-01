@@ -35,7 +35,7 @@ class spawn_animation(pygame.sprite.Sprite):
             
         self.image = self.frames[0]
         self.rect = self.image.get_frect(topleft=pos)
-        self.image_rect = self.image.get_rect(topleft=pos)
+        self.image_rect = self.image.get_frect(topleft=pos)
     def animate(self, dt):
         self.frame_index += self.animation_speed * dt
         self.image = self.frames[int(self.frame_index % len(self.frames))]

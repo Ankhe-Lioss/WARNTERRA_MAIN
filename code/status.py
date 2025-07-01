@@ -15,7 +15,7 @@ class Status(pygame.sprite.Sprite):
         self.load_icon()
 
         self.image = self.frames[self.frame_index]
-        self.image_rect = self.image.get_rect(center=self.owner.rect.center)
+        self.image_rect = self.image.get_frect(center=self.owner.rect.center)
 
     def load_images(self):
 

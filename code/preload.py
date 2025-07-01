@@ -138,3 +138,24 @@ def preload_all_image(game):
             if frames:
                 aoe_warning_frames[warning_name] = frames
     game.aoe_warning_frames = aoe_warning_frames
+    # Preload animated_object frames
+    animated_object_frames = {}
+    base_path = os.path.join('images', 'animated_object')
+    if os.path.exists(base_path):
+        for obj_name in os.listdir(base_path):
+            obj_path = os.path.join(base_path, obj_name)
+            if not os.path.isdir(obj_path):
+                continue
+            frames = []
+            # Sort files numerically if possible
+            files = sorted(
+                [f for f in os.listdir(obj_path) if f.endswith('.png')],
+                key=lambda x: int(os.path.splitext(x)[0]) if os.path.splitext(x)[0].isdigit() else x
+            )
+            for file in files:
+                full_path = os.path.join(obj_path, file)
+                img = pygame.image.load(full_path).convert_alpha()
+                frames.append(img)
+            if frames:
+                animated_object_frames[obj_name] = frames
+    game.animated_object_frames = animated_object_frames

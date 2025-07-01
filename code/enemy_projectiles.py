@@ -64,7 +64,7 @@ class Veigar_Cage(pygame.sprite.Sprite):
         pygame.draw.circle(self.image, (120, 0, 255, 180), (outer_radius, outer_radius), outer_radius)
         # Cut out the inner circle (make it transparent)
         pygame.draw.circle(self.image, (0, 0, 0, 0), (outer_radius, outer_radius), inner_radius)
-        self.rect = self.image.get_rect(center=center)
+        self.rect = self.image.get_frect(center=center)
         self.image_rect = self.rect.copy()
     def update(self, dt):
         player = self.game.player

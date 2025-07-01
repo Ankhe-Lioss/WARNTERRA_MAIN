@@ -16,7 +16,7 @@ class Healthbar(pygame.sprite.Sprite):
         self.offset_y =-5
 
         self.image = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
-        self.rect = self.image.get_rect(midbottom=user.rect.midtop)
+        self.rect = self.image.get_frect(midbottom=user.rect.midtop)
         self.rect.y += self.offset_y
         self.image_rect = self.rect  # For compatibility with your custom draw()
 

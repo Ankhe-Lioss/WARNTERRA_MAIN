@@ -3,7 +3,6 @@ from sprites import *
 from player import *
 from spawn import *
 from UI import UI  # Make sure UI is imported
-
 def setlevel(game):
     level = game.level%5+1
     
@@ -11,7 +10,7 @@ def setlevel(game):
     game.room = -1
 
     # Load TMX map
-    game.map = load_pygame(os.path.join('data', 'maps', f'Level{level}.tmx'))
+    game.map = load_pygame(os.path.join('data', 'maps', 'Level1.tmx'))
 
     # Initialize structures
     game.spawnlist = {}
@@ -20,18 +19,55 @@ def setlevel(game):
     game.doors = set()
 
     # Ground and Walls
-    for x, y, image in game.map.get_layer_by_name('Ground').tiles():
-        Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'ground')
+#    for x, y, image in game.map.get_layer_by_name('Ground').tiles():
+ #       Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'ground')
+    wall_layer = game.map.get_layer_by_name('Wall')
 
+    #Tile layer
     for x, y, image in game.map.get_layer_by_name('Floor').tiles():
         Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'floor')
 
     for x, y, image in game.map.get_layer_by_name('Wall').tiles():
-        Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'wall')
+        Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites)
+
+    for x, y, gid in game.map.get_layer_by_name('Animated Floor').iter_data():
+        props = game.map.get_tile_properties_by_gid(gid)
+        if props and 'type' in props:
+            Animated_Ground((x * TILE_SIZE, y * TILE_SIZE),game ,props['type'])
+    for x, y, image in game.map.get_layer_by_name('Decorative').tiles():
+        Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites)
+
 
     # Collision Sprites
-    for obj in game.map.get_layer_by_name('Objects'):
-        CollisionSprite((obj.x, obj.y), obj.image, (game.all_sprites, game.collision_sprites))
+#    for obj in game.map.get_layer_by_name('Objects'):
+#        CollisionSprite((obj.x, obj.y), obj.image, (game.all_sprites, game.collision_sprites))
+    #object layer
+    for obj in game.map.get_layer_by_name('Non_animated_non_collision'):
+        x = int(obj.x // TILE_SIZE)
+        y = int(obj.y // TILE_SIZE)
+        CollisionSprite((x * TILE_SIZE, y * TILE_SIZE), obj.image, game.all_sprites)
+
+    for obj in game.map.get_layer_by_name('Non_animated_collision'):
+        tile = game.map.get_tile_properties_by_gid(obj.gid)
+        CollisionSprite((obj.x, obj.y), obj.image, (game.all_sprites, game.collision_sprites),tile['type'])
+
+    for obj in game.map.get_layer_by_name('Animated_collision'):
+        tile = game.map.get_tile_properties_by_gid(obj.gid)
+        Aninmated_Object((obj.x, obj.y), tile['type'], (game.all_sprites, game.collision_sprites),game)
+
+
+
+    for obj in game.map.get_layer_by_name('Trap'):
+        tile = game.map.get_tile_properties_by_gid(obj.gid)
+        Trap((obj.x, obj.y),game, tile['type'])
+
+
+    for obj in game.map.get_layer_by_name('Animated_non_collision'):
+        tile = game.map.get_tile_properties_by_gid(obj.gid)
+        Aninmated_Object((obj.x, obj.y), tile['type'], game.all_sprites, game)
+
+
+
 
     for obj in game.map.get_layer_by_name('Collisions'):
         CollisionSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), game.collision_sprites)

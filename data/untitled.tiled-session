@@ -1,0 +1,244 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "maps/Level1.tmx",
+    "expandedProjectPaths": [
+        ".",
+        "maps",
+        "tilesets"
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "C:/Users/songh/Desktop/data/maps/Example.tmx": {
+            "expandedObjectLayers": [
+                8
+            ],
+            "scale": 1.5,
+            "selectedLayer": 10,
+            "viewCenter": {
+                "x": 763.3333333333333,
+                "y": 1020.3333333333333
+            }
+        },
+        "C:/Users/songh/Desktop/data/tilesets/Animated_collision.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/songh/Desktop/data/tilesets/Animated_floor.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "C:/Users/songh/Desktop/data/tilesets/Animated_non_collision.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "C:/Users/songh/Desktop/data/tilesets/Floor And Wall.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "C:/Users/songh/Desktop/data/tilesets/Non_animated_collision.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/songh/Desktop/data/tilesets/Non_animated_non_collision.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "C:/Users/songh/Desktop/data/tilesets/Trap.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level0.tmx": {
+            "scale": 0.2907327586206896,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 768.7472201630839,
+                "y": 1391.3120830244627
+            }
+        },
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level1.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 527,
+                "y": 3655
+            }
+        },
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level2.tmx": {
+            "scale": 0.17938829787234042,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 911.4306893995551,
+                "y": 2254.885100074129
+            }
+        },
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level4.tmx": {
+            "scale": 0.17938829787234042,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 914.2179392142327,
+                "y": 2254.885100074129
+            }
+        },
+        "D:/Git/WARNTERRA_MAIN/old_data/tilesets/Door.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/Git/WARNTERRA_MAIN/old_data/tilesets/dungeon_floor.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/Git/WARNTERRA_MAIN/old_data/tilesets/dungeon_object.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/Git/WARNTERRA_MAIN/old_data/tilesets/dungeon_sprite_sheet.tsx": {
+            "scaleInDock": 1
+        },
+        "Tilesets/Door.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "Tilesets/Floor and wall.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "Tilesets/Non_animated_non_collision.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "maps/Animated_floor.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "maps/Example.tmx": {
+            "expandedObjectLayers": [
+                2,
+                13
+            ],
+            "scale": 0.5,
+            "selectedLayer": 11,
+            "viewCenter": {
+                "x": 753,
+                "y": 787
+            }
+        },
+        "maps/Floor and wall.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 11
+        },
+        "maps/Level1.tmx": {
+            "expandedObjectLayers": [
+                5,
+                8,
+                11,
+                13,
+                6,
+                2,
+                7
+            ],
+            "scale": 1,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 577.5,
+                "y": 2706.5
+            }
+        },
+        "maps/Level2.tmx": {
+            "scale": 1,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 944.5,
+                "y": 2256.5
+            }
+        },
+        "tilesets/Animated_collision.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/Animated_floor.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "tilesets/Animated_non_collision.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/Door.tsx": {
+            "dynamicWrapping": false
+        },
+        "tilesets/Floor And Wall.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/Non_animated_collision.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/Non_animated_non_collision.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/Trap.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/dungeon_floor.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 23
+        },
+        "tilesets/dungeon_object.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "tilesets/dungeon_sprite_sheet.tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/wall.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "D:/Git/WARNTERRA_MAIN/data/graphics/object/Animated/Animated_collision",
+    "map.height": 10,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 10,
+    "openFiles": [
+        "maps/Level1.tmx"
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+        "maps/Level1.tmx",
+        "tilesets/Non_animated_non_collision.tsx",
+        "maps/Example.tmx",
+        "tilesets/Animated_floor.tsx",
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level1.tmx",
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level4.tmx",
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level2.tmx",
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level0.tmx",
+        "C:/Users/songh/Desktop/data/maps/Example.tmx",
+        "C:/Users/songh/Desktop/data/tilesets/Animated_floor.tsx",
+        "C:/Users/songh/Desktop/data/tilesets/Animated_collision.tsx",
+        "tilesets/Animated_collision.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 32
+    },
+    "tileset.type": 0
+}

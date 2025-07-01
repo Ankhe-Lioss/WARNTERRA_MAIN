@@ -39,7 +39,7 @@ class AllSprites(pygame.sprite.Group):
                 object_sprites.append(sprite)
 
         for layer in [ground_sprites, floor_sprites, object_sprites, top_sprites]:
-            for sprite in sorted(layer, key=lambda sprite: sprite.image_rect.bottom):
+            for sprite in sorted(layer, key=lambda sprite: sprite.image_rect.centery):
 
                 self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)
                 if Show_image and not hasattr(sprite, 'type') :

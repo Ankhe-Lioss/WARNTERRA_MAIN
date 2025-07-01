@@ -6,7 +6,7 @@ class Player(Entity):
     def __init__(self, pos, game):
         self.name = "Player"
         self.weapon_type = "gauntlet"  # <- make sure this is first
-        self.image_offset = (0, -20)
+        self.image_offset = (0, -15)
         super().__init__(game.player_sprites, game)
         self.game = game
         self.pos = pos

@@ -44,19 +44,16 @@ class Weap(pygame.sprite.Sprite):
         self.image=rotated_weapon
         # Update position (adjust for rotated image center)
 
-        self.image_rect = rotated_weapon.get_rect(center=self.player.image_rect.center + weapon_offset.rotate(-weapon_angle))
+        self.image_rect = rotated_weapon.get_frect(center=self.player.image_rect.center + weapon_offset.rotate(-weapon_angle))
 
     def draw_skill_bar(self):
         surf = self.skill_bar
         base_x, base_y = 894, 571  # top-left of vine UI
         self.game.display_surface.blit(surf, (base_x, base_y))
+        skill_keys = {'Left': self.primary, 'Right': self.secondary, 'Q': self.q_skill, 'E': self.e_skill}
 
-        skill_keys = ['Left', 'Right', 'Q', 'E']
         for index, key in enumerate(skill_keys):
-            if key not in self.player.skills:
-                continue
-            skill = self.player.skills[key]
-
+            skill = skill_keys[key]
             cooldown_ratio = skill.remaining / skill.cooldown if skill.cooldown else 0
 
             cooldown_time = skill.remaining / 1000
@@ -68,7 +65,7 @@ class Weap(pygame.sprite.Sprite):
             cooldown_ratio = max(0, min(cooldown_ratio, 1))
 
             x = base_x + 41 + index * 53
-            y = base_y + 45
+            y = base_y + 46
             icon_rect = pygame.Rect(x, y, 42, 42)
 
 
@@ -122,7 +119,7 @@ class Gauntlet(Weap):
     def __init__(self, game):
         self.name = self.__class__.__name__
         super().__init__(game)
-        
+
         # Import skills
         self.primary = Gauntlet_primary(self.player, self.game)
         self.q_skill = Gauntlet_q_skill(self.player, self.game)
@@ -134,7 +131,7 @@ class Bow(Weap):
     def __init__(self, game):
         self.name = self.__class__.__name__
         super().__init__(game)
-        
+
         # Import skills
         self.primary = Bow_primary(self.player, self.game)
         self.q_skill = Bow_q_skill(self.player, self.game)

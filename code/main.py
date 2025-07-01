@@ -31,7 +31,7 @@ class Game:
         print(self.enemy_frames)
         check_cursor(self)
 
-
+        self.frame_index = 0
         self.state = None
         self.game_state = 'in_start_menu'
         self.menu_state = 'main'
@@ -103,7 +103,7 @@ class Game:
                     if event.button == 7:
                         self.pausing = not self.pausing
             # FILL
-            self.display_surface.fill('gray12')
+            self.display_surface.fill('gray9')
 
 
             check_game_state(self)
@@ -119,6 +119,7 @@ class Game:
             self.all_sprites.draw(self.player)
             if not self.pausing and self.weapon_choose==False:
                 self.all_sprites.update(dt,self.player)
+                self.frame_index += dt*6
             if self.game_state == 'in_game':
                 self.ui.update(dt)
             self.draw_menu(dt)

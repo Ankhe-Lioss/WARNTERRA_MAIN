@@ -33,15 +33,17 @@ class AllSprites(pygame.sprite.Group):
                 floor_sprites.append(sprite)
             elif sprite_type == 'top':
                 top_sprites.append(sprite)
-            elif sprite_type not in ['ground', 'floor', 'top', 'collision', 'door']:
+            elif sprite_type not in ['ground', 'floor', 'top', 'door'] and sprite_type !="weap":
                 object_sprites.append(sprite)
             elif sprite_type is None:
                 object_sprites.append(sprite)
 
         for layer in [ground_sprites, floor_sprites, object_sprites, top_sprites]:
             for sprite in sorted(layer, key=lambda sprite: sprite.image_rect.centery):
-
+                if hasattr(sprite,"name") and   sprite.name=="Player":
+                    self.display_surface.blit(sprite.weap.image, sprite.weap.image_rect.topleft + self.offset)
                 self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)
+
                 if Show_image and not hasattr(sprite, 'type') :
                     image_rect_outline = sprite.image_rect.copy()
                     image_rect_outline.topleft += self.offset

@@ -5,50 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee4a0f70-305e-49b1-b297-9d90997c641d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/UI.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/UI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/groups.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/player_skills.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/player_skills.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/setlevel.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/setlevel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/sprites.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Example.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/data/maps/Example.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Level1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/data/maps/Level1.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Level2.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/data/maps/Level2.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tilesets/Animated_collision.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/tilesets/Animated_collision.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tilesets/Animated_non_collision.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/tilesets/Animated_non_collision.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tilesets/Non_animated_collision.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/tilesets/Non_animated_collision.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tilesets/Non_animated_non_collision.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/tilesets/Non_animated_non_collision.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/weapon.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/weapon.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/untitled.tiled-session" beforeDir="false" afterPath="$PROJECT_DIR$/data/untitled.tiled-session" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Stone_Door/9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Door/Wooden_Door/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/icons/Player_skills/Bow_e_skill.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/icons/Player_skills/Bow_e_skill.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/icons/Player_skills/Bow_primary.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/icons/Player_skills/Bow_primary.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/icons/Player_skills/Bow_primary_enhanced.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/icons/Player_skills/Bow_primary_enhanced.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/icons/Player_skills/Bow_q_skill.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/icons/Player_skills/Bow_q_skill.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/icons/Player_skills/Bow_secondary.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/icons/Player_skills/Bow_secondary.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/icons/Player_skills/Gauntlet_e_skill.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/icons/Player_skills/Gauntlet_e_skill.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/icons/Player_skills/Gauntlet_primary.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/icons/Player_skills/Gauntlet_primary.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/icons/Player_skills/Gauntlet_q_skill.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/icons/Player_skills/Gauntlet_q_skill.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/icons/Player_skills/Gauntlet_secondary.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/icons/Player_skills/Gauntlet_secondary.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +212,11 @@
       <workItem from="1751311933738" duration="107000" />
       <workItem from="1751342945722" duration="8897000" />
       <workItem from="1751367380959" duration="26388000" />
-      <workItem from="1751442087231" duration="10573000" />
+      <workItem from="1751442087231" duration="10886000" />
+      <workItem from="1751470117365" duration="393000" />
+      <workItem from="1751471275325" duration="1785000" />
+      <workItem from="1751473200919" duration="1255000" />
+      <workItem from="1751474623417" duration="2904000" />
     </task>
     <servers />
   </component>
@@ -275,7 +254,7 @@
     <SUITE FILE_PATH="coverage/projectiles_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750778979353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/main_py$check_images.coverage" NAME="check images Coverage Results" MODIFIED="1750478631992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/images" />
     <SUITE FILE_PATH="coverage/WARNTERRA_MAIN$enemies.coverage" NAME="enemies Coverage Results" MODIFIED="1749887503521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1751469777859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1751477331939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/main_py$button.coverage" NAME="button Coverage Results" MODIFIED="1750478642107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/main_py$setlevel.coverage" NAME="setlevel Coverage Results" MODIFIED="1750321504449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
   </component>

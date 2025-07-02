@@ -9,7 +9,6 @@ class Player_skill(Skill):
     def __init__(self, user, game):
         super().__init__(user, game)
         self.icon = pygame.image.load(os.path.join("images", "icons", "Player_skills", f"{self.name}.png")).convert_alpha()
-        self.icon = pygame.transform.scale(self.icon, (48, 48))
 
 class Gauntlet_primary(Player_skill):
     def __init__(self, user, game):

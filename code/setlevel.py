@@ -78,15 +78,12 @@ def setlevel(game):
         if obj.name == 'Player':
             # Create new player
             game.player = Player((obj.x, obj.y), game)
-            game.player.weap=Bow(game)
-            # kill weapon
-            if hasattr(game.player, 'weap'):
-                game.player.weap.kill()
-            if hasattr(game,'chosen_weap'):
-                game.player.weap=game.chosen_weap(game)
-            else:
+            # Give both weapons
+            game.player.weap_gauntlet = Gauntlet(game)
+            game.player.weap_bow = Bow(game)
+            game.player.current_weap = game.player.weap_gauntlet
+            game.player.weap= game.player.current_weap
 
-                game.player.weap=pygame.sprite.Sprite()
             # Reinitialize the UI with the new player
             game.ui = UI(game, game.player, game.display_surface)
 

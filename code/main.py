@@ -39,8 +39,7 @@ class Game:
         self.background = Background()
         self.current_BGM = None
         self.level = 5         #LEVEL
-        self.weapon_choose=False
-        
+
         self.level -= 1 
 
         #fps cal
@@ -117,7 +116,7 @@ class Game:
 
             # Game State
             self.all_sprites.draw(self.player)
-            if not self.pausing and self.weapon_choose==False:
+            if not self.pausing :
                 self.all_sprites.update(dt,self.player)
                 self.frame_index += dt*6
             if self.game_state == 'in_game':
@@ -157,8 +156,7 @@ class Game:
         self.display_surface.blit(fps_text, (10, 10))
 
     def draw_menu(self,dt):
-        if self.weapon_choose:
-            self.weapon_choosing_menu( )
+
 
         if self.pausing and self.game_state == 'in_game' and self.menu_state == 'main':
             self.pause_menu()
@@ -180,7 +178,6 @@ class Game:
                     self.game_state = 'in_game'
                     self.menu_state = True
                     pygame.mixer.stop()
-                    self.weapon_choose=True
                 # X button (Quit)
                 if self.joystick.get_button(2):
                     self.running = False
@@ -198,7 +195,6 @@ class Game:
                 self.restart()
                 self.pausing = False
                 game.start_menu_audio.stop()
-                self.weapon_choose=True
             if self.quit_start_button.draw(self.display_surface):
                 self.running = False
             '''if self.options_button.draw(self.display_surface):
@@ -229,7 +225,6 @@ class Game:
         if self.restart_button.draw(self.display_surface):
             self.restart()
             self.pausing = False
-            self.weapon_choose=True
         if self.startmenu_button.draw(self.display_surface):
             self.game_state = "in_start_menu"
     def death_menu(self):
@@ -253,7 +248,6 @@ class Game:
                 self.pausing = False
                 self.death_menu_audio.stop()
                 self.current_BGM = None
-                self.weapon_choose=True
 
     def weapon_choosing_menu(self):
         if self.have_joystick:
@@ -263,21 +257,18 @@ class Game:
                 self.pausing = False
                 self.game_state = "in_game"
                 self.menu_state = "main"
-                self.weapon_choose = False
             elif self.joystick.get_button(5):
                 self.player.weap.kill()
                 self.player.weap = Gauntlet(self)
                 self.pausing = False
                 self.game_state = "in_game"
                 self.menu_state = "main"
-                self.weapon_choose = False
         if self.bow_button.draw(self.display_surface):
             self.player.weap.kill()
             self.player.weap = Bow(self)
             self.pausing = False
             self.game_state = "in_game"
             self.menu_state = "main"
-            self.weapon_choose = False
             self.chosen_weap = Bow
 
         if self.gauntlet_button.draw(self.display_surface):
@@ -286,7 +277,6 @@ class Game:
             self.pausing = False
             self.game_state = "in_game"
             self.menu_state = "main"
-            self.weapon_choose = False
             self.chosen_weap = Gauntlet
 if __name__ == "__main__":
     game = Game()

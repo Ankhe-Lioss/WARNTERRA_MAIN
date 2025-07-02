@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/Level2.tmx",
+    "activeFile": "maps/Level1.tmx",
     "expandedProjectPaths": [
         ".",
         "tilesets",
@@ -136,23 +136,6 @@
         },
         "maps/Level1.tmx": {
             "expandedObjectLayers": [
-                2,
-                11,
-                13,
-                7,
-                6,
-                5,
-                8
-            ],
-            "scale": 0.75,
-            "selectedLayer": 10,
-            "viewCenter": {
-                "x": 795.3333333333333,
-                "y": 2842
-            }
-        },
-        "maps/Level2.tmx": {
-            "expandedObjectLayers": [
                 5,
                 11,
                 2,
@@ -162,10 +145,28 @@
                 6
             ],
             "scale": 0.33,
+            "selectedLayer": 10,
+            "viewCenter": {
+                "x": 565.1515151515152,
+                "y": 2992.424242424243
+            }
+        },
+        "maps/Level2.tmx": {
+            "expandedObjectLayers": [
+                5,
+                11,
+                2,
+                7,
+                10,
+                8,
+                13,
+                6
+            ],
+            "scale": 0.33,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 936.3636363636363,
-                "y": 3386.363636363636
+                "x": 934.8484848484848,
+                "y": 3759.090909090909
             }
         },
         "tilesets/Animated_collision.tsx": {
@@ -238,13 +239,14 @@
     "openFiles": [
         "maps/Level2.tmx",
         "tilesets/Non_animated_non_collision.tsx",
-        "tilesets/Door.tsx"
+        "tilesets/Door.tsx",
+        "maps/Level1.tmx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
-        "tilesets/Door.tsx",
-        "tilesets/Non_animated_non_collision.tsx",
         "maps/Level2.tmx",
+        "tilesets/Non_animated_non_collision.tsx",
+        "tilesets/Door.tsx",
         "maps/Level1.tmx",
         "tilesets/Non_animated_collision.tsx",
         "maps/Example.tmx",

@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/Level1.tmx",
+    "activeFile": "maps/Level2.tmx",
     "expandedProjectPaths": [
         ".",
-        "maps",
-        "tilesets"
+        "tilesets",
+        "maps"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -118,13 +118,15 @@
         "maps/Example.tmx": {
             "expandedObjectLayers": [
                 2,
-                13
+                13,
+                8,
+                7
             ],
-            "scale": 0.5,
-            "selectedLayer": 11,
+            "scale": 0.75,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 753,
-                "y": 787
+                "x": 768,
+                "y": 768.6666666666667
             }
         },
         "maps/Floor and wall.tsx": {
@@ -134,27 +136,36 @@
         },
         "maps/Level1.tmx": {
             "expandedObjectLayers": [
-                5,
-                8,
+                2,
                 11,
                 13,
+                7,
                 6,
-                2,
-                7
+                5,
+                8
             ],
-            "scale": 1,
-            "selectedLayer": 6,
+            "scale": 0.75,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 577.5,
-                "y": 2706.5
+                "x": 795.3333333333333,
+                "y": 2842
             }
         },
         "maps/Level2.tmx": {
-            "scale": 1,
+            "expandedObjectLayers": [
+                5,
+                11,
+                2,
+                7,
+                8,
+                13,
+                6
+            ],
+            "scale": 0.33,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 944.5,
-                "y": 2256.5
+                "x": 936.3636363636363,
+                "y": 3386.363636363636
             }
         },
         "tilesets/Animated_collision.tsx": {
@@ -164,16 +175,18 @@
         },
         "tilesets/Animated_floor.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 3,
+            "scaleInDock": 1.5,
             "scaleInEditor": 1
         },
         "tilesets/Animated_non_collision.tsx": {
             "dynamicWrapping": true,
-            "scaleInDock": 1,
+            "scaleInDock": 1.5,
             "scaleInEditor": 1
         },
         "tilesets/Door.tsx": {
-            "dynamicWrapping": false
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "tilesets/Floor And Wall.tsx": {
             "dynamicWrapping": false,
@@ -195,6 +208,11 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "tilesets/acid.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        },
         "tilesets/dungeon_floor.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
@@ -213,32 +231,34 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "D:/Git/WARNTERRA_MAIN/data/graphics/object/Animated/Animated_collision",
+    "last.imagePath": "D:/Git/WARNTERRA_MAIN/data/graphics/object/Door",
     "map.height": 10,
     "map.lastUsedFormat": "tmx",
     "map.width": 10,
     "openFiles": [
-        "maps/Level1.tmx"
+        "maps/Level2.tmx",
+        "tilesets/Non_animated_non_collision.tsx",
+        "tilesets/Door.tsx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
-        "maps/Level1.tmx",
+        "tilesets/Door.tsx",
         "tilesets/Non_animated_non_collision.tsx",
+        "maps/Level2.tmx",
+        "maps/Level1.tmx",
+        "tilesets/Non_animated_collision.tsx",
         "maps/Example.tmx",
+        "tilesets/Animated_collision.tsx",
+        "tilesets/acid.tsx",
+        "tilesets/Animated_non_collision.tsx",
         "tilesets/Animated_floor.tsx",
         "D:/Git/WARNTERRA_MAIN/old_data/maps/Level1.tmx",
-        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level4.tmx",
-        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level2.tmx",
-        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level0.tmx",
-        "C:/Users/songh/Desktop/data/maps/Example.tmx",
-        "C:/Users/songh/Desktop/data/tilesets/Animated_floor.tsx",
-        "C:/Users/songh/Desktop/data/tilesets/Animated_collision.tsx",
-        "tilesets/Animated_collision.tsx"
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level4.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 32,
         "width": 32
     },
-    "tileset.type": 0
+    "tileset.type": 1
 }

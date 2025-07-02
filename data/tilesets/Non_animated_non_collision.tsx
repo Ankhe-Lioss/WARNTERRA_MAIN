@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="Non_animated_non_collision" tilewidth="66" tileheight="34" tilecount="19" columns="0">
+<tileset version="1.10" tiledversion="1.11.2" name="Non_animated_non_collision" tilewidth="94" tileheight="72" tilecount="20" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0" type="saadsadasadasdasd">
   <image source="../Graphics/Object/None_Animated/None_Collision/Candles Not animated.png" width="20" height="22"/>
@@ -57,5 +57,8 @@
  </tile>
  <tile id="18">
   <image source="../Graphics/Object/None_Animated/None_Collision/Wall Hole.png" width="66" height="34"/>
+ </tile>
+ <tile id="19">
+  <image source="../graphics/object/None_Animated/None_Collision/object_83.png" width="94" height="72"/>
  </tile>
 </tileset>

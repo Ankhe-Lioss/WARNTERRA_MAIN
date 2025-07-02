@@ -2,6 +2,7 @@ from setting import *
 animated_image_offset={#name = (inflate,offset)
 'Fountain':((0,-35),(0,10)),
 'Broken_Pillar_Torch': ((-32,-78),(0,15)),
+'Orb':((-96,-102),(0,38)),
 'Torch_2': ((-82,-103),(0,0)),
 'Magic_Stone': ((-64,-128),(0,32)),
 'Haunted_Piano': ((-145,-150),(0,40)),
@@ -9,7 +10,9 @@ animated_image_offset={#name = (inflate,offset)
 'Rock':((0,-16),(0,8)),
 'Statues':((0,-42),(0,21)),
 'Flames_trap':((0,-86),(0,43)),
-'Pillar_Torch':((-32,-70),(0,35))
+'Pillar_Torch':((-32,-70),(0,35)),
+'Wooden_Door':((0,-32),(0,-16)),
+'Stone_Door':((0,-32),(0,-16))
 }
 class Ground(pygame.sprite.Sprite):
     """ Background map """
@@ -25,7 +28,7 @@ class CollisionSprite(pygame.sprite.Sprite):
     
     """ Objects and walls """
     
-    def __init__(self, pos, surf, groups,name=None):
+    def __init__(self, pos, surf, groups,name=None,type=None):
         super().__init__(groups)
         self.image = surf
         self.image_rect = self.image.get_rect(topleft=pos)
@@ -86,15 +89,6 @@ class Aninmated_Object(pygame.sprite.Sprite):
         self.frame_index=self.game.frame_index
         self.image=self.frames[int(self.frame_index % len(self.frames))]
 
-class Door(pygame.sprite.Sprite):
-    """ Objects and walls """
-
-    def __init__(self, pos, surf, groups):
-        super().__init__(groups)
-        self.image = surf
-        self.image_rect = self.image.get_frect(topleft=pos)
-        self.rect = self.image.get_frect(topleft=pos)
-        self.type = 'wall'
 
 Trap_on_off_time={#Trap name:(frames number,off frames number,on frames number)
 'Spikes':(14,5,9),
@@ -193,3 +187,79 @@ class Animated_Ground(pygame.sprite.Sprite):
     def update(self, dt):
         self.frame_index=self.game.frame_index
         self.image=self.frames[int(self.frame_index % len(self.frames))]
+class Door(pygame.sprite.Sprite):
+    def __init__(self, pos, game, name):
+        super().__init__(game.all_sprites,game.door_sprites)
+        self.game = game
+        self.name = name
+        self.pos = pos
+        self.state = 'opening'
+        self.frame_index = 0
+        self.frames = {
+            'opening': [],
+            'opened': [],
+            'closing': [],
+            'closed': []
+        }
+  # Adjust as needed
+        self.load_images()
+
+        self.image = self.frames[self.state][0]
+        self.image_rect = self.image.get_rect(topleft=pos)
+        inflate, offset = animated_image_offset.get(self.name, ((0, 0), (0, 0)))
+        self.rect = self.image_rect.copy()
+        self.rect = self.rect.inflate(*inflate)
+        self.rect.topleft = (self.rect.left + offset[0], self.rect.top + offset[1])
+
+    def load_images(self):
+        base_path = os.path.join('images', 'Door', self.name)
+
+        for state in self.frames:
+            state_path = os.path.join(base_path, state.capitalize())
+            if not os.path.exists(state_path):
+                continue
+
+            i = 1
+            while True:
+                img_path = os.path.join(state_path, f"{i}.png")
+                if os.path.exists(img_path):
+                    img = pygame.image.load(img_path).convert_alpha()
+                    self.frames[state].append(img)
+                    i += 1
+                else:
+                    break
+
+    def toggle(self):
+        if self.state in ['closed', 'closing']:
+            self.state = 'opening'
+            self.frame_index = 0
+        elif self.state in ['opened', 'opening']:
+            self.state = 'closing'
+            self.frame_index = 0
+
+    def update(self, dt):
+        if self.state in ['opening', 'closing']:
+            self.frame_index += 6*dt
+            frame_list = self.frames[self.state]
+
+            if self.frame_index >= len(frame_list):
+                # Transition to final state
+                if self.state == 'opening':
+                    self.state = 'opened'
+                    self.remove(self.game.collision_sprites)
+                else:
+                    self.state = 'closed'
+                    self.add(self.game.collision_sprites)
+
+                self.frame_index = 0
+
+            self.image = self.frames[self.state][int(self.frame_index)]
+
+        else:
+            # Ensure collision group reflects the current state
+            if self.state == 'closed':
+                self.add(self.game.collision_sprites)
+            else:
+                self.remove(self.game.collision_sprites)
+
+            self.image = self.frames[self.state][0]

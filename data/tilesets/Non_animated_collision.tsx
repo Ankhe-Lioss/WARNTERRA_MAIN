@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="Non_animated_collision" tilewidth="56" tileheight="84" tilecount="20" columns="0">
+<tileset version="1.10" tiledversion="1.11.2" name="Non_animated_collision" tilewidth="104" tileheight="130" tilecount="21" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0" type="Bookshelf">
   <image source="../graphics/object/None_Animated/Collision/BookShelf1.png" width="32" height="44"/>
@@ -60,5 +60,8 @@
  </tile>
  <tile id="19" type="Statues">
   <image source="../graphics/object/None_Animated/Collision/Statue with cape.png" width="56" height="84"/>
+ </tile>
+ <tile id="20" type="Fountain">
+  <image source="../graphics/object/None_Animated/Collision/Empty Fountain.png" width="104" height="130"/>
  </tile>
 </tileset>

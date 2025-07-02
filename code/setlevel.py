@@ -10,7 +10,7 @@ def setlevel(game):
     game.room = -1
 
     # Load TMX map
-    game.map = load_pygame(os.path.join('data', 'maps', 'Level1.tmx'))
+    game.map = load_pygame(os.path.join('data', 'maps', 'Level2.tmx'))
 
     # Initialize structures
     game.spawnlist = {}
@@ -25,7 +25,7 @@ def setlevel(game):
 
     #Tile layer
     for x, y, image in game.map.get_layer_by_name('Floor').tiles():
-        Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'floor')
+        Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'ground')
 
     for x, y, image in game.map.get_layer_by_name('Wall').tiles():
         Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites)
@@ -43,13 +43,11 @@ def setlevel(game):
 #        CollisionSprite((obj.x, obj.y), obj.image, (game.all_sprites, game.collision_sprites))
     #object layer
     for obj in game.map.get_layer_by_name('Non_animated_non_collision'):
-        x = int(obj.x // TILE_SIZE)
-        y = int(obj.y // TILE_SIZE)
-        CollisionSprite((x * TILE_SIZE, y * TILE_SIZE), obj.image, game.all_sprites)
+        CollisionSprite((x * TILE_SIZE, y * TILE_SIZE), obj.image, game.all_sprites,None)
 
     for obj in game.map.get_layer_by_name('Non_animated_collision'):
         tile = game.map.get_tile_properties_by_gid(obj.gid)
-        CollisionSprite((obj.x, obj.y), obj.image, (game.all_sprites, game.collision_sprites),tile['type'])
+        CollisionSprite((obj.x, obj.y), obj.image, (game.all_sprites, game.collision_sprites),tile['type'],)
 
     for obj in game.map.get_layer_by_name('Animated_collision'):
         tile = game.map.get_tile_properties_by_gid(obj.gid)
@@ -73,7 +71,8 @@ def setlevel(game):
         CollisionSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), game.collision_sprites)
 
     for obj in game.map.get_layer_by_name('Door'):
-        game.doorlist.append(((obj.x, obj.y), obj.image))
+        tile = game.map.get_tile_properties_by_gid(obj.gid)
+        Door((obj.x, obj.y),game, tile['type'])
 
     for obj in game.map.get_layer_by_name('Entities'):
         if obj.name == 'Player':

@@ -8,9 +8,9 @@ class Area_of_effect(pygame.sprite.Sprite):
         self.game = game
 
         #load stat
-        self.scale=Aoe_stat[self.name][0]
-        self.frame_number=Aoe_stat[self.name][1]
-        self.lifetime = Aoe_stat[self.name][2]
+        self.scale = aoe_stat[self.name][0]
+        self.frame_number = aoe_stat[self.name][1]
+        self.lifetime = aoe_stat[self.name][2]
         #graphic loading
 
         self.frame_index = 0

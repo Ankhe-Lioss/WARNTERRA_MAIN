@@ -10,7 +10,7 @@ def setlevel(game):
     game.room = -1
 
     # Load TMX map
-    game.map = load_pygame(os.path.join('data', 'maps', 'Level2.tmx'))
+    game.map = load_pygame(os.path.join('data', 'maps', 'Level1.tmx'))
 
     # Initialize structures
     game.spawnlist = {}
@@ -99,7 +99,8 @@ def setlevel(game):
                     game.spawnlist[room][wave].append((obj.name, obj.x, obj.y))
 
     game.room_numb = len(game.checkins) - 1
-    game.map_layout= build_grid(game.map,game.collision_sprites)
+    game.map_layout = build_grid_from_sprites(game.map,game.collision_sprites)
+    
 def endlevel(game):
     for group in [game.all_sprites, game.player_sprites, game.enemy_sprites, game.player_projectiles, game.enemy_projectiles, game.collision_sprites]:
         for sprite in group:
@@ -108,13 +109,12 @@ def endlevel(game):
     # Stat for levels
 
 def spawn_door(game):
-    for obj in game.doorlist:
-        game.doors.add(Door(obj[0], obj[1], (game.all_sprites, game.collision_sprites)))
+    for door in game.door_sprites:
+        door.toggle()
         
 def open_door(game):
-    for door in game.doors:
-        door.kill()
-        del door
+    for door in game.door_sprites:
+        door.toggle()
 
 def spawn_wave(game):
     for obj in game.spawnlist[game.room][game.wave]:
@@ -164,7 +164,8 @@ def check_game_state(game):
     #print(game.wave)
     if game.state == "in_level":
         update_level(game)
-def build_grid(map,collision_sprites):
+        
+def build_grid_from_sprites(map,collision_sprites):
     grid = []
     tile_w = map.tilewidth
     tile_h =map.tileheight

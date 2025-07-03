@@ -8,6 +8,7 @@ from button import *
 from background import *
 from UI import UI
 from preload import *
+
 # THIS FKING MAIN GAME SIHFHFHFHFHFHFHFHF
 class Game:
     def __init__(self):
@@ -18,14 +19,18 @@ class Game:
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.mouse.set_visible(False)
         self.game_font = pygame.font.Font(os.path.join('images', 'font', 'oldenglishtextmt.ttf'), 40)
+        
         # Captiona
         preload_all_image(self)
         pygame.display.set_caption("Warnterra")
         pygame.display.set_icon(self.icon)
+        
         # Times
         self.clock = pygame.time.Clock()
+        
         # States
         self.running = True
+        
         # game load asset
         load_menu(self)
         print(self.enemy_frames)
@@ -51,6 +56,7 @@ class Game:
         self.total_fps = 0
         self.frame_count = 0
         self.average_fps = 0
+        
     def restart(self):
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()

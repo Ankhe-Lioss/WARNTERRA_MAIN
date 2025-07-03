@@ -1,6 +1,7 @@
 from setting import *
 from player_skills import *
 import math
+
 class Weap(pygame.sprite.Sprite):
     def __init__(self, game):
         super().__init__(game.all_sprites)
@@ -120,7 +121,6 @@ class Weap(pygame.sprite.Sprite):
         self.q_skill.update(dt)
         self.e_skill.update(dt)
 
-
 class Gauntlet(Weap):
     def __init__(self, game):
         self.name = self.__class__.__name__
@@ -150,4 +150,7 @@ class Bazooka(Weap):
         super().__init__(game)
 
         # Import skills
-        self.primary = Tracking_missile(self.player, self.game)
+        self.primary = Bazooka_primary(self.player, self.game)
+        self.q_skill = Bazooka_q_skill(self.player, self.game)
+        self.e_skill = Bazooka_e_skill(self.player, self.game)
+        self.secondary = Bazooka_secondary(self.player, self.game)

@@ -1,6 +1,6 @@
 from setting import *
 from health_bar import Healthbar
-from helper import Delay
+from helper import *
 
 class Entity(pygame.sprite.Sprite):
     def __init__(self, groups, game):
@@ -213,6 +213,7 @@ class Enemy(Entity):
         enemy_pos = pygame.Vector2(self.rect.center)
         self.distance_vector = player_pos - enemy_pos
         self.direction = self.distance_vector.normalize() if self.distance_vector else self.distance_vector
+        self.facing_dir = self.distance_vector.normalize() if self.distance_vector else self.distance_vector
         
     def move_enemy(self,dt):
         # update the rect position + collision

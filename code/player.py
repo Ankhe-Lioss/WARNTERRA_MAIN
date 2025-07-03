@@ -3,6 +3,7 @@ from entity import Entity
 from player_skills import PlayerSkills
 from health_bar import *
 from weapon import *
+
 class Player(Entity):
     def __init__(self, pos, game):
         self.name = "Player"
@@ -170,7 +171,6 @@ class Player(Entity):
             self.update_facing_state()
         # move with entity
         if hasattr(self.game,'map_layout'):
-            self.direction=A_star_tracking(self.game.map_layout,self.rect,(980,996  ))
             self.direction = self.direction.normalize()if self.direction else self.direction
             print(self.direction)
 
@@ -188,86 +188,3 @@ class Player(Entity):
                 self.swap_cooldown = 0
 
 
-import heapq
-
-def A_star_tracking(grid, rect, goal_pos):
-    entity_w_tiles = int(rect.width // TILE_SIZE)
-    entity_h_tiles = int(rect.height // TILE_SIZE)
-    def to_tile(pos):
-        return int(pos[0] // TILE_SIZE), int(pos[1] // TILE_SIZE)
-
-    def is_walkable_at(x, y):
-        # Simulate placing the full rect at tile (x, y)
-        for dy in range(entity_h_tiles):
-            for dx in range(entity_w_tiles):
-                check_x = x + dx
-                check_y = y + dy
-
-                if not (0 <= check_x < len(grid[0]) and 0 <= check_y < len(grid)):
-                    return False  # Out of bounds
-                if grid[check_y][check_x] == 1:
-                    return False
-
-                # Simulate collision against sprites
-                pixel_rect = pygame.Rect(
-                    check_x * TILE_SIZE,
-                    check_y * TILE_SIZE,
-                    TILE_SIZE,
-                    TILE_SIZE
-                )
-
-        return True
-
-    def heuristic(a, b):
-        return abs(a[0] - b[0]) + abs(a[1] - b[1])
-
-    def a_star(start, goal):
-        open_set = []
-        heapq.heappush(open_set, (0, start))
-        came_from = {}
-        g_score = {start: 0}
-
-        while open_set:
-            _, current = heapq.heappop(open_set)
-            if current == goal:
-                # Reconstruct path
-                path = []
-                while current in came_from:
-                    path.append(current)
-                    current = came_from[current]
-                path.reverse()
-                return path
-
-            x, y = current
-            neighbors = [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
-            for nx, ny in neighbors:
-                if is_walkable_at(nx, ny):
-                    tentative_g = g_score[current] + 1
-                    neighbor = (nx, ny)
-                    if tentative_g < g_score.get(neighbor, float('inf')):
-                        came_from[neighbor] = current
-                        g_score[neighbor] = tentative_g
-                        f_score = tentative_g + heuristic(neighbor, goal)
-                        heapq.heappush(open_set, (f_score, neighbor))
-        return []
-
-    # Starting and goal tile are based on top-left of rect and goal center
-    start_tile = to_tile(rect.topleft)
-    goal_tile = to_tile(goal_pos)
-
-    path = a_star(start_tile, goal_tile)
-
-    if not path:
-        return pygame.Vector2(0, 0)  # No path found
-
-    next_tile = path[0]
-    next_pos = pygame.Vector2(
-        (next_tile[0] + 0.5) * TILE_SIZE,
-        (next_tile[1] + 0.5) * TILE_SIZE
-    )
-
-    current_center = pygame.Vector2(rect.center)
-    direction = next_pos - current_center
-    if direction.length() > 0:
-        direction = direction.normalize()
-    return direction

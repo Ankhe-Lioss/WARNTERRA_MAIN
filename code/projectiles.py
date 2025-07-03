@@ -1,5 +1,4 @@
 from setting import *
-import heapq
 
 class Projectiles(pygame.sprite.Sprite):
     def __init__(self, target, pos, direction, groups, game):
@@ -114,39 +113,3 @@ class Enemy_projectiles(Projectiles):
         self.scale, self.spd = enemy_projectiles[self.name]
         self.dmg = self.scale * self.user.atk
 
-class Tracking:
-    def __init__(self, cell_size=TILE_SIZE):
-        self.cell_size = cell_size
-
-    def grid_pos(self, pos):
-        return (int(pos[0] // self.cell_size), int(pos[1] // self.cell_size))
-
-    def is_blocked(self, pos):
-        # pos is (grid_x, grid_y)
-        rect = pygame.Rect(pos[0]*self.cell_size, pos[1]*self.cell_size, self.cell_size, self.cell_size)
-        for wall in self.game.collision_sprites:
-            if rect.colliderect(wall.rect): 
-                return True
-        return False
-
-    def astar_path(self, start, goal):
-        def heuristic(a, b):
-            return abs(a[0] - b[0]) + abs(a[1] - b[1])  # Manhattan distance
-
-        open_set = []
-        heapq.heappush(open_set, (0 + heuristic(start, goal), 0, start, [start]))
-        closed_set = set()
-
-        while open_set:
-            _, cost, current, path = heapq.heappop(open_set)
-            if current == goal:
-                return path
-            if current in closed_set:
-                continue
-            closed_set.add(current)
-            for dx, dy in [(-1,0),(1,0),(0,-1),(0,1)]:  # 4-way movement
-                neighbor = (current[0]+dx, current[1]+dy)
-                if neighbor in closed_set or self.is_blocked(neighbor):
-                    continue
-                heapq.heappush(open_set, (cost+1+heuristic(neighbor, goal), cost+1, neighbor, path+[neighbor]))
-        return []

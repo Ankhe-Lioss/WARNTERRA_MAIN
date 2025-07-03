@@ -13,7 +13,7 @@ class Karthus_primary(Skill):
         
     def activate(self):
         super().activate()
-        eproj.Karthus_Primary(self.user, self.user.direction, self.user.game)
+        eproj.Karthus_Primary(self.user, self.user.facing_dir, self.user.game)
         self.user.state='Attacking'
         
     def deactivate(self):
@@ -59,7 +59,7 @@ class Veigar_primary(Skill):
 
     def activate(self):
         super().activate()
-        eproj.Veigar_Primary(self.user, self.user.direction, self.user.game)
+        eproj.Veigar_Primary(self.user, self.user.facing_dir, self.user.game)
         self.user.state='Attacking'
 
     def deactivate(self):
@@ -74,7 +74,7 @@ class Veigar_secondary(Skill):
     def activate(self):
         super().activate()
         
-        dir = self.user.direction.copy()
+        dir = self.user.facing_dir.copy()
         
         eproj.Veigar_Secondary(self.user, dir, self.user.game)
         eproj.Veigar_Secondary(self.user, dir.rotate(18), self.user.game)
@@ -135,8 +135,8 @@ class Lulu_primary(Skill):
         
         deviation = random.randint(0, 30)
         
-        eproj.Lulu_Primary(self.user, self.user.direction.rotate(15).rotate(deviation), self.user.game)
-        eproj.Lulu_Primary(self.user, self.user.direction.rotate(-15).rotate(deviation), self.user.game)
+        eproj.Lulu_Primary(self.user, self.user.facing_dir.rotate(15).rotate(deviation), self.user.game)
+        eproj.Lulu_Primary(self.user, self.user.facing_dir.rotate(-15).rotate(deviation), self.user.game)
         self.user.state='Attacking'
         
     def deactivate(self):
@@ -238,7 +238,7 @@ class Maokai_primary(Skill):
 
     def activate(self):
         super().activate()
-        eproj.Maokai_Primary(self.user, self.user.direction, self.user.game)
+        eproj.Maokai_Primary(self.user, self.user.facing_dir, self.user.game)
         self.user.heal(self.user.maxhp * 0.5)
         self.user.state='Attacking'
 

@@ -1,6 +1,7 @@
 from projectiles import *
 from status import *
 from aoe import *
+from helper import *
 
 class Gauntlet_primary(Player_projectiles):
     def __init__(self, pos, direction, game):

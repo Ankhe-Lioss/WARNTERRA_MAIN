@@ -78,7 +78,7 @@ enemy_projectiles = {
     "Attack_Buff" : (0, 0)
 }
 
-Aoe_stat={
+aoe_stat={
 #   aoe skill=[scale_atk,frame_number,life_time]
     'Poro_Stomp':(0.5, 3, 1000),
     'Chogath_Rupture':(2, 5, 1000),

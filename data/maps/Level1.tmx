@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="591">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="595">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -806,6 +806,12 @@
     <property name="room" type="int" value="2"/>
     <property name="wave" type="int" value="1"/>
    </properties>
+   <point/>
+  </object>
+  <object id="593" name="Weapon" type="Bow" x="841.333" y="3936">
+   <point/>
+  </object>
+  <object id="594" name="Weapon" type="Gauntlet" x="1001.33" y="3936">
    <point/>
   </object>
  </objectgroup>

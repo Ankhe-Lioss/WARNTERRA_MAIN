@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="578">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="593">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -725,10 +725,31 @@
   <object id="468" name="Player" x="924" y="3992">
    <point/>
   </object>
-  <object id="469" name="Check_in" x="862" y="213" width="160" height="128">
+  <object id="469" name="Check_in" x="812.667" y="3275.67" width="160" height="128">
    <properties>
     <property name="room" type="int" value="0"/>
    </properties>
+  </object>
+  <object id="579" name="Check_in" x="845.333" y="2340" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="580" name="Check_in" x="877.333" y="1417.33" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="581" name="Check_in" x="881.333" y="494.667" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="591" name="Weapon" type="Bow" x="1139.33" y="3929.33">
+   <point/>
+  </object>
+  <object id="592" name="Weapon" type="Gauntlet" x="720" y="3925.33">
+   <point/>
   </object>
  </objectgroup>
 </map>

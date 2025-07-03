@@ -10,6 +10,8 @@ class Player_skill(Skill):
         super().__init__(user, game)
         self.icon = pygame.image.load(os.path.join("images", "icons", "Player_skills", f"{self.name}.png")).convert_alpha()
 
+# Gauntlet
+
 class Gauntlet_primary(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
@@ -67,6 +69,8 @@ class Gauntlet_secondary(Player_skill):
         super().deactivate()
         self.user.mode = None
         self.user.forced_moving = False
+
+# Bow
 
 class Bow_primary(Player_skill):
     def __init__(self, user, game):
@@ -137,22 +141,42 @@ class Bow_e_skill(Player_skill):
     def activate(self):
         super().activate()
         arrow = pproj.Bow_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
-        
-class PlayerSkills:
+
+# Bazooka
+
+class Bazooka_primary(Player_skill):
     def __init__(self, user, game):
-        self.user = user
-        self.game = game
-        self.skills_gauntlet = {
-            "Left": Gauntlet_primary(user, game),
-            "Right": Gauntlet_secondary(user, game),
-            "Q": Gauntlet_q_skill(user, game),
-            "E": Gauntlet_e_skill(user, game)            
-        }
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        pproj.Bazooka_primary(self.user.rect.center, self.user.facing_dir, self.game)
+
+class Bazooka_primary(Player_skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+
+class Bazooka_primary(Player_skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+
+class Bazooka_primary(Player_skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+
+class Bazooka_primary(Player_skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
         
-        # Bow Skills
-        self.skills_bow = {
-        "Left": Bow_primary(user, game),
-        "Right": Bow_secondary(user, game),
-        "Q": Bow_q_skill(user, game),
-        "E": Bow_e_skill(user, game),
-        }
+# Lunar gun
+
+
+# Crossbow
+
+
+# Whisper

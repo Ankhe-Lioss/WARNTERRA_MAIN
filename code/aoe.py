@@ -93,3 +93,21 @@ class Soraka_star(Area_of_effect):
         self.enemy_sprites=game.player_sprites
         self.name=self.__class__.__name__
         super().__init__(pos,game,user_atk)
+
+class Bazooka_pe(Area_of_effect):
+    def __init__(self, pos,game,user_atk):
+        self.enemy_sprites=game.enemy_sprites
+        self.name = self.__class__.__name__
+        super().__init__(pos,game,user_atk)
+
+class Bazooka_q(Area_of_effect):
+    def __init__(self, pos,game,user_atk):
+        self.enemy_sprites=game.enemy_sprites
+        self.name = self.__class__.__name__
+        super().__init__(pos,game,user_atk)
+
+class Bazooka_e(Area_of_effect):
+    def __init__(self, pos,game,user_atk):
+        self.enemy_sprites=game.enemy_sprites
+        self.name = self.__class__.__name__
+        super().__init__(pos,game,user_atk)

@@ -3,6 +3,7 @@ from sprites import *
 from player import *
 from spawn import *
 from UI import UI  # Make sure UI is imported
+from items import *
 def setlevel(game):
     level = game.level%5+1
     
@@ -79,11 +80,10 @@ def setlevel(game):
             # Create new player
             game.player = Player((obj.x, obj.y), game)
             # Give both weapons
-            game.player.weap_gauntlet = Gauntlet(game)
-            game.player.weap_bow = Bow(game)
-            game.player.current_weap = game.player.weap_gauntlet
-            game.player.weap= game.player.current_weap
-
+            for weap in game.player_currweapdict:
+                game.player.weapons.append(Weapon_Dict[weap](game))
+                game.player.current_weapon_index = len(game.player.weapons)-1
+                game.player.weap = game.player.weapons[game.player.current_weapon_index]
             # Reinitialize the UI with the new player
             game.ui = UI(game, game.player, game.display_surface)
 
@@ -97,9 +97,11 @@ def setlevel(game):
                     game.spawnlist.setdefault(room, {})
                     game.spawnlist[room].setdefault(wave, [])
                     game.spawnlist[room][wave].append((obj.name, obj.x, obj.y))
+            if obj.name == "Weapon" and len(game.player_currweapdict)==0:
+                Weapon_Item((obj.x, obj.y), game, obj.type)
 
     game.room_numb = len(game.checkins) - 1
-    game.map_layout = build_grid_from_sprites(game.map,game.collision_sprites)
+    #game.map_layout= build_grid(game.map,game.collision_sprites)
     
 def endlevel(game):
     for group in [game.all_sprites, game.player_sprites, game.enemy_sprites, game.player_projectiles, game.enemy_projectiles, game.collision_sprites]:

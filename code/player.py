@@ -36,6 +36,8 @@ class Player(Entity):
 
         self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
 
+        self.weapons=[]
+        self.current_weapon_index = 0
         self.swap_cooldown = 0  # in milliseconds
         self.swap_maxcooldown = 2000
         # Hitbox
@@ -118,13 +120,10 @@ class Player(Entity):
                 self.weap.q_skill.cast()
             if pygame.key.get_pressed()[pygame.K_e]:
                 self.weap.e_skill.cast()
-        if keys[pygame.K_TAB] and self.swap_cooldown <= 0:
-            if self.current_weap == self.weap_gauntlet:
-                self.current_weap = self.weap_bow
-            else:
-                self.current_weap = self.weap_gauntlet
-            self.weap = self.current_weap
-            self.swap_cooldown = self.swap_maxcooldown
+            if keys[pygame.K_TAB] and self.swap_cooldown <= 0 and len(self.weapons)>1:
+                self.current_weapon_index = (self.current_weapon_index + 1) % len(self.weapons)
+                self.weap = self.weapons[self.current_weapon_index]
+                self.swap_cooldown = self.swap_maxcooldown
 
     def take_damage(self, dmg, pen=0, type="normal"):
         super().take_damage(dmg, pen, type)
@@ -143,7 +142,6 @@ class Player(Entity):
                 dir = (pygame.Vector2(self.rect.center) - pygame.Vector2(enemy.rect.center))
                 self.mode = {"spd" : 800, "dir" : dir.normalize() if dir else dir, "type" : "knockback"}
                 self.knockback_remaining = 0.1
-                
                 if enemy.name == 'Nocturne' and enemy.state == 'Attacking' and not enemy.attacked:
                     enemy.attacked = True
                     self.take_damage(enemy.atk)
@@ -170,9 +168,6 @@ class Player(Entity):
         if not self.stunned:
             self.update_facing_state()
         # move with entity
-        if hasattr(self.game,'map_layout'):
-            self.direction = self.direction.normalize()if self.direction else self.direction
-            print(self.direction)
 
         super().update(dt)  # move
         # animation update
@@ -186,5 +181,4 @@ class Player(Entity):
             self.swap_cooldown -= dt * 1000  # dt is in seconds
             if self.swap_cooldown < 0:
                 self.swap_cooldown = 0
-
 

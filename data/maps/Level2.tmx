@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="578">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="582">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -700,8 +700,6 @@
   <object id="550" gid="202" x="256" y="1824" width="32" height="96"/>
   <object id="551" gid="206" x="864" y="2112" width="44" height="64"/>
   <object id="552" gid="207" x="928" y="288" width="46" height="66"/>
-  <object id="553" gid="201" x="640" y="1088" width="128" height="128"/>
-  <object id="554" gid="201" x="1184" y="1088" width="128" height="128"/>
  </objectgroup>
  <objectgroup id="8" name="Animated_collision">
   <object id="437" gid="200" x="829" y="1252" width="104" height="130"/>
@@ -720,6 +718,8 @@
   <object id="545" gid="196" x="512" y="1568" width="128" height="128"/>
   <object id="546" gid="196" x="1344" y="1568" width="128" height="128"/>
   <object id="547" gid="196" x="1632" y="1568" width="128" height="128"/>
+  <object id="578" gid="201" x="654" y="1096" width="128" height="128"/>
+  <object id="579" gid="201" x="1198" y="1096" width="128" height="128"/>
  </objectgroup>
  <objectgroup id="13" name="Entities">
   <object id="468" name="Player" x="924" y="3992">
@@ -729,6 +729,12 @@
    <properties>
     <property name="room" type="int" value="0"/>
    </properties>
+  </object>
+  <object id="580" name="Weapon" type="Gauntlet" x="832" y="3958">
+   <point/>
+  </object>
+  <object id="581" name="Weapon" type="Bow" x="1014" y="3956">
+   <point/>
   </object>
  </objectgroup>
 </map>

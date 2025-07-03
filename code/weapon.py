@@ -154,3 +154,9 @@ class Bazooka(Weap):
         self.q_skill = Bazooka_q_skill(self.player, self.game)
         self.e_skill = Bazooka_e_skill(self.player, self.game)
         self.secondary = Bazooka_secondary(self.player, self.game)
+
+
+Weapon_Dict = {
+    "Bow": Bow,
+    "Gauntlet": Gauntlet
+}

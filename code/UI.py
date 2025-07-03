@@ -10,7 +10,6 @@ class UI:
         self.game = game
         self.player = player
         self.display_surface = display_surface
-        self.weap = player.weap.__class__.__name__
         self.boss_name_font=pygame.font.Font(os.path.join('images','font','UncialAntiqua-Regular.ttf'), 20)
         # Fonts
         self.font = pygame.font.SysFont("Segoe UI", 20, bold=True)

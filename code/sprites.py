@@ -1,4 +1,5 @@
 from setting import *
+from aoe import *
 animated_image_offset={#name = (inflate,offset)
 'Fountain':((0,-35),(0,10)),
 'Broken_Pillar_Torch': ((-32,-78),(0,15)),
@@ -264,3 +265,53 @@ class Door(pygame.sprite.Sprite):
                 self.remove(self.game.collision_sprites)
 
             self.image = self.frames[self.state][0]
+class Explosive_Barrel(pygame.sprite.Sprite):
+    def __init__(self, pos, game):
+        super().__init__(game.all_sprites, game.collision_sprites)
+        self.game = game
+        self.pos = pos
+        self.state = 'idle'
+        self.warning_timer = 0
+        self.warning_duration = 1.0  # 1 second
+        self.frame_index = 0
+
+        # Load animation frames
+        self.frames = []
+        self.load_images()
+
+        self.image = self.frames[0]
+        self.rect = self.image.get_rect(topleft=pos).inflate(-108,-100)
+        self.image_rect = self.image.get_rect(topleft=pos)
+    def load_images(self):
+        path = os.path.join('images', 'barrel', 'Explosive')
+        i = 1
+        while True:
+            img_path = os.path.join(path, f"{i}.png")
+            if os.path.exists(img_path):
+                img = pygame.image.load(img_path).convert_alpha()
+                self.frames.append(img)
+                i += 1
+            else:
+                break
+
+    def update(self, dt):
+        if self.state == 'idle':
+            if pygame.sprite.spritecollideany(self, self.game.aoe_sprites):
+                print('ocj')
+                self.state = 'warning'
+                self.warning_timer = 0
+                self.frame_index = 0
+
+        elif self.state == 'warning':
+            self.warning_timer += dt
+
+            # Loop the animation frames during
+            self.frame_index += 6 * dt
+            self.image = self.frames[int(self.frame_index)%len(self.frames)]
+
+            if self.warning_timer >= self.warning_duration:
+                self.explode()
+
+    def explode(self):
+        Barrel_Explode(self.rect.center, self.game)
+        self.kill()

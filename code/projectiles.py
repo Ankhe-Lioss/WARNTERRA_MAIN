@@ -1,5 +1,5 @@
 from setting import *
-
+from sprites import *
 class Projectiles(pygame.sprite.Sprite):
     def __init__(self, target, pos, direction, groups, game):
         # Initializing
@@ -44,10 +44,20 @@ class Projectiles(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frame_id) % len(self.frames)]
     
     def collision(self):
+
+
+        collisions = pygame.sprite.spritecollide(self, self.game.collision_sprites, False)
+
+        for sprite in collisions:
+            if isinstance(sprite, Explosive_Barrel):
+                if sprite.state == 'idle':
+                    sprite.state = 'warning'
+                    sprite.warning_timer = 0
         if hasattr(self,'wall_piercing') and self.wall_piercing:
             return
-        if pygame.sprite.spritecollide(self, self.game.collision_sprites, False):
+        if collisions:
             self.kill()
+            return
     
     def update(self, dt):
         self._animate(dt)

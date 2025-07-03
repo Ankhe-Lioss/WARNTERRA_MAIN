@@ -3,7 +3,7 @@ from status import *
 
 class Area_of_effect(pygame.sprite.Sprite):
     def __init__(self,pos,game,user_atk):
-        super().__init__(game.all_sprites)
+        super().__init__(game.all_sprites,game.aoe_sprites)
         self.user_atk=user_atk
         self.game = game
 
@@ -93,6 +93,7 @@ class Soraka_star(Area_of_effect):
         self.enemy_sprites=game.player_sprites
         self.name=self.__class__.__name__
         super().__init__(pos,game,user_atk)
+<<<<<<< Updated upstream
 
 class Bazooka_pe(Area_of_effect):
     def __init__(self, pos,game,user_atk):
@@ -111,3 +112,11 @@ class Bazooka_e(Area_of_effect):
         self.enemy_sprites=game.enemy_sprites
         self.name = self.__class__.__name__
         super().__init__(pos,game,user_atk)
+=======
+class Barrel_Explode(Area_of_effect):
+    def __init__(self, pos,game,user_atk=200):
+        self.enemy_sprites = pygame.sprite.Group()
+        self.enemy_sprites.add(game.player_sprites, game.enemy_sprites)
+        self.name='Barrel_Explode'
+        super().__init__(pos,game,user_atk)
+>>>>>>> Stashed changes

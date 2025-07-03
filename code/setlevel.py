@@ -11,7 +11,7 @@ def setlevel(game):
     game.room = -1
 
     # Load TMX map
-    game.map = load_pygame(os.path.join('data', 'maps', 'Level1.tmx'))
+    game.map = load_pygame(os.path.join('data', 'maps', 'Example.tmx'))
 
     # Initialize structures
     game.spawnlist = {}
@@ -75,6 +75,10 @@ def setlevel(game):
     for obj in game.map.get_layer_by_name('Door'):
         tile = game.map.get_tile_properties_by_gid(obj.gid)
         Door((obj.x, obj.y),game, tile['type'])
+    for obj in game.map.get_layer_by_name('Interactive'):
+        tile = game.map.get_tile_properties_by_gid(obj.gid)
+        if tile['type'] =='Explosive_Barrel':
+            Explosive_Barrel((obj.x, obj.y),game)
 
     for obj in game.map.get_layer_by_name('Entities'):
         if obj.name == 'Player':

@@ -99,7 +99,7 @@ def setlevel(game):
                     game.spawnlist[room][wave].append((obj.name, obj.x, obj.y))
 
     game.room_numb = len(game.checkins) - 1
-    game.map_layout = build_grid_from_sprites(game.map,game.collision_sprites)
+    game.map_layout= build_grid(game.map,game.collision_sprites)
 def endlevel(game):
     for group in [game.all_sprites, game.player_sprites, game.enemy_sprites, game.player_projectiles, game.enemy_projectiles, game.collision_sprites]:
         for sprite in group:
@@ -164,7 +164,7 @@ def check_game_state(game):
     #print(game.wave)
     if game.state == "in_level":
         update_level(game)
-def build_grid_from_sprites(map,collision_sprites):
+def build_grid(map,collision_sprites):
     grid = []
     tile_w = map.tilewidth
     tile_h =map.tileheight
@@ -180,4 +180,5 @@ def build_grid_from_sprites(map,collision_sprites):
             else:
                 row.append(0)  # walkable
         grid.append(row)
+        print(row)
     return grid

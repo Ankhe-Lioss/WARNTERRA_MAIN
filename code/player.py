@@ -170,7 +170,8 @@ class Player(Entity):
             self.update_facing_state()
         # move with entity
         if hasattr(self.game,'map_layout'):
-            self.direction=get_next_direction_for_rect_block(self.game.map_layout,self.rect,(980,996  ),self.game.collision_sprites)
+            self.direction=A_star_tracking(self.game.map_layout,self.rect,(980,996  ))
+            self.direction = self.direction.normalize()if self.direction else self.direction
             print(self.direction)
 
         super().update(dt)  # move
@@ -188,10 +189,8 @@ class Player(Entity):
 
 
 import heapq
-import pygame
-import heapq
 
-def get_next_direction_for_rect_block(grid, rect, goal_pos, collision_sprites):
+def A_star_tracking(grid, rect, goal_pos):
     entity_w_tiles = int(rect.width // TILE_SIZE)
     entity_h_tiles = int(rect.height // TILE_SIZE)
     def to_tile(pos):
@@ -216,8 +215,7 @@ def get_next_direction_for_rect_block(grid, rect, goal_pos, collision_sprites):
                     TILE_SIZE,
                     TILE_SIZE
                 )
-                if any(sprite.rect.colliderect(pixel_rect) for sprite in collision_sprites):
-                    return False
+
         return True
 
     def heuristic(a, b):

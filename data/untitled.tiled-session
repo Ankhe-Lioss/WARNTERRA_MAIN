@@ -5,9 +5,9 @@
     },
     "activeFile": "maps/Level2.tmx",
     "expandedProjectPaths": [
-        "maps",
         ".",
-        "tilesets"
+        "tilesets",
+        "maps"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -162,11 +162,11 @@
                 7,
                 11
             ],
-            "scale": 1,
+            "scale": 0.5,
             "selectedLayer": 11,
             "viewCenter": {
-                "x": 953,
-                "y": 2618.5
+                "x": 1313,
+                "y": 1369
             }
         },
         "tilesets/Animated_collision.tsx": {

@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/setlevel.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/setlevel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Level2.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/data/maps/Level2.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/untitled.tiled-session" beforeDir="false" afterPath="$PROJECT_DIR$/data/untitled.tiled-session" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -204,7 +203,7 @@
       <workItem from="1751473200919" duration="1255000" />
       <workItem from="1751474623417" duration="2904000" />
       <workItem from="1751509330678" duration="518000" />
-      <workItem from="1751509896775" duration="2393000" />
+      <workItem from="1751509896775" duration="4026000" />
     </task>
     <servers />
   </component>
@@ -242,7 +241,7 @@
     <SUITE FILE_PATH="coverage/projectiles_py$main.coverage" NAME="main Coverage Results" MODIFIED="1750778979353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/main_py$check_images.coverage" NAME="check images Coverage Results" MODIFIED="1750478631992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/images" />
     <SUITE FILE_PATH="coverage/WARNTERRA_MAIN$enemies.coverage" NAME="enemies Coverage Results" MODIFIED="1749887503521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1751512259954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1751513949207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Git\WARNTERRA_MAIN" />
     <SUITE FILE_PATH="coverage/main_py$button.coverage" NAME="button Coverage Results" MODIFIED="1750478642107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/main_py$setlevel.coverage" NAME="setlevel Coverage Results" MODIFIED="1750321504449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
   </component>

@@ -7,6 +7,7 @@ class Gauntlet_primary(Player_projectiles):
         self.source = "Gauntlet Primary"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
+        self.rect=self.rect.inflate(-20, -20)
 
 class Gauntlet_q_skill(Player_projectiles):
     def __init__(self, pos, direction, game):

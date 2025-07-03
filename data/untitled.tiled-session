@@ -5,9 +5,9 @@
     },
     "activeFile": "maps/Level2.tmx",
     "expandedProjectPaths": [
-        ".",
         "tilesets",
-        "maps"
+        "maps",
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -136,37 +136,37 @@
         },
         "maps/Level1.tmx": {
             "expandedObjectLayers": [
-                13,
-                2,
-                5,
-                6,
-                8,
                 7,
-                11
+                6,
+                2,
+                8,
+                5,
+                11,
+                13
             ],
-            "scale": 0.33,
-            "selectedLayer": 10,
+            "scale": 1.5,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 960.6060606060605,
-                "y": 2240.909090909091
+                "x": 960,
+                "y": 2240.333333333333
             }
         },
         "maps/Level2.tmx": {
             "expandedObjectLayers": [
-                13,
-                2,
-                5,
+                7,
                 6,
                 10,
+                2,
                 8,
-                7,
-                11
+                5,
+                11,
+                13
             ],
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 11,
             "viewCenter": {
-                "x": 1313,
-                "y": 1369
+                "x": 1084.5,
+                "y": 4022.5
             }
         },
         "tilesets/Animated_collision.tsx": {

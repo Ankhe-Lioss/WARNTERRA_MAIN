@@ -151,3 +151,9 @@ class Bazooka(Weap):
 
         # Import skills
         self.primary = Tracking_missile(self.player, self.game)
+
+
+Weapon_Dict = {
+    "Bow": Bow,
+    "Gauntlet": Gauntlet
+}

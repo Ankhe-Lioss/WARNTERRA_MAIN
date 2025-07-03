@@ -59,6 +59,7 @@ class Game:
         self.enemy_projectiles = pygame.sprite.Group()
         self.collision_sprites = pygame.sprite.Group()
         self.door_sprites = pygame.sprite.Group()
+        self.player_currweapdict=[]
         self.delays = set()
 
         self.spawn_numb = 0

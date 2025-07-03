@@ -1,6 +1,5 @@
 from setting import *
 from entity import Entity
-from player_skills import PlayerSkills
 from health_bar import *
 from weapon import *
 
@@ -13,12 +12,12 @@ class Player(Entity):
         self.game = game
         self.pos = pos
         # Skill setup
-        skills_obj = PlayerSkills(self, game)
-        self.skills_gauntlet = skills_obj.skills_gauntlet
-        self.skills_bow = skills_obj.skills_bow
+        #skills_obj = PlayerSkills(self, game)
+        #self.skills_gauntlet = skills_obj.skills_gauntlet
+        #self.skills_bow = skills_obj.skills_bow
         
         # Attach current skill set based on weapon
-        self.skills = self.skills_gauntlet if self.weapon_type == "gauntlet" else self.skills_bow
+        #self.skills = self.skills_gauntlet if self.weapon_type == "gauntlet" else self.skills_bow
 
         # States
         self.facing = ("up", "up_right", "right", "down_right", "down", "down_left", "left", "up_left")

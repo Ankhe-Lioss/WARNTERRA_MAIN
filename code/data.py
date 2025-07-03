@@ -97,10 +97,16 @@ aoe_stat={
     'Soraka_star': (0.5, 4, 400),
 # Player
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     'Bow_explosion' : (1, 8, 500),
     'Bazooka_pe' : (1, 4, 200),
     'Bazooka_q' : (2.5, 4, 200),
     'Bazooka_e' : (2, 4, 200)
+=======
+    'Bow_explosion' : (1, 8, 500)    ,
+'Barrel_Explode' : (1, 4, 500)
+
+>>>>>>> Stashed changes
 =======
     'Bow_explosion' : (1, 8, 500)    ,
 'Barrel_Explode' : (1, 4, 500)

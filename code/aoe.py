@@ -94,6 +94,7 @@ class Soraka_star(Area_of_effect):
         self.name=self.__class__.__name__
         super().__init__(pos,game,user_atk)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 class Bazooka_pe(Area_of_effect):
     def __init__(self, pos,game,user_atk):
@@ -113,10 +114,15 @@ class Bazooka_e(Area_of_effect):
         self.name = self.__class__.__name__
         super().__init__(pos,game,user_atk)
 =======
+=======
+>>>>>>> Stashed changes
 class Barrel_Explode(Area_of_effect):
     def __init__(self, pos,game,user_atk=200):
         self.enemy_sprites = pygame.sprite.Group()
         self.enemy_sprites.add(game.player_sprites, game.enemy_sprites)
         self.name='Barrel_Explode'
         super().__init__(pos,game,user_atk)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes

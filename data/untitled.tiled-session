@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/Level2.tmx",
+    "activeFile": "maps/Level1.tmx",
     "expandedProjectPaths": [
-        "tilesets",
+        ".",
         "maps",
-        "."
+        "tilesets"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -144,11 +144,11 @@
                 5,
                 13
             ],
-            "scale": 1.5,
-            "selectedLayer": 8,
+            "scale": 0.75,
+            "selectedLayer": 11,
             "viewCenter": {
-                "x": 960,
-                "y": 2240.333333333333
+                "x": 1005.9999999999999,
+                "y": 4075.333333333333
             }
         },
         "maps/Level2.tmx": {
@@ -244,10 +244,10 @@
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
-        "maps/Level1.tmx",
-        "tilesets/Door.tsx",
-        "tilesets/Non_animated_non_collision.tsx",
         "maps/Level2.tmx",
+        "tilesets/Non_animated_non_collision.tsx",
+        "tilesets/Door.tsx",
+        "maps/Level1.tmx",
         "tilesets/Non_animated_collision.tsx",
         "maps/Example.tmx",
         "tilesets/Animated_collision.tsx",

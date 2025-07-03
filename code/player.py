@@ -2,7 +2,7 @@ from setting import *
 from entity import Entity
 from health_bar import *
 from weapon import *
-
+from aoe_warning import *
 class Player(Entity):
     def __init__(self, pos, game):
         self.name = "Player"
@@ -39,6 +39,7 @@ class Player(Entity):
         self.current_weapon_index = 0
         self.swap_cooldown = 0  # in milliseconds
         self.swap_maxcooldown = 2000
+        self.dust_cooldown = 0
         # Hitbox
         self.direction = pygame.Vector2()
     def joystick_input(self):
@@ -170,6 +171,11 @@ class Player(Entity):
 
         super().update(dt)  # move
         # animation update
+        if self.direction and self.dust_cooldown <= 0:
+            Dust_trace((self.rect.center[0],self.rect.center[1]+10), self.game)
+            self.dust_cooldown = 500
+        else:
+            self.dust_cooldown -=dt*1000
         """for skill in self.skills.values():
             skill.update(dt)"""
 

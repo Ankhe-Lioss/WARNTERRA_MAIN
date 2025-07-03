@@ -125,7 +125,7 @@ def preload_all_image(game):
     aoe_warning_frames = {}
     warning_folder = os.path.join('images', 'enviroment')
     if os.path.exists(warning_folder):
-        for warning_name in ['Spawn_rupture', 'Spawn_darkmatter', 'Spawn_Soraka_star', 'Spawn_Soraka_cc']:
+        for warning_name in ['Spawn_rupture', 'Spawn_darkmatter', 'Spawn_Soraka_star', 'Spawn_Soraka_cc','Dust_trace']:
             warning_path = os.path.join(warning_folder, warning_name)
             if not os.path.isdir(warning_path):
                 continue

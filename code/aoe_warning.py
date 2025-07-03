@@ -5,10 +5,11 @@ Spawn_aoe_dict={  #aoe skill=[frame_number,life_time]d
     'Spawn_rupture':(3, 500),
     'Spawn_darkmatter':(6, 1000),
     'Spawn_Soraka_star' : (6, 1000),
-    'Spawn_Soraka_cc' : (12, 2000)
+    'Spawn_Soraka_cc' : (12, 2000),
+    'Dust_trace':(8,400)
 }
 class Spawn_aoe(pygame.sprite.Sprite):
-    def __init__(self, pos, game, user_atk):
+    def __init__(self, pos, game, user_atk=0):
         super().__init__(game.all_sprites)
         #pass to aoe
         self.game=game
@@ -78,4 +79,10 @@ class Spawn_Soraka_cc(Spawn_aoe):
     def spawn(self):
         if (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.pos)).length() <= self.radius and self.user.phase == 2:
             Rooted(2000, self.game, self.game.player)
-            
+class Dust_trace(Spawn_aoe):
+    def __init__(self, pos, game):
+        self.name='Dust_trace'
+        super().__init__(pos, game)
+        self.type='floor'
+    def spawn(self):
+        pass

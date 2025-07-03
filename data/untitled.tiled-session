@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/Level1.tmx",
+    "activeFile": "tilesets/Animated_non_collision.tsx",
     "expandedProjectPaths": [
-        ".",
         "maps",
-        "tilesets"
+        "tilesets",
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -136,37 +136,45 @@
         },
         "maps/Level1.tmx": {
             "expandedObjectLayers": [
-                7,
-                6,
-                11,
-                2,
                 8,
-                5,
-                13
+                6,
+                13,
+                2,
+                11,
+                7,
+                5
             ],
-            "scale": 0.75,
+            "scale": 1.5,
             "selectedLayer": 11,
             "viewCenter": {
-                "x": 1005.9999999999999,
-                "y": 4075.333333333333
+                "x": 1134.3333333333333,
+                "y": 3990.333333333333
             }
         },
         "maps/Level2.tmx": {
             "expandedObjectLayers": [
-                7,
-                6,
-                11,
-                2,
                 8,
                 10,
-                5,
-                13
+                6,
+                13,
+                2,
+                11,
+                7,
+                5
             ],
             "scale": 1,
             "selectedLayer": 11,
             "viewCenter": {
-                "x": 1084.5,
-                "y": 4022.5
+                "x": 953.5,
+                "y": 2618.5
+            }
+        },
+        "maps/normal_level_model.tmx": {
+            "scale": 0.18,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 958.3333333333333,
+                "y": 2241.666666666667
             }
         },
         "tilesets/Animated_collision.tsx": {
@@ -232,30 +240,30 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "D:/Git/WARNTERRA_MAIN/data/graphics/object/Door",
+    "last.imagePath": "D:/Git/WARNTERRA_MAIN/data/graphics/object/Animated/Animated_non_collision",
     "map.height": 10,
     "map.lastUsedFormat": "tmx",
     "map.width": 10,
     "openFiles": [
         "maps/Level2.tmx",
-        "tilesets/Non_animated_non_collision.tsx",
         "tilesets/Door.tsx",
-        "maps/Level1.tmx"
+        "maps/Level1.tmx",
+        "tilesets/Animated_non_collision.tsx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
         "maps/Level2.tmx",
-        "tilesets/Non_animated_non_collision.tsx",
         "tilesets/Door.tsx",
         "maps/Level1.tmx",
+        "tilesets/Animated_non_collision.tsx",
+        "maps/normal_level_model.tmx",
+        "tilesets/Animated_collision.tsx",
+        "tilesets/Non_animated_non_collision.tsx",
         "tilesets/Non_animated_collision.tsx",
         "maps/Example.tmx",
-        "tilesets/Animated_collision.tsx",
         "tilesets/acid.tsx",
-        "tilesets/Animated_non_collision.tsx",
         "tilesets/Animated_floor.tsx",
-        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level1.tmx",
-        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level4.tmx"
+        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level1.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

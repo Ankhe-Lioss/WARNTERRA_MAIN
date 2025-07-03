@@ -56,6 +56,7 @@ def setlevel(game):
 
 
 
+
     for obj in game.map.get_layer_by_name('Trap'):
         tile = game.map.get_tile_properties_by_gid(obj.gid)
         Trap((obj.x, obj.y),game, tile['type'])

@@ -1,7 +1,7 @@
 from setting import *
 from health_bar import Healthbar
 from helper import *
-
+from sprites import *
 class Entity(pygame.sprite.Sprite):
     def __init__(self, groups, game):
         
@@ -204,8 +204,10 @@ class Enemy(Entity):
             self.image = pygame.transform.flip(self.image, True, False)
     
     def death(self):
+        Aninmated_Object(self.rect.center,'Grave2',self.game.all_sprites, self.game)
         super().death()
         self.game.spawn_numb -= 1
+
             
     def cal_dis(self):
         # get direction

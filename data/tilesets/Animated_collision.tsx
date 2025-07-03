@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="Animated_collision" class="Orb" tilewidth="256" tileheight="192" tilecount="7" columns="0">
+<tileset version="1.10" tiledversion="1.11.2" name="Animated_collision" class="Orb" tilewidth="256" tileheight="192" tilecount="8" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0" type="Broken_Pillar_Torch">
   <image source="../graphics/object/Animated/Animated_collision/1.png" width="64" height="96"/>
@@ -21,5 +21,8 @@
  </tile>
  <tile id="7" type="Orb">
   <image source="../graphics/object/Animated/Animated_collision/a.png" width="128" height="128"/>
+ </tile>
+ <tile id="8" type="Armored_Table">
+  <image source="../graphics/object/Animated/Animated_collision/4 - Copy.png" width="68" height="50"/>
  </tile>
 </tileset>

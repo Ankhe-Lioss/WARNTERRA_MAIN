@@ -21,7 +21,7 @@ def setlevel(game):
     # Ground and Walls
 #    for x, y, image in game.map.get_layer_by_name('Ground').tiles():
  #       Ground((x * TILE_SIZE, y * TILE_SIZE), image, game.all_sprites, 'ground')
-    wall_layer = game.map.get_layer_by_name('Wall')
+
 
     #Tile layer
     for x, y, image in game.map.get_layer_by_name('Floor').tiles():
@@ -99,7 +99,7 @@ def setlevel(game):
                     game.spawnlist[room][wave].append((obj.name, obj.x, obj.y))
 
     game.room_numb = len(game.checkins) - 1
-
+    game.map_layout = build_grid_from_sprites(game.map,game.collision_sprites)
 def endlevel(game):
     for group in [game.all_sprites, game.player_sprites, game.enemy_sprites, game.player_projectiles, game.enemy_projectiles, game.collision_sprites]:
         for sprite in group:
@@ -164,3 +164,20 @@ def check_game_state(game):
     #print(game.wave)
     if game.state == "in_level":
         update_level(game)
+def build_grid_from_sprites(map,collision_sprites):
+    grid = []
+    tile_w = map.tilewidth
+    tile_h =map.tileheight
+    map_w = map.width
+    map_h =map.height
+    for y in range(map_h):
+        row = []
+        for x in range(map_w):
+            tile_rect = pygame.Rect(x * tile_w, y * tile_h, tile_w, tile_h)
+            # Check if this tile collides with any collision sprite
+            if any(sprite.rect.colliderect(tile_rect) for sprite in collision_sprites):
+                row.append(1)  # blocked
+            else:
+                row.append(0)  # walkable
+        grid.append(row)
+    return grid

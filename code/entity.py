@@ -2,6 +2,7 @@ from setting import *
 from health_bar import Healthbar
 from helper import *
 from sprites import *
+
 class Entity(pygame.sprite.Sprite):
     def __init__(self, groups, game):
         
@@ -80,14 +81,22 @@ class Entity(pygame.sprite.Sprite):
         
         self.hp -= delta
         
-        if type == "normal":
-            Flyout_number(self.rect.center, int(delta), (200, 0, 0), self.game)
-        
-        if type == "DoT":
-            Flyout_number(self.rect.center, int(delta), (0, 165, 0), self.game, font_size=20)
-        
         if self.hp <= 0:
             self.death()
+        
+        # Flyout
+        
+        if delta < 0.5:
+            return
+        
+        if type == "normal":
+            Flyout_number(self.rect.center, int(delta), (255, 50, 50), self.game)
+        
+        if type == "poison":
+            Flyout_number(self.rect.center, int(delta), (50, 195, 50), self.game, font_size=20)
+        
+        if type == "burning":
+            Flyout_number(self.rect.center, int(delta), (255, 165, 50), self.game, font_size=20)
         
     def heal(self, healing, type="normal"):
         if type == "normal":
@@ -143,25 +152,6 @@ class Entity(pygame.sprite.Sprite):
     def update_stat(self):
         pass
 
-class Flyout_number(pygame.sprite.Sprite):
-    
-    def __init__(self, pos, number, color, game, font_size=24):
-        super().__init__(game.all_sprites)
-        self.image = pygame.font.Font(None, font_size).render(str(number), True, color)
-        self.image_rect = self.image.get_frect(center=pos)
-        self.lifetime = 0.5
-        self.spawn_time = pygame.time.get_ticks()
-        self.type = 'top'
-    
-    def update(self, dt):
-        elapsed_time = pygame.time.get_ticks() - self.spawn_time
-        if elapsed_time < self.lifetime * 1000:
-            self.image_rect.y -= 50 * dt
-            alpha = max(0, 255 - int((elapsed_time / (self.lifetime * 1000)) * 255))
-            self.image.set_alpha(alpha)
-        else:
-            self.kill()
-
 class Enemy(Entity):
     def __init__(self, pos, game):
         # Initializing
@@ -182,6 +172,8 @@ class Enemy(Entity):
         self.frame_index = 0
         self.states=['Walking', 'Attacking']
         self.state='Walking'
+        self.tracking = True
+        self.direction = pygame.Vector2(0, 0)
         
         #load image
         self.frames=game.enemy_frames[self.name]
@@ -195,8 +187,6 @@ class Enemy(Entity):
 
         self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
     
-
-    
     def animate(self, dt):
         self.frame_index += self.animation_spd * dt
         self.image = self.frames[self.state][int(self.frame_index) % len(self.frames[self.state])]
@@ -207,19 +197,19 @@ class Enemy(Entity):
         Aninmated_Object(self.rect.center,'Grave2',self.game.all_sprites, self.game)
         super().death()
         self.game.spawn_numb -= 1
-
             
     def cal_dis(self):
         # get direction
         player_pos = pygame.Vector2(self.player.rect.center)
         enemy_pos = pygame.Vector2(self.rect.center)
         self.distance_vector = player_pos - enemy_pos
+        
+        # FKING TEST THE TRACJER
         self.direction = self.distance_vector.normalize() if self.distance_vector else self.distance_vector
         self.facing_dir = self.distance_vector.normalize() if self.distance_vector else self.distance_vector
         
     def move_enemy(self,dt):
         # update the rect position + collision
-        
         if self.forced_moving:
             self.forced_move(self.mode['dir'], dt)
             return
@@ -256,8 +246,16 @@ class Enemy(Entity):
             for skill in self.skills:
                 if self.skills[skill].ready:
                     self.skills[skill].cast()
-                    
+    
+    def set_tracker(self):
+        self.tracker = Tracking(self.game, self, self.game.player)
+        self.path = self.tracker.get_path()
+        self.path_index = 1
+    
     def update(self, dt):
+        if self.tracking and hasattr(self.game, 'player') and self.game.player.alive():
+            self.set_tracker()
+        
         if self.death_time==0:
             self.cal_dis()
             for skill_name in self.skills:
@@ -277,7 +275,7 @@ class Boss(Enemy):
         # Boss specific attributes
         self.phase = 1
         self.phase_change_hp = 0.5 * self.maxhp  # Change phase at 50% HP
-        self.special_skills = []  # List of special skills for the boss
+        self.special_skills = []    # List of special skills for the boss
 
     def update(self, dt):
         super().update(dt)

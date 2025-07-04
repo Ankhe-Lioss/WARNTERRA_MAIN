@@ -75,6 +75,25 @@ def preload_all_image(game):
             if frames:
                 status_frames[status_name] = frames
     game.status_frames = status_frames
+    
+    aura_frames = {}
+    aura_folder = os.path.join('images', 'aura')
+    if os.path.exists(aura_folder):
+        for aura_name in os.listdir(aura_folder):
+            aura_path = os.path.join(aura_folder, aura_name)
+            if not os.path.isdir(aura_path):
+                continue
+            frames = []
+            for i in range(5):  # Assuming 5 frames per aura
+                img_path = os.path.join(aura_path, f'{i}.png')
+                if os.path.exists(img_path):
+                    surf = pygame.image.load(img_path).convert_alpha()
+                    frames.append(surf)
+            if frames:
+                aura_frames[aura_name] = frames
+    game.aura_frames = aura_frames
+    
+    #print(status_frames)
 
     # Preload status icons
     status_icons = {}
@@ -89,6 +108,7 @@ def preload_all_image(game):
                     icon_name = os.path.splitext(icon_file)[0]
                     surf = pygame.image.load(icon_path).convert_alpha()
                     status_icons[icon_name] = pygame.transform.scale(surf, (24, 24))
+                
         # Other status icons
         for icon_file in os.listdir(icons_folder):
             icon_path = os.path.join(icons_folder, icon_file)

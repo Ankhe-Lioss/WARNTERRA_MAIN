@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="254">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="256">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -445,6 +445,13 @@
    </properties>
   </object>
   <object id="253" name="Weapon" type="Bazooka" x="656" y="234">
+   <point/>
+  </object>
+  <object id="254" name="Veigar" x="646" y="1042">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

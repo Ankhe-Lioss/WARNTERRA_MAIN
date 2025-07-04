@@ -71,7 +71,7 @@ player_projectiles = {
     "Bazooka_primary" : (1.5, 900),
     "Bazooka_primary_enhanced" : (0, 850),
     "Bazooka_q_skill" : (0, 800),
-    "Bazooka_e_skill" : (0, 750)
+    "Bazooka_e_skill" : (0, 400)
 }
 
 enemy_projectiles = {

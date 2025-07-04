@@ -18,7 +18,6 @@ class Status(pygame.sprite.Sprite):
         self.image_rect = self.image.get_frect(center=self.owner.rect.center)
 
     def load_images(self):
-
         self.frames = [pygame.transform.scale_by(surf, self.scale_ratio) for surf in
             self.game.status_frames[self.name]]
 
@@ -48,6 +47,17 @@ class Status(pygame.sprite.Sprite):
             self.kill()
         if self.owner.hp<=0:
             self.kill()
+
+class Aura(Status):
+    def __init__(self, duration, game, owner):
+        self.name = self.__class__.__name__
+        self.owner = owner
+        super().__init__(duration, game)
+    
+    def load_images(self):
+        self.frames = [pygame.transform.scale_by(surf, self.scale_ratio) for surf in
+            self.game.aura_frames[self.name]]
+            
 class Stunned(Status):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__
@@ -167,12 +177,13 @@ class Buff(Status):
             self.owner.def_ /= 1 + self.ratio
         elif self.type == 'spd':
             self.owner.spd /= 1 + self.ratio
-class Dark_aura(Status):
+            
+class Dark_aura(Aura):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__
         self.owner = owner
         self.offset=pygame.Vector2(1, 0)
-        super().__init__(duration, game)
+        super().__init__(duration, game, owner)
         for frame in self.frames:
-            frame.set_alpha(100)
+            frame.set_alpha(80)
 

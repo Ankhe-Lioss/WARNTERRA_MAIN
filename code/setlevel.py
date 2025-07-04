@@ -106,7 +106,7 @@ def setlevel(game):
                 Weapon_Item((obj.x, obj.y), game, obj.type)
 
     game.room_numb = len(game.checkins) - 1
-    #game.map_layout= build_grid(game.map,game.collision_sprites)
+    game.map_layout= build_grid_from_sprites(game.map,game.collision_sprites)
     
 def endlevel(game):
     for group in [game.all_sprites, game.player_sprites, game.enemy_sprites, game.player_projectiles, game.enemy_projectiles, game.collision_sprites]:
@@ -174,8 +174,9 @@ def check_game_state(game):
         
 def build_grid_from_sprites(map,collision_sprites):
     grid = []
-    tile_w = map.tilewidth
-    tile_h =map.tileheight
+    #sdhuyghuihg isdhighsighdfsiughsd hgsdf hgsidufhsdiou hdohsidhdifuo iudfohiuo 
+    tile_w = 16
+    tile_h = 16
     map_w = map.width
     map_h =map.height
     for y in range(map_h):
@@ -188,5 +189,5 @@ def build_grid_from_sprites(map,collision_sprites):
             else:
                 row.append(0)  # walkable
         grid.append(row)
-        print(row)
+        #print(row)
     return grid

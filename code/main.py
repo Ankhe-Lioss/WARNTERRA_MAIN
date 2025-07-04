@@ -33,7 +33,7 @@ class Game:
         
         # game load asset
         load_menu(self)
-        print(self.enemy_frames)
+        #print(self.enemy_frames)
         check_cursor(self)
 
         self.frame_index = 0
@@ -43,7 +43,7 @@ class Game:
         self.pausing = True
         self.background = Background()
         self.current_BGM = None
-        self.level = 5         #LEVEL
+        self.level = 1         #LEVEL
 
         self.level -= 1 
 

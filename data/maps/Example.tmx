@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="252">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="254">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -404,33 +404,30 @@
   <object id="251" gid="194" x="1237.33" y="1243.67" width="136" height="118"/>
  </objectgroup>
  <objectgroup id="13" name="Entities">
-  <object id="200" name="Check_in" x="1025.33" y="773.333" width="160" height="128">
+  <object id="200" name="Check_in" x="289.33" y="293.333" width="160" height="128">
    <properties>
     <property name="room" type="int" value="0"/>
    </properties>
   </object>
   <object id="201" name="Karthus" x="1060.67" y="268">
    <properties>
-    <property name="room" type="int" value="0"/>
-    <property name="wave" type="int" value="1"/>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
-  <object id="202" name="Poro" x="734" y="285.337">
+  <object id="202" name="Maokai" x="1177" y="600.337">
    <properties>
     <property name="room" type="int" value="1"/>
-    <property name="wave" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
   <object id="203" name="Poro" x="1012.67" y="376.003">
    <properties>
     <property name="room" type="int" value="1"/>
-    <property name="wave" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
    </properties>
-   <point/>
-  </object>
-  <object id="217" x="992" y="640">
    <point/>
   </object>
   <object id="231" name="Player" x="660.667" y="387.997">
@@ -440,6 +437,14 @@
    <point/>
   </object>
   <object id="233" name="Weapon" type="Gauntlet" x="738.667" y="338.667">
+   <point/>
+  </object>
+  <object id="252" name="Check_in" x="30" y="70" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="253" name="Weapon" type="Bazooka" x="656" y="234">
    <point/>
   </object>
  </objectgroup>

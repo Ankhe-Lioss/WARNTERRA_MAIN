@@ -39,6 +39,7 @@ class Projectiles(pygame.sprite.Sprite):
             # Rotate each frame as needed
             rotated = pygame.transform.rotozoom(surf, self.angle, 1)
             self.frames.append(rotated)
+    
     def _animate(self, dt):
         self.frame_id += self.animation_spd * dt
         self.image = self.frames[int(self.frame_id) % len(self.frames)]

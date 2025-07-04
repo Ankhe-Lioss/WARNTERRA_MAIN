@@ -140,7 +140,7 @@ class Bow_e_skill(Player_skill):
     
     def activate(self):
         super().activate()
-        arrow = pproj.Bow_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
+        pproj.Bow_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
 
 # Bazooka
 
@@ -153,25 +153,49 @@ class Bazooka_primary(Player_skill):
         super().activate()
         pproj.Bazooka_primary(self.user.rect.center, self.user.facing_dir, self.game)
 
-class Bazooka_primary(Player_skill):
+class Bazooka_primary_enhanced(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        pproj.Bazooka_primary_enhanced(self.user.rect.center, self.user.facing_dir, self.game)
 
-class Bazooka_primary(Player_skill):
+class Bazooka_secondary(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        self.user.weap.primary = Bazooka_primary_enhanced(self.user, self.game)
+        Buff(self.cast_time, 0.3, 'atk', self.game, self.user)
+    
+    def deactivate(self):
+        super().deactivate()
+        self.user.weap.primary = Bazooka_primary(self.user, self.game)
 
-class Bazooka_primary(Player_skill):
+class Bazooka_q_skill(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        dir = pygame.Vector2(self.user.facing_dir)
+        pproj.Bazooka_q_skill(self.user.rect.center, dir, self.game)
+        pproj.Bazooka_q_skill(self.user.rect.center, dir.rotate(-30), self.game)
+        pproj.Bazooka_q_skill(self.user.rect.center, dir.rotate(30), self.game)
 
-class Bazooka_primary(Player_skill):
+class Bazooka_e_skill(Player_skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
         super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        pproj.Bazooka_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
         
 # Lunar gun
 

@@ -69,24 +69,7 @@ class Aninmated_Object(pygame.sprite.Sprite):
         self.rect = self.image_rect.copy()
         self.rect = self.rect.inflate(*inflate)
         self.rect.topleft = (self.rect.left + offset[0], self.rect.top + offset[1])
-    def update(self, dt):
-        self.frame_index=self.game.frame_index
-        self.image=self.frames[int(self.frame_index % len(self.frames))]
-
-class Aninmated_Object(pygame.sprite.Sprite):
-
-    def __init__(self, pos, name,groups,game):
-        super().__init__(groups)
-        self.game = game
-        self.name = name
-        self.frames = self.game.animated_object_frames[self.name]
-        self.image=self.frames[0]
-        self.image_rect = self.image.get_frect(topleft=pos)
-        inflate, offset = animated_image_offset.get(self.name, ((0, 0), (0, 0)))
-
-        self.rect = self.image_rect.copy()
-        self.rect = self.rect.inflate(*inflate)
-        self.rect.topleft = (self.rect.left + offset[0], self.rect.top + offset[1])
+        
     def update(self, dt):
         self.frame_index=self.game.frame_index
         self.image=self.frames[int(self.frame_index % len(self.frames))]
@@ -297,7 +280,7 @@ class Explosive_Barrel(pygame.sprite.Sprite):
     def update(self, dt):
         if self.state == 'idle':
             if pygame.sprite.spritecollideany(self, self.game.aoe_sprites):
-                print('ocj')
+                #print('ocj')
                 self.state = 'warning'
                 self.warning_timer = 0
                 self.frame_index = 0

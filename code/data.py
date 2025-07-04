@@ -26,11 +26,11 @@ skill_stats = {
     "Bow_q_skill": (3800, 1000, 200),
     "Bow_e_skill": (12000, 6000, 300),
     
-    "Bazooka_primary" : (1000, 500, 0),
+    "Bazooka_primary" : (1000, 1000, 0),
     "Bazooka_primary_enhanced" : (1000, 1000, 0),
     "Bazooka_secondary" : (10000, 2000, 5000),
     "Bazooka_q_skill" : (3000, 1000, 0),
-    "Bazooka_e_skill" : (12000, 4000, 0),
+    "Bazooka_e_skill" : (1000, 4000, 0),
 #enemy
     "Poro_stomp" : (1500, 0, 1000),
     "Chogath_stomp" : (2500, 1000, 750),
@@ -101,12 +101,7 @@ aoe_stat={
     'Bazooka_pe' : (1, 4, 200),
     'Bazooka_q' : (2.5, 4, 200),
     'Bazooka_e' : (2, 4, 200),
-    'Bow_explosion' : (1, 8, 500),
-'Barrel_Explode' : (1, 4, 500),
 
-
-    'Bow_explosion' : (1, 8, 500)    ,
-'Barrel_Explode' : (1, 4, 500)
-
-
+# Environment
+    'Barrel_Explode' : (1, 4, 500)
 }

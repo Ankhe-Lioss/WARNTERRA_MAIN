@@ -158,5 +158,6 @@ class Bazooka(Weap):
 
 Weapon_Dict = {
     "Bow": Bow,
-    "Gauntlet": Gauntlet
+    "Gauntlet": Gauntlet,
+    "Bazooka" : Bazooka
 }

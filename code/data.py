@@ -25,6 +25,12 @@ skill_stats = {
     "Bow_secondary": (6500, 5000, 3500),
     "Bow_q_skill": (3800, 1000, 200),
     "Bow_e_skill": (12000, 6000, 300),
+    
+    "Bazooka_primary" : (1000, 1000, 0),
+    "Bazooka_primary_enhanced" : (1000, 1000, 0),
+    "Bazooka_secondary" : (10000, 2000, 5000),
+    "Bazooka_q_skill" : (3000, 1000, 0),
+    "Bazooka_e_skill" : (1000, 4000, 0),
 #enemy
     "Poro_stomp" : (1500, 0, 1000),
     "Chogath_stomp" : (2500, 1000, 750),
@@ -47,7 +53,8 @@ skill_stats = {
     "Soraka_ult" : (5000, 2000, 1000),
 # Other
     "Summon_healing_buff" : (20000, 0, 0),
-    "Summon_speed_buff" : (20000, 0, 0)
+    "Summon_speed_buff" : (20000, 0, 0),
+    "Summon_attack_buff" : (20000, 0, 0)
 }
 
 player_projectiles = {
@@ -59,7 +66,12 @@ player_projectiles = {
     "Bow_primary" : (1, 1000),
     "Bow_primary_enhanced": (0.4, 800),
     "Bow_q_skill": (0.5, 700),
-    "Bow_e_skill": (1, 600)
+    "Bow_e_skill": (1, 600),
+    
+    "Bazooka_primary" : (1.5, 900),
+    "Bazooka_primary_enhanced" : (0, 850),
+    "Bazooka_q_skill" : (0, 800),
+    "Bazooka_e_skill" : (0, 750)
 }
 
 enemy_projectiles = {
@@ -77,12 +89,19 @@ enemy_projectiles = {
     "Attack_Buff" : (0, 0)
 }
 
-Aoe_stat={
-#   aoe skill=[scale_atk,frame_number,life_time]
+aoe_stat={
+#   aoe skill=[scale_atk, frame_number, life_time]
     'Poro_Stomp':(0.5, 3, 1000),
     'Chogath_Rupture':(2, 5, 1000),
     'Veigar_Darkmatter':(1, 9, 500),
     'Soraka_star': (0.5, 4, 400),
 # Player
-    'Bow_explosion' : (1, 8, 500)    
+
+    'Bow_explosion' : (1, 8, 500),
+    'Bazooka_pe' : (1, 4, 200),
+    'Bazooka_q' : (2.5, 4, 200),
+    'Bazooka_e' : (2, 4, 200),
+
+# Environment
+    'Barrel_Explode' : (1, 4, 500)
 }

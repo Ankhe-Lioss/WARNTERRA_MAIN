@@ -1,5 +1,5 @@
 from setting import *
-
+from sprites import *
 class Projectiles(pygame.sprite.Sprite):
     def __init__(self, target, pos, direction, groups, game):
         # Initializing
@@ -29,24 +29,36 @@ class Projectiles(pygame.sprite.Sprite):
         # Audio
         if os.path.exists(os.path.join('audio', 'projectiles', f'{self.name}.ogg')):
             self.sound = pygame.mixer.Sound(os.path.join('audio', 'projectiles', f'{self.name}.ogg'))
-    
+
     def _load_images(self):
         folder, folder1 = self.source.split(" ")
-
-        for i in range(4):
-            surf = pygame.image.load(os.path.join('images', 'projectiles', f'{folder}',f'{folder1}',f'{i}.png')).convert_alpha()
-            surf = pygame.transform.rotozoom(surf, self.angle,1)
-            self.frames.append(surf)
-        
+        # Use preloaded frames
+        base_frames = self.game.projectile_frames.get(folder, {}).get(folder1, [])
+        self.frames = []
+        for surf in base_frames:
+            # Rotate each frame as needed
+            rotated = pygame.transform.rotozoom(surf, self.angle, 1)
+            self.frames.append(rotated)
+    
     def _animate(self, dt):
         self.frame_id += self.animation_spd * dt
         self.image = self.frames[int(self.frame_id) % len(self.frames)]
     
     def collision(self):
+
+
+        collisions = pygame.sprite.spritecollide(self, self.game.collision_sprites, False)
+
+        for sprite in collisions:
+            if isinstance(sprite, Explosive_Barrel):
+                if sprite.state == 'idle':
+                    sprite.state = 'warning'
+                    sprite.warning_timer = 0
         if hasattr(self,'wall_piercing') and self.wall_piercing:
             return
-        if pygame.sprite.spritecollide(self, self.game.collision_sprites, False):
+        if collisions:
             self.kill()
+            return
     
     def update(self, dt):
         self._animate(dt)
@@ -61,7 +73,6 @@ class Projectiles(pygame.sprite.Sprite):
     
     def apply(self, target):
         pass
-    
     def play_sound(self):
         if hasattr(self, 'sound'):
             self.sound.play()
@@ -72,7 +83,7 @@ class Projectiles(pygame.sprite.Sprite):
         sprite.take_damage(self.dmg)
     
     def bullet_collision(self):
-        collision_sprites = pygame.sprite.spritecollide(self, self.target, False, pygame.sprite.collide_mask)
+        collision_sprites = pygame.sprite.spritecollide(self, self.target, False)
         if collision_sprites:
             for sprite in collision_sprites:
                 
@@ -112,3 +123,4 @@ class Enemy_projectiles(Projectiles):
         # Calcu
         self.scale, self.spd = enemy_projectiles[self.name]
         self.dmg = self.scale * self.user.atk
+

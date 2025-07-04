@@ -9,7 +9,8 @@ class Player_skill(Skill):
     def __init__(self, user, game):
         super().__init__(user, game)
         self.icon = pygame.image.load(os.path.join("images", "icons", "Player_skills", f"{self.name}.png")).convert_alpha()
-        self.icon = pygame.transform.scale(self.icon, (48, 48))
+
+# Gauntlet
 
 class Gauntlet_primary(Player_skill):
     def __init__(self, user, game):
@@ -21,7 +22,7 @@ class Gauntlet_primary(Player_skill):
         pproj.Gauntlet_primary(self.user.rect.center, self.user.facing_dir, self.game)
         
         # Test
-        #self.user.status.add(Poisoned(3000, 50, self.game, self.user))
+        #Poisoned(3000, 50, self.game, self.user)
 
 class Gauntlet_q_skill(Player_skill):
     def __init__(self, user, game):
@@ -68,6 +69,8 @@ class Gauntlet_secondary(Player_skill):
         super().deactivate()
         self.user.mode = None
         self.user.forced_moving = False
+
+# Bow
 
 class Bow_primary(Player_skill):
     def __init__(self, user, game):
@@ -137,23 +140,67 @@ class Bow_e_skill(Player_skill):
     
     def activate(self):
         super().activate()
-        arrow = pproj.Bow_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
-        
-class PlayerSkills:
+        pproj.Bow_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
+
+# Bazooka
+
+class Bazooka_primary(Player_skill):
     def __init__(self, user, game):
-        self.user = user
-        self.game = game
-        self.skills_gauntlet = {
-            "Left": Gauntlet_primary(user, game),
-            "Right": Gauntlet_secondary(user, game),
-            "Q": Gauntlet_q_skill(user, game),
-            "E": Gauntlet_e_skill(user, game)            
-        }
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        pproj.Bazooka_primary(self.user.rect.center, self.user.facing_dir, self.game)
+
+class Bazooka_primary_enhanced(Player_skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        pproj.Bazooka_primary_enhanced(self.user.rect.center, self.user.facing_dir, self.game)
+
+class Bazooka_secondary(Player_skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        self.user.weap.primary = Bazooka_primary_enhanced(self.user, self.game)
+        Buff(self.cast_time, 0.3, 'atk', self.game, self.user)
+    
+    def deactivate(self):
+        super().deactivate()
+        self.user.weap.primary = Bazooka_primary(self.user, self.game)
+
+class Bazooka_q_skill(Player_skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        dir = pygame.Vector2(self.user.facing_dir)
+        pproj.Bazooka_q_skill(self.user.rect.center, dir, self.game)
+        pproj.Bazooka_q_skill(self.user.rect.center, dir.rotate(-30), self.game)
+        pproj.Bazooka_q_skill(self.user.rect.center, dir.rotate(30), self.game)
+
+class Bazooka_e_skill(Player_skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        pproj.Bazooka_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
         
-        # Bow Skills
-        self.skills_bow = {
-        "Left": Bow_primary(user, game),
-        "Right": Bow_secondary(user, game),
-        "Q": Bow_q_skill(user, game),
-        "E": Bow_e_skill(user, game),
-        }
+# Lunar gun
+
+
+# Crossbow
+
+
+# Whisper

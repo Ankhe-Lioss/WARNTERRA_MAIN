@@ -48,7 +48,7 @@ class Lulu_Primary(Enemy_projectiles):
         super().__init__(user, user.rect.center, direction, game)
     
     def apply(self, target):
-        target.status.add(Slowed(3000, 0.5, self.game, target))
+        Slowed(3000, 0.5, self.game, target)
 
 class Veigar_Cage(pygame.sprite.Sprite):
     def __init__(self, center, outer_radius, inner_radius, game):
@@ -64,10 +64,8 @@ class Veigar_Cage(pygame.sprite.Sprite):
         pygame.draw.circle(self.image, (120, 0, 255, 180), (outer_radius, outer_radius), outer_radius)
         # Cut out the inner circle (make it transparent)
         pygame.draw.circle(self.image, (0, 0, 0, 0), (outer_radius, outer_radius), inner_radius)
-        self.rect = self.image.get_rect(center=center)
+        self.rect = self.image.get_frect(center=center)
         self.image_rect = self.rect.copy()
-        self.mask = pygame.mask.from_surface(self.image)
-
     def update(self, dt):
         player = self.game.player
         self.lifetime -= dt * 1000
@@ -77,7 +75,7 @@ class Veigar_Cage(pygame.sprite.Sprite):
 
         if self.inner_radius - 20 <= dist and dist <= self.outer_radius + 20:
             if not hasattr(player, "caged") or not player.caged:
-                player.status.add(Stunned(1500, self.game, player))
+                Stunned(1500, self.game, player)
                 player.caged = True
         else:
             player.caged = False
@@ -92,7 +90,7 @@ class Healing_Buff(Enemy_projectiles):
         self.skill = skill
     
     def apply(self, target):
-        target.status.add(Healing(2000, self.game.player.maxhp * 0.125, self.game, target))
+        Healing(2000, self.game.player.maxhp * 0.125, self.game, target)
         self.used = True
         
     def update(self, dt):
@@ -109,9 +107,27 @@ class Speed_Buff(Enemy_projectiles):
         self.skill = skill
     
     def apply(self, target):
-        target.status.add(Buff(5000, 0.3, 'spd', self.game, target))
+        Buff(5000, 0.3, 'spd', self.game, target)
         self.used = True
     
+    def update(self, dt):
+        super().update(dt)
+        self.skill.remaining = self.skill.cooldown
+
+
+class Attack_Buff(Enemy_projectiles):
+    def __init__(self, user, pos, game, skill):
+        self.name = self.__class__.__name__
+        self.source = "Other Attacking_buff"
+        super().__init__(user, pos, pygame.Vector2(), game)
+        self.lifetime = 999999999
+        self.used = False
+        self.skill = skill
+
+    def apply(self, target):
+        Buff(5000, 0.3, 'atk', self.game, target)
+        self.used = True
+
     def update(self, dt):
         super().update(dt)
         self.skill.remaining = self.skill.cooldown
@@ -125,4 +141,4 @@ class Maokai_Primary(Enemy_projectiles):
         self.lifetime = 250
     
     def apply(self, target):
-        target.status.add(Slowed(1000, 0.6, self.game, target))
+        Slowed(1000, 0.6, self.game, target)

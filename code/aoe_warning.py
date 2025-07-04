@@ -5,10 +5,11 @@ Spawn_aoe_dict={  #aoe skill=[frame_number,life_time]d
     'Spawn_rupture':(3, 500),
     'Spawn_darkmatter':(6, 1000),
     'Spawn_Soraka_star' : (6, 1000),
-    'Spawn_Soraka_cc' : (6, 2000)
+    'Spawn_Soraka_cc' : (12, 2000),
+    'Dust_trace':(8,400)
 }
 class Spawn_aoe(pygame.sprite.Sprite):
-    def __init__(self, pos, game, user_atk):
+    def __init__(self, pos, game, user_atk=0):
         super().__init__(game.all_sprites)
         #pass to aoe
         self.game=game
@@ -19,18 +20,13 @@ class Spawn_aoe(pygame.sprite.Sprite):
         self.frame_number=self.stat[0]
         self.lifetime=self.stat[1]
         self.frame_index = 0
-        self.frames=[]
-        self.load_frame()
+        self.frames = self.game.aoe_warning_frames[self.name]
         self.animation_speed = 6
         self.image = self.frames[0]
         self.rect = self.image.get_frect(center=pos)
-        self.radius = float(self.rect.top) + 20
+        self.radius = self.rect.width / 2 + 20
         self.image_rect = self.image.get_frect(center=pos)
 
-    def load_frame(self):
-        for i in range(self.frame_number):
-            surf=pygame.image.load(os.path.join('images', 'enviroment',f'{self.name}', f'{i}.png')).convert_alpha()
-            self.frames.append(surf)
 
     def animate(self, dt):
         self.frame_index += self.animation_speed * dt
@@ -72,9 +68,21 @@ class Spawn_Soraka_cc(Spawn_aoe):
     def update(self, dt):
         super().update(dt)
         if (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.pos)).length() <= self.radius:
-            self.game.player.status.add(Silenced(dt * 1000, self.game, self.game.player))
+            Silenced(100, self.game, self.game.player)
+        
+        
+        # CHECK
+        offset = self.game.all_sprites.offset
+        screen_pos = pygame.Vector2(self.rect.center) + offset
+        pygame.draw.circle(pygame.display.get_surface(), 'aqua', screen_pos, self.radius, width=5)
     
     def spawn(self):
         if (pygame.Vector2(self.game.player.rect.center) - pygame.Vector2(self.pos)).length() <= self.radius and self.user.phase == 2:
-            self.game.player.status.add(Rooted(2000, self.game, self.game.player))
-            
+            Rooted(2000, self.game, self.game.player)
+class Dust_trace(Spawn_aoe):
+    def __init__(self, pos, game):
+        self.name='Dust_trace'
+        super().__init__(pos, game)
+        self.type='floor'
+    def spawn(self):
+        pass

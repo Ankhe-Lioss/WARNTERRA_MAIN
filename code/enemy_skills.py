@@ -13,7 +13,7 @@ class Karthus_primary(Skill):
         
     def activate(self):
         super().activate()
-        eproj.Karthus_Primary(self.user, self.user.direction, self.user.game)
+        eproj.Karthus_Primary(self.user, self.user.facing_dir, self.user.game)
         self.user.state='Attacking'
         
     def deactivate(self):
@@ -59,7 +59,7 @@ class Veigar_primary(Skill):
 
     def activate(self):
         super().activate()
-        eproj.Veigar_Primary(self.user, self.user.direction, self.user.game)
+        eproj.Veigar_Primary(self.user, self.user.facing_dir, self.user.game)
         self.user.state='Attacking'
 
     def deactivate(self):
@@ -74,7 +74,7 @@ class Veigar_secondary(Skill):
     def activate(self):
         super().activate()
         
-        dir = self.user.direction.copy()
+        dir = self.user.facing_dir.copy()
         
         eproj.Veigar_Secondary(self.user, dir, self.user.game)
         eproj.Veigar_Secondary(self.user, dir.rotate(18), self.user.game)
@@ -135,8 +135,8 @@ class Lulu_primary(Skill):
         
         deviation = random.randint(0, 30)
         
-        eproj.Lulu_Primary(self.user, self.user.direction.rotate(15).rotate(deviation), self.user.game)
-        eproj.Lulu_Primary(self.user, self.user.direction.rotate(-15).rotate(deviation), self.user.game)
+        eproj.Lulu_Primary(self.user, self.user.facing_dir.rotate(15).rotate(deviation), self.user.game)
+        eproj.Lulu_Primary(self.user, self.user.facing_dir.rotate(-15).rotate(deviation), self.user.game)
         self.user.state='Attacking'
         
     def deactivate(self):
@@ -152,8 +152,8 @@ class Lulu_buff(Skill):
         super().activate()
         self.user.state='Attacking'
         for enemy in self.game.enemy_sprites:
-            enemy.status.add(Buff(2000, 0.5, 'spd', self.game, enemy))
-            enemy.status.add(Buff(4000, 0.3, 'atk', self.game, enemy))
+            Buff(2000, 0.5, 'spd', self.game, enemy)
+            Buff(4000, 0.3, 'atk', self.game, enemy)
         
     def deactivate(self):
         super().deactivate()
@@ -195,7 +195,17 @@ class Summon_speed_buff(Skill):
         
     def activate(self):
         super().activate()
-        self.buff = eproj.Speed_Buff(self.user, self.pos, self.game, self)   
+        self.buff = eproj.Speed_Buff(self.user, self.pos, self.game, self)
+
+class Summon_attack_buff(Skill):
+    def __init__(self, user, pos, game):
+        self.name = self.__class__.__name__
+        self.pos = pos
+        super().__init__(user, game)
+
+    def activate(self):
+        super().activate()
+        self.buff = eproj.Attack_Buff(self.user, self.pos, self.game, self)
 
 class Nocturne_sprint(Skill):
     def __init__(self, user, game):
@@ -228,7 +238,7 @@ class Maokai_primary(Skill):
 
     def activate(self):
         super().activate()
-        eproj.Maokai_Primary(self.user, self.user.direction, self.user.game)
+        eproj.Maokai_Primary(self.user, self.user.facing_dir, self.user.game)
         self.user.heal(self.user.maxhp * 0.5)
         self.user.state='Attacking'
 

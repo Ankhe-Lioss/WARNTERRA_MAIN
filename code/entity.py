@@ -1,6 +1,7 @@
 from setting import *
 from health_bar import Healthbar
-
+from helper import *
+from sprites import *
 class Entity(pygame.sprite.Sprite):
     def __init__(self, groups, game):
         
@@ -35,14 +36,15 @@ class Entity(pygame.sprite.Sprite):
         self.cross_wall = False
         
         # Status
-        self.status = set()
+        # Removed
         
         self.rect = pygame.rect.FRect()
         
         self.healthbar = Healthbar(self)
         if isinstance(self, Boss):
             self.healthbar.kill()
-        
+        self.image_offset = getattr(self, 'image_offset', (0, 0))
+
     def updstat(self):
         self.maxhp = self.raw_hp + self.level * self.hp_multiplier
         self.baseatk = self.raw_atk + self.level * self.atk_multiplier
@@ -108,12 +110,12 @@ class Entity(pygame.sprite.Sprite):
         self.rect.x += self.direction.x * self.spd * dt
         if not self.cross_wall:
             self.collision('horizontal', self.direction)
-        
+
         self.rect.y += self.direction.y * self.spd * dt
         if not self.cross_wall:
             self.collision('vertical', self.direction)
         
-        self.image_rect.center = self.rect.center
+        self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
     
     def forced_move(self, dir, dt):
         if self.rooted or self.stunned:
@@ -129,8 +131,8 @@ class Entity(pygame.sprite.Sprite):
         self.rect.y += dir.y * forced_spd * dt
         if not self.cross_wall:
             self.collision('vertical', dir)
-            
-        self.image_rect.center = self.rect.center
+
+        self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
     
     def update(self, dt):
         if self.forced_moving:
@@ -182,7 +184,7 @@ class Enemy(Entity):
         self.state='Walking'
         
         #load image
-        self.load_frames()
+        self.frames=game.enemy_frames[self.name]
         
         # image
         self.image = self.frames['Walking'][0]
@@ -190,14 +192,10 @@ class Enemy(Entity):
         # rect
         self.rect = self.image.get_frect(center=pos)
         self.image_rect = self.rect.copy()
+
+        self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
     
-    def load_frames(self):
-        self.frames = {}
-        for i in self.states:
-            self.frames[i] = []
-            for k in range(0, 6):
-                surf = pygame.image.load(os.path.join('images', 'enemies',f'{self.name}',f'{i}',f'{k}.png')).convert_alpha()
-                self.frames[i].append(surf)
+
     
     def animate(self, dt):
         self.frame_index += self.animation_spd * dt
@@ -206,16 +204,18 @@ class Enemy(Entity):
             self.image = pygame.transform.flip(self.image, True, False)
     
     def death(self):
+        Aninmated_Object(self.rect.center,'Grave2',self.game.all_sprites, self.game)
         super().death()
         self.game.spawn_numb -= 1
-        for stt in self.status:
-            stt.kill()
+
+            
     def cal_dis(self):
         # get direction
         player_pos = pygame.Vector2(self.player.rect.center)
         enemy_pos = pygame.Vector2(self.rect.center)
         self.distance_vector = player_pos - enemy_pos
         self.direction = self.distance_vector.normalize() if self.distance_vector else self.distance_vector
+        self.facing_dir = self.distance_vector.normalize() if self.distance_vector else self.distance_vector
         
     def move_enemy(self,dt):
         # update the rect position + collision
@@ -239,8 +239,8 @@ class Enemy(Entity):
         
         if not self.cross_wall:
             self.collision('vertical', self.direction)
-        self.enemy_collision('vertical',dt)
-        self.image_rect.center = self.rect.center
+
+        self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
         
     def enemy_collision(self,direction,dt):
         for sprite in self.game.enemy_sprites:
@@ -259,9 +259,6 @@ class Enemy(Entity):
                     
     def update(self, dt):
         if self.death_time==0:
-            if len(self.status)!=0:
-                #check_status(self,dt)
-                pass
             self.cal_dis()
             for skill_name in self.skills:
                 self.skills[skill_name].update(dt)
@@ -298,5 +295,5 @@ class Boss(Enemy):
 
     def death(self):
         super().death()
-        self.game.current_BGM = None
         pygame.mixer.music.fadeout(1000)
+        Delay(1100, lambda: setattr(self.game, "current_BGM", None), self.game)

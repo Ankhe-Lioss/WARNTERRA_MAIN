@@ -15,25 +15,17 @@ class Status(pygame.sprite.Sprite):
         self.load_icon()
 
         self.image = self.frames[self.frame_index]
-        self.image_rect = self.image.get_rect(center=self.owner.rect.center)
+        self.image_rect = self.image.get_frect(center=self.owner.rect.center)
 
     def load_images(self):
-        for i in range(5):
-            surf = pygame.image.load(os.path.join('images', 'status', f'{self.name}', f'{i}.png')).convert_alpha()
-            surf = pygame.transform.scale_by(surf, self.scale_ratio)
-            self.frames.append(surf)
+
+        self.frames = [pygame.transform.scale_by(surf, self.scale_ratio) for surf in
+            self.game.status_frames[self.name]]
 
     def load_icon(self):
-        if self.name == 'Buff' and hasattr(self, 'type'):
-            # Buff icons use a subfolder for types
-            icon_path = os.path.join('images', 'icons', 'status', 'Buff', f'{self.type}.png')
-        else:
-            # Default: load by status name
-            icon_path = os.path.join('images', 'icons', 'status', f'{self.name}.png')
-
-        if os.path.exists(icon_path):
-            icon_surf = pygame.image.load(icon_path).convert_alpha()
-            self.icon = pygame.transform.scale(icon_surf, (24,24))
+        icon_key = getattr(self, 'type', self.name)
+        if hasattr(self.game, 'status_icons') and icon_key in self.game.status_icons:
+            self.icon = self.game.status_icons[icon_key]
         else:
             self.icon = None
 
@@ -45,7 +37,7 @@ class Status(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frame_index) % len(self.frames)]
         
     def update_position(self):
-        self.image_rect.center = pygame.Vector2(self.owner.image_rect.center) + self.offset * self.scale_ratio
+        self.image_rect.center = pygame.Vector2(self.owner.rect.center) + self.offset * self.scale_ratio
         
     def update(self, dt):
         self.update_animation(dt)
@@ -108,6 +100,10 @@ class Silenced(Status):
         super().__init__(duration, game)
         self.owner.silenced = True
 
+    def update(self, dt):
+        self.owner.silenced = True
+        super().update(dt)
+
     def unapply(self):
         self.owner.silenced = False
         
@@ -149,8 +145,12 @@ class Buff(Status):
         self.owner = owner
         self.offset=pygame.Vector2(0, -20)
         super().__init__(duration, game)
-        self.ratio = ratio
+
         self.type = type
+        self.load_icon()
+
+        self.ratio = ratio
+
         if type == 'atk':
             owner.atk *= 1 + ratio
         elif type == 'def':
@@ -159,7 +159,7 @@ class Buff(Status):
             owner.spd *= 1 + ratio
     def update_position(self):
 
-        self.image_rect.center=self.owner.image_rect.midbottom+self.offset
+        self.image_rect.center=self.owner.rect.midbottom+self.offset
     def unapply(self):
         if self.type == 'atk':
             self.owner.atk /= 1 + self.ratio
@@ -174,5 +174,5 @@ class Dark_aura(Status):
         self.offset=pygame.Vector2(1, 0)
         super().__init__(duration, game)
         for frame in self.frames:
-            frame.set_alpha(150)
+            frame.set_alpha(100)
 

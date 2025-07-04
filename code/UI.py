@@ -10,7 +10,6 @@ class UI:
         self.game = game
         self.player = player
         self.display_surface = display_surface
-        self.weap = player.weap.__class__.__name__
         self.boss_name_font=pygame.font.Font(os.path.join('images','font','UncialAntiqua-Regular.ttf'), 20)
         # Fonts
         self.font = pygame.font.SysFont("Segoe UI", 20, bold=True)
@@ -139,7 +138,7 @@ class UI:
 
     
     def draw_level_circle(self):
-        text = self.level_font.render(f"{self.player.level}", True, (255, 255, 255))
+        text = self.level_font.render(f"{self.player.level+1}", True, (255, 255, 255))
         padding = 12
         radius = max(text.get_width(), text.get_height()) // 2 + padding
 
@@ -188,7 +187,7 @@ class UI:
             border_rect = pygame.Rect(icon_x, icon_y, icon_size, icon_size)
             pygame.draw.rect(self.display_surface, (255, 255, 255), border_rect, 1)
 
-    def draw_skill_boxes(self, dt):
+    '''def draw_skill_boxes(self, dt):
         skill_keys = ['Left', 'Right', 'Q', 'E']
         for index, key in enumerate(skill_keys):
             if key not in self.player.skills:
@@ -246,17 +245,13 @@ class UI:
                 cd_rect = cd_text.get_rect(center=(x + 30, y + 16))
                 cd_shadow_rect = cd_text.get_rect(center=(x + 31, y + 17))
                 self.display_surface.blit(cd_shadow, cd_shadow_rect)
-                self.display_surface.blit(cd_text, cd_rect)
+                self.display_surface.blit(cd_text, cd_rect)'''
 
     def update(self, dt):
-        # Detect level up
-        if self.player.level != self.last_level:
-            self.last_level = self.player.level
-            self.display_hp = self.player.hp  
 
-        self.draw_health_bar(dt)
-        self.draw_level_circle()
-        self.draw_skill_boxes(dt)
+        #self.draw_health_bar(dt)
+        #self.draw_level_circle()
+        #self.draw_skill_boxes(dt)
         self.draw_status_effects()
         self.draw_boss_bar(dt)
 

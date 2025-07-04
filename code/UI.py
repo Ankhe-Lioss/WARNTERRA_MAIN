@@ -12,9 +12,9 @@ class UI:
         self.display_surface = display_surface
         self.boss_name_font=pygame.font.Font(os.path.join('images','font','UncialAntiqua-Regular.ttf'), 20)
         # Fonts
-        self.font = pygame.font.SysFont("Segoe UI", 20, bold=True)
-        self.level_font = pygame.font.SysFont("Segoe UI", 28, bold=True)
-        self.cooldown_font = pygame.font.SysFont("Segoe UI", 18, bold=True)
+        self.font = pygame.font.Font(os.path.join('images','font','Orbitron-Regular.ttf'), 20)
+        self.level_font = pygame.font.Font(os.path.join('images','font','Orbitron-Bold.ttf'), 20)
+        self.cooldown_font = pygame.font.Font(os.path.join('images','font','ShareTechMono-Regular.ttf'), 20)
 
         # Health bar position (bottom left side)
         self.health_rect = pygame.Rect(60, WINDOW_HEIGHT - 70, 200, 24)

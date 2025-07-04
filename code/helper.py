@@ -61,3 +61,22 @@ class Delay:
             self.commands()
             self.game.delays.discard(self)  
             del self
+
+class Flyout_number(pygame.sprite.Sprite): # OR TEXTS
+    
+    def __init__(self, pos, number, color, game, font_size=24):
+        super().__init__(game.all_sprites)
+        self.image = pygame.font.Font(None, font_size).render(str(number), True, color)
+        self.image_rect = self.image.get_frect(center=pos)
+        self.lifetime = 0.5
+        self.spawn_time = pygame.time.get_ticks()
+        self.type = 'top'
+    
+    def update(self, dt):
+        elapsed_time = pygame.time.get_ticks() - self.spawn_time
+        if elapsed_time < self.lifetime * 1000:
+            self.image_rect.y -= 50 * dt
+            alpha = max(0, 255 - int((elapsed_time / (self.lifetime * 1000)) * 255))
+            self.image.set_alpha(alpha)
+        else:
+            self.kill()

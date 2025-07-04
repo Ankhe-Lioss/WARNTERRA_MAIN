@@ -113,6 +113,7 @@ class Bazooka_e_skill(Player_projectiles):
         # image for rotozoom
         
         self.target_sprite = self.find_nearest_enemy()
+        self.lifetime = 60000
 
         if self.target_sprite:     
             self.tracker = Tracking(game, self, self.target_sprite)
@@ -155,12 +156,7 @@ class Bazooka_e_skill(Player_projectiles):
                 else:
                     self.direction = move_vec.normalize()
             
-            # ROTATE ERHIUADIFUHSIUDHISUAIHSDIAHDUASHDIASDHAIUSDHIASHDIUSHIUD
-            if self.direction.length_squared() > 0:
-                angle = -self.direction.angle_to(pygame.Vector2(1, 0))
-                self.image = pygame.transform.rotozoom(self.image, -self.angle, 1)
-                self.image = pygame.transform.rotozoom(self.image, angle, 1)
-                self.image_rect = self.image.get_rect(center=self.rect.center)
+            
         else:
             self.tracking = False  # Stop tracking if target is gone
 
@@ -170,9 +166,17 @@ class Bazooka_e_skill(Player_projectiles):
 
         # Other update (super() after subtracts)
         self._animate(dt)
+        
+        # ROTATE ERHIUADIFUHSIUDHISUAIHSDIAHDUASHDIASDHAIUSDHIASHDIUSHIUD
+        if self.direction.length_squared() > 0 and self.tracking:
+            angle = self.direction.angle_to(pygame.Vector2(1, 0))
+            self.image = pygame.transform.rotozoom(self.image, -self.angle, 1)
+            self.image = pygame.transform.rotozoom(self.image, angle, 1)
+            self.image_rect = self.image.get_rect(center=self.rect.center)
+        
+        # Check collision
         self.collision()
         self.bullet_collision()
-        
         
         
         self.lifetime -= dt * 1000

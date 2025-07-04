@@ -1,5 +1,6 @@
 from setting import *
 from weapon import *
+from helper import Flyout_number
 
 class Item(pygame.sprite.Sprite):
     def __init__(self, game, image, pos=(0, 0)):
@@ -17,8 +18,9 @@ class Item(pygame.sprite.Sprite):
 
     def update(self, dt):
         # Bobbing effect
-        self.updown += dt * 10
-        offset = int(self.updown % 20)
+        self.updown += dt * 10      
+        offset = int(sin(self.updown / 5) * 10)
+        
         self.rect.center = (self.base_pos.x, self.base_pos.y + offset)
         self.image_rect.center=self.rect.center
         if not self.collected and self.rect.colliderect(self.game.player.rect):
@@ -34,6 +36,7 @@ class Weapon_Item(Item):
     def __init__(self, pos, game, name):
         self.game = game
         self.name = name
+        self.pos = pos
 
         # Load and scale image
         surf = pygame.image.load(os.path.join('images', 'weapon', f'{self.name}.png')).convert_alpha()
@@ -47,12 +50,14 @@ class Weapon_Item(Item):
 
     def apply_effect(self, player):
         weapon_class = Weapon_Dict.get(self.name)
+        
+        Flyout_number(self.pos, f"You picked up {self.name}", (255, 255, 255), self.game, 36)
+        
         if weapon_class:
             player.weapons.append(weapon_class(self.game))
             player.current_weapon_index=len(player.weapons)-1
             player.weap=player.weapons[player.current_weapon_index]
             self.game.player_currweapdict.append(self.name)
-            if self.name=="Bow" or self.name=="Gauntlet":
-                for sprite in self.game.all_sprites:
-                    if isinstance(sprite, Weapon_Item):
-                        sprite.kill()
+            for sprite in self.game.all_sprites:
+                if isinstance(sprite, Weapon_Item):
+                    sprite.kill()

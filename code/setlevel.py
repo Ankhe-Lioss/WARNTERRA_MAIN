@@ -175,10 +175,10 @@ def check_game_state(game):
 def build_grid_from_sprites(map,collision_sprites):
     grid = []
     #sdhuyghuihg isdhighsighdfsiughsd hgsdf hgsidufhsdiou hdohsidhdifuo iudfohiuo 
-    tile_w = 16
-    tile_h = 16
+    tile_w = 32
+    tile_h = 32
     map_w = map.width
-    map_h =map.height
+    map_h = map.height
     for y in range(map_h):
         row = []
         for x in range(map_w):

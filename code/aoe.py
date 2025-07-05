@@ -1,5 +1,6 @@
 from setting import *
 from status import *
+from helper import Delay
 
 class Area_of_effect(pygame.sprite.Sprite):
     def __init__(self,pos,game,user_atk):
@@ -112,11 +113,35 @@ class Bazooka_e(Area_of_effect):
         self.name = self.__class__.__name__
         super().__init__(pos,game,user_atk)
 
+    def apply(self, target):
+        Burning(3000, apply_scale[self.name] * self.user_atk, self.game, target)
 
 class Barrel_Explode(Area_of_effect):
-    def __init__(self, pos,game,user_atk=200):
+    def __init__(self, pos,game,user_atk=0):
         self.enemy_sprites = pygame.sprite.Group()
         self.enemy_sprites.add(game.player_sprites, game.enemy_sprites)
         self.name='Barrel_Explode'
         super().__init__(pos,game,user_atk)
 
+    def apply(self, target):
+        Burning(2000, apply_scale[self.name][0] * target.maxhp if not hasattr(target, 'is_boss') else apply_scale[self.name][1] * target.maxhp, self.game, target)
+
+class Calibrum_ult(Area_of_effect):
+    def __init__(self, pos,game,user_atk):
+        self.enemy_sprites=game.enemy_sprites
+        self.name = self.__class__.__name__
+        super().__init__(pos,game,user_atk)
+    
+    def apply(self, target):
+        Delay(1000, lambda : (Calibrum_mark(5000, self.game, target)), self.game)
+
+class Infernum_ult(Area_of_effect):
+    def __init__(self, pos, game,user_atk):
+        self.enemy_sprites = game.enemy_sprites
+        self.name = self.__class__.__name__
+        super().__init__(pos, game, user_atk)
+    
+    def apply(self, target):
+        from player_projectiles import Infernum_burgeon
+        Delay(1000, lambda : (Infernum_burgeon(target.rect.center, self.game, target)), self.game)
+        

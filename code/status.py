@@ -30,8 +30,12 @@ class Status(pygame.sprite.Sprite):
 
     def unapply(self):
         pass
+    
+    def cleanse(self):
+        self.unapply()
+        self.kill()
 
-    def update_animation(self,dt):
+    def update_animation(self, dt):
         self.frame_index +=6*dt
         self.image = self.frames[int(self.frame_index) % len(self.frames)]
         
@@ -88,7 +92,24 @@ class Poisoned(Status):
         if self.remaining > 0 and cur_tick != self.ticks:
             #print(self.remaining, self.ticks)
             self.ticks = cur_tick
-            self.owner.take_damage(self.dps / 4, type="DoT")
+            self.owner.take_damage(self.dps / 4, type="poison")
+
+class Burning(Status):
+    def __init__(self, duration, dps, game, owner):
+        self.name = self.__class__.__name__
+        self.owner = owner
+        self.offset=pygame.Vector2(0, -50)
+        super().__init__(duration, game)
+        self.dps = dps
+        self.ticks = int(self.remaining) // 250
+    
+    def update(self, dt):
+        super().update(dt)
+        cur_tick = int(self.remaining) // 250
+        if self.remaining > 0 and cur_tick != self.ticks:
+            #print(self.remaining, self.ticks)
+            self.ticks = cur_tick
+            self.owner.take_damage(self.dps / 4, type="burning")
 
 class Slowed(Status):
     def __init__(self, duration, ratio, game, owner):
@@ -182,8 +203,28 @@ class Dark_aura(Aura):
     def __init__(self, duration, game, owner):
         self.name = self.__class__.__name__
         self.owner = owner
-        self.offset=pygame.Vector2(1, 0)
+        self.offset = pygame.Vector2(1, 0)
         super().__init__(duration, game, owner)
         for frame in self.frames:
             frame.set_alpha(80)
 
+class Calibrum_mark(Aura):
+    def __init__(self, duration, game, owner):     
+        self.name = self.__class__.__name__
+        self.owner = owner
+        self.offset = pygame.Vector2(1, 0)
+        
+        super().__init__(duration, game, owner)
+        
+        if not hasattr(self.owner, "calibrum_aura") or self.owner.calibrum_aura is None:
+            self.owner.calibrum_aura = self
+        else:
+            self.owner.calibrum_aura.remaining = max(self.owner.calibrum_aura.remaining, duration)
+            self.kill()
+            return
+        
+    def update(self, dt):
+        super().update(dt)
+    
+    def unapply(self):
+        self.owner.calibrum_aura = None

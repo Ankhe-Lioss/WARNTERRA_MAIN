@@ -45,7 +45,8 @@ class Bow_primary(Player_projectiles):
         self.source = "Bow Primary"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
-        self.rect=self.rect.inflate(-43, -43)
+        self.rect=self.rect.inflate(-60, -60)
+        
     def apply(self, target):
         Slowed(500, 0.2, self.game, target)
 
@@ -89,6 +90,9 @@ class Bazooka_primary_enhanced(Player_projectiles):
         self.source = "Bazooka Secondary"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
+        
+        m = min(self.rect.w, self.rect.h)
+        self.rect.inflate_ip(-m + 10, -m + 10)
     
     def kill(self):
         Bazooka_pe(self.rect.center, self.game, self.game.player.atk)
@@ -126,7 +130,6 @@ class Bazooka_e_skill(Player_projectiles):
         self.tracking = True
         
         m = min(self.rect.w, self.rect.h)
-        
         self.rect.inflate_ip(-m + 10, -m + 10)
 
     def find_nearest_enemy(self):
@@ -187,3 +190,110 @@ class Bazooka_e_skill(Player_projectiles):
     def kill(self):
         Bazooka_e(self.rect.center, self.game, self.game.player.atk)
         super().kill()
+
+def Infernum_wave(pos, dir, game, target):
+    Infernum_ray(pos, dir.rotate(-15), game, target)
+    Infernum_ray(pos, dir.rotate( -5), game, target)
+    Infernum_ray(pos, dir.rotate( 5 ), game, target)
+    Infernum_ray(pos, dir.rotate( 15), game, target)
+
+def Infernum_burgeon(pos, game, target):
+    for i in range(0, 360, 30):
+        Infernum_ray(pos, pygame.Vector2(1, 0).rotate(i), game, target)
+
+class Calibrum_primary(Player_projectiles):
+    def __init__(self, pos, direction, game):
+        self.source = "Lunar_gun Left"
+        self.name = self.__class__.__name__
+        super().__init__(pos, direction, game)
+        self.rect=self.rect.inflate(-20, -20)
+    
+    def apply(self, target):
+        if hasattr(target, "calibrum_aura") and target.calibrum_aura is not None:
+            target.calibrum_aura.cleanse()
+                
+            Infernum_wave(self.rect.center, self.direction, self.game, target)
+            Buff(1000, 0.3, 'spd', self.game, self.game.player)
+
+class Infernum_primary(Player_projectiles):
+    def __init__(self, pos, direction, game):
+        self.source = "Lunar_gun Right"
+        self.name = self.__class__.__name__
+        super().__init__(pos, direction, game)
+        self.rect=self.rect.inflate(-20, -20)
+    
+    def apply(self, target):
+        Infernum_wave(self.rect.center, self.direction, self.game, target)
+        
+class Infernum_ray(Player_projectiles):
+    def __init__(self, pos, direction, game, ignored_target):
+        self.source = "Lunar_gun Right"
+        self.name = self.__class__.__name__
+        super().__init__(pos, direction, game)
+        
+        self.e_piercing = True
+        self.lifetime = 250
+        self.ignored_target = ignored_target
+        self.rect=self.rect.inflate(-20, -20)
+        
+    def bullet_collision(self):
+        collision_sprites = pygame.sprite.spritecollide(self, self.target, False)
+        if collision_sprites:
+            for sprite in collision_sprites:
+                if sprite is self.ignored_target:
+                    continue
+                
+                if not hasattr(self, "e_piercing") or not self.e_piercing:
+                    self.collide(sprite)
+                    self.kill()
+                    break
+                else:
+                    if not hasattr(sprite, "get_shot"):
+                        self.collide(sprite)
+                        sprite.get_shot = [self]
+                    else:
+                        this_sprite_got_shot_by_this_proj = False
+                        for proj in sprite.get_shot:
+                            if proj is self:
+                                this_sprite_got_shot_by_this_proj = True
+                                
+                        if not this_sprite_got_shot_by_this_proj:
+                            self.collide(sprite)
+                            sprite.get_shot.append(self)
+
+class Calibrum_skill(Player_projectiles):
+    def __init__(self, pos, direction, game):
+        self.source = "Lunar_gun Q"
+        self.name = self.__class__.__name__
+        super().__init__(pos, direction, game)
+        self.rect=self.rect.inflate(-20, -20)
+    
+    def apply(self, target):
+        Calibrum_mark(5000, self.game, target)
+
+class Infernum_skill(Player_projectiles):
+    def __init__(self, pos, direction, game):
+        self.source = "Lunar_gun Left"
+        self.name = self.__class__.__name__
+        super().__init__(pos, direction, game)
+        self.rect=self.rect.inflate(-20, -20)
+    
+    def apply(self, target):
+        Calibrum_mark(5000, self.game, target)
+
+class Lunar_ult(Player_projectiles):
+    def __init__(self, pos, direction, game, gun_type):
+        self.source = "Lunar_gun E"
+        self.name = self.__class__.__name__
+        
+        self.gun_type = gun_type
+        super().__init__(pos, direction, game)
+        self.wall_piercing = True
+        
+        self.rect.inflate_ip(-10, -10)
+    
+    def apply(self, target):
+        if self.gun_type == "Calibrum":
+            Calibrum_ult(self.rect.center, self.game, self.game.player.atk)
+        else:
+            Infernum_ult(self.rect.center, self.game, self.game.player.atk)

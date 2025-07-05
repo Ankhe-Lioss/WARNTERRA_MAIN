@@ -45,8 +45,6 @@ class Projectiles(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frame_id) % len(self.frames)]
     
     def collision(self):
-
-
         collisions = pygame.sprite.spritecollide(self, self.game.collision_sprites, False)
 
         for sprite in collisions:

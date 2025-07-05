@@ -16,8 +16,8 @@ skill_stats = {
 #   "Skill" : (cooldown, warmup, cast_time)
 #player
     "Gauntlet_primary" : (1000, 0, 0),
-    "Gauntlet_secondary" : (2000, 0, 100),
-    "Gauntlet_q_skill" : (4800, 0, 200),
+    "Gauntlet_secondary" : (2000, 0, 0),
+    "Gauntlet_q_skill" : (5000, 0, 0),
     "Gauntlet_e_skill" : (14250, 10000, 750),
     
     "Bow_primary" : (1000, 500, 0),
@@ -30,7 +30,15 @@ skill_stats = {
     "Bazooka_primary_enhanced" : (1000, 1000, 0),
     "Bazooka_secondary" : (10000, 2000, 5000),
     "Bazooka_q_skill" : (3000, 1000, 0),
-    "Bazooka_e_skill" : (1000, 4000, 0),
+    "Bazooka_e_skill" : (12000, 4000, 0),
+    
+    "Calibrum_primary" : (1000, 0, 0),
+    "Infernum_primary" : (1000, 0, 0),
+    "Calibrum_skill" : (5500, 0, 500),
+    "Infernum_skill" : (5800, 0, 200),
+    "Lunar_swap" : (500, 500, 500),
+    "Lunar_ult" : (14500, 5000, 500),
+    
 #enemy
     "Poro_stomp" : (1500, 0, 1000),
     "Chogath_stomp" : (2500, 1000, 750),
@@ -71,7 +79,14 @@ player_projectiles = {
     "Bazooka_primary" : (1.5, 900),
     "Bazooka_primary_enhanced" : (0, 850),
     "Bazooka_q_skill" : (0, 800),
-    "Bazooka_e_skill" : (0, 400)
+    "Bazooka_e_skill" : (0, 600),
+    
+    "Calibrum_primary" : (1.2, 1200),
+    "Infernum_primary" : (0.6, 900),
+    "Calibrum_skill" : (3, 700),
+    "Infernum_skill" : (0.2, 1000),
+    "Infernum_ray" : (0.3, 800),
+    "Lunar_ult" : (0, 700)
 }
 
 enemy_projectiles = {
@@ -99,9 +114,16 @@ aoe_stat={
 
     'Bow_explosion' : (1, 8, 500),
     'Bazooka_pe' : (1, 4, 200),
-    'Bazooka_q' : (2.5, 4, 200),
-    'Bazooka_e' : (2, 4, 200),
+    'Bazooka_q' : (2, 4, 200),
+    'Bazooka_e' : (1, 4, 200),
+    'Calibrum_ult' : (2, 12, 600),
+    'Infernum_ult' : (2, 12, 600),
 
 # Environment
     'Barrel_Explode' : (1, 4, 500)
+}
+
+apply_scale = {
+    'Bazooka_e' : 0.6, # Burning dps scale
+    'Barrel_Explode' : (0.1, 0.01), # Normal, boss, scale by max hp 
 }

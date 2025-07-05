@@ -23,7 +23,7 @@ class Skill:
             self.sound.play()
     
     def cast(self):
-        if self.ready and not self.user.stunned and not self.user.silenced:
+        if self.ready and not self.user.stunned and not self.user.silenced and not self.user.channeling and not self.user.meditating:
             self.activate()
         else:
             self.warning()

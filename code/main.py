@@ -256,7 +256,7 @@ class Game:
                 self.pausing = False
                 self.death_menu_audio.stop()
                 self.current_BGM = None
-
+    """
     def weapon_choosing_menu(self):
         if self.have_joystick:
             if self.joystick.get_button(4):
@@ -286,6 +286,7 @@ class Game:
             self.game_state = "in_game"
             self.menu_state = "main"
             self.chosen_weap = Gauntlet
+    """
 if __name__ == "__main__":
     game = Game()
     game.run()

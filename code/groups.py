@@ -2,7 +2,7 @@ import pygame.math
 
 from setting import *
 
-SHOW_HITBOX = True
+SHOW_HITBOX = False
 Show_image=False
 class AllSprites(pygame.sprite.Group):
     def __init__(self):

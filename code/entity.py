@@ -27,14 +27,15 @@ class Entity(pygame.sprite.Sprite):
         self.updstat()
         
         #states
-        self.channeling = False
-        self.forced_moving = False
-        self.stunned = False
-        self.mode = None
-        self.silenced = False
-        self.ghost = False
-        self.rooted = False
-        self.cross_wall = False
+        self.channeling = False       # Cannot use skill (Only 1 at a time)
+        self.forced_moving = False    # Sprinting
+        self.stunned = False          # Cannot move and skill
+        self.mode = None              # Optional (usually for forced moving)
+        self.silenced = False         # Cannot use skill (Debuff status)
+        self.ghost = False            # Go through enemies
+        self.rooted = False           # Cannot move (Debuff status)
+        self.cross_wall = False       # :D
+        self.meditating = False       # Cannot move (Like channeling but also cannot move, only 1 at a time)
         
         # Status
         # Removed
@@ -113,7 +114,7 @@ class Entity(pygame.sprite.Sprite):
         self.kill()
     
     def move(self, dt):
-        if self.channeling or self.stunned or self.rooted:
+        if self.meditating or self.stunned or self.rooted:
             return
         
         self.rect.x += self.direction.x * self.spd * dt
@@ -271,6 +272,8 @@ class Boss(Enemy):
         super().__init__(pos, game)
         
         pygame.mixer.music.fadeout(2000)
+        
+        self.is_boss = True
         
         # Boss specific attributes
         self.phase = 1

@@ -1,5 +1,6 @@
 from setting import *
 import heapq
+import random
 
 class Tracking:
     def __init__(self, game, moving_sprite, target_sprite, cell_size=32):
@@ -63,11 +64,11 @@ class Delay:
             del self
 
 class Flyout_number(pygame.sprite.Sprite): # OR TEXTS
-    
-    def __init__(self, pos, number, color, game, font_size=24):
+    def __init__(self, pos, number, color, game, font_size=30):
         super().__init__(game.all_sprites)
         self.image = pygame.font.Font(None, font_size).render(str(number), True, color)
-        self.image_rect = self.image.get_frect(center=pos)
+        self.image_rect = self.image.get_frect(center=pygame.Vector2(pos) 
+                                               + pygame.Vector2(1, 0).rotate(random.randrange(0, 360) * random.randrange(0, 20)))
         self.lifetime = 0.5
         self.spawn_time = pygame.time.get_ticks()
         self.type = 'top'

@@ -35,9 +35,9 @@ skill_stats = {
     "Calibrum_primary" : (1000, 0, 0),
     "Infernum_primary" : (1000, 0, 0),
     "Calibrum_skill" : (5500, 0, 500),
-    "Infernum_skill" : (5800, 0, 200),
+    "Infernum_skill" : (7800, 0, 200),
     "Lunar_swap" : (500, 500, 500),
-    "Lunar_ult" : (14500, 5000, 500),
+    "Lunar_ult" : (17500, 5000, 500),
     
 #enemy
     "Poro_stomp" : (1500, 0, 1000),
@@ -84,8 +84,8 @@ player_projectiles = {
     "Calibrum_primary" : (1.2, 1200),
     "Infernum_primary" : (0.6, 900),
     "Calibrum_skill" : (3, 700),
-    "Infernum_skill" : (0.2, 1000),
-    "Infernum_ray" : (0.3, 800),
+    "Infernum_skill" : (0.2, 1500),
+    "Infernum_ray" : (0.25, 800),
     "Lunar_ult" : (0, 700)
 }
 
@@ -126,4 +126,5 @@ aoe_stat={
 apply_scale = {
     'Bazooka_e' : 0.6, # Burning dps scale
     'Barrel_Explode' : (0.1, 0.01), # Normal, boss, scale by max hp 
+    'Calibrum_mark' : 0.3          # Bonus dmg when break the mark
 }

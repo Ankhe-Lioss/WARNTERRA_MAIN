@@ -4,6 +4,7 @@ import player_projectiles as pproj
 from status import *
 import aoe
 import aoe_warning as aoew
+from helper import Delay
 
 class Player_skill(Skill):
     def __init__(self, user, game):
@@ -258,14 +259,14 @@ class Infernum_skill(Player_skill): # Q Infernum
     
     def activate(self):
         super().activate()
-        self.user.channeling = True
+        self.user.hesitating = True
+        pproj.Infernum_skill(self.user.rect.center, self.user.facing_dir.rotate(15), self.game)
+        Delay(50, lambda : pproj.Infernum_skill(self.user.rect.center, self.user.facing_dir, self.game), self.game)
+        Delay(100, lambda : pproj.Infernum_skill(self.user.rect.center, self.user.facing_dir.rotate(-15), self.game), self.game)
     
     def deactivate(self):
         super().deactivate()
-        pproj.Infernum_skill(self.user.rect.center, self.user.facing_dir, self.game)
-        pproj.Infernum_skill(self.user.rect.center, self.user.facing_dir.rotate(-20), self.game)
-        pproj.Infernum_skill(self.user.rect.center, self.user.facing_dir.rotate(20), self.game)
-        self.user.channeling = False
+        self.user.hesitating = False
         
 class Lunar_ult(Player_skill): # E
     def __init__(self, user, game):

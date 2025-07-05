@@ -2,6 +2,7 @@ from projectiles import *
 from status import *
 from aoe import *
 from helper import *
+import random
 
 class Gauntlet_primary(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -198,8 +199,9 @@ def Infernum_wave(pos, dir, game, target):
     Infernum_ray(pos, dir.rotate( 15), game, target)
 
 def Infernum_burgeon(pos, game, target):
-    for i in range(0, 360, 30):
-        Infernum_ray(pos, pygame.Vector2(1, 0).rotate(i), game, target)
+    for i in range(0, 360, 45):
+        angle = i + random.randrange(0, 45)
+        Infernum_ray(pos, pygame.Vector2(1, 0).rotate(angle), game, target)
 
 class Calibrum_primary(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -213,6 +215,7 @@ class Calibrum_primary(Player_projectiles):
             target.calibrum_aura.cleanse()
                 
             Infernum_wave(self.rect.center, self.direction, self.game, target)
+            target.take_damage(apply_scale["Calibrum_mark"] * self.game.player.atk)
             Buff(1000, 0.3, 'spd', self.game, self.game.player)
 
 class Infernum_primary(Player_projectiles):
@@ -234,7 +237,7 @@ class Infernum_ray(Player_projectiles):
         self.e_piercing = True
         self.lifetime = 250
         self.ignored_target = ignored_target
-        self.rect=self.rect.inflate(-20, -20)
+        self.rect=self.rect.inflate(0, 0)
         
     def bullet_collision(self):
         collision_sprites = pygame.sprite.spritecollide(self, self.target, False)
@@ -273,13 +276,15 @@ class Calibrum_skill(Player_projectiles):
 
 class Infernum_skill(Player_projectiles):
     def __init__(self, pos, direction, game):
-        self.source = "Lunar_gun Left"
+        self.source = "Lunar_gun Infernum_Q"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
-        self.rect=self.rect.inflate(-20, -20)
+        self.rect=self.rect.inflate(0, 0)
+        self.e_piercing = True
+        self.lifetime = 200
     
     def apply(self, target):
-        Calibrum_mark(5000, self.game, target)
+        Delay(500, lambda : Calibrum_mark(3000, self.game, target), self.game)
 
 class Lunar_ult(Player_projectiles):
     def __init__(self, pos, direction, game, gun_type):

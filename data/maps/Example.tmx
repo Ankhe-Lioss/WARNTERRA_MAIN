@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="266">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="268">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -313,20 +313,6 @@
     <property name="room" type="int" value="0"/>
    </properties>
   </object>
-  <object id="201" name="Karthus" x="1315.34" y="596">
-   <properties>
-    <property name="room" type="int" value="1"/>
-    <property name="wave" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="203" name="Poro" x="1328.67" y="969.336">
-   <properties>
-    <property name="room" type="int" value="1"/>
-    <property name="wave" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
   <object id="231" name="Player" x="660.667" y="387.997">
    <point/>
   </object>
@@ -347,56 +333,56 @@
   <object id="256" name="Weapon" type="Lunar_gun" x="735" y="197">
    <point/>
   </object>
-  <object id="257" name="Maokai" x="1004" y="936">
+  <object id="257" name="Maokai" x="1132" y="482">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
-  <object id="258" name="Maokai" x="1334.67" y="818.667">
+  <object id="258" name="Maokai" x="1102.67" y="218.667">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
-  <object id="259" name="Maokai" x="1205.33" y="1096">
+  <object id="259" name="Maokai" x="1371.33" y="744">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
-  <object id="260" name="Maokai" x="620" y="849.334">
+  <object id="260" name="Maokai" x="1036" y="805.334">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
-  <object id="261" name="Maokai" x="877.333" y="744">
+  <object id="261" name="Maokai" x="1441.33" y="472">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
-  <object id="262" name="Maokai" x="210.667" y="1248">
+  <object id="262" name="Maokai" x="1070.67" y="1054">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
-  <object id="263" name="Maokai" x="301.333" y="822.667">
+  <object id="263" name="Maokai" x="1365.33" y="1332.67">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>
-  <object id="264" name="Maokai" x="461.334" y="1058.67">
+  <object id="264" name="Maokai" x="1367.33" y="1012.67">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="0"/>
@@ -407,6 +393,20 @@
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="266" name="Maokai" x="1340" y="250">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="267" name="Maokai" x="1068" y="1320">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
    </properties>
    <point/>
   </object>

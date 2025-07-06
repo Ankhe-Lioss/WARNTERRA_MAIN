@@ -9,6 +9,8 @@ from background import *
 from UI import UI
 from preload import *
 
+SHOW_DETAIL_FPS = False
+
 # THIS FKING MAIN GAME SIHFHFHFHFHFHFHFHF
 class Game:
     def __init__(self):
@@ -49,7 +51,7 @@ class Game:
         self.level -= 1 
 
         #fps cal
-        self.font = pygame.font.Font(None, 20)  # You can use your game font here
+        self.font = pygame.font.Font("images/font/PressStart2P.ttf", 12)  # You can use your game font here
         self.lowest_fps = float('inf')
         self.fps_timer = 0
         self.fps_interval = 5
@@ -57,6 +59,8 @@ class Game:
         self.total_fps = 0
         self.frame_count = 0
         self.average_fps = 0
+        self.avg1s_fps = 0
+        self.last_timer = 0
         
     def restart(self):
         self.all_sprites = AllSprites()
@@ -154,6 +158,10 @@ class Game:
     def show_fps(self,dt):
         # --- FPS Monitoring ---
         current_fps = self.clock.get_fps()
+        
+        if self.avg1s_fps == 0:
+            self.avg1s_fps = current_fps
+            
         if current_fps > 0 and current_fps < self.lowest_fps:
             self.lowest_fps = current_fps
 
@@ -170,9 +178,16 @@ class Game:
             self.total_fps = 0
             self.frame_count = 0
             self.fps_timer = 0
+        
+        if int(self.fps_timer) != self.last_timer:
+            self.avg1s_fps = current_fps
+            self.last_timer = int(self.fps_timer)
 
         # --- Draw FPS info on screen ---
-        fps_text = self.font.render(f"{current_fps:.1f} Lowest(5s): {self.displayed_lowest_fps:.1f} Avg(5s): {self.average_fps:.1f}", True, 'red')
+        if SHOW_DETAIL_FPS:
+            fps_text = self.font.render(f"{current_fps:.1f} Lowest(5s): {self.displayed_lowest_fps:.1f} Avg(5s): {self.average_fps:.1f}", True, (255, 255, 100))
+        else:
+            fps_text = self.font.render(f"FPS: {self.avg1s_fps:.0f}", True, (255, 255, 100))
         self.display_surface.blit(fps_text, (10, 10))
 
     def draw_menu(self,dt):
@@ -208,7 +223,7 @@ class Game:
                     pygame.mixer.stop()
 
     def start_menu(self):
-        if not pygame.mixer.get_busy() or self.current_BGM != "start_menu":
+        if not pygame.mixer.get_busy() and self.current_BGM != "start_menu":
             self.start_menu_audio.play(-1)
             self.current_BGM = "start_menu"
             

@@ -117,7 +117,7 @@ class Announcement(pygame.sprite.Sprite):
             self.kill()
 
 class Description:
-    def __init__(self, *parts, font_size=18, default_color=(255, 255, 255)):
+    def __init__(self, *parts, font_size=24, default_color=(255, 255, 255)):
         self.font = pygame.font.Font("images/font/UncialAntiqua-Regular.ttf", font_size)
         self.parts = parts
         self.default_color = default_color

@@ -94,16 +94,16 @@ class Entity(pygame.sprite.Sprite):
             Flyout_number(self.rect.center, int(delta), (255, 50, 50), self.game)
         
         if type == "poison":
-            Flyout_number(self.rect.center, int(delta), (50, 195, 50), self.game, font_size=24)
+            Flyout_number(self.rect.center, int(delta), (50, 195, 50), self.game, font_size=20)
         
         if type == "burning":
-            Flyout_number(self.rect.center, int(delta), (255, 165, 50), self.game, font_size=24)
+            Flyout_number(self.rect.center, int(delta), (255, 165, 50), self.game, font_size=20)
         
     def heal(self, healing, type="normal"):
         if type == "normal":
             Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game)
         elif type == "overtime":
-            Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game, font_size=24)
+            Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game, font_size=20)
         
         if isinstance(self, Boss) and self.phase == 2:
             self.hp = min(self.hp + healing, self.maxhp / 2)

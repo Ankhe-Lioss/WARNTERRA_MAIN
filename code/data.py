@@ -16,7 +16,7 @@ skill_stats = {
 #   "Skill" : (cooldown, warmup, cast_time)
 #player
     "Gauntlet_primary" : (1000, 0, 0),
-    "Gauntlet_secondary" : (2000, 0, 0),
+    "Gauntlet_secondary" : (1900, 0, 100),
     "Gauntlet_q_skill" : (5000, 0, 0),
     "Gauntlet_e_skill" : (14250, 10000, 750),
     

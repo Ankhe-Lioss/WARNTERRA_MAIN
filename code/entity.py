@@ -248,15 +248,7 @@ class Enemy(Entity):
                 if self.skills[skill].ready:
                     self.skills[skill].cast()
     
-    def set_tracker(self):
-        self.tracker = Tracking(self.game, self, self.game.player)
-        self.path = self.tracker.get_path()
-        self.path_index = 1
-    
     def update(self, dt):
-        if self.tracking and hasattr(self.game, 'player') and self.game.player.alive():
-            self.set_tracker()
-        
         if self.death_time==0:
             self.cal_dis()
             for skill_name in self.skills:

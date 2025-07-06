@@ -120,6 +120,7 @@ class Game:
             
             # REPEATING TESTS
             #print(self.spawn_numb)
+            #print(len(self.enemy_projectiles), len(self.player_projectiles))
             
 
             # Game State

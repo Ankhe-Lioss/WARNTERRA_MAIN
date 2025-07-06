@@ -197,11 +197,13 @@ def Infernum_wave(pos, dir, game, target):
     Infernum_ray(pos, dir.rotate( -5), game, target)
     Infernum_ray(pos, dir.rotate( 5 ), game, target)
     Infernum_ray(pos, dir.rotate( 15), game, target)
+    game.projectiles_audio["Infernum_beam"].play()
 
 def Infernum_burgeon(pos, game, target):
     for i in range(0, 360, 45):
         angle = i + random.randrange(0, 45)
         Infernum_ray(pos, pygame.Vector2(1, 0).rotate(angle), game, target)
+    game.projectiles_audio["Infernum_beam"].play()
 
 class Calibrum_primary(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -285,6 +287,7 @@ class Infernum_skill(Player_projectiles):
     
     def apply(self, target):
         Delay(500, lambda : Calibrum_mark(3000, self.game, target), self.game)
+        Delay(500, lambda : (self.game.projectiles_audio["Calibrum_primary"].play()), self.game)
 
 class Lunar_ult(Player_projectiles):
     def __init__(self, pos, direction, game, gun_type):

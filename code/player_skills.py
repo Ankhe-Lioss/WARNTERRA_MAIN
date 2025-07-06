@@ -233,6 +233,7 @@ class Lunar_swap(Player_skill): # R
             self.user.weap.gun_type = "Calibrum"
             self.user.weap.primary = Calibrum_primary(self.user, self.game)
             self.user.weap.q_skill = self.user.weap.q_skills[self.user.weap.gun_type]
+        self.game.skill_audio[self.user.weap.gun_type].play()
     
     def deactivate(self):
         super().deactivate()
@@ -246,11 +247,13 @@ class Calibrum_skill(Player_skill): # Q Calibrum
     def activate(self):
         super().activate()
         self.user.meditating = True
+        self.game.skill_audio[self.name + "_activate"].play()
     
     def deactivate(self):
         super().deactivate()
         pproj.Calibrum_skill(self.user.rect.center, self.user.facing_dir, self.game)
         self.user.meditating = False
+        self.game.skill_audio[self.name + "_deactivate"].play()
 
 class Infernum_skill(Player_skill): # Q Infernum
     def __init__(self, user, game):

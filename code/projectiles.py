@@ -27,8 +27,8 @@ class Projectiles(pygame.sprite.Sprite):
         self.rect = self.image.get_frect(center=pos)
         
         # Audio
-        if os.path.exists(os.path.join('audio', 'projectiles', f'{self.name}.ogg')):
-            self.sound = pygame.mixer.Sound(os.path.join('audio', 'projectiles', f'{self.name}.ogg'))
+        if self.name in game.projectiles_audio:
+            self.sound = game.projectiles_audio[self.name]
 
     def _load_images(self):
         folder, folder1 = self.source.split(" ")

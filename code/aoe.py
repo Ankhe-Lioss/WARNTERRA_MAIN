@@ -134,6 +134,7 @@ class Calibrum_ult(Area_of_effect):
     
     def apply(self, target):
         Delay(1000, lambda : (Calibrum_mark(5000, self.game, target)), self.game)
+        Delay(1000, lambda : (self.game.projectiles_audio["Calibrum_primary"].play()), self.game)
 
 class Infernum_ult(Area_of_effect):
     def __init__(self, pos, game,user_atk):

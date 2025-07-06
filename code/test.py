@@ -1,9 +1,7 @@
-class cla:
-    def cc(self):
-        print(self.__class__.__name__)
+import pygame
+import os
 
-a = cla()
-a.cc()
+pygame.mixer.init()
 
-
-
+sound = pygame.mixer.music.load(os.path.join("audio", "test_folder", "0015.ogg"))
+sound.play()

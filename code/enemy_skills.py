@@ -29,12 +29,10 @@ class Poro_stomp(Skill):
         super().activate()
         aoe.Poro_Stomp(self.user.rect.center,self.user.game,self.user.atk)
         self.user.state = 'Attacking'
-        self.user.channeling = True
 
     def deactivate(self):
         super().deactivate()
         self.user.state = 'Walking'
-        self.user.channeling = False
 
 class Chogath_stomp(Skill):
     def __init__(self, user, game):
@@ -45,12 +43,10 @@ class Chogath_stomp(Skill):
         super().activate()
         aoew.Spawn_rupture(self.user.player.rect.center, self.user.game, self.user.atk)
         self.user.state = 'Attacking'
-        self.user.channeling = True
 
     def deactivate(self):
         super().deactivate()
         self.user.state = 'Walking'
-        self.user.channeling = False
 
 class Veigar_primary(Skill):
     def __init__(self, user, game):
@@ -118,12 +114,10 @@ class Veigar_aoe(Skill):
             aoew.Spawn_darkmatter(pos, self.game, self.user.atk)
 
         self.user.state = 'Attacking'
-        self.user.channeling = True
 
     def deactivate(self):
         super().deactivate()
         self.user.state = 'Walking'
-        self.user.channeling = False
 
 class Lulu_primary(Skill):
     def __init__(self, user, game):
@@ -169,12 +163,10 @@ class Veigar_cage(Skill):
         # Example: ring around player with outer radius 120, inner radius 80
         self.cage = eproj.Veigar_Cage(self.user.player.rect.center, outer_radius=240, inner_radius=220, game=self.user.game)
         self.user.state = 'Attacking'
-        self.user.channeling = True
 
     def deactivate(self):
         super().deactivate()
         self.user.state = 'Walking'
-        self.user.channeling = False
         self.cage.kill()
 
 class Summon_healing_buff(Skill):

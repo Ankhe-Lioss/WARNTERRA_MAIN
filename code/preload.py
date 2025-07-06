@@ -179,3 +179,46 @@ def preload_all_image(game):
             if frames:
                 animated_object_frames[obj_name] = frames
     game.animated_object_frames = animated_object_frames
+
+def preload_all_sound(game):
+    
+# Projectiles:
+    proj_folder = os.path.join("audio", "projectiles")
+    projectiles_audio = {}
+    if os.path.exists(proj_folder):
+        for name in os.listdir(proj_folder):
+            #print(name)
+            file_path = os.path.join(proj_folder, name)
+            
+            if os.path.exists(file_path) and file_path.endswith(".ogg"):
+                audio = pygame.mixer.Sound(file_path)
+                
+                if name.startswith("Infernum") or name.startswith("Calibrum"):
+                    audio.set_volume(0.15)
+                if name.startswith("Lunar"):
+                    audio.set_volume(0.6)
+                
+                projectiles_audio[os.path.splitext(name)[0]] = audio
+                
+    game.projectiles_audio = projectiles_audio
+
+# Skills
+    skill_folder = os.path.join("audio", "skills")
+    skill_audio = {}
+    if os.path.exists(skill_folder):
+        for name in os.listdir(skill_folder):
+            #print(name)
+            file_path = os.path.join(skill_folder, name)
+            
+            if os.path.exists(file_path) and file_path.endswith(".ogg"):
+                #print(file_path)
+                audio = pygame.mixer.Sound(file_path)
+                
+                if name.startswith("Infernum") or name.startswith("Calibrum"):
+                    audio.set_volume(0.15)
+                if name.startswith("Lunar"):
+                    audio.set_volume(0.6)
+                    
+                skill_audio[os.path.splitext(name)[0]] = audio
+                
+    game.skill_audio = skill_audio

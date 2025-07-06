@@ -2,7 +2,7 @@ import pygame.math
 
 from setting import *
 
-SHOW_HITBOX = True
+SHOW_HITBOX = False
 Show_image=False
 class AllSprites(pygame.sprite.Group):
     def __init__(self):
@@ -41,7 +41,14 @@ class AllSprites(pygame.sprite.Group):
         for layer in [ground_sprites, floor_sprites, object_sprites, top_sprites]:
             for sprite in sorted(layer, key=lambda sprite: sprite.image_rect.centery):
                 if hasattr(sprite,"name") and   sprite.name=="Player" and hasattr(sprite, 'weap'):
-                    self.display_surface.blit(sprite.weap.image, sprite.weap.image_rect.topleft + self.offset)
+                    if sprite.weap.image_rect.centery >= sprite.image_rect.centery:
+                        self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)
+                        self.display_surface.blit(sprite.weap.image, sprite.weap.image_rect.topleft + self.offset)
+                    else:
+
+                        self.display_surface.blit(sprite.weap.image, sprite.weap.image_rect.topleft + self.offset)
+                        self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)
+                    continue
                 self.display_surface.blit(sprite.image, sprite.image_rect.topleft + self.offset)
 
                 if Show_image and not hasattr(sprite, 'type') :

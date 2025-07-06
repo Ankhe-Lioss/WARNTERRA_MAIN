@@ -27,14 +27,15 @@ class Entity(pygame.sprite.Sprite):
         self.updstat()
         
         #states
-        self.channeling = False
-        self.forced_moving = False
-        self.stunned = False
-        self.mode = None
-        self.silenced = False
-        self.ghost = False
-        self.rooted = False
-        self.cross_wall = False
+        self.channeling = False       # Cannot use skill (Only 1 at a time)
+        self.forced_moving = False    # Sprinting
+        self.stunned = False          # Cannot move and skill
+        self.mode = None              # Optional (usually for forced moving)
+        self.silenced = False         # Cannot use skill (Debuff status)
+        self.ghost = False            # Go through enemies
+        self.rooted = False           # Cannot move (Debuff status)
+        self.cross_wall = False       # :D
+        self.meditating = False       # Cannot move (Like channeling but also cannot move, only 1 at a time)
         
         # Status
         # Removed
@@ -93,16 +94,16 @@ class Entity(pygame.sprite.Sprite):
             Flyout_number(self.rect.center, int(delta), (255, 50, 50), self.game)
         
         if type == "poison":
-            Flyout_number(self.rect.center, int(delta), (50, 195, 50), self.game, font_size=20)
+            Flyout_number(self.rect.center, int(delta), (50, 195, 50), self.game, font_size=24)
         
         if type == "burning":
-            Flyout_number(self.rect.center, int(delta), (255, 165, 50), self.game, font_size=20)
+            Flyout_number(self.rect.center, int(delta), (255, 165, 50), self.game, font_size=24)
         
     def heal(self, healing, type="normal"):
         if type == "normal":
             Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game)
         elif type == "overtime":
-            Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game, font_size=20)
+            Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game, font_size=24)
         
         if isinstance(self, Boss) and self.phase == 2:
             self.hp = min(self.hp + healing, self.maxhp / 2)
@@ -113,7 +114,7 @@ class Entity(pygame.sprite.Sprite):
         self.kill()
     
     def move(self, dt):
-        if self.channeling or self.stunned or self.rooted:
+        if self.meditating or self.stunned or self.rooted:
             return
         
         self.rect.x += self.direction.x * self.spd * dt
@@ -247,15 +248,7 @@ class Enemy(Entity):
                 if self.skills[skill].ready:
                     self.skills[skill].cast()
     
-    def set_tracker(self):
-        self.tracker = Tracking(self.game, self, self.game.player)
-        self.path = self.tracker.get_path()
-        self.path_index = 1
-    
     def update(self, dt):
-        if self.tracking and hasattr(self.game, 'player') and self.game.player.alive():
-            self.set_tracker()
-        
         if self.death_time==0:
             self.cal_dis()
             for skill_name in self.skills:
@@ -271,6 +264,8 @@ class Boss(Enemy):
         super().__init__(pos, game)
         
         pygame.mixer.music.fadeout(2000)
+        
+        self.is_boss = True
         
         # Boss specific attributes
         self.phase = 1

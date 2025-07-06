@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/Example.tmx",
+    "activeFile": "maps/Level3.tmx",
     "expandedProjectPaths": [
+        "tilesets",
         ".",
-        "maps",
-        "tilesets"
+        "maps"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -116,11 +116,14 @@
             "scaleInEditor": 1
         },
         "maps/Example.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 11,
+            "expandedObjectLayers": [
+                14
+            ],
+            "scale": 0.25,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 749.9999999999999,
-                "y": 1212.6666666666665
+                "x": 1210,
+                "y": 586
             }
         },
         "maps/Floor and wall.tsx": {
@@ -130,16 +133,16 @@
         },
         "maps/Level1.tmx": {
             "expandedObjectLayers": [
-                8,
-                13,
-                7,
-                2,
+                6,
                 5,
+                2,
+                7,
                 11,
-                6
+                13,
+                8
             ],
             "scale": 0.75,
-            "selectedLayer": 11,
+            "selectedLayer": 10,
             "viewCenter": {
                 "x": 950.6666666666666,
                 "y": 2744.6666666666665
@@ -147,20 +150,34 @@
         },
         "maps/Level2.tmx": {
             "expandedObjectLayers": [
-                5,
-                2,
-                11,
-                7,
-                10,
-                13,
                 6,
+                5,
+                10,
+                14,
+                2,
+                7,
+                11,
+                13,
                 8
             ],
-            "scale": 1,
-            "selectedLayer": 11,
+            "scale": 0.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 953,
-                "y": 2618.5
+                "x": 1111,
+                "y": 1831
+            }
+        },
+        "maps/Level3.tmx": {
+            "expandedObjectLayers": [
+                5,
+                10,
+                13
+            ],
+            "scale": 0.5,
+            "selectedLayer": 10,
+            "viewCenter": {
+                "x": 959,
+                "y": 2487
             }
         },
         "maps/normal_level_model.tmx": {
@@ -234,30 +251,29 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "D:/Git/WARNTERRA_MAIN/data/graphics/object/None_Animated/Collision",
+    "last.imagePath": "D:/Git/WARNTERRA_MAIN/data/graphics/object/Animated/Animated_collision",
     "map.height": 10,
     "map.lastUsedFormat": "tmx",
     "map.width": 10,
     "openFiles": [
         "maps/Level1.tmx",
-        "maps/normal_level_model.tmx",
-        "maps/Example.tmx",
-        "tilesets/Non_animated_collision.tsx"
+        "maps/Level3.tmx",
+        "maps/Level2.tmx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
         "maps/Level1.tmx",
-        "maps/normal_level_model.tmx",
-        "tilesets/Non_animated_collision.tsx",
-        "maps/Example.tmx",
-        "tilesets/Animated_non_collision.tsx",
         "maps/Level2.tmx",
-        "tilesets/Door.tsx",
+        "maps/Level3.tmx",
+        "maps/Example.tmx",
         "tilesets/Animated_collision.tsx",
+        "tilesets/Non_animated_collision.tsx",
+        "maps/normal_level_model.tmx",
+        "tilesets/Animated_non_collision.tsx",
+        "tilesets/Door.tsx",
         "tilesets/Non_animated_non_collision.tsx",
         "tilesets/acid.tsx",
-        "tilesets/Animated_floor.tsx",
-        "D:/Git/WARNTERRA_MAIN/old_data/maps/Level1.tmx"
+        "tilesets/Animated_floor.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

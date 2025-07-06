@@ -4,6 +4,7 @@ import player_projectiles as pproj
 from status import *
 import aoe
 import aoe_warning as aoew
+from helper import Delay
 
 class Player_skill(Skill):
     def __init__(self, user, game):
@@ -40,7 +41,7 @@ class Gauntlet_e_skill(Player_skill):
     
     def activate(self):
         super().activate()        
-        self.user.channeling = True
+        self.user.meditating = True
         self.pos, self.dir = self.user.rect.copy().center, self.user.facing_dir.copy()
         self.fake = pproj.Gauntlet_e_skill(self.pos, self.dir, self.game)
         self.fake.bullet_collision = lambda: None
@@ -50,7 +51,7 @@ class Gauntlet_e_skill(Player_skill):
         super().deactivate()
         self.fake.kill()
         pproj.Gauntlet_e_skill(self.pos, self.dir, self.game)
-        self.user.channeling = False
+        self.user.meditating = False
 
 class Gauntlet_secondary(Player_skill):
     def __init__(self, user, game):
@@ -198,7 +199,91 @@ class Bazooka_e_skill(Player_skill):
         pproj.Bazooka_e_skill(self.user.rect.center, self.user.facing_dir, self.game)
         
 # Lunar gun
+class Calibrum_primary(Player_skill): # L Calibrum
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        pproj.Calibrum_primary(self.user.rect.center, self.user.facing_dir, self.game)
 
+class Infernum_primary(Player_skill): # L Infernum
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        pproj.Infernum_primary(self.user.rect.center, self.user.facing_dir, self.game)
+
+class Lunar_swap(Player_skill): # R
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        self.user.channeling = True
+        if self.user.weap.gun_type == "Calibrum":
+            self.user.weap.gun_type = "Infernum"
+            self.user.weap.primary = Infernum_primary(self.user, self.game)
+            self.user.weap.q_skill = self.user.weap.q_skills[self.user.weap.gun_type]
+        else:
+            self.user.weap.gun_type = "Calibrum"
+            self.user.weap.primary = Calibrum_primary(self.user, self.game)
+            self.user.weap.q_skill = self.user.weap.q_skills[self.user.weap.gun_type]
+        self.game.skill_audio[self.user.weap.gun_type].play()
+    
+    def deactivate(self):
+        super().deactivate()
+        self.user.channeling = False   
+
+class Calibrum_skill(Player_skill): # Q Calibrum
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        self.user.meditating = True
+        self.game.skill_audio[self.name + "_activate"].play()
+    
+    def deactivate(self):
+        super().deactivate()
+        pproj.Calibrum_skill(self.user.rect.center, self.user.facing_dir, self.game)
+        self.user.meditating = False
+        self.game.skill_audio[self.name + "_deactivate"].play()
+
+class Infernum_skill(Player_skill): # Q Infernum
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        self.user.hesitating = True
+        pproj.Infernum_skill(self.user.rect.center, self.user.facing_dir.rotate(15), self.game)
+        Delay(50, lambda : pproj.Infernum_skill(self.user.rect.center, self.user.facing_dir, self.game), self.game)
+        Delay(100, lambda : pproj.Infernum_skill(self.user.rect.center, self.user.facing_dir.rotate(-15), self.game), self.game)
+    
+    def deactivate(self):
+        super().deactivate()
+        self.user.hesitating = False
+        
+class Lunar_ult(Player_skill): # E
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+    
+    def activate(self):
+        super().activate()
+        self.user.meditating = True
+    
+    def deactivate(self):
+        super().deactivate()
+        self.user.meditating = False
+        pproj.Lunar_ult(self.user.rect.center, self.user.facing_dir, self.game, self.user.weap.gun_type)
 
 # Crossbow
 

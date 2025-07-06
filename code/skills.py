@@ -15,15 +15,15 @@ class Skill:
         self.remaining = self.warmup
         
         # Audio
-        if os.path.exists(os.path.join('audio', 'skills', f'{self.name}.ogg')):
-            self.sound = pygame.mixer.Sound(os.path.join('audio', 'skills', f'{self.name}.ogg'))
+        if self.name in game.skill_audio:
+            self.sound = game.skill_audio[self.name]
     
     def play_sound(self):
         if hasattr(self, 'sound'):
             self.sound.play()
     
     def cast(self):
-        if self.ready and not self.user.stunned and not self.user.silenced:
+        if self.ready and not self.user.stunned and not self.user.silenced and not self.user.channeling and not self.user.meditating:
             self.activate()
         else:
             self.warning()

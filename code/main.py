@@ -22,6 +22,7 @@ class Game:
         
         # Captiona
         preload_all_image(self)
+        preload_all_sound(self)
         pygame.display.set_caption("Warnterra")
         pygame.display.set_icon(self.icon)
         
@@ -120,6 +121,7 @@ class Game:
             
             # REPEATING TESTS
             #print(self.spawn_numb)
+            #print(len(self.enemy_projectiles), len(self.player_projectiles))
             
 
             # Game State
@@ -132,6 +134,16 @@ class Game:
             self.draw_menu(dt)
             # CURSOR
             check_cursor(self)
+            
+            
+            # REPEATING TESTS FOR UPPER
+            """
+            from helper import Description
+            self.display_surface.blit(
+                Description(("Con cac ", (255, 255, 0)), ("to ", (255, 0, 255)), ("vcl ra", (0, 255, 255)), font_size=40).image,
+                (0, 500)
+                )
+            """
             
             # UPDATE (LAST)
             # UPDATE (LAST)
@@ -196,7 +208,10 @@ class Game:
                     pygame.mixer.stop()
 
     def start_menu(self):
-        self.start_menu_audio.play(-1)
+        if not pygame.mixer.get_busy() or self.current_BGM != "start_menu":
+            self.start_menu_audio.play(-1)
+            self.current_BGM = "start_menu"
+            
         if self.menu_state == 'main' :
             game.display_surface.blit(self.title_img, (295, 8))
             if self.start_button.draw(self.display_surface):
@@ -256,7 +271,7 @@ class Game:
                 self.pausing = False
                 self.death_menu_audio.stop()
                 self.current_BGM = None
-
+    """
     def weapon_choosing_menu(self):
         if self.have_joystick:
             if self.joystick.get_button(4):
@@ -286,6 +301,7 @@ class Game:
             self.game_state = "in_game"
             self.menu_state = "main"
             self.chosen_weap = Gauntlet
+    """
 if __name__ == "__main__":
     game = Game()
     game.run()

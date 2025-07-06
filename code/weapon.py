@@ -107,19 +107,22 @@ class Weap(pygame.sprite.Sprite):
 
             # 4. Blit to the target surface (e.g., the screen)
             self.game.display_surface.blit(circle_surf, blit_pos)
+           
+    def update_skills(self, dt):
+        self.primary.update(dt)
+        self.secondary.update(dt)
+        self.q_skill.update(dt)
+        self.e_skill.update(dt)
+     
     def update(self, dt):
         self.update_pos()
-
-
         if self.game.player.weap is self:
             self.visible=True
             self.draw_skill_bar()
         else:
             self.visible=False
-        self.primary.update(dt)
-        self.secondary.update(dt)
-        self.q_skill.update(dt)
-        self.e_skill.update(dt)
+        
+        self.update_skills(dt)
 
 class Gauntlet(Weap):
     def __init__(self, game):
@@ -131,7 +134,6 @@ class Gauntlet(Weap):
         self.q_skill = Gauntlet_q_skill(self.player, self.game)
         self.e_skill = Gauntlet_e_skill(self.player, self.game)
         self.secondary = Gauntlet_secondary(self.player, self.game)
-
 
 class Bow(Weap):
     def __init__(self, game):
@@ -155,9 +157,36 @@ class Bazooka(Weap):
         self.e_skill = Bazooka_e_skill(self.player, self.game)
         self.secondary = Bazooka_secondary(self.player, self.game)
 
+class Lunar_gun(Weap):
+    def __init__(self, game):
+        self.name = self.__class__.__name__
+        super().__init__(game)
+
+        self.gun_types = ["Calibrum", "Infernum"]
+        self.gun_type = "Calibrum"
+
+        # Import skills
+        self.q_skills = {
+            "Calibrum" : Calibrum_skill(self.player, self.game),
+            "Infernum" : Infernum_skill(self.player, self.game)
+        } 
+        
+        self.primary = Calibrum_primary(self.player, self.game)
+        self.secondary = Lunar_swap(self.player, self.game)
+        self.q_skill = self.q_skills[self.gun_type]
+        self.e_skill = Lunar_ult(self.player, self.game)
+    
+    def update_skills(self, dt):
+        self.primary.update(dt)
+        self.secondary.update(dt)
+        self.e_skill.update(dt)
+        
+        for gun_type in self.gun_types:
+            self.q_skills[gun_type].update(dt)
 
 Weapon_Dict = {
     "Bow": Bow,
     "Gauntlet": Gauntlet,
-    "Bazooka" : Bazooka
+    "Bazooka" : Bazooka,
+    "Lunar_gun" : Lunar_gun
 }

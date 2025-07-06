@@ -48,7 +48,8 @@ def load_menu(game):
 	#weapon menu
 	game.bow_button=Button(83, 453, game.bow_button_img, 0.25)
 	game.gauntlet_button=Button(869,414, game.gauntlet_button_img, 0.25)
-class Button():
+ 
+class Button:
 	def __init__(self, x, y, image, scale):
 		width = image.get_width()
 		height = image.get_height()
@@ -90,3 +91,10 @@ class Button():
 		surface.blit(self.image, (draw_x, draw_y))
 
 		return action
+
+class Interactive_icon:
+	def __init__(self, x, y, icon):
+		self.image = icon
+		self.rect = self.image.get_rect()
+		self.rect.topleft = (x, y)
+		self.clicked = False

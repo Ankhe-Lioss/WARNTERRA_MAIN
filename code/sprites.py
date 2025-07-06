@@ -14,7 +14,9 @@ animated_image_offset={#name = (inflate,offset)
 'Pillar_Torch':((-32,-70),(0,35)),
 'Wooden_Door':((0,-32),(0,-16)),
 'Stone_Door':((0,-32),(0,-16)),
-'Armored_Table':((0,-32),(0,8))
+'Armored_Table':((0,-32),(0,8)),
+'Shrine':((0,-52),(0,26)),
+'Well':((0,-42),(0,21))
 }
 class Ground(pygame.sprite.Sprite):
     """ Background map """

@@ -11,7 +11,7 @@ def setlevel(game):
     game.room = -1
 
     # Load TMX map
-    game.map = load_pygame(os.path.join('data', 'maps', 'Level1.tmx'))
+    game.map = load_pygame(os.path.join('data', 'maps', 'Level2.tmx'))
 
     # Initialize structures
     game.spawnlist = {}

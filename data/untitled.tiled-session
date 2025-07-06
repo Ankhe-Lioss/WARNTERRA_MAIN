@@ -131,36 +131,36 @@
         "maps/Level1.tmx": {
             "expandedObjectLayers": [
                 5,
-                11,
+                8,
                 13,
-                2,
-                7,
                 6,
-                8
+                11,
+                7,
+                2
             ],
             "scale": 0.75,
-            "selectedLayer": 12,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 951.3333333333333,
-                "y": 2088.6666666666665
+                "x": 951.3333333333334,
+                "y": 940.6666666666667
             }
         },
         "maps/Level2.tmx": {
             "expandedObjectLayers": [
                 5,
-                2,
-                11,
-                7,
-                10,
+                8,
                 13,
                 6,
-                8
+                11,
+                10,
+                7,
+                2
             ],
-            "scale": 1,
-            "selectedLayer": 11,
+            "scale": 0.5,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 953,
-                "y": 2618.5
+                "x": 783,
+                "y": 1423
             }
         },
         "maps/normal_level_model.tmx": {
@@ -234,7 +234,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "D:/Git/WARNTERRA_MAIN/data/graphics/object/None_Animated/Collision",
+    "last.imagePath": "D:/Git/WARNTERRA_MAIN/data/graphics/object/Animated/Animated_collision",
     "map.height": 10,
     "map.lastUsedFormat": "tmx",
     "map.width": 10,

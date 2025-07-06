@@ -12,9 +12,9 @@ class Veigar(Boss):
         self.skills = {
             'primary': Veigar_primary(self, game),
             'secondary': Veigar_secondary(self, game),
-            'heal1' : Summon_healing_buff(self, (200, 3500), game),
-            'heal2' : Summon_healing_buff(self, (1350, 3500), game),
-            'speed' : Summon_speed_buff(self, (780, 3380), game)
+            'heal1' : Summon_healing_buff(self, (250, 600), game),
+            'heal2' : Summon_healing_buff(self, (250, 900), game),
+            'speed' : Summon_speed_buff(self, (250, 1200), game)
         }
         self.mode = 1
         self.phase = 1
@@ -42,6 +42,11 @@ class Veigar(Boss):
     def update(self, dt):
         #print(self.skills['speed'].remaining)
         super().update(dt)
+        
+        
+        #print(self.channeling, self.forced_moving, self.state, self.direction)
+        
+        
         self.phase_remaining -= dt * 1000
         if self.mode == 1 and self.phase_remaining <= 0: # 1 to 2
             self.mode = 2

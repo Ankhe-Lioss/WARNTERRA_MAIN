@@ -22,6 +22,7 @@ class Game:
         
         # Captiona
         preload_all_image(self)
+        preload_all_sound(self)
         pygame.display.set_caption("Warnterra")
         pygame.display.set_icon(self.icon)
         
@@ -134,6 +135,16 @@ class Game:
             # CURSOR
             check_cursor(self)
             
+            
+            # REPEATING TESTS FOR UPPER
+            """
+            from helper import Description
+            self.display_surface.blit(
+                Description(("Con cac ", (255, 255, 0)), ("to ", (255, 0, 255)), ("vcl ra", (0, 255, 255)), font_size=40).image,
+                (0, 500)
+                )
+            """
+            
             # UPDATE (LAST)
             # UPDATE (LAST)
             self.show_fps(dt)
@@ -197,7 +208,10 @@ class Game:
                     pygame.mixer.stop()
 
     def start_menu(self):
-        self.start_menu_audio.play(-1)
+        if not pygame.mixer.get_busy() or self.current_BGM != "start_menu":
+            self.start_menu_audio.play(-1)
+            self.current_BGM = "start_menu"
+            
         if self.menu_state == 'main' :
             game.display_surface.blit(self.title_img, (295, 8))
             if self.start_button.draw(self.display_surface):

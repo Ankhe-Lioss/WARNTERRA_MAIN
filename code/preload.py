@@ -179,3 +179,18 @@ def preload_all_image(game):
             if frames:
                 animated_object_frames[obj_name] = frames
     game.animated_object_frames = animated_object_frames
+
+def preload_all_sound(game):
+    # projectiles:
+    proj_folder = os.path.join("audio", "projectiles")
+    projectiles_audio = {}
+    if os.path.exists(proj_folder):
+        for name in os.listdir(proj_folder):
+            #print(name)
+            path = os.path.join(proj_folder, name)
+            
+            if os.path.exists(path) and path.endswith(".ogg"):
+                audio = pygame.mixer.Sound(path)
+                projectiles_audio[os.path.splitext(name)[0]] = audio
+            
+    game.projectiles_audio = projectiles_audio

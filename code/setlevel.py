@@ -11,7 +11,7 @@ def setlevel(game):
     game.room = -1
 
     # Load TMX map
-    game.map = load_pygame(os.path.join('data', 'maps', 'Level2.tmx'))
+    game.map = load_pygame(os.path.join('data', 'maps', 'Example.tmx'))
 
     # Initialize structures
     game.spawnlist = {}
@@ -148,6 +148,11 @@ def spawn_room(game):
 
 def update_level(game):
     # BGM
+    
+    if game.current_BGM == "start_menu":
+        pygame.mixer.music.stop()
+        game.current_BGM = None
+        
     if not pygame.mixer.get_busy() and game.game_state == "in_game" and game.current_BGM is None:
         pygame.mixer.music.load(os.path.join("audio", "BGM", "normal.wav"))
         pygame.mixer.music.play(loops=-1)
@@ -163,10 +168,12 @@ def update_level(game):
         game.room += 1
         
         spawn_room(game)
-        if game.room > 0:
-            spawn_door(game)
+        spawn_door(game)
             
         game.wave = -1
+    
+    if game.room == 0 and hasattr(game.player, 'weap') and game.player.weap is not None:
+        open_door(game)
     
     if game.spawn_numb == 1 and game.room > 0:
         if game.wave >= len(game.spawnlist[game.room]) - 1:

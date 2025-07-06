@@ -83,6 +83,7 @@ class Flyout_number(pygame.sprite.Sprite):
             self.image.set_alpha(alpha)
         else:
             self.kill()
+            
 class Announcement(pygame.sprite.Sprite):
     def __init__(self, game, text, duration=2.5, font_size=24, color=(255, 255, 255)):
         super().__init__(game.all_sprites)  # Use a separate UI group if you have one
@@ -114,3 +115,31 @@ class Announcement(pygame.sprite.Sprite):
 
         if self.elapsed > self.duration + self.fade_time:
             self.kill()
+
+class Description:
+    def __init__(self, *parts, font_size=18, default_color=(255, 255, 255)):
+        self.font = pygame.font.Font("images/font/UncialAntiqua-Regular.ttf", font_size)
+        self.parts = parts
+        self.default_color = default_color
+
+        # Render 
+        rendered = []
+        for part in self.parts:
+            if isinstance(part, tuple):
+                text, color = part
+            else:
+                text, color = part, self.default_color
+            rendered.append(self.font.render(str(text), True, color))
+
+        # Combine into one surface
+        width = sum(img.get_width() for img in rendered)
+        height = max(img.get_height() for img in rendered)
+        self.image = pygame.Surface((width, height), pygame.SRCALPHA)
+        x = 0
+        for img in rendered:
+            self.image.blit(img, (x, 0))
+            x += img.get_width()
+        self.rect = self.image.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))  # Default position
+
+    def set_pos(self, pos):
+        self.rect.center = pos

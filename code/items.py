@@ -1,7 +1,6 @@
 from setting import *
 from weapon import *
-from helper import Flyout_number
-
+from helper import *
 class Item(pygame.sprite.Sprite):
     def __init__(self, game, image, pos=(0, 0)):
         super().__init__(game.all_sprites)
@@ -52,7 +51,7 @@ class Weapon_Item(Item):
         weapon_class = Weapon_Dict.get(self.name)
         
         Flyout_number(self.pos, f"You picked up {self.name}", (255, 255, 255), self.game, 36)
-        
+        Announcement(self.game, f"New Weapon: {self.name}", duration=2.5, font_size=24, color=(255, 255, 100))
         if weapon_class:
             player.weapons.append(weapon_class(self.game))
             player.current_weapon_index=len(player.weapons)-1

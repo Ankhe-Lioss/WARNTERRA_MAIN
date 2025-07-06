@@ -63,16 +63,18 @@ class Delay:
             self.game.delays.discard(self)  
             del self
 
-class Flyout_number(pygame.sprite.Sprite): # OR TEXTS
-    def __init__(self, pos, number, color, game, font_size=30):
+class Flyout_number(pygame.sprite.Sprite):
+    def __init__(self, pos, number, color, game, font_size=13):
         super().__init__(game.all_sprites)
-        self.image = pygame.font.Font(None, font_size).render(str(number), True, color)
-        self.image_rect = self.image.get_frect(center=pygame.Vector2(pos) 
+        font_path = "images/font/PressStart2P.ttf"
+        font = pygame.font.Font(font_path, font_size)
+        self.image = font.render(str(number), True, color)
+        self.image_rect = self.image.get_frect(center=pygame.Vector2(pos)
                                                + pygame.Vector2(1, 0).rotate(random.randrange(0, 360) * random.randrange(0, 20)))
         self.lifetime = 0.5
         self.spawn_time = pygame.time.get_ticks()
         self.type = 'top'
-    
+
     def update(self, dt):
         elapsed_time = pygame.time.get_ticks() - self.spawn_time
         if elapsed_time < self.lifetime * 1000:
@@ -80,4 +82,35 @@ class Flyout_number(pygame.sprite.Sprite): # OR TEXTS
             alpha = max(0, 255 - int((elapsed_time / (self.lifetime * 1000)) * 255))
             self.image.set_alpha(alpha)
         else:
+            self.kill()
+class Announcement(pygame.sprite.Sprite):
+    def __init__(self, game, text, duration=2.5, font_size=24, color=(255, 255, 255)):
+        super().__init__(game.all_sprites)  # Use a separate UI group if you have one
+        self.game = game
+        self.text = text
+        self.duration = duration
+        self.elapsed = 0
+        self.fade_time = 0.5  # time spent fading out (in seconds)
+
+        # Load font and render
+        self.font = pygame.font.Font("images/font/PressStart2P.ttf", font_size)
+        self.image = self.font.render(text, True, color)
+        self.alpha = 255
+        self.image.set_alpha(self.alpha)
+
+        # Position at bottom center of screen
+
+        self.rect = self.image.get_rect(midbottom=(WINDOW_WIDTH // 2,WINDOW_HEIGHT - 20))
+
+    def update(self, dt):
+        self.elapsed += dt
+
+        # Fade out over last self.fade_time seconds
+        if self.elapsed > self.duration:
+            fade_elapsed = self.elapsed - self.duration
+            fade_ratio = fade_elapsed / self.fade_time
+            self.alpha = max(0, 255 * (1 - fade_ratio))
+            self.image.set_alpha(int(self.alpha))
+
+        if self.elapsed > self.duration + self.fade_time:
             self.kill()

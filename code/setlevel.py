@@ -18,6 +18,8 @@ def setlevel(game):
     game.checkins = {}
     game.doorlist = []
     game.doors = set()
+    
+    game.door_opened = True
 
     # Ground and Walls
 #    for x, y, image in game.map.get_layer_by_name('Ground').tiles():
@@ -116,12 +118,18 @@ def endlevel(game):
     # Stat for levels
 
 def spawn_door(game):
+    if not game.door_opened:
+        return
     for door in game.door_sprites:
         door.toggle()
+        game.door_opened = False
         
 def open_door(game):
+    if game.door_opened:
+        return
     for door in game.door_sprites:
         door.toggle()
+        game.door_opened = True
 
 def spawn_wave(game):
     for obj in game.spawnlist[game.room][game.wave]:

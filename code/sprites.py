@@ -261,30 +261,31 @@ class Door(pygame.sprite.Sprite):
 
     def update(self, dt):
         if self.state in ['opening', 'closing']:
-            self.frame_index += 6*dt
+            self.frame_index += 6 * dt
             frame_list = self.frames[self.state]
 
             if self.frame_index >= len(frame_list):
                 # Transition to final state
                 if self.state == 'opening':
                     self.state = 'opened'
-                    self.remove(self.game.collision_sprites)
                 else:
                     self.state = 'closed'
-                    self.add(self.game.collision_sprites)
 
                 self.frame_index = 0
 
-            self.image = self.frames[self.state][int(self.frame_index)]
-
+            self.image = frame_list[int(self.frame_index)]
         else:
-            # Ensure collision group reflects the current state
-            if self.state == 'closed':
-                self.add(self.game.collision_sprites)
-            else:
-                self.remove(self.game.collision_sprites)
-
             self.image = self.frames[self.state][0]
+
+        # --- Always update collision state ---
+        if self.state == 'opened':
+            if self in self.game.collision_sprites:
+                self.remove(self.game.collision_sprites)
+        else:  # All other states: keep collision
+            if self not in self.game.collision_sprites:
+                self.add(self.game.collision_sprites)
+
+
 #Explosive barrel for game
 class Explosive_Barrel(pygame.sprite.Sprite):
     def __init__(self, pos, game):

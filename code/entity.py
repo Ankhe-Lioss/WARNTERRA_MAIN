@@ -111,7 +111,7 @@ class Entity(pygame.sprite.Sprite):
     #death effect
     def death(self):
         self.kill()
-    #moving logic for entity in general 
+    #moving logic for entity in general
     def move(self, dt):
         if self.meditating or self.stunned or self.rooted:
             return

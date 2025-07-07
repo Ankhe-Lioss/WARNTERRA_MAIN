@@ -34,19 +34,17 @@ class Entity(pygame.sprite.Sprite):
         self.silenced = False         # Cannot use skill (Debuff status)
         self.ghost = False            # Go through enemies
         self.rooted = False           # Cannot move (Debuff status)
-        self.cross_wall = False       # :D
+        self.cross_wall = False       # Not checking for wall collisions
         self.meditating = False       # Cannot move (Like channeling but also cannot move, only 1 at a time)
         
-        # Status
-        # Removed
-        
+        #init rect for work
         self.rect = pygame.rect.FRect()
         
-        self.healthbar = Healthbar(self)
-        if isinstance(self, Boss):
+        self.healthbar = Healthbar(self)#init for healthbar
+        if isinstance(self, Boss): #different healthbar for box
             self.healthbar.kill()
         self.image_offset = getattr(self, 'image_offset', (0, 0))
-
+    #calculate stat for each time init
     def updstat(self):
         self.maxhp = self.raw_hp + self.level * self.hp_multiplier
         self.baseatk = self.raw_atk + self.level * self.atk_multiplier
@@ -56,7 +54,7 @@ class Entity(pygame.sprite.Sprite):
         self.atk = self.baseatk
         self.def_ = self.basedef
         self.spd = self.basespd
-
+    #wall collision logic
     def collision(self, dir_type, dir):
         for group in (self.game.collision_sprites, self.game.animated_tiles):
             for sprite in group:
@@ -67,7 +65,7 @@ class Entity(pygame.sprite.Sprite):
                     else:
                         if dir.y < 0: self.rect.top = sprite.rect.bottom
                         if dir.y > 0: self.rect.bottom = sprite.rect.top
-    
+    #take damage logic
     def take_damage(self, dmg, pen = 0, type="normal"):
         if dmg < 0:
             dmg = 0    
@@ -110,10 +108,10 @@ class Entity(pygame.sprite.Sprite):
             self.hp = min(self.hp + healing, self.maxhp / 2)
         else:
             self.hp = min(self.hp + healing, self.maxhp)
-    
+    #death effect
     def death(self):
         self.kill()
-    
+    #moving logic for entity in general 
     def move(self, dt):
         if self.meditating or self.stunned or self.rooted:
             return

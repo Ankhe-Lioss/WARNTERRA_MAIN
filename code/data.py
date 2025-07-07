@@ -11,7 +11,7 @@ entity_stats = {
     "Maokai" : (800 , 30 , 20, 100, 95 , 11  , 3  , 200 , 100),
     "Soraka" : (14000,100, 25, 300, 777, 45  , 4.5, 1000, 625)
 } 
-
+#handling stat and managing stat change
 skill_stats = {
 #   "Skill" : (cooldown, warmup, cast_time)
 #player

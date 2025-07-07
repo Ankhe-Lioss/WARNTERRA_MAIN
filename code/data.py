@@ -110,7 +110,7 @@ enemy_projectiles = {
 aoe_stat={
 #   aoe skill=[scale_atk, frame_number, life_time]
     'Poro_Stomp':(0.5, 3, 1000),
-    'Chogath_Rupture':(2, 5, 1000),
+    'Chogath_Rupture':(2, 5, 500),
     'Veigar_Darkmatter':(1, 9, 200),
     'Soraka_star': (0.5, 4, 400),
 # Player

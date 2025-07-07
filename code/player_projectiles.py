@@ -169,7 +169,12 @@ class Bazooka_e_skill(Player_projectiles):
             
             
         else:
-            self.direction = pygame.Vector2(self.target_sprite.rect.center - self.rect.center).normalize()
+            if self.target and self.tracking:
+                self.direction = (pygame.Vector2(self.target_sprite.rect.center) - pygame.Vector2(self.rect.center)).normalize()
+                angle = self.direction.angle_to(pygame.Vector2(1, 0))
+                self.image = pygame.transform.rotozoom(self.image, -self.angle, 1)
+                self.image = pygame.transform.rotozoom(self.image, angle, 1)
+                self.image_rect = self.image.get_rect(center=self.rect.center)
             self.tracking = False  # Stop tracking if target is gone
 
         # Move

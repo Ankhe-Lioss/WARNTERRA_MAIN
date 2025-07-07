@@ -659,30 +659,20 @@
   <object id="651" gid="214" x="576" y="2912" width="32" height="32"/>
   <object id="659" gid="214" x="576" y="3104" width="32" height="32"/>
   <object id="660" gid="214" x="640" y="3072" width="32" height="32"/>
-  <object id="661" gid="214" x="736" y="3104" width="32" height="32"/>
-  <object id="662" gid="214" x="896" y="3072" width="32" height="32"/>
   <object id="663" gid="214" x="992" y="3136" width="32" height="32"/>
   <object id="664" gid="214" x="1152" y="2848" width="32" height="32"/>
   <object id="665" gid="214" x="928" y="2880" width="32" height="32"/>
-  <object id="666" gid="214" x="800" y="2816" width="32" height="32"/>
   <object id="667" gid="214" x="544" y="2816" width="32" height="32"/>
   <object id="668" gid="214" x="736" y="2016" width="32" height="32"/>
   <object id="669" gid="214" x="448" y="2048" width="32" height="32"/>
-  <object id="670" gid="214" x="1152" y="2080" width="32" height="32"/>
   <object id="671" gid="214" x="1120" y="2240" width="32" height="32"/>
   <object id="672" gid="214" x="800" y="2336" width="32" height="32"/>
-  <object id="673" gid="214" x="1344" y="2144" width="32" height="32"/>
-  <object id="677" gid="214" x="1088" y="1984" width="32" height="32"/>
-  <object id="678" gid="214" x="736" y="1952" width="32" height="32"/>
-  <object id="679" gid="214" x="576" y="2176" width="32" height="32"/>
   <object id="680" gid="214" x="288" y="2176" width="32" height="32"/>
   <object id="681" gid="214" x="1760" y="2336" width="32" height="32"/>
-  <object id="682" gid="214" x="1184" y="2304" width="32" height="32"/>
   <object id="683" gid="214" x="1248" y="2016" width="32" height="32"/>
   <object id="684" gid="214" x="992" y="1888" width="32" height="32"/>
   <object id="685" gid="214" x="608" y="1888" width="32" height="32"/>
   <object id="686" gid="214" x="576" y="2368" width="32" height="32"/>
-  <object id="687" gid="214" x="1024" y="2400" width="32" height="32"/>
   <object id="688" gid="214" x="1280" y="2240" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="6" name="Non_animated_collision">
@@ -735,10 +725,10 @@
     <property name="room" type="int" value="3"/>
    </properties>
   </object>
-  <object id="593" name="Weapon" type="Bow" x="721.666" y="3873.33">
+  <object id="593" name="Weapon" type="Bow" x="731.666" y="3971.33">
    <point/>
   </object>
-  <object id="594" name="Weapon" type="Bazooka" x="1142" y="3876.67">
+  <object id="594" name="Weapon" type="Bazooka" x="1088" y="3994.67">
    <point/>
   </object>
   <object id="691" name="Check_in" x="846" y="2364" width="160" height="128">

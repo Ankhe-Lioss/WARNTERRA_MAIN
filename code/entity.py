@@ -197,9 +197,11 @@ class Enemy(Entity):
             self.image = pygame.transform.flip(self.image, True, False)
     
     def death(self):
-        Aninmated_Object(self.rect.center,'Grave2',self.game.all_sprites, self.game)
+        if self.alive():
+            self.game.spawn_numb -= 1
+            Aninmated_Object(self.rect.center,'Grave2',self.game.all_sprites, self.game)
         super().death()
-        self.game.spawn_numb -= 1
+        
             
     def cal_dis(self):
         # get direction

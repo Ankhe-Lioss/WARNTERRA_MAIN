@@ -698,13 +698,10 @@
   <object id="635" gid="201" x="860" y="2187.67" width="104" height="130"/>
  </objectgroup>
  <objectgroup id="14" name="Interactive">
-  <object id="598" gid="194" x="874.667" y="3229.33" width="136" height="118"/>
-  <object id="599" gid="194" x="697.333" y="3233.33" width="136" height="118"/>
-  <object id="600" gid="194" x="672" y="3072" width="136" height="118"/>
-  <object id="601" gid="194" x="873.333" y="3308" width="136" height="118"/>
-  <object id="602" gid="194" x="872" y="3072" width="136" height="118"/>
-  <object id="603" gid="194" x="792" y="3064" width="136" height="118"/>
-  <object id="604" gid="194" x="692" y="3301.33" width="136" height="118"/>
+  <object id="600" gid="194" x="437" y="3034" width="136" height="118"/>
+  <object id="601" gid="194" x="1219.33" y="3445" width="136" height="118"/>
+  <object id="602" gid="194" x="1227" y="3034" width="136" height="118"/>
+  <object id="604" gid="194" x="809" y="3185.33" width="136" height="118"/>
  </objectgroup>
  <objectgroup id="13" name="Entities">
   <object id="468" name="Player" x="918.667" y="4059.33">
@@ -735,7 +732,7 @@
    </properties>
    <point/>
   </object>
-  <object id="638" name="Maokai" x="824" y="2828">
+  <object id="638" name="Maokai" x="810" y="2861">
    <properties>
     <property name="room" type="int" value="1"/>
     <property name="wave" type="int" value="1"/>
@@ -805,13 +802,6 @@
    </properties>
    <point/>
   </object>
-  <object id="648" name="Maokai" x="897.333" y="1938.67">
-   <properties>
-    <property name="room" type="int" value="2"/>
-    <property name="wave" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
   <object id="649" name="Chogath" x="1332" y="1944">
    <properties>
     <property name="room" type="int" value="2"/>
@@ -820,13 +810,6 @@
    <point/>
   </object>
   <object id="650" name="Chogath" x="449.333" y="1929.33">
-   <properties>
-    <property name="room" type="int" value="2"/>
-    <property name="wave" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="651" name="Chogath" x="901.333" y="2260">
    <properties>
     <property name="room" type="int" value="2"/>
     <property name="wave" type="int" value="0"/>
@@ -854,13 +837,6 @@
    </properties>
    <point/>
   </object>
-  <object id="655" name="Nocturne" x="1629.33" y="1182.67">
-   <properties>
-    <property name="room" type="int" value="3"/>
-    <property name="wave" type="int" value="2"/>
-   </properties>
-   <point/>
-  </object>
   <object id="656" name="Nocturne" x="1233.33" y="1253.33">
    <properties>
     <property name="room" type="int" value="3"/>
@@ -875,14 +851,7 @@
    </properties>
    <point/>
   </object>
-  <object id="658" name="Nocturne" x="437.333" y="1253.33">
-   <properties>
-    <property name="room" type="int" value="3"/>
-    <property name="wave" type="int" value="2"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="659" name="Maokai" x="968" y="1044">
+  <object id="659" name="Maokai" x="965.333" y="973.333">
    <properties>
     <property name="room" type="int" value="3"/>
     <property name="wave" type="int" value="2"/>

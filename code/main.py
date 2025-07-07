@@ -10,6 +10,7 @@ from UI import UI
 from preload import *
 
 SHOW_DETAIL_FPS = False
+START_LEVEL = 1
 
 class Game:
     def __init__(self):
@@ -47,11 +48,8 @@ class Game:
         self.current_BGM = None
 
         #in game asset
-        self.level = 5         #LEVEL
-        self.level -= 1
+        self.level = START_LEVEL - 1
         self.frame_index = 0
-
-
 
         #fps cal
         self.font = pygame.font.Font(os.path.join('images','font','PressStart2P.ttf'), 12)
@@ -79,6 +77,7 @@ class Game:
         self.door_sprites = pygame.sprite.Group()
         self.aoe_sprites = pygame.sprite.Group()
         self.player_currweapdict=[]
+        
         #in game asset
         self.delays = set()
         self.spawn_numb = 0

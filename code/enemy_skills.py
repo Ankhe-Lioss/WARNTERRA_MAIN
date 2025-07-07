@@ -174,6 +174,7 @@ class Summon_healing_buff(Skill):
         self.name = self.__class__.__name__
         self.pos = pos
         super().__init__(user, game)
+        self.passive = True
         
     def activate(self):
         super().activate()
@@ -184,6 +185,7 @@ class Summon_speed_buff(Skill):
         self.name = self.__class__.__name__
         self.pos = pos
         super().__init__(user, game)
+        self.passive = True
         
     def activate(self):
         super().activate()
@@ -194,6 +196,7 @@ class Summon_attack_buff(Skill):
         self.name = self.__class__.__name__
         self.pos = pos
         super().__init__(user, game)
+        self.passive = True
 
     def activate(self):
         super().activate()

@@ -12,9 +12,9 @@ class Veigar(Boss):
         self.skills = {
             'primary': Veigar_primary(self, game),
             'secondary': Veigar_secondary(self, game),
-            'heal1' : Summon_healing_buff(self, (250, 600), game),
-            'heal2' : Summon_healing_buff(self, (250, 900), game),
-            'speed' : Summon_speed_buff(self, (250, 1200), game)
+            'heal1' : Summon_healing_buff(self, game.blessing_list[0], game),
+            'heal2' : Summon_healing_buff(self, game.blessing_list[1], game),
+            'speed' : Summon_speed_buff(self, game.blessing_list[2], game)
         }
         self.mode = 1
         self.phase = 1
@@ -91,9 +91,9 @@ class Soraka(Boss):
             'heal' : Soraka_heal(self, game),
             'aoe' : Soraka_primary(self, game),
             'cc' : Soraka_cc(self, game),
-            'heal1': Summon_attack_buff(self, (110, 3230), game),
-            'heal2': Summon_attack_buff(self, (1455, 3230), game),
-            'atk': Summon_healing_buff(self, (780, 3390), game)
+            'heal1': Summon_attack_buff(self, game.blessing_list[0], game),
+            'heal2': Summon_attack_buff(self, game.blessing_list[1], game),
+            'atk': Summon_healing_buff(self, game.blessing_list[2], game)
         }
         self.phase = 1
     

@@ -163,6 +163,7 @@ class Bazooka_e_skill(Player_projectiles):
             
             
         else:
+            self.direction = pygame.Vector2(self.target_sprite.rect.center - self.rect.center).normalize()
             self.tracking = False  # Stop tracking if target is gone
 
         # Move

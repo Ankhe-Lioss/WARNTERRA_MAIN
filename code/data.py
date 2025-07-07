@@ -108,7 +108,7 @@ aoe_stat={
 #   aoe skill=[scale_atk, frame_number, life_time]
     'Poro_Stomp':(0.5, 3, 1000),
     'Chogath_Rupture':(2, 5, 1000),
-    'Veigar_Darkmatter':(1, 9, 500),
+    'Veigar_Darkmatter':(1, 9, 200),
     'Soraka_star': (0.5, 4, 400),
 # Player
 
@@ -124,7 +124,7 @@ aoe_stat={
 }
 
 apply_scale = {
-    'Bazooka_e' : 0.75, # Burning dps scale
+    'Bazooka_e' : 0.66, # Burning dps scale
     'Barrel_Explode' : (0.1, 0.01), # Normal, boss, scale by max hp 
     'Calibrum_mark' : 0.3          # Bonus dmg when break the mark
 }

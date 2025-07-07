@@ -315,7 +315,10 @@ weapon_skill_detail = {
         )
     ],
     "Bazooka" : [
-        
+        Description(),
+        Description(),
+        Description(),
+        Description()
     ],
     "Lunar_gun" : [
         Description(

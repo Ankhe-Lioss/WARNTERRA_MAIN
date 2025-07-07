@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="626">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="639">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -630,18 +630,78 @@
   <object id="493" gid="195" x="1024" y="3744" width="64" height="96"/>
   <object id="496" gid="199" x="768" y="4192" width="96" height="160"/>
   <object id="497" gid="202" x="1184" y="4000" width="128" height="128"/>
-  <object id="596" gid="203" x="808" y="3966.33" width="68" height="50"/>
-  <object id="597" gid="203" x="968" y="3968.33" width="68" height="50"/>
  </objectgroup>
  <objectgroup id="14" name="Interactive"/>
  <objectgroup id="13" name="Entities">
   <object id="468" name="Player" x="924" y="3992">
    <point/>
   </object>
-  <object id="593" name="Weapon" type="Bow" x="840.666" y="3941.33">
+  <object id="594" name="Weapon" type="Lunar_gun" x="928.667" y="4156">
    <point/>
   </object>
-  <object id="594" name="Weapon" type="Gauntlet" x="1002" y="3942.67">
+  <object id="634" name="Weapon" type="Gauntlet" x="1134.67" y="3933.33">
+   <point/>
+  </object>
+  <object id="635" name="Weapon" type="Bow" x="730.667" y="3932">
+   <point/>
+  </object>
+  <object id="637" name="Check_in" x="822" y="3312" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="638" name="Check_in" x="806" y="1662" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="626" name="Lulu" x="1454" y="2150">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="628" name="Lulu" x="292" y="2134">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="629" name="Poro" x="882" y="2322">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="630" name="Veigar" x="884" y="2648">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="631" name="Lulu" x="1456" y="2650">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="632" name="Lulu" x="322" y="2630">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="633" name="Chogath" x="900" y="3392">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

@@ -98,7 +98,7 @@ class Burning(Status):
     def __init__(self, duration, dps, game, owner):
         self.name = self.__class__.__name__
         self.owner = owner
-        self.offset=pygame.Vector2(0, -50)
+        self.offset=pygame.Vector2(0, -60)
         super().__init__(duration, game)
         self.dps = dps
         self.ticks = int(self.remaining) // 250

@@ -54,7 +54,7 @@ class Game:
 
 
         #fps cal
-        self.font = pygame.font.Font("images/font/PressStart2P.ttf", 12)
+        self.font = pygame.font.Font(os.path.join('images','font','PressStart2P.ttf'), 12)
         self.lowest_fps = float('inf')
         self.fps_timer = 0
         self.fps_interval = 5

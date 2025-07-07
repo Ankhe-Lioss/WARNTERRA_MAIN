@@ -102,12 +102,14 @@ class Trap(pygame.sprite.Sprite):
         self.image = self.frames[self.state][0]
         self.image_rect = self.image.get_frect(topleft=pos)
 
-
-
         inflate, offset = animated_image_offset.get(self.name, ((0, 0), (0, 0)))
         self.rect = self.image_rect.copy()
         self.rect = self.rect.inflate(*inflate)
         self.rect.topleft = (self.rect.left + offset[0], self.rect.top + offset[1])
+
+        # Cooldown values (in milliseconds)
+        self.hit_cooldown = 0.0  # current timer
+        self.hit_delay = 1000.0  # 1 second = 1000 milliseconds
 
     def load_images(self):
         base_path = os.path.join('images', 'traps', self.name)
@@ -122,9 +124,15 @@ class Trap(pygame.sprite.Sprite):
                     break
 
     def update(self, dt):
+        # Decrease cooldown using delta time
+        if self.hit_cooldown > 0:
+            self.hit_cooldown -= dt
+            if self.hit_cooldown < 0:
+                self.hit_cooldown = 0
+
+        # Frame animation logic
         cycle_frame = int(self.game.frame_index % self.total_frames)
 
-        # Decide state based on time slice
         if cycle_frame < self.off_frames:
             self.state = 'off'
             frame_list = self.frames['off']
@@ -134,9 +142,19 @@ class Trap(pygame.sprite.Sprite):
             frame_list = self.frames['on']
             local_frame = cycle_frame - self.off_frames
 
-        # Animate current frame
         self.image = frame_list[local_frame % len(frame_list)]
 
+        # Check for player collision if trap is active
+        self.collision_with_player()
+
+    def collision_with_player(self):
+        if self.state == 'on' and self.hit_cooldown == 0:
+            if self.rect.colliderect(self.game.player.rect):
+                self.hit_cooldown = self.hit_delay
+                if self.name=='Flames_trap':
+                    pass
+                if self.name=='Spikes':
+                    pass
 
 class Animated_Ground(pygame.sprite.Sprite):
     """Animated ground tile (e.g. animated water)."""

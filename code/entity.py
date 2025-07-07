@@ -174,7 +174,7 @@ class Enemy(Entity):
         self.frame_index = 0
         self.states=['Walking', 'Attacking']
         self.state='Walking'
-        self.tracking = True
+
         self.direction = pygame.Vector2(0, 0)
         
         #load image
@@ -188,6 +188,9 @@ class Enemy(Entity):
         self.image_rect = self.rect.copy()
 
         self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
+        #Tracking
+        self.tracking = True
+        self.tracker=Tracking(self.game,self,self.game.player)
     
     def animate(self, dt):
         self.frame_index += self.animation_spd * dt

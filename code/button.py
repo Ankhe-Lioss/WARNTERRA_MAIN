@@ -21,9 +21,9 @@ def load_menu(game):
 	game.title_img = pygame.image.load(os.path.join('images','menu','title.png')).convert_alpha()
 	#load_audio
 	game.start_menu_audio=pygame.mixer.Sound(os.path.join('audio','menu','Start_menu.wav'))
-	game.start_menu_audio.set_volume(0.3)
+	game.start_menu_audio.set_volume(0.9)
 	game.death_menu_audio=pygame.mixer.Sound(os.path.join('audio','menu','Death_menu.wav'))
-	game.death_menu_audio.set_volume(0.04)
+	game.death_menu_audio.set_volume(0.4)
 	#pause menu
 	game.resume_button = Button(304, 125, game.resume_img, 1)
 	game.quit_button = Button(304, 500, game.quit_img, 1)
@@ -100,6 +100,7 @@ class Instruction_rect:
         self.waiting = False
         self.active = False
         self.game = game
+        self.timer = None
 
     def update(self, surface: pygame.Surface):
         pos = pygame.mouse.get_pos()
@@ -111,17 +112,20 @@ class Instruction_rect:
             
             if not self.waiting:
                 self.waiting = True
-                Delay(1000, lambda: setattr(self, 'active', True), self.game)
+                self.timer = Delay(1000, lambda: setattr(self, 'active', True), self.game)
             if self.active:
                 self.draw(surface)
         else:
             self.waiting = False
             self.active = False
+            if self.timer:
+                self.timer.discard()
             
     def draw(self, surface):
         text_image = self.description.image
-        padding = (136, 136)
+        pos = pygame.Vector2(550, -75)
+        padding = pygame.Vector2(188, 188)
 
-        self.dialog.blit(text_image, padding)
-        surface.blit(self.dialog, (800, 150))
+        surface.blit(self.dialog, pos)
+        surface.blit(text_image, pos + padding)
 	

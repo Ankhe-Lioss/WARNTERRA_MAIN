@@ -47,7 +47,7 @@ class Game:
         self.current_BGM = None
 
         #in game asset
-        self.level = 1         #LEVEL
+        self.level = 5         #LEVEL
         self.level -= 1
         self.frame_index = 0
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="626">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="628">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -630,8 +630,6 @@
   <object id="493" gid="195" x="1024" y="3744" width="64" height="96"/>
   <object id="496" gid="199" x="768" y="4192" width="96" height="160"/>
   <object id="497" gid="202" x="1184" y="4000" width="128" height="128"/>
-  <object id="596" gid="203" x="808" y="3966.33" width="68" height="50"/>
-  <object id="597" gid="203" x="968" y="3968.33" width="68" height="50"/>
  </objectgroup>
  <objectgroup id="14" name="Interactive"/>
  <objectgroup id="13" name="Entities">
@@ -642,6 +640,12 @@
    <point/>
   </object>
   <object id="594" name="Weapon" type="Gauntlet" x="1002" y="3942.67">
+   <point/>
+  </object>
+  <object id="626" name="Weapon" type="Bazooka" x="840" y="4029.33">
+   <point/>
+  </object>
+  <object id="627" name="Weapon" type="Lunar_gun" x="1002.67" y="4034">
    <point/>
   </object>
  </objectgroup>

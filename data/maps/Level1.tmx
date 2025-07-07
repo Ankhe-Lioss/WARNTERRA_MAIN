@@ -724,22 +724,22 @@
   <object id="468" name="Player" x="924" y="3992">
    <point/>
   </object>
-  <object id="469" name="Check_in" x="812.667" y="3275.67" width="160" height="128">
+  <object id="469" name="Check_in" x="815.334" y="3262.34" width="160" height="128">
    <properties>
     <property name="room" type="int" value="0"/>
    </properties>
   </object>
-  <object id="579" name="Check_in" x="845.333" y="2340" width="160" height="128">
+  <object id="579" name="Check_in" x="850.666" y="2337.33" width="160" height="128">
    <properties>
     <property name="room" type="int" value="1"/>
    </properties>
   </object>
-  <object id="580" name="Check_in" x="877.333" y="1417.33" width="160" height="128">
+  <object id="580" name="Check_in" x="878.666" y="1408" width="160" height="128">
    <properties>
     <property name="room" type="int" value="2"/>
    </properties>
   </object>
-  <object id="581" name="Check_in" x="881.333" y="494.667" width="160" height="128">
+  <object id="581" name="Check_in" x="885.333" y="172" width="160" height="128">
    <properties>
     <property name="room" type="int" value="3"/>
    </properties>

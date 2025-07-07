@@ -6,8 +6,8 @@
     "activeFile": "maps/Level4.tmx",
     "expandedProjectPaths": [
         "maps",
-        "tilesets",
-        "."
+        ".",
+        "tilesets"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -133,13 +133,13 @@
         },
         "maps/Level1.tmx": {
             "expandedObjectLayers": [
-                11,
+                8,
+                7,
+                5,
                 2,
                 13,
-                8,
-                6,
-                5,
-                7
+                11,
+                6
             ],
             "scale": 0.75,
             "selectedLayer": 10,
@@ -150,15 +150,15 @@
         },
         "maps/Level2.tmx": {
             "expandedObjectLayers": [
-                11,
+                14,
+                8,
+                7,
+                10,
+                5,
                 2,
                 13,
-                8,
-                6,
-                5,
-                10,
-                14,
-                7
+                11,
+                6
             ],
             "scale": 0.5,
             "selectedLayer": 3,
@@ -169,9 +169,9 @@
         },
         "maps/Level3.tmx": {
             "expandedObjectLayers": [
-                13,
+                10,
                 5,
-                10
+                13
             ],
             "scale": 0.5,
             "selectedLayer": 10,
@@ -181,11 +181,31 @@
             }
         },
         "maps/Level4.tmx": {
-            "scale": 0.33,
-            "selectedLayer": 2,
+            "expandedObjectLayers": [
+                8,
+                7
+            ],
+            "scale": 0.5,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 1215.151515151515,
-                "y": 592.4242424242423
+                "x": 1090,
+                "y": 4655
+            }
+        },
+        "maps/Level5.tmx": {
+            "scale": 0.526953125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 769.518161601186,
+                "y": 3101.7939214232765
+            }
+        },
+        "maps/Level6.tmx": {
+            "scale": 0.526953125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 769.518161601186,
+                "y": 1467.8724981467753
             }
         },
         "maps/normal_level_model.tmx": {
@@ -267,22 +287,24 @@
         "maps/Level1.tmx",
         "maps/Level3.tmx",
         "maps/Level2.tmx",
-        "maps/Level4.tmx"
+        "maps/Level4.tmx",
+        "maps/Level5.tmx",
+        "maps/Level6.tmx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
         "maps/Level1.tmx",
         "maps/Level3.tmx",
         "maps/Level2.tmx",
+        "maps/Level6.tmx",
+        "maps/Level5.tmx",
         "maps/Level4.tmx",
         "maps/Example.tmx",
         "tilesets/Animated_collision.tsx",
         "tilesets/Non_animated_collision.tsx",
         "maps/normal_level_model.tmx",
         "tilesets/Animated_non_collision.tsx",
-        "tilesets/Door.tsx",
-        "tilesets/Non_animated_non_collision.tsx",
-        "tilesets/acid.tsx"
+        "tilesets/Door.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

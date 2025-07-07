@@ -13,17 +13,20 @@ class Area_of_effect(pygame.sprite.Sprite):
         self.frame_number = aoe_stat[self.name][1]
         self.lifetime = aoe_stat[self.name][2]
         #graphic loading
-
         self.frame_index = 0
         self.frames = self.game.aoe_frames[self.name]
         self.load_sound()
-        if hasattr(self, 'sound'):
-            self.sound.play()
-        self.animation_speed = self.frame_number/self.lifetime*1000
+        #graphic processing
+
+        self.animation_speed = self.frame_number / self.lifetime * 1000
         self.image = self.frames[0]
         self.image_rect = self.image.get_frect(center=pos)
         self.rect = self.image.get_frect(center=pos)
-        
+
+        #audio loading
+        if hasattr(self, 'sound'):
+            self.sound.play()
+
 
     def load_sound(self):
         if os.path.exists(os.path.join("audio", "aoe", f"{self.name}.ogg")):
@@ -32,7 +35,8 @@ class Area_of_effect(pygame.sprite.Sprite):
     def animate(self, dt):
         self.frame_index += self.animation_speed * dt
         self.image = self.frames[int(self.frame_index % len(self.frames))]
-        
+
+   # enemies checking hit
     def aoe_collision(self):
         dmg = self.scale * self.user_atk
 
@@ -48,17 +52,15 @@ class Area_of_effect(pygame.sprite.Sprite):
                     sprite.take_damage(dmg)
                     self.hit_enemies.add(sprite)
                     self.apply(sprite)
-
+    #special effect taking place
+    def apply(self, target):
+        pass
     def update(self, dt):
         self.animate(dt)
         self.aoe_collision()
         self.lifetime-=1000*dt
         if self.lifetime <= 0:
             self.kill()
-            
-    def apply(self, target):
-        pass
-            
 class Poro_Stomp(Area_of_effect):
     def __init__(self, pos,game,user_atk):
         self.enemy_sprites=game.player_sprites

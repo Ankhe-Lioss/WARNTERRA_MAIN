@@ -2,6 +2,7 @@ from setting import *
 from player_skills import *
 import math
 from button import Instruction_rect
+from helper import Description
 
 class Weap(pygame.sprite.Sprite):
     def __init__(self, game):
@@ -19,19 +20,19 @@ class Weap(pygame.sprite.Sprite):
         self.font = pygame.font.SysFont("Segoe UI", 17, bold=True)
         self.type= "weap"
 
+        #skill icon adjustment
         original_width, original_height = self.surf.get_size()
         scale_ratio = min(64 / original_width, 64 / original_height)
         new_width = int(original_width * scale_ratio)
         new_height = int(original_height * scale_ratio)
-
         self.icon = pygame.transform.smoothscale(self.surf, (new_width, new_height))
         self.icon_rect = self.icon.get_frect(center=(1191,651))
-        
+        #instruction to check for mouse hoovering
         self.instruction_rects = {
-            'Left': Instruction_rect(self.game, pygame.Rect(894 + 41 + 0 * 53, 571 + 46, 42, 42)),
-            'Right': Instruction_rect(self.game, pygame.Rect(894 + 41 + 1 * 53, 571 + 46, 42, 42)),
-            'Q': Instruction_rect(self.game, pygame.Rect(894 + 41 + 2 * 53, 571 + 46, 42, 42)),
-            'E': Instruction_rect(self.game, pygame.Rect(894 + 41 + 3 * 53, 571 + 46, 42, 42))
+            'Left': Instruction_rect(self.game, pygame.Rect(894 + 41 + 0 * 53, 571 + 46, 42, 42), weapon_skill_detail[self.name][0]),
+            'Right': Instruction_rect(self.game, pygame.Rect(894 + 41 + 1 * 53, 571 + 46, 42, 42), weapon_skill_detail[self.name][1]),
+            'Q': Instruction_rect(self.game, pygame.Rect(894 + 41 + 2 * 53, 571 + 46, 42, 42), weapon_skill_detail[self.name][2]),
+            'E': Instruction_rect(self.game, pygame.Rect(894 + 41 + 3 * 53, 571 + 46, 42, 42), weapon_skill_detail[self.name][3])
         }
     
     def update_pos(self):
@@ -47,7 +48,7 @@ class Weap(pygame.sprite.Sprite):
 
         self.image_rect = rotated_weapon.get_frect(center=self.player.image_rect.center + weapon_offset.rotate(-weapon_angle))
 
-
+    #draw skill bar and anything on it including(skill, cooldown,instruction and timer)
     def draw_skill_bar(self):
         surf = self.skill_bar
         base_x, base_y = 894, 571  # top-left of vine UI
@@ -119,7 +120,7 @@ class Weap(pygame.sprite.Sprite):
 
             # 4. Blit to the target surface (e.g., the screen)
             self.game.display_surface.blit(circle_surf, blit_pos)
-           
+        #uptate weapon skill timer
     def update_skills(self, dt):
         self.primary.update(dt)
         self.secondary.update(dt)
@@ -206,4 +207,187 @@ Weapon_Dict = {
     "Gauntlet": Gauntlet,
     "Bazooka" : Bazooka,
     "Lunar_gun" : Lunar_gun
+}
+
+CC = (130, 60, 220)
+ATK = (255, 255, 100)
+WHITE = (255, 255, 255)
+SCALE = (150, 220, 220)
+TIME = (220, 160, 130)
+ICY = (90, 200, 255)
+CALIBRUM = (90, 240, 180)
+INFERNUM = (50, 80, 200)
+
+weapon_skill_detail = {
+    "Gauntlet": [
+        Description(
+            ("Rising Spell Force\n", WHITE, 28),
+            ("Fires a bolt of magic energy that strikes the first enemy hit, dealing damage equal to "),
+            (f"{player_projectiles["Gauntlet_primary"][0] * 100:.0f}% of ATK", ATK),
+            (".")
+                    ),
+        Description(
+            ("Arcane shift\n", WHITE, 28),
+            ("Dashes a short distance toward the cursor.")
+                    ),
+        Description(
+            ("Mystic Shot", WHITE, 28),
+            ("\n"),
+            ("Unleashes a mighty arcane beam upon the first enemy struck, dealing "),
+            (f"{player_projectiles["Gauntlet_q_skill"][0] * 100:.0f}% of ATK", ATK),
+            (" as damage. On hit, this skill and Skill E have their cooldowns reduced by "),
+            ("2 seconds", TIME),
+            (", and the Right Skill is immediately refreshed.")
+                    ),
+        Description(
+            ("Trueshot barrage\n", WHITE, 28),
+            ("Unleashes a colossal surge of energy that cuts through all obstacles, striking every enemy in its path for "),
+            (f"{player_projectiles["Gauntlet_e_skill"][0] * 100:.0f}% of ATK", ATK),
+            (" as damage and "),
+            ("slowing", CC),
+            (" them by "),
+            (f"75%", SCALE),
+            (" for "),
+            ("2 seconds", TIME),
+            (".")
+        )
+    ],
+    "Bow" : [
+        Description(
+            ("Frost shot\n", WHITE, 28),
+            ("Fires a chilling arrow that deals "),
+            (f"{player_projectiles['Bow_primary'][0] * 100:.0f}% of ATK", ATK),
+            (" as damage to the first enemy hit, "),
+            ("slowing", CC),
+            (" them by "),
+            ("20%", SCALE),
+            (" for "),
+            ("0.5 seconds", TIME),
+            (".\n"),
+            ("Empower: ", ICY),
+            ("Reduce cooldown; when activated, fires three frost arrows, each dealing "),
+            (f"{player_projectiles['Bow_primary_enhanced'][0] * 100:.0f}% of ATK", ATK),
+            (" damage and boosting the "),
+            ("slowing", CC),
+            (" effect to "),
+            ("30%", SCALE),
+            (".")
+        ),
+        Description(
+            ("Ranger's Focus\n", WHITE, 28),
+            ("Harness unwavering concentration and raise your bow, "),
+            ("empowering", ICY),
+            (" your Left Skill for "),
+            (f"{skill_stats['Bow_secondary'][2] / 1000:.1f} seconds", TIME),
+            (".")
+        ),
+        Description(
+            ("Volley\n", WHITE, 28),
+            ("Shoots nine cold-infused arrows, each dealing "),
+            (f"{player_projectiles['Bow_q_skill'][0] * 100:.0f}% of ATK", ATK),
+            (" and "),
+            ("slowing", CC),
+            (" enemies by "),
+            ("60%", SCALE),
+            (" for "),
+            ("1 second", TIME),
+            (".")
+        ),
+        Description(
+            ("Enchanted Crystal Arrow\n", WHITE, 28),
+            ("Sends forth an enormous crystalline arrow that penetrates barriers. It strikes the first foe for "),
+            (f"{player_projectiles['Bow_e_skill'][0] * 100:.0f}% ATK damage", ATK),
+            (" and "),
+            ("stuns", CC),
+            (" them for "),
+            ("3 seconds", TIME),
+            (", then detonates—enemies in the radius suffer "),
+            (f"{aoe_stat['Bow_explosion'][0] * 100:.0f}% ATK damage", ATK),
+            (" and are "),
+            ("slowed", CC),
+            (" by "),
+            ("90%", SCALE),
+            (" for "),
+            ("5 seconds", TIME),
+            (".")
+        )
+    ],
+    "Bazooka" : [
+        
+    ],
+    "Lunar_gun" : [
+        Description(
+            ("Weapons of the Faithful\n", WHITE, 28),
+            ("Calibrum: ", CALIBRUM),
+            ("Fires a projectile that deals "),
+            (f"{player_projectiles['Calibrum_primary'][0] * 100:.0f}% of ATK", ATK),
+            (" damage to the enemy. If the enemy has a "),
+            ("Calibrum Mark", CALIBRUM),
+            (", it detonates the mark."),
+            ('\n'),
+            ("Infernum: ", INFERNUM),
+            ("Fires a projectile that deals "),
+            (f"{player_projectiles['Infernum_primary'][0] * 100:.0f}% of ATK", ATK),
+            (" damage to the enemy and triggers "),
+            ("Infernum Wave", INFERNUM),
+            (".")
+        ),
+        Description(
+            ("Lunar Swap\n", WHITE, 28),
+            ("Flexible switch between "),
+            ("Calibrum", CALIBRUM),
+            (" and "),
+            ("Infernum\n", INFERNUM),
+            ("Skill special effects:\n", WHITE),
+            ("Calibrum Mark: ", CALIBRUM),
+            ("When detonated, deals "),
+            (f"{apply_scale['Calibrum_mark'] * 100:.0f}% of ATK", ATK),
+            (" as damage to the enemy and triggers "),
+            ("Infernum Wave", INFERNUM),
+            (", while also increasing movement speed by "),
+            (f"30%", SCALE),
+            (" for "),
+            ("1 second", TIME),
+            (".\n"),
+            ("Infernum Wave: ", INFERNUM),
+            ("Unleashes 4 piercing rays, each ray deals damage equal to "),
+            (f"{player_projectiles['Infernum_ray'][0] * 100:.0f}% of ATK", ATK),
+            (".")
+        ),
+        Description(
+            ("Moonshot / Duskwave\n", WHITE, 28),
+            ("Calibrum: ", CALIBRUM, 24),
+            ("Fires a long-range shot that deals "),
+            (f"{player_projectiles['Calibrum_skill'][0] * 100:.0f}% of ATK", ATK),
+            (" to the first enemy hit and applies a "),
+            ("Calibrum Mark", CALIBRUM),
+            (" for "),
+            ("5 seconds", TIME),
+            (".\n"),
+            ("Infernum: ", INFERNUM, 24),
+            ("Unleashes a fiery wave made of three piercing flames, each dealing "),
+            (f"{player_projectiles['Infernum_skill'][0] * 100:.0f}% of ATK", ATK),
+            (". Enemies hit are marked with "),
+            ("Calibrum Mark", CALIBRUM),
+            (" for "),
+            ("3 seconds", TIME),
+            (".")
+        ),
+        Description(
+            ("Moonlight Vigil\n", WHITE, 28),
+            ("Fires a lunar spotlight forward, piercing terrain and exploding upon contact with an enemy. The explosion's effects vary based on the current lunar weapon:\n"),
+            ("Calibrum: ", CALIBRUM, 24),
+            ("Deals "),
+            (f"{aoe_stat['Calibrum_ult'][0] * 100:.0f}% of ATK", ATK),
+            (" damage and applies "),
+            ("Calibrum Mark", CALIBRUM),
+            (" to all affected enemies.\n"),
+            ("Infernum: ", INFERNUM, 24),
+            ("Deals "),
+            (f"{aoe_stat['Infernum_ult'][0] * 100:.0f}% of ATK", ATK),
+            (" damage and triggers 8 direction "),
+            ("Infernum Ray", INFERNUM),
+            (" on all hit enemies.\n"),
+        )
+    ]
 }

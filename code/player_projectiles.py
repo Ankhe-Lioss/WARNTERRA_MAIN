@@ -4,6 +4,8 @@ from aoe import *
 from helper import *
 import random
 
+# Gauntlet
+
 class Gauntlet_primary(Player_projectiles):
     def __init__(self, pos, direction, game):
         self.source = "Gauntlet Primary"
@@ -41,6 +43,8 @@ class Gauntlet_e_skill(Player_projectiles):
     
     def apply(self, target):
         Slowed(2000, 0.75, self.game, target)
+
+# Bơ
 
 class Bow_primary(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -80,6 +84,8 @@ class Bow_e_skill(Player_projectiles):
     def apply(self, target):
         Stunned(3000, self.game, target)
         Bow_explosion(self.rect.center, self.game, self.game.player.atk)
+
+# Bazooka
 
 class Bazooka_primary(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -193,6 +199,8 @@ class Bazooka_e_skill(Player_projectiles):
     def kill(self):
         Bazooka_e(self.rect.center, self.game, self.game.player.atk)
         super().kill()
+
+# Lunar
 
 def Infernum_wave(pos, dir, game, target):
     Infernum_ray(pos, dir.rotate(-15), game, target)

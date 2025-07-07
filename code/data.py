@@ -37,7 +37,7 @@ skill_stats = {
     "Calibrum_skill" : (6000, 0, 500),
     "Infernum_skill" : (8300, 0, 200),
     "Lunar_swap" : (500, 500, 500),
-    "Lunar_ult" : (19500, 5000, 500),
+    "Lunar_ult" : (19500, 7500, 500),
     
 #enemy
     "Poro_stomp" : (1500, 0, 1000),
@@ -47,6 +47,7 @@ skill_stats = {
     "Lulu_buff" : (9000, 3000, 1000),
     "Nocturne_sprint" : (3000, 2000, 500),
     "Maokai_primary" : (4000, 0, 1000),
+    
 # Veigar
     "Veigar_primary" : (1800, 0, 200),
     "Veigar_secondary" : (3800, 3000, 200),
@@ -54,11 +55,13 @@ skill_stats = {
     "Veigar_ult" : (29500, 0, 500),
     "Veigar_aoe" : (0, 0, 500),
     "Veigar_cage" : (10000, 0, 5000),
+    
 # Soraka
     "Soraka_heal" : (2000, 1000, 1000),
     "Soraka_primary" : (500, 0, 1000),
     "Soraka_cc" : (5000, 3000, 1000),
     "Soraka_ult" : (5000, 2000, 1000),
+    
 # Other
     "Summon_healing_buff" : (20000, 0, 0),
     "Summon_speed_buff" : (20000, 0, 0),
@@ -82,10 +85,10 @@ player_projectiles = {
     "Bazooka_e_skill" : (0, 600),
     
     "Calibrum_primary" : (1.3, 1200),
-    "Infernum_primary" : (1, 900),
-    "Calibrum_skill" : (2.8, 700),
+    "Infernum_primary" : (0.8, 900),
+    "Calibrum_skill" : (3.2, 700),
     "Infernum_skill" : (0.55, 1500),
-    "Infernum_ray" : (0.35, 800),
+    "Infernum_ray" : (0.3, 800),
     "Lunar_ult" : (0, 700)
 }
 
@@ -112,7 +115,7 @@ aoe_stat={
     'Soraka_star': (0.5, 4, 400),
 # Player
 
-    'Bow_explosion' : (1, 8, 500),
+    'Bow_explosion' : (1.2, 8, 500),
     'Bazooka_pe' : (0.8, 4, 200),
     'Bazooka_q' : (1.5, 4, 200),
     'Bazooka_e' : (1, 4, 200),

@@ -67,7 +67,7 @@ class Delay:
             del self
 
 class Flyout_number(pygame.sprite.Sprite):
-    def __init__(self, pos, number, color, game, font_size=22):
+    def __init__(self, pos, number, color, game, font_size=16):
         super().__init__(game.all_sprites)
         font_path = "images/font/PressStart2P.ttf"
         font = pygame.font.Font(font_path, font_size)
@@ -120,7 +120,7 @@ class Announcement(pygame.sprite.Sprite):
             self.kill()
 
 class Description:
-    def __init__(self, *parts, max_width=280, max_height=280, default_color=(255,255,255), default_font_size=20):
+    def __init__(self, *parts, max_width=450, max_height=9999, default_color=(200,200,200), default_font_size=24):
         pygame.font.init()
         self.max_width = max_width
         self.max_height = max_height
@@ -161,7 +161,7 @@ class Description:
         line_height = 0
 
         for text, color, font_size in processed_parts:
-            font = pygame.font.Font("images/font/PressStart2P.ttf", font_size)
+            font = pygame.font.Font("images/font/DungeonChunk.ttf", font_size)
 
             for subline in str(text).split('\n'):
                 text_surface = font.render(subline, True, color)

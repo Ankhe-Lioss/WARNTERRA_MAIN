@@ -1,6 +1,11 @@
 from setting import *
 from aoe import *
+<<<<<<< Updated upstream
 #customizing hitbox rectangle and displaying rectangle
+=======
+from status import Burning, Rooted
+
+>>>>>>> Stashed changes
 animated_image_offset={#name = (inflate,offset)
 'Fountain':((0,-35),(0,10)),
 'Broken_Pillar_Torch': ((-32,-78),(0,15)),
@@ -159,6 +164,17 @@ class Trap(pygame.sprite.Sprite):
         # Check for player collision if trap is active
         self.collision_with_player()
 
+<<<<<<< Updated upstream
+=======
+    def collision_with_player(self):
+        if self.state == 'on' and self.hit_cooldown == 0:
+            if self.rect.colliderect(self.game.player.rect):
+                self.hit_cooldown = self.hit_delay
+                if self.name=='Flames_trap':
+                    Burning(2000, self.game.player.maxhp * 0.05, self.game, self.game.player)
+                if self.name=='Spikes':
+                    self.game.player.take_damage(self.game.player.maxhp * 0.05)
+>>>>>>> Stashed changes
 
 #Animated ground layer with special effect
 class Animated_Ground(pygame.sprite.Sprite):

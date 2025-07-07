@@ -109,7 +109,7 @@ class Trap(pygame.sprite.Sprite):
 
         # Cooldown values (in milliseconds)
         self.hit_cooldown = 0.0  # current timer
-        self.hit_delay = 1000.0  # 1 second = 1000 milliseconds
+        self.hit_delay = 2000.0  # 1 second = 1000 milliseconds
 
     def load_images(self):
         base_path = os.path.join('images', 'traps', self.name)
@@ -126,7 +126,7 @@ class Trap(pygame.sprite.Sprite):
     def update(self, dt):
         # Decrease cooldown using delta time
         if self.hit_cooldown > 0:
-            self.hit_cooldown -= dt
+            self.hit_cooldown -=1000*dt
             if self.hit_cooldown < 0:
                 self.hit_cooldown = 0
 

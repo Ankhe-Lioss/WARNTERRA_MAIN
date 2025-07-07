@@ -58,14 +58,15 @@ class Entity(pygame.sprite.Sprite):
         self.spd = self.basespd
 
     def collision(self, dir_type, dir):
-        for sprite in self.game.collision_sprites:
-            if sprite.rect.colliderect(self.rect):
-                if dir_type == 'horizontal':
-                    if dir.x > 0: self.rect.right = sprite.rect.left
-                    if dir.x < 0: self.rect.left = sprite.rect.right
-                else:
-                    if dir.y < 0: self.rect.top = sprite.rect.bottom
-                    if dir.y > 0: self.rect.bottom = sprite.rect.top
+        for group in (self.game.collision_sprites, self.game.animated_tiles):
+            for sprite in group:
+                if sprite.rect.colliderect(self.rect):
+                    if dir_type == 'horizontal':
+                        if dir.x > 0: self.rect.right = sprite.rect.left
+                        if dir.x < 0: self.rect.left = sprite.rect.right
+                    else:
+                        if dir.y < 0: self.rect.top = sprite.rect.bottom
+                        if dir.y > 0: self.rect.bottom = sprite.rect.top
     
     def take_damage(self, dmg, pen = 0, type="normal"):
         if dmg < 0:

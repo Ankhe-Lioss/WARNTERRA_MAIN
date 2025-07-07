@@ -69,6 +69,7 @@ class Game:
         self.player_projectiles = pygame.sprite.Group()
         self.enemy_projectiles = pygame.sprite.Group()
         self.collision_sprites = pygame.sprite.Group()
+        self.animated_tiles = pygame.sprite.Group()
         self.door_sprites = pygame.sprite.Group()
         self.aoe_sprites = pygame.sprite.Group()
         self.player_currweapdict=[]
@@ -138,8 +139,8 @@ class Game:
             self.draw_menu(dt)
             # CURSOR
             check_cursor(self)
-            
-            
+
+
             # REPEATING TESTS FOR UPPER
             """
             from helper import Description

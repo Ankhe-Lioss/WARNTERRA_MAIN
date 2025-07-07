@@ -48,8 +48,6 @@ class Projectiles(pygame.sprite.Sprite):
         collisions = pygame.sprite.spritecollide(self, self.game.collision_sprites, False)
 
         for sprite in collisions:
-            if isinstance(sprite,Animated_Ground):
-                return
             if isinstance(sprite, Explosive_Barrel):
                 if sprite.state == 'idle':
                     sprite.state = 'warning'

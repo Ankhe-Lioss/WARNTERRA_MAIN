@@ -20,14 +20,14 @@ class Weap(pygame.sprite.Sprite):
         self.font = pygame.font.SysFont("Segoe UI", 17, bold=True)
         self.type= "weap"
 
+        #skill icon adjustment
         original_width, original_height = self.surf.get_size()
         scale_ratio = min(64 / original_width, 64 / original_height)
         new_width = int(original_width * scale_ratio)
         new_height = int(original_height * scale_ratio)
-
         self.icon = pygame.transform.smoothscale(self.surf, (new_width, new_height))
         self.icon_rect = self.icon.get_frect(center=(1191,651))
-        
+        #instruction to check for mouse hoovering
         self.instruction_rects = {
             'Left': Instruction_rect(self.game, pygame.Rect(894 + 41 + 0 * 53, 571 + 46, 42, 42), weapon_skill_detail[self.name][0]),
             'Right': Instruction_rect(self.game, pygame.Rect(894 + 41 + 1 * 53, 571 + 46, 42, 42), weapon_skill_detail[self.name][1]),
@@ -48,7 +48,7 @@ class Weap(pygame.sprite.Sprite):
 
         self.image_rect = rotated_weapon.get_frect(center=self.player.image_rect.center + weapon_offset.rotate(-weapon_angle))
 
-
+    #draw skill bar and anything on it including(skill, cooldown,instruction and timer)
     def draw_skill_bar(self):
         surf = self.skill_bar
         base_x, base_y = 894, 571  # top-left of vine UI
@@ -120,7 +120,7 @@ class Weap(pygame.sprite.Sprite):
 
             # 4. Blit to the target surface (e.g., the screen)
             self.game.display_surface.blit(circle_surf, blit_pos)
-           
+        #uptate weapon skill timer
     def update_skills(self, dt):
         self.primary.update(dt)
         self.secondary.update(dt)

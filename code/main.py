@@ -11,7 +11,6 @@ from preload import *
 
 SHOW_DETAIL_FPS = False
 
-# THIS FKING MAIN GAME SIHFHFHFHFHFHFHFHF
 class Game:
     def __init__(self):
         # Initializing
@@ -37,22 +36,25 @@ class Game:
         
         # game load asset
         load_menu(self)
-        #print(self.enemy_frames)
         check_cursor(self)
 
-        self.frame_index = 0
+        #menu state
         self.state = None
         self.game_state = 'in_start_menu'
         self.menu_state = 'main'
         self.pausing = True
         self.background = Background()
         self.current_BGM = None
-        self.level = 1         #LEVEL
 
-        self.level -= 1 
+        #in game asset
+        self.level = 1         #LEVEL
+        self.level -= 1
+        self.frame_index = 0
+
+
 
         #fps cal
-        self.font = pygame.font.Font("images/font/PressStart2P.ttf", 12)  # You can use your game font here
+        self.font = pygame.font.Font("images/font/PressStart2P.ttf", 12)
         self.lowest_fps = float('inf')
         self.fps_timer = 0
         self.fps_interval = 5
@@ -63,10 +65,10 @@ class Game:
         self.avg1s_fps = 0
         self.last_timer = 0
         
-        # TEST ONCE
 
         
     def restart(self):
+        #group calling
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()
         self.enemy_sprites = pygame.sprite.Group()
@@ -77,8 +79,8 @@ class Game:
         self.door_sprites = pygame.sprite.Group()
         self.aoe_sprites = pygame.sprite.Group()
         self.player_currweapdict=[]
+        #in game asset
         self.delays = set()
-
         self.spawn_numb = 0
         self.checked_in = True
         self.room = 0
@@ -86,13 +88,12 @@ class Game:
         self.screen_toggle = 0
         self.state = 'in_level'
 
+        #start the level
         setlevel(self)
-
+        #call ui
         self.ui = UI(self, self.player, self.display_surface)
-
-        # Set states to show weapon choosing menu
         self.game_state = "in_game"
-        self.pausing = True
+
     def run(self):
         self.restart()
         self.game_state = "in_start_menu"
@@ -110,8 +111,6 @@ class Game:
                     if event.key == pygame.K_F11 and self.screen_toggle - pygame.time.get_ticks() < -5000:
                         pygame.display.toggle_fullscreen()
                         self.screen_toggle = pygame.time.get_ticks()
-                    if event.key == pygame.K_F1:
-                        self.player.death()
                     if event.key == pygame.K_F2:
                         self.player.atk=1000
                         self.player.hp=100000
@@ -122,16 +121,13 @@ class Game:
             # FILL
             self.display_surface.fill('gray9')
 
-
+            #check for event happen in game
             check_game_state(self)
             for delay in self.delays.copy():
                 delay.update(dt)
             
             
-            # REPEATING TESTS
-            #print(self.spawn_numb)
-            #print(len(self.enemy_projectiles), len(self.player_projectiles))
-            
+
 
             # Game State
             self.all_sprites.draw(self.player)
@@ -146,20 +142,12 @@ class Game:
 
 
             # REPEATING TESTS FOR UPPER
-            """
-            from helper import Description
-            self.display_surface.blit(
-                Description(("Con cac ", (255, 255, 0)), ("to ", (255, 0, 255)), ("vcl ra", (0, 255, 255)), font_size=40).image,
-                (0, 500)
-                )
-            """
+
             
-            
-            # UPDATE (LAST)
             # UPDATE (LAST)
             self.show_fps(dt)
             pygame.display.update()
-        # Cútd
+        #end game
         pygame.quit()
     def show_fps(self,dt):
         # --- FPS Monitoring ---
@@ -195,10 +183,8 @@ class Game:
         else:
             fps_text = self.font.render(f"FPS: {self.avg1s_fps:.0f}", True, (255, 255, 100))
         self.display_surface.blit(fps_text, (10, 10))
-
+    #Check for menu and menu function
     def draw_menu(self,dt):
-
-
         if self.pausing and self.game_state == 'in_game' and self.menu_state == 'main':
             self.pause_menu()
 
@@ -241,17 +227,7 @@ class Game:
                 game.start_menu_audio.stop()
             if self.quit_start_button.draw(self.display_surface):
                 self.running = False
-            '''if self.options_button.draw(self.display_surface):
-                self.menu_state = "options"
-        if self.menu_state == "options":
-            if self.video_button.draw(self.display_surface):
-                print("Video Settings")
-            if self.audio_button.draw(self.display_surface):
-                print("Audio Settings")
-            if self.keys_button.draw(self.display_surface):
-                    ("Change Key Bindings")
-            if self.back_button.draw(self.display_surface):
-                self.menu_state = "main"'''
+
 
     def pause_menu(self):
         # Optional dark overlay
@@ -292,37 +268,7 @@ class Game:
                 self.pausing = False
                 self.death_menu_audio.stop()
                 self.current_BGM = None
-    """
-    def weapon_choosing_menu(self):
-        if self.have_joystick:
-            if self.joystick.get_button(4):
-                self.player.weap.kill()
-                self.player.weap = Bow(self)
-                self.pausing = False
-                self.game_state = "in_game"
-                self.menu_state = "main"
-            elif self.joystick.get_button(5):
-                self.player.weap.kill()
-                self.player.weap = Gauntlet(self)
-                self.pausing = False
-                self.game_state = "in_game"
-                self.menu_state = "main"
-        if self.bow_button.draw(self.display_surface):
-            self.player.weap.kill()
-            self.player.weap = Bow(self)
-            self.pausing = False
-            self.game_state = "in_game"
-            self.menu_state = "main"
-            self.chosen_weap = Bow
 
-        if self.gauntlet_button.draw(self.display_surface):
-            self.player.weap.kill()
-            self.player.weap = Gauntlet(self)
-            self.pausing = False
-            self.game_state = "in_game"
-            self.menu_state = "main"
-            self.chosen_weap = Gauntlet
-    """
 if __name__ == "__main__":
     game = Game()
     game.run()

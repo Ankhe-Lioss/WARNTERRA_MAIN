@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/Level6.tmx",
+    "activeFile": "maps/Level4.tmx",
     "expandedProjectPaths": [
         "maps",
         ".",
@@ -181,11 +181,15 @@
             }
         },
         "maps/Level4.tmx": {
+            "expandedObjectLayers": [
+                8,
+                7
+            ],
             "scale": 0.5,
-            "selectedLayer": 9,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 271,
-                "y": 1907
+                "x": 1090,
+                "y": 4655
             }
         },
         "maps/Level5.tmx": {
@@ -292,9 +296,9 @@
         "maps/Level1.tmx",
         "maps/Level3.tmx",
         "maps/Level2.tmx",
-        "maps/Level4.tmx",
-        "maps/Level5.tmx",
         "maps/Level6.tmx",
+        "maps/Level5.tmx",
+        "maps/Level4.tmx",
         "maps/Example.tmx",
         "tilesets/Animated_collision.tsx",
         "tilesets/Non_animated_collision.tsx",

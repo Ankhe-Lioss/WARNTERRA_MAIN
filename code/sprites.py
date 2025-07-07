@@ -1,5 +1,6 @@
 from setting import *
 from aoe import *
+#customizing hitbox rectangle and displaying rectangle
 animated_image_offset={#name = (inflate,offset)
 'Fountain':((0,-35),(0,10)),
 'Broken_Pillar_Torch': ((-32,-78),(0,15)),
@@ -18,6 +19,7 @@ animated_image_offset={#name = (inflate,offset)
 'Shrine':((0,-52),(0,26)),
 'Well':((0,-42),(0,21))
 }
+#the lowest floor of game that have the highest priortity in drawing so it alway behind every other object
 class Ground(pygame.sprite.Sprite):
     """ Background map """
 
@@ -27,7 +29,7 @@ class Ground(pygame.sprite.Sprite):
         self.rect = self.image.get_frect(topleft=pos)
         self.image_rect = self.image.get_rect(topleft=pos)
         self.type = type
-
+#collision the invisible layer that resemble wall
 class CollisionSprite(pygame.sprite.Sprite):
     
     """ Objects and walls """
@@ -41,7 +43,7 @@ class CollisionSprite(pygame.sprite.Sprite):
             inflate, offset = animated_image_offset.get(name, ((0, 0), (0, 0)))
             self.rect = self.rect.inflate(*inflate)
             self.rect.topleft = (self.rect.left + offset[0], self.rect.top + offset[1])
-
+#Check if the player have reached a certain point
 class Check_in(pygame.sprite.Sprite):
     def __init__(self, pos, game):
         super().__init__(game.all_sprites)
@@ -56,18 +58,20 @@ class Check_in(pygame.sprite.Sprite):
             self.kill()
             self.game.spawn_numb -= 1
 
-
+#Animated_Object to decorated and centurized the game play around something
 class Aninmated_Object(pygame.sprite.Sprite):
 
     def __init__(self, pos, name,groups,game):
         super().__init__(groups)
         self.game = game
         self.name = name
+        #load graphic
         self.frames = self.game.animated_object_frames[self.name]
         self.image=self.frames[0]
         self.image_rect = self.image.get_frect(topleft=pos)
-        inflate, offset = animated_image_offset.get(self.name, ((0, 0), (0, 0)))
 
+        #custom self_hitbox
+        inflate, offset = animated_image_offset.get(self.name, ((0, 0), (0, 0)))
         self.rect = self.image_rect.copy()
         self.rect = self.rect.inflate(*inflate)
         self.rect.topleft = (self.rect.left + offset[0], self.rect.top + offset[1])
@@ -86,7 +90,7 @@ Trap_on_off_time = {
     'Spikes': (14, 5, 9),
     'Flames_trap': (12, 4, 8)
 }
-
+#Trap with on/off state that have special effect on player if hit
 class Trap(pygame.sprite.Sprite):
     def __init__(self, pos, game, name):
         super().__init__(game.all_sprites)
@@ -107,9 +111,9 @@ class Trap(pygame.sprite.Sprite):
         self.rect = self.rect.inflate(*inflate)
         self.rect.topleft = (self.rect.left + offset[0], self.rect.top + offset[1])
 
-        # Cooldown values (in milliseconds)
-        self.hit_cooldown = 0.0  # current timer
-        self.hit_delay = 2000.0  # 1 second = 1000 milliseconds
+        # Cooldown values
+        self.hit_cooldown = 0 # current timer
+        self.hit_delay = 2000
 
     def load_images(self):
         base_path = os.path.join('images', 'traps', self.name)
@@ -122,9 +126,17 @@ class Trap(pygame.sprite.Sprite):
                     self.frames[state].append(img)
                 else:
                     break
-
+    #check if collide with player while on and no cooldown
+    def collision_with_player(self):
+        if self.state == 'on' and self.hit_cooldown == 0:
+            if self.rect.colliderect(self.game.player.rect):
+                self.hit_cooldown = self.hit_delay
+                if self.name=='Flames_trap':
+                    pass
+                if self.name=='Spikes':
+                    pass
     def update(self, dt):
-        # Decrease cooldown using delta time
+        # Decrease cooldown using dt
         if self.hit_cooldown > 0:
             self.hit_cooldown -=1000*dt
             if self.hit_cooldown < 0:
@@ -147,15 +159,8 @@ class Trap(pygame.sprite.Sprite):
         # Check for player collision if trap is active
         self.collision_with_player()
 
-    def collision_with_player(self):
-        if self.state == 'on' and self.hit_cooldown == 0:
-            if self.rect.colliderect(self.game.player.rect):
-                self.hit_cooldown = self.hit_delay
-                if self.name=='Flames_trap':
-                    pass
-                if self.name=='Spikes':
-                    pass
 
+#Animated ground layer with special effect
 class Animated_Ground(pygame.sprite.Sprite):
     """Animated ground tile (e.g. animated water)."""
 
@@ -192,6 +197,7 @@ class Animated_Ground(pygame.sprite.Sprite):
     def update(self, dt):
         self.frame_index=self.game.frame_index
         self.image=self.frames[int(self.frame_index % len(self.frames))]
+#Door to open and close for game intend experience
 class Door(pygame.sprite.Sprite):
     def __init__(self, pos, game, name):
         super().__init__(game.all_sprites,game.door_sprites)
@@ -268,6 +274,7 @@ class Door(pygame.sprite.Sprite):
                 self.remove(self.game.collision_sprites)
 
             self.image = self.frames[self.state][0]
+#Explosive barrel for game
 class Explosive_Barrel(pygame.sprite.Sprite):
     def __init__(self, pos, game):
         super().__init__(game.all_sprites, game.collision_sprites)

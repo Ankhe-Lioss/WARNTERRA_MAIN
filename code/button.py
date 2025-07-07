@@ -85,29 +85,43 @@ class Button:
 		if not mouse_pressed:
 			self.clicked = False
 
-
-
 		# Draw with possible vibration offset
 		surface.blit(self.image, (draw_x, draw_y))
 
 		return action
 
-from helper import Description
+from helper import Description, Delay
 
 class Instruction_rect:
-    def __init__(self, rect, description: Description, game):
+    def __init__(self, game, rect, description: Description = Description("Ah ah ah yeh yeh sussy baka shiba seki ramen aioshima boot skibidi bidi dom dom yes yes")):
         self.rect = rect
         self.description = description
         self.dialog = game.dialog_layout
+        self.waiting = False
+        self.active = False
+        self.game = game
 
-    def draw(self, surface):
+    def update(self, surface: pygame.Surface):
         pos = pygame.mouse.get_pos()
         
         if self.rect.collidepoint(pos):
-            text_image = self.description.image
-            padding = 8
+            overlay = pygame.Surface(self.rect.size, pygame.SRCALPHA)
+            overlay.fill((255, 255, 255, 100))
+            surface.blit(overlay, self.rect.topleft)
+            
+            if not self.waiting:
+                self.waiting = True
+                Delay(1000, lambda: setattr(self, 'active', True), self.game)
+            if self.active:
+                self.draw(surface)
+        else:
+            self.waiting = False
+            self.active = False
+            
+    def draw(self, surface):
+        text_image = self.description.image
+        padding = (136, 136)
 
-            self.dialog.blit(text_image, (padding, padding))
-
-            surface.blit(self.dialog, CENTER)
+        self.dialog.blit(text_image, padding)
+        surface.blit(self.dialog, (800, 150))
 	

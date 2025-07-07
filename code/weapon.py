@@ -1,6 +1,7 @@
 from setting import *
 from player_skills import *
 import math
+from button import Instruction_rect
 
 class Weap(pygame.sprite.Sprite):
     def __init__(self, game):
@@ -25,7 +26,14 @@ class Weap(pygame.sprite.Sprite):
 
         self.icon = pygame.transform.smoothscale(self.surf, (new_width, new_height))
         self.icon_rect = self.icon.get_frect(center=(1191,651))
-
+        
+        self.instruction_rects = {
+            'Left': Instruction_rect(self.game, pygame.Rect(894 + 41 + 0 * 53, 571 + 46, 42, 42)),
+            'Right': Instruction_rect(self.game, pygame.Rect(894 + 41 + 1 * 53, 571 + 46, 42, 42)),
+            'Q': Instruction_rect(self.game, pygame.Rect(894 + 41 + 2 * 53, 571 + 46, 42, 42)),
+            'E': Instruction_rect(self.game, pygame.Rect(894 + 41 + 3 * 53, 571 + 46, 42, 42))
+        }
+    
     def update_pos(self):
         weapon_offset = pygame.math.Vector2(10, -30)  # adjust for hand position
         dx = self.player.facing_dir.x
@@ -60,7 +68,10 @@ class Weap(pygame.sprite.Sprite):
 
             x = base_x + 41 + index * 53
             y = base_y + 46
+            
             icon_rect = pygame.Rect(x, y, 42, 42)
+
+            # THIS FCKING RECTDAHDUIHASDHAIUSDHAISHDIAUSDUIHD
 
 
             # Background (only visible if icon has transparency)
@@ -69,6 +80,7 @@ class Weap(pygame.sprite.Sprite):
 
             # Resize and draw skill icon to 42x42
             self.game.display_surface.blit(skill.icon, icon_rect)
+            
             # Cooldown overlay
             if not skill.ready:
                 overlay = pygame.Surface((42, 42), pygame.SRCALPHA)
@@ -114,6 +126,10 @@ class Weap(pygame.sprite.Sprite):
         self.q_skill.update(dt)
         self.e_skill.update(dt)
      
+    def update_instruction_rect(self):
+        for key in self.instruction_rects:
+            self.instruction_rects[key].update(self.game.display_surface)
+    
     def update(self, dt):
         self.update_pos()
         if self.game.player.weap is self:
@@ -122,6 +138,7 @@ class Weap(pygame.sprite.Sprite):
         else:
             self.visible=False
         
+        self.update_instruction_rect()
         self.update_skills(dt)
 
 class Gauntlet(Weap):

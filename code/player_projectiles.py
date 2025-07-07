@@ -163,6 +163,7 @@ class Bazooka_e_skill(Player_projectiles):
             
             
         else:
+            self.direction = pygame.Vector2(self.target_sprite.rect.center - self.rect.center).normalize()
             self.tracking = False  # Stop tracking if target is gone
 
         # Move
@@ -201,9 +202,9 @@ def Infernum_wave(pos, dir, game, target):
     game.projectiles_audio["Infernum_beam"].play()
 
 def Infernum_burgeon(pos, game, target):
+    angle = random.randrange(0, 45)
     for i in range(0, 360, 45):
-        angle = i + random.randrange(0, 45)
-        Infernum_ray(pos, pygame.Vector2(1, 0).rotate(angle), game, target)
+        Infernum_ray(pos, pygame.Vector2(1, 0).rotate(angle + i), game, target)
     game.projectiles_audio["Infernum_beam"].play()
 
 class Calibrum_primary(Player_projectiles):
@@ -238,6 +239,7 @@ class Infernum_ray(Player_projectiles):
         super().__init__(pos, direction, game)
         
         self.e_piercing = True
+        self.wall_piercing = True
         self.lifetime = 250
         self.ignored_target = ignored_target
         self.rect=self.rect.inflate(0, 0)
@@ -284,7 +286,8 @@ class Infernum_skill(Player_projectiles):
         super().__init__(pos, direction, game)
         self.rect=self.rect.inflate(0, 0)
         self.e_piercing = True
-        self.lifetime = 200
+        self.wall_piercing = True
+        self.lifetime = 250
     
     def apply(self, target):
         Delay(500, lambda : Calibrum_mark(3000, self.game, target), self.game)

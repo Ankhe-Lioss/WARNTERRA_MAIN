@@ -18,7 +18,7 @@ skill_stats = {
     "Gauntlet_primary" : (1000, 0, 0),
     "Gauntlet_secondary" : (4900, 0, 100),
     "Gauntlet_q_skill" : (4500, 0, 0),
-    "Gauntlet_e_skill" : (11250, 10000, 750),
+    "Gauntlet_e_skill" : (14250, 10000, 750),
     
     "Bow_primary" : (1000, 500, 0),
     "Bow_primary_enhanced": (450, 500, 150),
@@ -32,11 +32,11 @@ skill_stats = {
     "Bazooka_q_skill" : (3500, 1000, 0),
     "Bazooka_e_skill" : (12000, 4000, 0),
     
-    "Calibrum_primary" : (1000, 0, 0),
-    "Infernum_primary" : (1000, 0, 0),
+    "Calibrum_primary" : (1000, 500, 0),
+    "Infernum_primary" : (1000, 500, 0),
     "Calibrum_skill" : (6000, 0, 500),
     "Infernum_skill" : (8300, 0, 200),
-    "Lunar_swap" : (1000, 500, 500),
+    "Lunar_swap" : (500, 500, 500),
     "Lunar_ult" : (19500, 5000, 500),
     
 #enemy
@@ -67,9 +67,9 @@ skill_stats = {
 
 player_projectiles = {
 #   "proj" : (atk_scale_multification, speed)
-    "Gauntlet_primary" : (1.5, 1200),
-    "Gauntlet_q_skill" : (2.5, 1000),
-    "Gauntlet_e_skill" : (2.5, 700),
+    "Gauntlet_primary" : (1.4, 1200),
+    "Gauntlet_q_skill" : (2, 1000),
+    "Gauntlet_e_skill" : (2, 700),
     
     "Bow_primary" : (1.2, 1000),
     "Bow_primary_enhanced": (0.75, 800),
@@ -81,11 +81,11 @@ player_projectiles = {
     "Bazooka_q_skill" : (0, 800),
     "Bazooka_e_skill" : (0, 600),
     
-    "Calibrum_primary" : (1.2, 1200),
-    "Infernum_primary" : (0.6, 900),
-    "Calibrum_skill" : (3, 700),
-    "Infernum_skill" : (0.5, 1500),
-    "Infernum_ray" : (0.25, 800),
+    "Calibrum_primary" : (1.3, 1200),
+    "Infernum_primary" : (1, 900),
+    "Calibrum_skill" : (2.8, 700),
+    "Infernum_skill" : (0.55, 1500),
+    "Infernum_ray" : (0.35, 800),
     "Lunar_ult" : (0, 700)
 }
 
@@ -108,7 +108,7 @@ aoe_stat={
 #   aoe skill=[scale_atk, frame_number, life_time]
     'Poro_Stomp':(0.5, 3, 1000),
     'Chogath_Rupture':(2, 5, 1000),
-    'Veigar_Darkmatter':(1, 9, 500),
+    'Veigar_Darkmatter':(1, 9, 200),
     'Soraka_star': (0.5, 4, 400),
 # Player
 
@@ -117,14 +117,14 @@ aoe_stat={
     'Bazooka_q' : (1.5, 4, 200),
     'Bazooka_e' : (1, 4, 200),
     'Calibrum_ult' : (3, 12, 600),
-    'Infernum_ult' : (1.5, 12, 600),
+    'Infernum_ult' : (2, 12, 600),
 
 # Environment
     'Barrel_Explode' : (1, 4, 500)
 }
 
 apply_scale = {
-    'Bazooka_e' : 0.75, # Burning dps scale
+    'Bazooka_e' : 0.66, # Burning dps scale
     'Barrel_Explode' : (0.1, 0.01), # Normal, boss, scale by max hp 
-    'Calibrum_mark' : 0.3          # Bonus dmg when break the mark
+    'Calibrum_mark' : 1.2          # Bonus dmg when break the mark
 }

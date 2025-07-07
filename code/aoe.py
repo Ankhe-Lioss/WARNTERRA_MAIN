@@ -114,7 +114,7 @@ class Bazooka_e(Area_of_effect):
         super().__init__(pos,game,user_atk)
 
     def apply(self, target):
-        Burning(3000, apply_scale[self.name] * self.user_atk, self.game, target)
+        Burning(5000, apply_scale[self.name] * self.user_atk, self.game, target)
 
 class Barrel_Explode(Area_of_effect):
     def __init__(self, pos,game,user_atk=0):

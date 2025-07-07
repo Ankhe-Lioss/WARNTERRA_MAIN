@@ -58,14 +58,15 @@ class Entity(pygame.sprite.Sprite):
         self.spd = self.basespd
 
     def collision(self, dir_type, dir):
-        for sprite in self.game.collision_sprites:
-            if sprite.rect.colliderect(self.rect):
-                if dir_type == 'horizontal':
-                    if dir.x > 0: self.rect.right = sprite.rect.left
-                    if dir.x < 0: self.rect.left = sprite.rect.right
-                else:
-                    if dir.y < 0: self.rect.top = sprite.rect.bottom
-                    if dir.y > 0: self.rect.bottom = sprite.rect.top
+        for group in (self.game.collision_sprites, self.game.animated_tiles):
+            for sprite in group:
+                if sprite.rect.colliderect(self.rect):
+                    if dir_type == 'horizontal':
+                        if dir.x > 0: self.rect.right = sprite.rect.left
+                        if dir.x < 0: self.rect.left = sprite.rect.right
+                    else:
+                        if dir.y < 0: self.rect.top = sprite.rect.bottom
+                        if dir.y > 0: self.rect.bottom = sprite.rect.top
     
     def take_damage(self, dmg, pen = 0, type="normal"):
         if dmg < 0:
@@ -94,16 +95,16 @@ class Entity(pygame.sprite.Sprite):
             Flyout_number(self.rect.center, int(delta), (255, 50, 50), self.game)
         
         if type == "poison":
-            Flyout_number(self.rect.center, int(delta), (50, 195, 50), self.game, font_size=20)
+            Flyout_number(self.rect.center, int(delta), (50, 195, 50), self.game, font_size=18)
         
         if type == "burning":
-            Flyout_number(self.rect.center, int(delta), (255, 165, 50), self.game, font_size=20)
+            Flyout_number(self.rect.center, int(delta), (255, 165, 50), self.game, font_size=18)
         
     def heal(self, healing, type="normal"):
         if type == "normal":
             Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game)
         elif type == "overtime":
-            Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game, font_size=20)
+            Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game, font_size=18)
         
         if isinstance(self, Boss) and self.phase == 2:
             self.hp = min(self.hp + healing, self.maxhp / 2)
@@ -173,7 +174,7 @@ class Enemy(Entity):
         self.frame_index = 0
         self.states=['Walking', 'Attacking']
         self.state='Walking'
-        self.tracking = True
+
         self.direction = pygame.Vector2(0, 0)
         
         #load image
@@ -187,6 +188,9 @@ class Enemy(Entity):
         self.image_rect = self.rect.copy()
 
         self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
+        #Tracking
+        self.tracking = True
+        self.tracker=Tracking(self.game,self,self.game.player)
     
     def animate(self, dt):
         self.frame_index += self.animation_spd * dt

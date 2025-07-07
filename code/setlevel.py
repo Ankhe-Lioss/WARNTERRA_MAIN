@@ -20,6 +20,7 @@ def setlevel(game):
     game.doors = set()
     
     game.door_opened = True
+    game.blessing_list = [None] * 5
 
     # Ground and Walls
 #    for x, y, image in game.map.get_layer_by_name('Ground').tiles():
@@ -94,6 +95,8 @@ def setlevel(game):
             # Reinitialize the UI with the new player
             game.ui = UI(game, game.player, game.display_surface)
 
+        elif obj.name == 'Blessing':
+            game.blessing_list[int(obj.type)] = (obj.x, obj.y)
         else:
             if 'room' in obj.properties:
                 if obj.name == "Check_in":

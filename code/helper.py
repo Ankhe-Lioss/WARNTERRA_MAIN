@@ -56,6 +56,9 @@ class Delay:
         # Register
         self.game.delays.add(self)
     
+    def discard(self):
+        self.game.delays.discard(self)
+    
     def update(self, dt):
         self.elapsed += dt * 1000 
         if self.elapsed >= self.delay_time:
@@ -64,7 +67,7 @@ class Delay:
             del self
 
 class Flyout_number(pygame.sprite.Sprite):
-    def __init__(self, pos, number, color, game, font_size=13):
+    def __init__(self, pos, number, color, game, font_size=22):
         super().__init__(game.all_sprites)
         font_path = "images/font/PressStart2P.ttf"
         font = pygame.font.Font(font_path, font_size)
@@ -117,29 +120,84 @@ class Announcement(pygame.sprite.Sprite):
             self.kill()
 
 class Description:
-    def __init__(self, *parts, font_size=24, default_color=(255, 255, 255)):
-        self.font = pygame.font.Font("images/font/UncialAntiqua-Regular.ttf", font_size)
-        self.parts = parts
+    def __init__(self, *parts, max_width=280, max_height=280, default_color=(255,255,255), default_font_size=20):
+        pygame.font.init()
+        self.max_width = max_width
+        self.max_height = max_height
         self.default_color = default_color
+        self.default_font_size = default_font_size
 
-        # Render 
-        rendered = []
-        for part in self.parts:
+        # (text, color, font_size)
+        processed_parts = []
+        for part in parts:
             if isinstance(part, tuple):
-                text, color = part
+                if len(part) == 3:
+                    text, color, font_size = part
+                elif len(part) == 2:
+                    text, color = part
+                    font_size = self.default_font_size
+                else:
+                    text = part[0]
+                    color = self.default_color
+                    font_size = self.default_font_size
             else:
-                text, color = part, self.default_color
-            rendered.append(self.font.render(str(text), True, color))
+                text = part
+                color = self.default_color
+                font_size = self.default_font_size
+            #processed_parts.append((str(text), color, font_size))
+    
+            # Split by spaces
+            words = str(text).split(' ')
+            for i, word in enumerate(words):
+                if i < len(words) - 1:
+                    processed_parts.append((word + ' ', color, font_size))
+                else:
+                    processed_parts.append((word, color, font_size))
 
-        # Combine into one surface
-        width = sum(img.get_width() for img in rendered)
-        height = max(img.get_height() for img in rendered)
-        self.image = pygame.Surface((width, height), pygame.SRCALPHA)
-        x = 0
-        for img in rendered:
-            self.image.blit(img, (x, 0))
-            x += img.get_width()
-        self.rect = self.image.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))  # Default position
+        # RETURNSFAJDAOIDJASODJAOISDJOIASJDO
+        lines = []
+        current_line = []
+        current_width = 0
+        line_height = 0
+
+        for text, color, font_size in processed_parts:
+            font = pygame.font.Font("images/font/PressStart2P.ttf", font_size)
+
+            for subline in str(text).split('\n'):
+                text_surface = font.render(subline, True, color)
+                text_width = text_surface.get_width()
+                text_height = text_surface.get_height()
+
+                if current_width + text_width > self.max_width and current_line:
+                    lines.append((current_line, line_height))
+                    current_line = []
+                    current_width = 0
+                    line_height = 0
+
+                current_line.append((text_surface, current_width))
+                current_width += text_width
+                line_height = max(line_height, text_height)
+
+                if '\n' in text:
+                    lines.append((current_line, line_height))
+                    current_line = []
+                    current_width = 0
+                    line_height = 0
+
+        if current_line:
+            lines.append((current_line, line_height))
+
+        # FINAL
+        total_height = sum(h for _, h in lines)
+        total_height = min(total_height, self.max_height)
+        self.image = pygame.Surface((self.max_width, total_height), pygame.SRCALPHA)
+        y = 0
+        for line, h in lines:
+            for surf, x in line:
+                self.image.blit(surf, (x, y))
+            y += h
+
+        self.rect = self.image.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
 
     def set_pos(self, pos):
         self.rect.center = pos

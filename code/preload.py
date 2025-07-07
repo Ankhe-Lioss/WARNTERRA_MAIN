@@ -7,6 +7,7 @@ def preload_all_image(game):
     game.check_in_image=pygame.image.load(os.path.join('images','enviroment','check_in','0.png'))
     game.icon = pygame.image.load(os.path.join('images', 'UI', 'icon.png')).convert_alpha()
     game.skill_bar = pygame.image.load(os.path.join('images', 'UI', 'skill_bar', 'skill_bar.png')).convert_alpha()
+    game.dialog_layout = pygame.image.load(os.path.join('images', 'UI', 'dlayout.png')).convert_alpha()
 
     #enemies
     enemy_frames = {}

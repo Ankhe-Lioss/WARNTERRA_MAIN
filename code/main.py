@@ -18,7 +18,8 @@ class Game:
         pygame.init()
 
         # Display
-        self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SRCALPHA)
+        
         pygame.mouse.set_visible(False)
         self.game_font = pygame.font.Font(os.path.join('images', 'font', 'oldenglishtextmt.ttf'), 40)
         
@@ -62,6 +63,9 @@ class Game:
         self.avg1s_fps = 0
         self.last_timer = 0
         
+        # TEST ONCE
+
+        
     def restart(self):
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()
@@ -69,6 +73,7 @@ class Game:
         self.player_projectiles = pygame.sprite.Group()
         self.enemy_projectiles = pygame.sprite.Group()
         self.collision_sprites = pygame.sprite.Group()
+        self.animated_tiles = pygame.sprite.Group()
         self.door_sprites = pygame.sprite.Group()
         self.aoe_sprites = pygame.sprite.Group()
         self.player_currweapdict=[]
@@ -138,8 +143,8 @@ class Game:
             self.draw_menu(dt)
             # CURSOR
             check_cursor(self)
-            
-            
+
+
             # REPEATING TESTS FOR UPPER
             """
             from helper import Description
@@ -148,6 +153,7 @@ class Game:
                 (0, 500)
                 )
             """
+            
             
             # UPDATE (LAST)
             # UPDATE (LAST)

@@ -14,6 +14,9 @@ class Skill:
         self.cooldown, self.warmup, self.cast_time = skill_stats[self.name]
         self.remaining = self.warmup
         
+        # Passive = not depends on user states
+        self.passive = False
+        
         # Audio
         if self.name in game.skill_audio:
             self.sound = game.skill_audio[self.name]
@@ -23,6 +26,10 @@ class Skill:
             self.sound.play()
     
     def cast(self):
+        if self.passive:
+            self.activate()
+            return
+        
         if self.ready and not self.user.stunned and not self.user.silenced and not self.user.channeling and not self.user.meditating:
             self.activate()
         else:

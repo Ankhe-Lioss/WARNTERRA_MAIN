@@ -1,6 +1,7 @@
 from setting import *
 from player_skills import *
 import math
+from button import Instruction_rect
 
 class Weap(pygame.sprite.Sprite):
     def __init__(self, game):
@@ -25,6 +26,8 @@ class Weap(pygame.sprite.Sprite):
 
         self.icon = pygame.transform.smoothscale(self.surf, (new_width, new_height))
         self.icon_rect = self.icon.get_frect(center=(1191,651))
+        
+        #self.detail = Instruction_rect()
 
     def update_pos(self):
         weapon_offset = pygame.math.Vector2(10, -30)  # adjust for hand position

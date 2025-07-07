@@ -62,6 +62,9 @@ class Game:
         self.avg1s_fps = 0
         self.last_timer = 0
         
+        # TEST ONCE
+
+        
     def restart(self):
         self.all_sprites = AllSprites()
         self.player_sprites = pygame.sprite.GroupSingle()
@@ -149,6 +152,7 @@ class Game:
                 (0, 500)
                 )
             """
+            
             
             # UPDATE (LAST)
             # UPDATE (LAST)

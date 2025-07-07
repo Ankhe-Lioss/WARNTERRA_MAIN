@@ -92,9 +92,22 @@ class Button:
 
 		return action
 
-class Interactive_icon:
-	def __init__(self, x, y, icon):
-		self.image = icon
-		self.rect = self.image.get_rect()
-		self.rect.topleft = (x, y)
-		self.clicked = False
+from helper import Description
+
+class Instruction_rect:
+    def __init__(self, rect, description: Description, game):
+        self.rect = rect
+        self.description = description
+        self.dialog = game.dialog_layout
+
+    def draw(self, surface):
+        pos = pygame.mouse.get_pos()
+        
+        if self.rect.collidepoint(pos):
+            text_image = self.description.image
+            padding = 8
+
+            self.dialog.blit(text_image, (padding, padding))
+
+            surface.blit(self.dialog, CENTER)
+	

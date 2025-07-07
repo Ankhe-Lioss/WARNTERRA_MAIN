@@ -1,6 +1,7 @@
 import pygame.image
 
 from setting import *
+#background that run on loop when open the menu
 class Background(pygame.sprite.Sprite):
     def __init__(self):
         self.frame_index = 0

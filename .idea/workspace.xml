@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee4a0f70-305e-49b1-b297-9d90997c641d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Level5.tmx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Level6.tmx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Level7.tmx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Level8.tmx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/maps/Level9.tmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/maps/Level4.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/data/maps/Level4.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/untitled.tiled-session" beforeDir="false" afterPath="$PROJECT_DIR$/data/untitled.tiled-session" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

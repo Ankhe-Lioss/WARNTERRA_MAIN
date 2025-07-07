@@ -181,27 +181,27 @@
             }
         },
         "maps/Level4.tmx": {
-            "scale": 0.33,
-            "selectedLayer": 2,
+            "scale": 0.5,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 960.6060606060605,
-                "y": 2240.909090909091
+                "x": 271,
+                "y": 1907
             }
         },
         "maps/Level5.tmx": {
             "scale": 0.526953125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 768.5693106004449,
-                "y": 767.6204595997035
+                "x": 769.518161601186,
+                "y": 3101.7939214232765
             }
         },
         "maps/Level6.tmx": {
             "scale": 0.526953125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 768.5693106004449,
-                "y": 767.6204595997034
+                "x": 769.518161601186,
+                "y": 1467.8724981467753
             }
         },
         "maps/normal_level_model.tmx": {

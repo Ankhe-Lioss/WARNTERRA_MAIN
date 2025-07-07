@@ -142,7 +142,7 @@ class Animated_Ground(pygame.sprite.Sprite):
     """Animated ground tile (e.g. animated water)."""
 
     def __init__(self, pos, game,name):
-        super().__init__(game.all_sprites)
+        super().__init__(game.all_sprites,game.collision_sprites)
         self.game = game
         self.name = name
         self.frames=[]

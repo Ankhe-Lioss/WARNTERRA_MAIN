@@ -171,7 +171,7 @@ class Bazooka_secondary(Player_skill):
     def activate(self):
         super().activate()
         self.user.weap.primary = Bazooka_primary_enhanced(self.user, self.game)
-        Buff(self.cast_time, 0.3, 'atk', self.game, self.user)
+        Buff(self.cast_time, 0.2, 'atk', self.game, self.user)
     
     def deactivate(self):
         super().deactivate()

@@ -23,6 +23,7 @@ class Gauntlet_q_skill(Player_projectiles):
             
             self.game.player.weap.q_skill.remaining -= 2000
             self.game.player.weap.e_skill.remaining -= 2000
+            self.game.player.weap.secondary.remaining = 0
             
             for sprite in collision_sprites:
                 sprite.take_damage(self.dmg)

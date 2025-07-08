@@ -67,6 +67,9 @@ class Entity(pygame.sprite.Sprite):
                         if dir.y > 0: self.rect.bottom = sprite.rect.top
     #take damage logic
     def take_damage(self, dmg, pen = 0, type="normal"):
+        if not self.alive():
+            return
+        
         if dmg < 0:
             dmg = 0    
     
@@ -99,6 +102,9 @@ class Entity(pygame.sprite.Sprite):
             Flyout_number(self.rect.center, int(delta), (255, 165, 50), self.game, font_size=18)
         
     def heal(self, healing, type="normal"):
+        if not self.alive():
+            return
+        
         if type == "normal":
             Flyout_number(self.rect.center, "+" + str(int(healing)), (100, 255, 100), self.game)
         elif type == "overtime":

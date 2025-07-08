@@ -68,9 +68,11 @@ class Healthbar(pygame.sprite.Sprite):
 
 
 class Player_healthbar(pygame.sprite.Sprite):
-    def __init__(self, user):
+    def __init__(self, user, game):
         self.user = user
         self.type = 'top'
+
+        super().__init__(game.all_sprites)
 
         # Load bar images AFTER display is initialized
         self.bar_bg_frames=[]
@@ -105,8 +107,9 @@ class Player_healthbar(pygame.sprite.Sprite):
         self.image.blit(text,(105,66))
         text=self.level_font.render(f"{int(self.user.game.level+1)}", True, 'White')
         self.image.blit(text,(43,51))
+        
     def update(self, dt):
-        if self.user.hp <= 0:
+        if not self.user.alive():
             self.kill()
             return
 

@@ -5,8 +5,8 @@
     },
     "activeFile": "maps/Level1.tmx",
     "expandedProjectPaths": [
-        "maps",
         ".",
+        "maps",
         "tilesets"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -133,64 +133,65 @@
         },
         "maps/Level1.tmx": {
             "expandedObjectLayers": [
-                13,
-                2,
-                7,
-                6,
                 11,
+                2,
                 8,
-                5
+                7,
+                13,
+                5,
+                6
             ],
-            "scale": 0.75,
-            "selectedLayer": 4,
+            "scale": 0.33,
+            "selectedLayer": 12,
             "viewCenter": {
-                "x": 1215.3333333333333,
-                "y": 2892.6666666666665
+                "x": 765.1515151515151,
+                "y": 1859.090909090909
             }
         },
         "maps/Level2.tmx": {
             "expandedObjectLayers": [
-                14,
+                11,
+                2,
+                8,
+                7,
+                13,
+                10,
                 5,
                 6,
-                13,
-                2,
-                10,
-                11,
-                8,
-                7
+                14
             ],
-            "scale": 3,
+            "scale": 0.5,
             "selectedLayer": 12,
             "viewCenter": {
-                "x": 952.1666666666665,
-                "y": 767.8333333333333
+                "x": 960,
+                "y": 2241
             }
         },
         "maps/Level3.tmx": {
             "expandedObjectLayers": [
-                5,
+                7,
                 13,
-                10
+                10,
+                5
             ],
             "scale": 1.5,
-            "selectedLayer": 12,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 955,
-                "y": 4321
+                "x": 960,
+                "y": 2240.333333333333
             }
         },
         "maps/Level4.tmx": {
             "expandedObjectLayers": [
-                13,
                 8,
-                7
+                7,
+                13
             ],
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 12,
             "viewCenter": {
-                "x": 949.5,
-                "y": 3864.5
+                "x": 960,
+                "y": 2240.333333333333
             }
         },
         "maps/Level5.tmx": {
@@ -200,8 +201,8 @@
             "scale": 1.5,
             "selectedLayer": 12,
             "viewCenter": {
-                "x": 980.3333333333333,
-                "y": 3302.333333333333
+                "x": 960,
+                "y": 2240.333333333333
             }
         },
         "maps/Level6.tmx": {
@@ -301,17 +302,21 @@
     "openFiles": [
         "maps/normal_level_model (2).tmx",
         "maps/Level6.tmx",
-        "maps/Level1.tmx"
+        "maps/Level1.tmx",
+        "maps/Level2.tmx",
+        "maps/Level3.tmx",
+        "maps/Level4.tmx",
+        "maps/Level5.tmx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
         "maps/normal_level_model (2).tmx",
         "maps/Level6.tmx",
-        "maps/Level1.tmx",
         "maps/Level5.tmx",
         "maps/Level4.tmx",
-        "maps/Level2.tmx",
         "maps/Level3.tmx",
+        "maps/Level2.tmx",
+        "maps/Level1.tmx",
         "maps/Example.tmx",
         "tilesets/Animated_collision.tsx",
         "tilesets/Non_animated_collision.tsx",

@@ -16,8 +16,8 @@ animated_image_offset={#name = (inflate,offset)
 'Statues':((0,-42),(0,21)),
 'Flames_trap':((0,-86),(0,43)),
 'Pillar_Torch':((-32,-70),(0,35)),
-'Wooden_Door':((0,-32),(0,-16)),
-'Stone_Door':((0,-32),(0,-16)),
+'Wooden_Door':((0,-64),(0,0)),
+'Stone_Door':((0,-64),(0,0)),
 'Armored_Table':((0,-32),(0,8)),
 'Shrine':((0,-52),(0,26)),
 'Well':((0,-42),(0,21))
@@ -54,7 +54,7 @@ class Check_in(pygame.sprite.Sprite):
         self.image = game.check_in_image
         self.rect = self.image.get_frect(topleft=pos)
         self.image_rect = self.image.get_frect(topleft=pos)
-        self.visible = True
+        self.visible = False
         
     def update(self, dt):
         if pygame.sprite.spritecollide(self, self.game.player_sprites,False):

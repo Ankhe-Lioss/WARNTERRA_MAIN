@@ -187,6 +187,61 @@ class UI:
             border_rect = pygame.Rect(icon_x, icon_y, icon_size, icon_size)
             pygame.draw.rect(self.display_surface, (255, 255, 255), border_rect, 1)
 
+    def draw_stat_panel(self):
+        # Load and scale down the panel image
+        original_panel = pygame.image.load(os.path.join('images', 'ui', 'statlayout.png')).convert_alpha()
+        panel = pygame.transform.scale(original_panel, (150, 120))  # Smaller size
+        panel_width, panel_height = panel.get_size()
+
+        # Align to the left of skill UI (skill UI starts ~WINDOW_WIDTH - 310)
+        skill_box_left = WINDOW_WIDTH - 350
+        x = skill_box_left - panel_width - 10
+        y = WINDOW_HEIGHT - panel_height - 20
+
+        self.display_surface.blit(panel, (x, y))
+
+        # Load and scale icons (to 24x24)
+        atk_icon = pygame.transform.scale(
+            pygame.image.load(os.path.join('images', 'ui', 'stats', 'atk.png')).convert_alpha(), (20, 20)
+        )
+        def_icon = pygame.transform.scale(
+            pygame.image.load(os.path.join('images', 'ui', 'stats', 'def.png')).convert_alpha(), (20, 20)
+        )
+        spd_icon = pygame.transform.scale(
+            pygame.image.load(os.path.join('images', 'ui', 'stats', 'spd.png')).convert_alpha(), (20, 20)
+        )
+
+        icons = [atk_icon, def_icon, spd_icon]
+        stats = [self.player.atk, self.player.def_, self.player.spd]
+        bases = [self.player.baseatk, self.player.basedef, self.player.basespd]
+
+        icon_x = x + 40
+        text_x = x + 65  # Closer to icon, within small box
+        base_y = y + 25
+        line_spacing = 24  # Tighter vertical space
+
+        # Use smaller font for tight fit
+        small_font = pygame.font.Font(os.path.join('images', 'font', 'DungeonChunk.ttf'), 16)
+
+        for i, (icon, stat, base) in enumerate(zip(icons, stats, bases)):
+            y_offset = base_y + i * line_spacing
+
+            # Draw icon
+            self.display_surface.blit(icon, (icon_x, y_offset))
+
+            # Determine color
+            if stat > base:
+                color = (255, 230, 200)
+            elif stat < base:
+                color = (255, 140, 140)
+            else:
+                color = (255, 255, 255)
+
+            # Draw number
+            text_surface = small_font.render(str(int(stat)), True, color)
+            text_rect = text_surface.get_rect(midleft=(text_x, y_offset + icon.get_height() // 2))
+            self.display_surface.blit(text_surface, text_rect)
+
     '''def draw_skill_boxes(self, dt):
         skill_keys = ['Left', 'Right', 'Q', 'E']
         for index, key in enumerate(skill_keys):
@@ -254,4 +309,5 @@ class UI:
         #self.draw_skill_boxes(dt)
         self.draw_status_effects()
         self.draw_boss_bar(dt)
+        self.draw_stat_panel()
 

@@ -645,12 +645,12 @@
   <object id="635" name="Weapon" type="Bow" x="730.667" y="3932">
    <point/>
   </object>
-  <object id="637" name="Check_in" x="822" y="3312" width="160" height="128">
+  <object id="637" name="Check_in" x="832" y="3232" width="160" height="128">
    <properties>
     <property name="room" type="int" value="0"/>
    </properties>
   </object>
-  <object id="638" name="Check_in" x="806" y="1662" width="160" height="128">
+  <object id="638" name="Check_in" x="832" y="1600" width="160" height="128">
    <properties>
     <property name="room" type="int" value="1"/>
    </properties>

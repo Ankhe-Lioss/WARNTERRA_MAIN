@@ -762,12 +762,12 @@
   <object id="647" name="Blessing" type="2" x="912" y="2716">
    <point/>
   </object>
-  <object id="648" name="Check_in" x="810" y="3288" width="160" height="128">
+  <object id="648" name="Check_in" x="832" y="3264" width="160" height="128">
    <properties>
     <property name="room" type="int" value="0"/>
    </properties>
   </object>
-  <object id="649" name="Check_in" x="818" y="1634" width="160" height="128">
+  <object id="649" name="Check_in" x="832" y="1600" width="160" height="128">
    <properties>
     <property name="room" type="int" value="1"/>
    </properties>

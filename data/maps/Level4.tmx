@@ -715,12 +715,12 @@
   <object id="468" name="Player" x="924" y="3992">
    <point/>
   </object>
-  <object id="580" name="Check_in" x="877.333" y="1417.33" width="160" height="128">
+  <object id="580" name="Check_in" x="896" y="1376" width="160" height="128">
    <properties>
     <property name="room" type="int" value="2"/>
    </properties>
   </object>
-  <object id="581" name="Check_in" x="881.333" y="494.667" width="160" height="128">
+  <object id="581" name="Check_in" x="896" y="448" width="160" height="128">
    <properties>
     <property name="room" type="int" value="3"/>
    </properties>
@@ -731,12 +731,12 @@
   <object id="594" name="Weapon" type="Bazooka" x="1088" y="3994.67">
    <point/>
   </object>
-  <object id="691" name="Check_in" x="846" y="2364" width="160" height="128">
+  <object id="691" name="Check_in" x="864" y="2304" width="160" height="128">
    <properties>
     <property name="room" type="int" value="1"/>
    </properties>
   </object>
-  <object id="692" name="Check_in" x="820" y="3282" width="160" height="128">
+  <object id="692" name="Check_in" x="832" y="3232" width="160" height="128">
    <properties>
     <property name="room" type="int" value="0"/>
    </properties>

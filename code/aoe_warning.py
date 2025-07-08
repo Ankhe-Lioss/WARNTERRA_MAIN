@@ -8,6 +8,7 @@ Spawn_aoe_dict={  #aoe skill=[frame_number,life_time]d
     'Spawn_Soraka_cc' : (12, 2000),
     'Dust_trace':(8,400)
 }
+#the sprite that end when it reach its life time
 class Spawn_aoe(pygame.sprite.Sprite):
     def __init__(self, pos, game, user_atk=0):
         super().__init__(game.all_sprites)
@@ -20,13 +21,14 @@ class Spawn_aoe(pygame.sprite.Sprite):
         self.frame_number=self.stat[0]
         self.lifetime=self.stat[1]
         self.frame_index = 0
+        #loading graphics
         self.frames = self.game.aoe_warning_frames[self.name]
         self.animation_speed = 6
         self.image = self.frames[0]
         self.rect = self.image.get_frect(center=pos)
+        #radius if check if it a circle
         self.radius = self.rect.width / 2 + 20
         self.image_rect = self.image.get_frect(center=pos)
-
 
     def animate(self, dt):
         self.frame_index += self.animation_speed * dt

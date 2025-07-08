@@ -11,7 +11,7 @@ entity_stats = {
     "Maokai" : (800 , 30 , 20, 100, 95 , 11  , 3  , 200 , 100),
     "Soraka" : (14000,100, 25, 300, 777, 45  , 4.5, 1000, 625)
 } 
-
+#handling stat and managing stat change
 skill_stats = {
 #   "Skill" : (cooldown, warmup, cast_time)
 #player
@@ -110,7 +110,7 @@ enemy_projectiles = {
 aoe_stat={
 #   aoe skill=[scale_atk, frame_number, life_time]
     'Poro_Stomp':(0.5, 3, 1000),
-    'Chogath_Rupture':(2, 5, 1000),
+    'Chogath_Rupture':(2, 5, 500),
     'Veigar_Darkmatter':(1, 9, 200),
     'Soraka_star': (0.5, 4, 400),
 # Player

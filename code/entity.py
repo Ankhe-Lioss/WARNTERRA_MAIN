@@ -34,19 +34,17 @@ class Entity(pygame.sprite.Sprite):
         self.silenced = False         # Cannot use skill (Debuff status)
         self.ghost = False            # Go through enemies
         self.rooted = False           # Cannot move (Debuff status)
-        self.cross_wall = False       # :D
+        self.cross_wall = False       # Not checking for wall collisions
         self.meditating = False       # Cannot move (Like channeling but also cannot move, only 1 at a time)
         
-        # Status
-        # Removed
-        
+        #init rect for work
         self.rect = pygame.rect.FRect()
         
-        self.healthbar = Healthbar(self)
-        if isinstance(self, Boss):
+        self.healthbar = Healthbar(self)#init for healthbar
+        if isinstance(self, Boss): #different healthbar for box
             self.healthbar.kill()
         self.image_offset = getattr(self, 'image_offset', (0, 0))
-
+    #calculate stat for each time init
     def updstat(self):
         self.maxhp = self.raw_hp + self.level * self.hp_multiplier
         self.baseatk = self.raw_atk + self.level * self.atk_multiplier
@@ -56,7 +54,7 @@ class Entity(pygame.sprite.Sprite):
         self.atk = self.baseatk
         self.def_ = self.basedef
         self.spd = self.basespd
-
+    #wall collision logic
     def collision(self, dir_type, dir):
         for group in (self.game.collision_sprites, self.game.animated_tiles):
             for sprite in group:
@@ -67,7 +65,7 @@ class Entity(pygame.sprite.Sprite):
                     else:
                         if dir.y < 0: self.rect.top = sprite.rect.bottom
                         if dir.y > 0: self.rect.bottom = sprite.rect.top
-    
+    #take damage logic
     def take_damage(self, dmg, pen = 0, type="normal"):
         if dmg < 0:
             dmg = 0    
@@ -110,10 +108,10 @@ class Entity(pygame.sprite.Sprite):
             self.hp = min(self.hp + healing, self.maxhp / 2)
         else:
             self.hp = min(self.hp + healing, self.maxhp)
-    
+    #death effect
     def death(self):
         self.kill()
-    
+    #moving logic for entity in general
     def move(self, dt):
         if self.meditating or self.stunned or self.rooted:
             return
@@ -191,7 +189,40 @@ class Enemy(Entity):
         #Tracking
         self.tracking = True
         self.tracker=Tracking(self.game,self,self.game.player)
-    
+        #Line of sight
+        self.last_known_player_pos = pygame.Vector2(self.player.rect.center)
+        self.has_direct_los = False
+        #path finding if not have los
+        self.path_vector_timer = 500  # ms
+        self.path_vector_elapsed = 0
+        self.cached_path_vector = pygame.Vector2()
+        self.path = []
+        self.path_index = 0
+        self.cached_path_vector = pygame.Vector2()
+    def has_line_of_sight(self):
+        start = pygame.Vector2(self.rect.center)
+        end = pygame.Vector2(self.player.rect.center)
+        delta = end - start
+        distance = delta.length()
+
+        if distance == 0:
+            return True
+
+        direction = delta.normalize()
+        steps = int(distance // 32)  # step every 32 pixels
+
+        for i in range(steps + 1):  # +1 to include final check
+            check_pos = start + direction * (i * 32)
+
+            # 32x32 block centered at this sample point
+            block_rect = pygame.Rect(0, 0, 32, 32)
+            block_rect.center = check_pos
+
+            for sprite in self.game.collision_sprites:
+                if sprite.rect.colliderect(block_rect):
+                    return False  # blocked by obstacle
+
+        return True  # all clear
     def animate(self, dt):
         self.frame_index += self.animation_spd * dt
         self.image = self.frames[self.state][int(self.frame_index) % len(self.frames[self.state])]
@@ -199,20 +230,66 @@ class Enemy(Entity):
             self.image = pygame.transform.flip(self.image, True, False)
     
     def death(self):
-        Aninmated_Object(self.rect.center,'Grave2',self.game.all_sprites, self.game)
+        if self.alive():
+            self.game.spawn_numb -= 1
+            Aninmated_Object(self.rect.center,'Grave2',self.game.all_sprites, self.game)
         super().death()
-        self.game.spawn_numb -= 1
-            
-    def cal_dis(self):
-        # get direction
+
+    def cal_dis(self, dt):
         player_pos = pygame.Vector2(self.player.rect.center)
         enemy_pos = pygame.Vector2(self.rect.center)
         self.distance_vector = player_pos - enemy_pos
-        
-        # FKING TEST THE TRACJER
-        self.direction = self.distance_vector.normalize() if self.distance_vector else self.distance_vector
         self.facing_dir = self.distance_vector.normalize() if self.distance_vector else self.distance_vector
-        
+        #  Direct line of sight to player
+        if self.has_line_of_sight():
+            self.has_direct_los = True
+            self.last_known_player_pos = player_pos
+            self.path = []
+            self.path_index = 0
+
+            if self.distance_vector.length_squared() > 0:
+                self.direction = self.distance_vector.normalize()
+
+            else:
+                self.direction = pygame.Vector2()
+            return
+
+        # No line of sight
+        if self.has_direct_los:
+            # Move toward last seen position
+            to_last_known = self.last_known_player_pos - enemy_pos
+            if to_last_known.length() > 4:
+                self.direction = to_last_known.normalize()
+
+                return
+            else:
+                # Reached last known pos
+                self.has_direct_los = False
+
+        # Use pathfinding if no LOS or reached last known pos
+        self.path_vector_elapsed += dt * 1000
+        if self.path_vector_elapsed >= self.path_vector_timer:
+            self.path_vector_elapsed = 0
+            self.path = self.tracker.get_path()
+            self.path_index = 1  # skip current tile
+
+        if self.path and self.path_index < len(self.path):
+            target_cell = self.path[self.path_index]
+            target_pos = pygame.Vector2(
+                (target_cell[0] + 0.5) * self.tracker.cell_size,
+                (target_cell[1] + 0.5) * self.tracker.cell_size
+            )
+            to_target = target_pos - enemy_pos
+
+            if to_target.length() < 4:
+                self.path_index += 1  # reached this tile
+            elif to_target.length_squared() > 0:
+                self.direction = to_target.normalize()
+
+                return
+
+        # No direction fallback
+        self.direction = pygame.Vector2()
     def move_enemy(self,dt):
         # update the rect position + collision
         if self.forced_moving:
@@ -223,7 +300,7 @@ class Enemy(Entity):
             return
         
         distance = self.distance_vector.length()
-        if distance <= self.keep_range:
+        if distance <= self.keep_range and self.has_line_of_sight() :
             return
         
         self.rect.x += self.direction.x * self.spd * dt
@@ -254,7 +331,7 @@ class Enemy(Entity):
     
     def update(self, dt):
         if self.death_time==0:
-            self.cal_dis()
+            self.cal_dis(dt)
             for skill_name in self.skills:
                 self.skills[skill_name].update(dt)
             self.attacking()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="626">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="651">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -509,6 +509,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,172,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -527,6 +528,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,172,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -545,9 +547,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,172,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -624,14 +624,13 @@
   <object id="479" gid="207" x="672" y="4320" width="128" height="128"/>
   <object id="480" gid="207" x="640" y="4288" width="128" height="128"/>
   <object id="481" gid="211" x="992" y="4288" width="46" height="66"/>
+  <object id="650" gid="211" x="864" y="1536" width="46" height="66"/>
  </objectgroup>
  <objectgroup id="8" name="Animated_collision">
   <object id="492" gid="195" x="768" y="3744" width="64" height="96"/>
   <object id="493" gid="195" x="1024" y="3744" width="64" height="96"/>
   <object id="496" gid="199" x="768" y="4192" width="96" height="160"/>
   <object id="497" gid="202" x="1184" y="4000" width="128" height="128"/>
-  <object id="596" gid="203" x="808" y="3966.33" width="68" height="50"/>
-  <object id="597" gid="203" x="968" y="3968.33" width="68" height="50"/>
  </objectgroup>
  <objectgroup id="14" name="Interactive"/>
  <objectgroup id="13" name="Entities">
@@ -643,6 +642,136 @@
   </object>
   <object id="594" name="Weapon" type="Gauntlet" x="1002" y="3942.67">
    <point/>
+  </object>
+  <object id="626" name="Weapon" type="Bazooka" x="840" y="4029.33">
+   <point/>
+  </object>
+  <object id="627" name="Weapon" type="Lunar_gun" x="1002.67" y="4034">
+   <point/>
+  </object>
+  <object id="628" name="Soraka" x="888" y="2256">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="630" name="Maokai" x="442" y="2250">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="631" name="Maokai" x="1384" y="2260">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="632" name="Maokai" x="1394" y="2568">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="633" name="Maokai" x="430" y="2554">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="634" name="Maokai" x="896" y="2564">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="635" name="Maokai" x="1158" y="2384">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="636" name="Maokai" x="644" y="2376">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="638" name="Lulu" x="1480" y="3310">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="639" name="Lulu" x="280" y="3312">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="640" name="Chogath" x="888" y="3010">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="641" name="Chogath" x="1392" y="2898">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="642" name="Chogath" x="448" y="2844">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="643" name="Maokai" x="616" y="3174">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="644" name="Maokai" x="1170" y="3154">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="645" name="Blessing" type="0" x="1548" y="2098">
+   <point/>
+  </object>
+  <object id="646" name="Blessing" type="1" x="234" y="3326">
+   <point/>
+  </object>
+  <object id="647" name="Blessing" type="2" x="912" y="2716">
+   <point/>
+  </object>
+  <object id="648" name="Check_in" x="800" y="3296" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="649" name="Check_in" x="800" y="1472" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="1"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

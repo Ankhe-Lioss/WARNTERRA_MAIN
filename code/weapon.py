@@ -50,11 +50,12 @@ class Weap(pygame.sprite.Sprite):
 
     #draw skill bar and anything on it including(skill, cooldown,instruction and timer)
     def draw_skill_bar(self):
+        #init the skill bar
         surf = self.skill_bar
         base_x, base_y = 894, 571  # top-left of vine UI
         self.game.display_surface.blit(surf, (base_x, base_y))
         skill_keys = {'Left': self.primary, 'Right': self.secondary, 'Q': self.q_skill, 'E': self.e_skill}
-
+        #check and draw everyskill in inventory
         for index, key in enumerate(skill_keys):
             skill = skill_keys[key]
             cooldown_ratio = skill.remaining / skill.cooldown if skill.cooldown else 0
@@ -72,7 +73,6 @@ class Weap(pygame.sprite.Sprite):
             
             icon_rect = pygame.Rect(x, y, 42, 42)
 
-            # THIS FCKING RECTDAHDUIHASDHAIUSDHAISHDIAUSDUIHD
 
 
             # Background (only visible if icon has transparency)
@@ -104,6 +104,7 @@ class Weap(pygame.sprite.Sprite):
                 cd_text = self.cooldown_font.render(str(cooldown_time), True, 'white')
                 cd_rect = cd_text.get_rect(center=(x + 21, y + 17))
                 self.game.display_surface.blit(cd_text, cd_rect)
+        #blit the icon last
         self.game.display_surface.blit(self.icon,self.icon_rect.topleft)
         if self.player.swap_cooldown>0:
             center_pos=self.icon_rect.center
@@ -126,19 +127,20 @@ class Weap(pygame.sprite.Sprite):
         self.secondary.update(dt)
         self.q_skill.update(dt)
         self.e_skill.update(dt)
-     
+
     def update_instruction_rect(self):
         for key in self.instruction_rects:
             self.instruction_rects[key].update(self.game.display_surface)
-    
+    #update self
     def update(self, dt):
         self.update_pos()
         if self.game.player.weap is self:
+            #only draw the weapon in use
             self.visible=True
             self.draw_skill_bar()
         else:
             self.visible=False
-        
+        #instruction and skill dt
         self.update_instruction_rect()
         self.update_skills(dt)
 
@@ -313,7 +315,10 @@ weapon_skill_detail = {
         )
     ],
     "Bazooka" : [
-        
+        Description(),
+        Description(),
+        Description(),
+        Description()
     ],
     "Lunar_gun" : [
         Description(

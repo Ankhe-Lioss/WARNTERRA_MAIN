@@ -5,13 +5,13 @@ from spawn import *
 from UI import UI  # Make sure UI is imported
 from items import *
 def setlevel(game):
-    level = game.level%5+1
-    
+    print(game.level)
+    level = game.level % 6 + 1
     
     game.room = -1
 
     # Load TMX map
-    game.map = load_pygame(os.path.join('data', 'maps', 'Example.tmx'))
+    game.map = load_pygame(os.path.join('data', 'maps', f'Level{level}.tmx'))
 
     # Initialize structures
     game.spawnlist = {}
@@ -107,7 +107,7 @@ def setlevel(game):
                     game.spawnlist.setdefault(room, {})
                     game.spawnlist[room].setdefault(wave, [])
                     game.spawnlist[room][wave].append((obj.name, obj.x, obj.y))
-            if obj.name == "Weapon" and len(game.player_currweapdict)==0:
+            if obj.name == "Weapon":
                 Weapon_Item((obj.x, obj.y), game, obj.type)
 
     game.room_numb = len(game.checkins) - 1

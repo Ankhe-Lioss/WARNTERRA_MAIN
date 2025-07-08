@@ -22,7 +22,7 @@ class Karthus(Enemy):
     def __init__(self, pos, game):
         self.name='Karthus'
         super().__init__(pos, game)
-        self.rect = self.rect.inflate(-20, 0)
+        self.rect = self.rect.inflate(-20, -10)
         self.asymmetry=True
         self.attack_time=1000
         self.skills = {
@@ -33,7 +33,7 @@ class Chogath(Enemy):
     def __init__(self, pos, game):
         self.name='Chogath'
         super().__init__(pos, game)
-        self.rect = self.rect.inflate(0, 0)
+        self.rect = self.rect.inflate(-10, -10)
         self.asymmetry=True
         self.attack_time=1000
         self.skills = {
@@ -44,7 +44,7 @@ class Lulu(Enemy):
     def __init__(self, pos, game):
         self.name = self.__class__.__name__
         super().__init__(pos, game)
-        self.rect = self.rect.inflate(0, 0)
+        self.rect = self.rect.inflate(-20, 0)
         self.asymmetry=True
         self.attack_time=1000
         self.skills = {
@@ -56,7 +56,7 @@ class Maokai(Enemy):
     def __init__(self, pos, game):
         self.name = self.__class__.__name__
         super().__init__(pos, game)
-        self.rect = self.rect.inflate(0, 0)
+        self.rect = self.rect.inflate(-10, -10)
         self.asymmetry=True
         self.attack_time=1000
         self.skills = {

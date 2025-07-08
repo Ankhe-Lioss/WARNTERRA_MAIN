@@ -161,7 +161,7 @@ class Description:
         line_height = 0
 
         for text, color, font_size in processed_parts:
-            font = pygame.font.Font("images/font/DungeonChunk.ttf", font_size)
+            font = pygame.font.Font(os.path.join('images','font','DungeonChunk.ttf'), font_size)
 
             for subline in str(text).split('\n'):
                 text_surface = font.render(subline, True, color)

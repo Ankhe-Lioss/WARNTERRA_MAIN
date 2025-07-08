@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="691">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="140" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="719">
  <tileset firstgid="1" source="../tilesets/Floor And Wall.tsx"/>
  <tileset firstgid="153" source="../tilesets/Non_animated_non_collision.tsx"/>
  <tileset firstgid="173" source="../tilesets/Non_animated_collision.tsx"/>
@@ -659,30 +659,20 @@
   <object id="651" gid="214" x="576" y="2912" width="32" height="32"/>
   <object id="659" gid="214" x="576" y="3104" width="32" height="32"/>
   <object id="660" gid="214" x="640" y="3072" width="32" height="32"/>
-  <object id="661" gid="214" x="736" y="3104" width="32" height="32"/>
-  <object id="662" gid="214" x="896" y="3072" width="32" height="32"/>
   <object id="663" gid="214" x="992" y="3136" width="32" height="32"/>
   <object id="664" gid="214" x="1152" y="2848" width="32" height="32"/>
   <object id="665" gid="214" x="928" y="2880" width="32" height="32"/>
-  <object id="666" gid="214" x="800" y="2816" width="32" height="32"/>
   <object id="667" gid="214" x="544" y="2816" width="32" height="32"/>
   <object id="668" gid="214" x="736" y="2016" width="32" height="32"/>
   <object id="669" gid="214" x="448" y="2048" width="32" height="32"/>
-  <object id="670" gid="214" x="1152" y="2080" width="32" height="32"/>
   <object id="671" gid="214" x="1120" y="2240" width="32" height="32"/>
   <object id="672" gid="214" x="800" y="2336" width="32" height="32"/>
-  <object id="673" gid="214" x="1344" y="2144" width="32" height="32"/>
-  <object id="677" gid="214" x="1088" y="1984" width="32" height="32"/>
-  <object id="678" gid="214" x="736" y="1952" width="32" height="32"/>
-  <object id="679" gid="214" x="576" y="2176" width="32" height="32"/>
   <object id="680" gid="214" x="288" y="2176" width="32" height="32"/>
   <object id="681" gid="214" x="1760" y="2336" width="32" height="32"/>
-  <object id="682" gid="214" x="1184" y="2304" width="32" height="32"/>
   <object id="683" gid="214" x="1248" y="2016" width="32" height="32"/>
   <object id="684" gid="214" x="992" y="1888" width="32" height="32"/>
   <object id="685" gid="214" x="608" y="1888" width="32" height="32"/>
   <object id="686" gid="214" x="576" y="2368" width="32" height="32"/>
-  <object id="687" gid="214" x="1024" y="2400" width="32" height="32"/>
   <object id="688" gid="214" x="1280" y="2240" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="6" name="Non_animated_collision">
@@ -713,8 +703,6 @@
   <object id="545" gid="197" x="512" y="1568" width="128" height="128"/>
   <object id="546" gid="197" x="1344" y="1568" width="128" height="128"/>
   <object id="547" gid="197" x="1632" y="1568" width="128" height="128"/>
-  <object id="596" gid="203" x="808" y="3966.33" width="68" height="50"/>
-  <object id="597" gid="203" x="968" y="3968.33" width="68" height="50"/>
   <object id="625" gid="201" x="896" y="2208" width="104" height="130"/>
  </objectgroup>
  <objectgroup id="14" name="Interactive">
@@ -727,20 +715,212 @@
   <object id="468" name="Player" x="924" y="3992">
    <point/>
   </object>
-  <object id="580" name="Check_in" x="877.333" y="1417.33" width="160" height="128">
+  <object id="580" name="Check_in" x="864" y="1408" width="160" height="128">
    <properties>
     <property name="room" type="int" value="2"/>
    </properties>
   </object>
-  <object id="581" name="Check_in" x="881.333" y="494.667" width="160" height="128">
+  <object id="581" name="Check_in" x="880" y="220" width="160" height="128">
    <properties>
     <property name="room" type="int" value="3"/>
    </properties>
   </object>
-  <object id="593" name="Weapon" type="Bow" x="840.666" y="3941.33">
+  <object id="593" name="Weapon" type="Bow" x="731.666" y="3971.33">
    <point/>
   </object>
-  <object id="594" name="Weapon" type="Gauntlet" x="1002" y="3942.67">
+  <object id="594" name="Weapon" type="Bazooka" x="1088" y="3994.67">
+   <point/>
+  </object>
+  <object id="691" name="Check_in" x="832" y="2336" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="692" name="Check_in" x="800" y="3264" width="160" height="128">
+   <properties>
+    <property name="room" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="693" name="Nocturne" x="517" y="3360">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="694" name="Nocturne" x="1254" y="2788">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="695" name="Chogath" x="609" y="2814">
+   <properties>
+    <property name="room" type="int" value="1"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="696" name="Lulu" x="429.333" y="1998.67">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="697" name="Lulu" x="434.667" y="2404">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="698" name="Lulu" x="1614.67" y="1993.33">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="699" name="Lulu" x="1616" y="2386.67">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="700" name="Nocturne" x="949.333" y="2153.33">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="701" name="Nocturne" x="428" y="1996">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="702" name="Nocturne" x="437.333" y="2408">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="703" name="Nocturne" x="1610.67" y="1994.67">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="704" name="Nocturne" x="1614.67" y="2385.33">
+   <properties>
+    <property name="room" type="int" value="2"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="705" name="Nocturne" x="953.333" y="1092">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="706" name="Karthus" x="1400" y="1206.67">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="707" name="Karthus" x="573.333" y="1220">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="708" name="Nocturne" x="1672.97" y="1236.85">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="709" name="Nocturne" x="324.242" y="1220.73">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="710" name="Chogath" x="956" y="1244">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="711" name="Poro" x="1688" y="994">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="712" name="Poro" x="1680" y="1312">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="713" name="Poro" x="1554" y="1136">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="714" name="Poro" x="1558.67" y="1301.33">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="715" name="Poro" x="1404" y="1120">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="716" name="Poro" x="1413.33" y="1264">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="717" name="Poro" x="1266.67" y="1156">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="718" name="Poro" x="1280" y="1270.67">
+   <properties>
+    <property name="room" type="int" value="3"/>
+    <property name="wave" type="int" value="2"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

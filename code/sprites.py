@@ -1,6 +1,9 @@
 from setting import *
 from aoe import *
+
 #customizing hitbox rectangle and displaying rectangle
+from status import Burning, Rooted
+
 animated_image_offset={#name = (inflate,offset)
 'Fountain':((0,-35),(0,10)),
 'Broken_Pillar_Torch': ((-32,-78),(0,15)),
@@ -13,8 +16,8 @@ animated_image_offset={#name = (inflate,offset)
 'Statues':((0,-42),(0,21)),
 'Flames_trap':((0,-86),(0,43)),
 'Pillar_Torch':((-32,-70),(0,35)),
-'Wooden_Door':((0,-32),(0,-16)),
-'Stone_Door':((0,-32),(0,-16)),
+'Wooden_Door':((0,-64),(0,0)),
+'Stone_Door':((0,-64),(0,0)),
 'Armored_Table':((0,-32),(0,8)),
 'Shrine':((0,-52),(0,26)),
 'Well':((0,-42),(0,21))
@@ -51,7 +54,7 @@ class Check_in(pygame.sprite.Sprite):
         self.image = game.check_in_image
         self.rect = self.image.get_frect(topleft=pos)
         self.image_rect = self.image.get_frect(topleft=pos)
-        self.visible = True
+        self.visible = False
         
     def update(self, dt):
         if pygame.sprite.spritecollide(self, self.game.player_sprites,False):
@@ -159,6 +162,14 @@ class Trap(pygame.sprite.Sprite):
         # Check for player collision if trap is active
         self.collision_with_player()
 
+    def collision_with_player(self):
+        if self.state == 'on' and self.hit_cooldown == 0:
+            if self.rect.colliderect(self.game.player.rect):
+                self.hit_cooldown = self.hit_delay
+                if self.name=='Flames_trap':
+                    Burning(2000, self.game.player.maxhp * 0.05, self.game, self.game.player)
+                if self.name=='Spikes':
+                    self.game.player.take_damage(self.game.player.maxhp * 0.05)
 
 #Animated ground layer with special effect
 class Animated_Ground(pygame.sprite.Sprite):
@@ -250,30 +261,31 @@ class Door(pygame.sprite.Sprite):
 
     def update(self, dt):
         if self.state in ['opening', 'closing']:
-            self.frame_index += 6*dt
+            self.frame_index += 6 * dt
             frame_list = self.frames[self.state]
 
             if self.frame_index >= len(frame_list):
                 # Transition to final state
                 if self.state == 'opening':
                     self.state = 'opened'
-                    self.remove(self.game.collision_sprites)
                 else:
                     self.state = 'closed'
-                    self.add(self.game.collision_sprites)
 
                 self.frame_index = 0
 
-            self.image = self.frames[self.state][int(self.frame_index)]
-
+            self.image = frame_list[int(self.frame_index)]
         else:
-            # Ensure collision group reflects the current state
-            if self.state == 'closed':
-                self.add(self.game.collision_sprites)
-            else:
-                self.remove(self.game.collision_sprites)
-
             self.image = self.frames[self.state][0]
+
+        # --- Always update collision state ---
+        if self.state == 'opened':
+            if self in self.game.collision_sprites:
+                self.remove(self.game.collision_sprites)
+        else:  # All other states: keep collision
+            if self not in self.game.collision_sprites:
+                self.add(self.game.collision_sprites)
+
+
 #Explosive barrel for game
 class Explosive_Barrel(pygame.sprite.Sprite):
     def __init__(self, pos, game):

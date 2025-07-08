@@ -92,6 +92,7 @@ class Bazooka_primary(Player_projectiles):
         self.source = "Bazooka Primary"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
+        self.rect=self.rect.inflate(-36, -36)
 
 class Bazooka_primary_enhanced(Player_projectiles):
     def __init__(self, pos, direction, game):
@@ -111,7 +112,8 @@ class Bazooka_q_skill(Player_projectiles):
         self.source = "Bazooka SkillQ"
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
-    
+        self.rect=self.rect.inflate(-40, -40)
+
     def kill(self):
         Bazooka_q(self.rect.center, self.game, self.game.player.atk)
         super().kill()

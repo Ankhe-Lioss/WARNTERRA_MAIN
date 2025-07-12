@@ -218,7 +218,7 @@ class UI:
         icon_x = x + 40
         text_x = x + 65  # Closer to icon, within small box
         base_y = y + 25
-        line_spacing = 24  # Tighter vertical space
+        line_spacing = 20  # Tighter vertical space
 
         # Use smaller font for tight fit
         small_font = pygame.font.Font(os.path.join('images', 'font', 'DungeonChunk.ttf'), 16)

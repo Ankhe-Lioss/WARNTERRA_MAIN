@@ -30,7 +30,7 @@ class Player(Entity):
         self.image: pygame.Surface = self.frames[self.facing_state][self.frame_index]
         self.rect = self.image.get_frect(center=self.pos)
         self.image_rect = self.rect.copy()
-        self.player_health_bar=Player_healthbar(self)
+        self.player_health_bar=Player_healthbar(self, self.game)
         self.rect = self.rect.inflate(0, -30)
 
         self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)

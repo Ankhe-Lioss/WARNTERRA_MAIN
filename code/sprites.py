@@ -130,14 +130,7 @@ class Trap(pygame.sprite.Sprite):
                 else:
                     break
     #check if collide with player while on and no cooldown
-    def collision_with_player(self):
-        if self.state == 'on' and self.hit_cooldown == 0:
-            if self.rect.colliderect(self.game.player.rect):
-                self.hit_cooldown = self.hit_delay
-                if self.name=='Flames_trap':
-                    pass
-                if self.name=='Spikes':
-                    pass
+
     def update(self, dt):
         # Decrease cooldown using dt
         if self.hit_cooldown > 0:
@@ -163,6 +156,8 @@ class Trap(pygame.sprite.Sprite):
         self.collision_with_player()
 
     def collision_with_player(self):
+        if not self.game.player.alive():
+            return
         if self.state == 'on' and self.hit_cooldown == 0:
             if self.rect.colliderect(self.game.player.rect):
                 self.hit_cooldown = self.hit_delay

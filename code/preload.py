@@ -218,7 +218,7 @@ def preload_all_sound(game):
                 if name.startswith("Infernum") or name.startswith("Calibrum"):
                     audio.set_volume(0.15)
                 if name.startswith("Lunar"):
-                    audio.set_volume(0.6)
+                    audio.set_volume(0.45)
                     
                 skill_audio[os.path.splitext(name)[0]] = audio
                 

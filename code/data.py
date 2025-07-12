@@ -4,7 +4,7 @@ entity_stats = {
     "Poro"   : (250 , 50 , 10, 450, 75 , 25  , 3  , 20  , 10 ),
     "Meele"  : (500 , 45 , 10, 300, 65 , 30  , 1.5, 50  , 10 ),
     "Karthus": (250 , 75 , 10, 200, 25 , 75  , 1  , 650 , 400),
-    "Chogath": (700 , 40 , 15, 200, 150, 20  , 2  , 200 , 100),
+    "Chogath": (700 , 20 , 15, 200, 150, 7   , 2  , 200 , 100),
     "Veigar" : (12600,80 , 25, 250, 792, 80  , 5  , 1000, 550),
     "Lulu"   : (300 , 20 ,  5, 250, 60 , 10  , 0.5, 750 , 600),
     "Nocturne":(400 , 80 , 20,   0, 40 , 30  , 2  , 5000, 900),
@@ -30,7 +30,7 @@ skill_stats = {
     "Bazooka_primary_enhanced" : (1000, 500, 0),
     "Bazooka_secondary" : (10000, 2000, 5000),
     "Bazooka_q_skill" : (3500, 1000, 0),
-    "Bazooka_e_skill" : (12000, 4000, 0),
+    "Bazooka_e_skill" : (12000, 4000, 500),
     
     "Calibrum_primary" : (1000, 500, 0),
     "Infernum_primary" : (1000, 500, 0),
@@ -71,8 +71,8 @@ skill_stats = {
 player_projectiles = {
 #   "proj" : (atk_scale_multification, speed)
     "Gauntlet_primary" : (1.4, 1200),
-    "Gauntlet_q_skill" : (2, 1000),
-    "Gauntlet_e_skill" : (2, 700),
+    "Gauntlet_q_skill" : (2.9, 1000),
+    "Gauntlet_e_skill" : (2.5, 700),
     
     "Bow_primary" : (1.2, 1000),
     "Bow_primary_enhanced": (0.75, 800),
@@ -98,8 +98,8 @@ enemy_projectiles = {
     "Lulu_Primary" : (0.5, 600),
     "Maokai_Primary" : (1, 800),
 # Veigar
-    "Veigar_Primary" : (0.6, 750),
-    "Veigar_Secondary" : (0.5, 500),
+    "Veigar_Primary" : (0.5, 750),
+    "Veigar_Secondary" : (0.4, 500),
     "Veigar_Ult" : (0, 700),
 # Other
     "Healing_Buff" : (0, 0),
@@ -111,14 +111,14 @@ aoe_stat={
 #   aoe skill=[scale_atk, frame_number, life_time]
     'Poro_Stomp':(0.5, 3, 1000),
     'Chogath_Rupture':(2, 5, 500),
-    'Veigar_Darkmatter':(1, 9, 200),
+    'Veigar_Darkmatter':(0.75, 9, 200),
     'Soraka_star': (0.5, 4, 400),
 # Player
 
     'Bow_explosion' : (1.2, 8, 500),
-    'Bazooka_pe' : (0.8, 4, 200),
+    'Bazooka_pe' : (1, 4, 200),
     'Bazooka_q' : (1.5, 4, 200),
-    'Bazooka_e' : (1, 4, 200),
+    'Bazooka_e' : (1.3, 4, 200),
     'Calibrum_ult' : (3, 12, 600),
     'Infernum_ult' : (2, 12, 600),
 

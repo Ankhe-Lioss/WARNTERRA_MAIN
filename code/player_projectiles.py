@@ -80,6 +80,7 @@ class Bow_e_skill(Player_projectiles):
         self.name = self.__class__.__name__
         super().__init__(pos, direction, game)
         self.wall_piercing = True
+        self.rect.inflate_ip(-self.rect.w + 24, -self.rect.h + 24)
     
     def apply(self, target):
         Stunned(3000, self.game, target)
@@ -139,8 +140,7 @@ class Bazooka_e_skill(Player_projectiles):
             self.path_index = 0
         self.tracking = True
         
-        m = min(self.rect.w, self.rect.h)
-        self.rect.inflate_ip(-m + 10, -m + 10)
+        self.rect.inflate_ip(-self.rect.w + 10, -self.rect.h + 10)
 
     def find_nearest_enemy(self):
         enemies = [e for e in self.game.enemy_sprites]
@@ -234,7 +234,7 @@ class Calibrum_primary(Player_projectiles):
             target.calibrum_aura.cleanse()
                 
             Infernum_wave(self.rect.center, self.direction, self.game, target)
-            target.take_damage(apply_scale["Calibrum_mark"] * self.game.player.atk)
+            target.take_damage(apply_scale["Calibrum_mark"] * self.game.player.atk) # type: ignore
             Buff(1000, 0.3, 'spd', self.game, self.game.player)
 
 class Infernum_primary(Player_projectiles):

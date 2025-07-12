@@ -88,7 +88,7 @@ class Soraka(Boss):
         self.states.append('Healing')
 
         self.skills = {
-            'heal' : Soraka_heal(self, game),
+            'buff' : Soraka_heal(self, game),
             'aoe' : Soraka_primary(self, game),
             'cc' : Soraka_cc(self, game),
             'heal1': Summon_attack_buff(self, game.blessing_list[0], game),
@@ -99,7 +99,7 @@ class Soraka(Boss):
     
     def change_phase(self):
         super().change_phase()
-        del self.skills['heal']
+        del self.skills['buff']
         self.skills['ult'] = Soraka_ult(self, self.game)
         
         self.game.wave += 1

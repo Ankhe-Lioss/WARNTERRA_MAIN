@@ -12,7 +12,7 @@ class Entity(pygame.sprite.Sprite):
         self.level = game.level
         
         #stats
-        self.stats = entity_stats[self.name]
+        self.stats = entity_stats[self.name] # type: ignore
         
         self.raw_hp = self.stats[0]
         self.raw_atk = self.stats[1]
@@ -205,6 +205,7 @@ class Enemy(Entity):
         self.path = []
         self.path_index = 0
         self.cached_path_vector = pygame.Vector2()
+        
     def has_line_of_sight(self):
         start = pygame.Vector2(self.rect.center)
         end = pygame.Vector2(self.player.rect.center)
@@ -229,6 +230,7 @@ class Enemy(Entity):
                     return False  # blocked by obstacle
 
         return True  # all clear
+    
     def animate(self, dt):
         self.frame_index += self.animation_spd * dt
         self.image = self.frames[self.state][int(self.frame_index) % len(self.frames[self.state])]
@@ -280,29 +282,36 @@ class Enemy(Entity):
             self.path_index = 1  # skip current tile
 
         if self.path and self.path_index < len(self.path):
-            target_cell = self.path[self.path_index]
+    # Look ahead up to 2 nodes for smoother turns
+            lookahead = min(self.path_index + 2, len(self.path) - 1)
+            target_cell = self.path[lookahead]
             target_pos = pygame.Vector2(
                 (target_cell[0] + 0.5) * self.tracker.cell_size,
                 (target_cell[1] + 0.5) * self.tracker.cell_size
             )
             to_target = target_pos - enemy_pos
 
-            if to_target.length() < 4:
-                self.path_index += 1  # reached this tile
+            # If close to the next node, advance the path index
+            next_node_pos = pygame.Vector2(
+                (self.path[self.path_index][0] + 0.5) * self.tracker.cell_size,
+                (self.path[self.path_index][1] + 0.5) * self.tracker.cell_size
+            )
+            if (next_node_pos - enemy_pos).length() < 8:
+                self.path_index += 1
             elif to_target.length_squared() > 0:
                 self.direction = to_target.normalize()
-
                 return
 
         # No direction fallback
         self.direction = pygame.Vector2()
+        
     def move_enemy(self,dt):
         # update the rect position + collision
         if self.forced_moving:
             self.forced_move(self.mode['dir'], dt)
             return
         
-        if self.channeling or self.stunned or self.forced_moving or self.rooted:
+        if self.channeling or self.stunned or self.forced_moving or self.rooted or self.meditating:
             return
         
         distance = self.distance_vector.length()
@@ -320,14 +329,29 @@ class Enemy(Entity):
 
         self.image_rect.center = (pygame.math.Vector2(self.rect.center) + self.image_offset)
         
-    def enemy_collision(self,direction,dt):
+    def enemy_collision(self, direction, dt):
         for sprite in self.game.enemy_sprites:
-                if self!=sprite:
-                    if sprite.rect.colliderect(self.rect):
-                        if direction == 'horizontal':
-                            self.rect.x -= self.direction.x * self.spd * dt
-                        else:
-                            self.rect.y -= self.direction.y * self.spd * dt
+            if self != sprite and sprite.rect.colliderect(self.rect):
+
+                overlap_rect = self.rect.clip(sprite.rect)
+
+                push_vec = pygame.Vector2(self.rect.center) - pygame.Vector2(sprite.rect.center)
+                if push_vec.length_squared() == 0:
+                    push_vec = pygame.Vector2(1, 0)  # Arbitrary direction if exactly overlapping
+                push_vec = push_vec.normalize()
+
+                push_amount = max(overlap_rect.width, overlap_rect.height) / 2 + 1
+                self.rect.x += push_vec.x * push_amount
+                self.rect.y += push_vec.y * push_amount
+                sprite.rect.x -= push_vec.x * push_amount
+                sprite.rect.y -= push_vec.y * push_amount
+                
+                self.image_rect.center = self.rect.center
+                sprite.image_rect.center = sprite.rect.center
+
+                if not self.cross_wall:
+                    self.collision(direction, push_vec)
+                    sprite.collision(direction, -push_vec)
 
     def attacking(self):
         if self.distance_vector.length() <= self.atk_range:

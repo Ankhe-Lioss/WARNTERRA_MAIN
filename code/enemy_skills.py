@@ -29,10 +29,12 @@ class Poro_stomp(Skill):
         super().activate()
         aoe.Poro_Stomp(self.user.rect.center,self.user.game,self.user.atk)
         self.user.state = 'Attacking'
+        self.user.meditating = True
 
     def deactivate(self):
         super().deactivate()
         self.user.state = 'Walking'
+        self.user.meditating = False
 
 class Chogath_stomp(Skill):
     def __init__(self, user, game):
@@ -47,6 +49,82 @@ class Chogath_stomp(Skill):
     def deactivate(self):
         super().deactivate()
         self.user.state = 'Walking'
+
+class Lulu_primary(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        
+        deviation = random.randint(0, 30)
+        
+        eproj.Lulu_Primary(self.user, self.user.facing_dir.rotate(15).rotate(deviation), self.user.game)
+        eproj.Lulu_Primary(self.user, self.user.facing_dir.rotate(-15).rotate(deviation), self.user.game)
+        self.user.state='Attacking'
+        
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'
+
+class Lulu_buff(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        self.user.state='Attacking'
+        for enemy in self.game.enemy_sprites:
+            Buff(2000, 0.5, 'spd', self.game, enemy)
+            Buff(4000, 0.3, 'atk', self.game, enemy)
+        
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'
+
+class Nocturne_sprint(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+        
+    def activate(self):
+        super().activate()
+        self.user.state='Attacking'
+        self.target_pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(0, 100)).rotate(random.randrange(0, 360))
+        self.user.attacked = False
+        spd = (pygame.Vector2(self.target_pos) - pygame.Vector2(self.user.rect.center)).length() / self.cast_time * 1000
+        dir = (pygame.Vector2(self.target_pos) - pygame.Vector2(self.user.rect.center)).normalize()
+        self.user.forced_moving = True
+        self.user.mode = {
+            "dir" : dir,
+            "spd" : spd
+        }
+        
+    def deactivate(self):
+        super().deactivate()        
+        self.user.state='Walking'
+        self.user.forced_moving = False
+        self.user.mode = None
+
+class Maokai_primary(Skill):
+    def __init__(self, user, game):
+        self.name = self.__class__.__name__
+        super().__init__(user, game)
+
+    def activate(self):
+        super().activate()
+        eproj.Maokai_Primary(self.user, self.user.facing_dir, self.user.game)
+        self.user.heal(self.user.maxhp * 0.5)
+        self.user.state='Attacking'
+
+    def deactivate(self):
+        super().deactivate()
+        self.user.state='Walking'
+
+
+# Veigar
 
 class Veigar_primary(Skill):
     def __init__(self, user, game):
@@ -119,40 +197,6 @@ class Veigar_aoe(Skill):
         super().deactivate()
         self.user.state = 'Walking'
 
-class Lulu_primary(Skill):
-    def __init__(self, user, game):
-        self.name = self.__class__.__name__
-        super().__init__(user, game)
-        
-    def activate(self):
-        super().activate()
-        
-        deviation = random.randint(0, 30)
-        
-        eproj.Lulu_Primary(self.user, self.user.facing_dir.rotate(15).rotate(deviation), self.user.game)
-        eproj.Lulu_Primary(self.user, self.user.facing_dir.rotate(-15).rotate(deviation), self.user.game)
-        self.user.state='Attacking'
-        
-    def deactivate(self):
-        super().deactivate()
-        self.user.state='Walking'
-
-class Lulu_buff(Skill):
-    def __init__(self, user, game):
-        self.name = self.__class__.__name__
-        super().__init__(user, game)
-        
-    def activate(self):
-        super().activate()
-        self.user.state='Attacking'
-        for enemy in self.game.enemy_sprites:
-            Buff(2000, 0.5, 'spd', self.game, enemy)
-            Buff(4000, 0.3, 'atk', self.game, enemy)
-        
-    def deactivate(self):
-        super().deactivate()
-        self.user.state='Walking'
-
 class Veigar_cage(Skill):
     def __init__(self, user, game):
         self.name = self.__class__.__name__
@@ -169,77 +213,7 @@ class Veigar_cage(Skill):
         self.user.state = 'Walking'
         self.cage.kill()
 
-class Summon_healing_buff(Skill):
-    def __init__(self, user, pos, game):
-        self.name = self.__class__.__name__
-        self.pos = pos
-        super().__init__(user, game)
-        self.passive = True
-        
-    def activate(self):
-        super().activate()
-        self.buff = eproj.Healing_Buff(self.user, self.pos, self.game, self)    
-
-class Summon_speed_buff(Skill):
-    def __init__(self, user, pos, game):
-        self.name = self.__class__.__name__
-        self.pos = pos
-        super().__init__(user, game)
-        self.passive = True
-        
-    def activate(self):
-        super().activate()
-        self.buff = eproj.Speed_Buff(self.user, self.pos, self.game, self)
-
-class Summon_attack_buff(Skill):
-    def __init__(self, user, pos, game):
-        self.name = self.__class__.__name__
-        self.pos = pos
-        super().__init__(user, game)
-        self.passive = True
-
-    def activate(self):
-        super().activate()
-        self.buff = eproj.Attack_Buff(self.user, self.pos, self.game, self)
-
-class Nocturne_sprint(Skill):
-    def __init__(self, user, game):
-        self.name = self.__class__.__name__
-        super().__init__(user, game)
-        
-    def activate(self):
-        super().activate()
-        self.user.state='Attacking'
-        self.target_pos = pygame.Vector2(self.game.player.rect.center) + pygame.Vector2(random.randint(0, 100)).rotate(random.randrange(0, 360))
-        self.user.attacked = False
-        spd = (pygame.Vector2(self.target_pos) - pygame.Vector2(self.user.rect.center)).length() / self.cast_time * 1000
-        dir = (pygame.Vector2(self.target_pos) - pygame.Vector2(self.user.rect.center)).normalize()
-        self.user.forced_moving = True
-        self.user.mode = {
-            "dir" : dir,
-            "spd" : spd
-        }
-        
-    def deactivate(self):
-        super().deactivate()        
-        self.user.state='Walking'
-        self.user.forced_moving = False
-        self.user.mode = None
-
-class Maokai_primary(Skill):
-    def __init__(self, user, game):
-        self.name = self.__class__.__name__
-        super().__init__(user, game)
-
-    def activate(self):
-        super().activate()
-        eproj.Maokai_Primary(self.user, self.user.facing_dir, self.user.game)
-        self.user.heal(self.user.maxhp * 0.5)
-        self.user.state='Attacking'
-
-    def deactivate(self):
-        super().deactivate()
-        self.user.state='Walking'
+# Soraka
 
 class Soraka_heal(Skill):
     def __init__(self, user, game):
@@ -258,6 +232,7 @@ class Soraka_heal(Skill):
             if enemy.hp / enemy.maxhp < target.hp / target.maxhp and enemy is not self.user:
                 target = enemy
         target.heal(self.user.atk * 2)
+        Buff(2000, 1.5, 'spd', self.game, target)
         
     def deactivate(self):
         super().deactivate()
@@ -312,3 +287,39 @@ class Soraka_cc(Skill):
     def deactivate(self):
         super().deactivate()
         self.user.state='Walking'
+
+# Summon Buffs
+
+class Summon_healing_buff(Skill):
+    def __init__(self, user, pos, game):
+        self.name = self.__class__.__name__
+        self.pos = pos
+        super().__init__(user, game)
+        self.passive = True
+        
+    def activate(self):
+        super().activate()
+        self.buff = eproj.Healing_Buff(self.user, self.pos, self.game, self)    
+
+class Summon_speed_buff(Skill):
+    def __init__(self, user, pos, game):
+        self.name = self.__class__.__name__
+        self.pos = pos
+        super().__init__(user, game)
+        self.passive = True
+        
+    def activate(self):
+        super().activate()
+        self.buff = eproj.Speed_Buff(self.user, self.pos, self.game, self)
+
+class Summon_attack_buff(Skill):
+    def __init__(self, user, pos, game):
+        self.name = self.__class__.__name__
+        self.pos = pos
+        super().__init__(user, game)
+        self.passive = True
+
+    def activate(self):
+        super().activate()
+        self.buff = eproj.Attack_Buff(self.user, self.pos, self.game, self)
+
